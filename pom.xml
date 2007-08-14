@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name> 
-  <version>0.7-SNAPSHOT</version>
+  <version>0.8-SNAPSHOT</version>
   <modelVersion>4.0.0</modelVersion>
   <description>
 	Title says all, this is just another rss feed reader and writer API library. 
