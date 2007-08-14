@@ -6,46 +6,57 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name> 
-  <version>1.0</version>
+  <version>0.6-SNAPSHOT</version>
   <modelVersion>4.0.0</modelVersion>
   <description>
 	Title says all, this is just another rss feed reader and writer API library. 
   </description>
   <url>http://yarfraw.sourceforge.net/</url>
-
   <licenses>
   	<license>
   		<name>Apache License 2.0</name>
   		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
   	</license>
   </licenses>
+  <scm>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw</url>
+  </scm>
   <mailingLists>
-  <!-- not yet
     <mailingList>
       <name>User List</name>
-      <subscribe>http://lists.sourceforge.net/lists/listsinfo/geo-google-users</subscribe>
-      <unsubscribe>http://lists.sourceforge.net/lists/listsinfo/geo-google-users</unsubscribe>
-      <post>geo-google-users@lists.sourceforge.net</post>
+      <subscribe>http://lists.sourceforge.net/lists/listsinfo/yarfraw-users</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listsinfo/yarfraw-users</unsubscribe>
+      <post>yarfraw-users@lists.sourceforge.net</post>
     </mailingList>
     <mailingList>
       <name>Developer List</name>
-      <subscribe>http://lists.sourceforge.net/mailman/listinfo/geo-google-devel</subscribe>
-      <unsubscribe>http://lists.sourceforge.net/mailman/listinfo/geo-google-devel</unsubscribe>
-      <post>geo-google-devel@lists.sourceforge.net</post>
+      <subscribe>http://lists.sourceforge.net/mailman/listinfo/yarfraw-devel</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/mailman/listinfo/yarfraw-devel</unsubscribe>
+      <post>yarfraw-devel@lists.sourceforge.net</post>
     </mailingList>
-     -->
+    <mailingList>
+      <name>Commit List</name>
+      <subscribe>http://lists.sourceforge.net/mailman/listinfo/yarfraw-commits</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/mailman/listinfo/yarfraw-commits</unsubscribe>
+      <post>yarfraw-commits@lists.sourceforge.net</post>
+    </mailingList>
   </mailingLists>
   <distributionManagement>
-  <!--  not yet
     <site>
       <id>website</id>
-      <url>scp://zl25-drexel@shell.sf.net/home/groups/g/ge/geo-google/htdocs</url>
-    </site>
- -->    
-    </distributionManagement>
+      <url>scp://zl25-drexel@shell.sf.net/home/groups/y/ya/yarfraw/htdocs/</url>
+    </site>    
+  </distributionManagement>
   <build>
 	<defaultGoal>package</defaultGoal>
-    <plugins>   
+    <plugins>  
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+      </plugin>     
        <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-clean-plugin</artifactId>
