@@ -16,8 +16,8 @@
   	</license>
   </licenses>
   <scm>
-    <connection>scm:svn:zl25-drexel@https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</connection>
-    <developerConnection>scm:svn:zl25-drexel@https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</developerConnection>
+    <connection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</connection>
+    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</developerConnection>
     <url>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</url>
   </scm>
   <mailingLists>
