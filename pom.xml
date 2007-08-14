@@ -16,10 +16,10 @@
   	</license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/rel_0_6</connection>
-    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/rel_0_6</developerConnection>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
     <tag>HEAD</tag>
-    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/rel_0_6</url>
+    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</url>
   </scm>
   <mailingLists>
     <mailingList>
