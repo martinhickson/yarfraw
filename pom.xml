@@ -53,6 +53,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+            <tagBase>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags</tagBase>
+          </configuration>
       </plugin>     
        <plugin>
          <groupId>org.apache.maven.plugins</groupId>
