@@ -3,7 +3,7 @@
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name> 
-  <version>0.6.2-SNAPSHOT</version>
+  <version>0.6.2</version>
   <modelVersion>4.0.0</modelVersion>
   <description>
 	Title says all, this is just another rss feed reader and writer API library. 
@@ -16,9 +16,9 @@
   	</license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
-    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
-    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</url>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.2</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.2</developerConnection>
+    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.2</url>
   </scm>
   <mailingLists>
     <mailingList>
