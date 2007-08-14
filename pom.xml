@@ -44,11 +44,11 @@
     <repository>
       <id>central</id>
       <uniqueVersion>false</uniqueVersion>
-      <url>scpexe://zl25@tux.cs.drexel.edu/home/zl25/public_html/maven2/repo</url>
+      <url>scp://zl25@tux.cs.drexel.edu:/home/zl25/public_html/maven2/repo</url>
     </repository>  
     <site>
       <id>website</id>
-      <url>scp://zl25-drexel@shell.sf.net/home/groups/y/ya/yarfraw/htdocs/</url>
+      <url>scp://zl25-drexel@shell.sf.net:/home/groups/y/ya/yarfraw/htdocs/</url>
     </site>    
   </distributionManagement>
   <build>
