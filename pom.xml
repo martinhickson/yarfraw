@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <groupId>yarfraw</groupId>
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name> 
-  <version>0.6-SNAPSHOT</version>
+  <version>rel_0_6</version>
   <modelVersion>4.0.0</modelVersion>
   <description>
 	Title says all, this is just another rss feed reader and writer API library. 
@@ -19,10 +16,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   	</license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
-    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/rel_0_6</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/rel_0_6</developerConnection>
     <tag>HEAD</tag>
-    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw</url>
+    <url>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/rel_0_6</url>
   </scm>
   <mailingLists>
     <mailingList>
@@ -260,4 +257,3 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   	</plugins>
   </reporting>
 </project>
-
