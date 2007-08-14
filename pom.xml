@@ -3,7 +3,7 @@
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name> 
-  <version>0.6.4-SNAPSHOT</version>
+  <version>0.6.4</version>
   <modelVersion>4.0.0</modelVersion>
   <description>
 	Title says all, this is just another rss feed reader and writer API library. 
@@ -16,9 +16,9 @@
   	</license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</connection>
-    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</developerConnection>
-    <url>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</url>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.4</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.4</developerConnection>
+    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags/yarfraw-0.6.4</url>
   </scm>
   <mailingLists>
     <mailingList>
@@ -41,10 +41,15 @@
     </mailingList>
   </mailingLists>
   <distributionManagement>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <uniqueVersion>true</uniqueVersion>
+      <url>sftp://tux.cs.drexel.edu/home/zl25/public_html/maven2/snapshot</url>
+    </snapshotRepository>    
     <repository>
       <id>central</id>
       <uniqueVersion>false</uniqueVersion>
-      <url>scp://zl25@tux.cs.drexel.edu:/home/zl25/public_html/maven2/repo</url>
+      <url>sftp://tux.cs.drexel.edu/home/zl25/public_html/maven2/repo</url>
     </repository>  
     <site>
       <id>website</id>
@@ -55,10 +60,10 @@
     <extensions>
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ssh-external</artifactId>
-         <version>1.0-alpha-5</version>
+         <artifactId>wagon-ftp</artifactId>
+         <version>1.0-alpha-6</version>
       </extension>
-    </extensions>  
+    </extensions> 
 	<defaultGoal>package</defaultGoal>
     <plugins>  
       <plugin>
@@ -209,8 +214,8 @@
 		    <groupId>org.codehaus.mojo</groupId>
 		    <artifactId>findbugs-maven-plugin</artifactId>
 		    <configuration>
-		      <threshold>High|Normal|Low|Exp|Ignore</threshold>
-		      <effort>Min|Default|Max</effort>
+		      <threshold>Exp</threshold>
+		      <effort>Max</effort>
 		      <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
 		      <includeFilterFile>findbugs-include.xml</includeFilterFile>
 		      <visitors>FindDeadLocalStores,UnreadFields</visitors>
