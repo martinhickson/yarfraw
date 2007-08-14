@@ -44,12 +44,12 @@
     <snapshotRepository>
       <id>snapshots</id>
       <uniqueVersion>true</uniqueVersion>
-      <url>scp://zl25@tux.cs.drexel.edu/home/zl25/public_html/maven2/repo</url>
+      <url>scpexe://zl25@tux.cs.drexel.edu/home/zl25/public_html/maven2/repo</url>
     </snapshotRepository>  
     <repository>
       <id>central</id>
       <uniqueVersion>false</uniqueVersion>
-      <url>scp://zl25@tux.cs.drexel.edu/home/zl25/public_html/maven2/snapshot/</url>
+      <url>scpexe://zl25@tux.cs.drexel.edu/home/zl25/public_html/maven2/snapshot/</url>
     </repository>  
     <site>
       <id>website</id>
