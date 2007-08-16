@@ -1,0 +1,237 @@
+/**
+* This is a mix of a few css i found online:
+
+    maven-stylus-skin-1.0.1
+    http://www.oswd.org/design/preview/id/3577
+    http://www.oswd.org/design/preview/id/3629
+*/
+
+.xright, #bannerRight img {
+  float:right;
+  text-shadow: #7CFC00;
+  position: relative;
+}
+
+body {
+  background-color: #fff;
+  font: normal 0.9em Tahoma,Verdana,sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  background-repeat: repeat-y;
+  padding: 0px;
+}
+td, select, input{
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color:#333333;
+
+}
+
+.body li{
+  	list-style: url(img/li.gif);
+	margin-left: 18px;
+}
+
+code{
+  font-size: 12px;
+}
+a {
+  text-decoration: underline;
+}
+a:link {
+  color:#333;
+  
+}
+a:visited  {
+  color:#666666;
+}
+a:active, a:hover {
+  color:#990000;
+  text-decoration: none;
+}
+#legend li.externalLink {
+  background: url(../images/external.png) left top no-repeat;
+  padding-left: 18px;
+}
+a.externalLink, a.externalLink:link, a.externalLink:visited, a.externalLink:active, a.externalLink:hover {
+  background: url(../images/external.png) right center no-repeat;
+  padding-right: 18px;
+}
+#legend li.newWindow {
+  background: url(../images/newwindow.png) left top no-repeat;
+  padding-left: 18px;
+}
+a.newWindow, a.newWindow:link, a.newWindow:visited, a.newWindow:active, a.newWindow:hover {
+  background: url(../images/newwindow.png) right center no-repeat;
+  padding-right: 18px;
+}
+h2 {
+  font-size: 17px;
+  color: #fff;  
+  background-image: url("../images/bglbl.gif");
+  padding: 0.3em;
+  border: 1px dashed;
+}
+h3 {
+  padding: 4px 4px 4px 24px;
+  color: #333;
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: 14px;
+  background-image: url(../images/h3.jpg);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+p {
+  line-height: 1.3em;
+  font-size: 12px;
+  color: #000;
+  background-image: url("../images/hbg.gif");
+  background-repeat: repeat-x;
+  padding: 1em;
+}
+#breadcrumbs {
+  height: 13px;
+  background-image: url(../images/breadcrumbs.jpg);
+  padding: 5px 10px 14px 20px;
+}
+* html #breadcrumbs {
+  padding-bottom: 8px;
+}
+#leftColumn {
+  margin: 10px 0 10px 0;
+  border-top-color: #ccc;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: #ccc;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: #ccc;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background-image: url("../images/hbg.gif");
+  background-repeat: repeat-x;
+  
+}
+#navcolumn h5 {
+  font-size: smaller;
+  border-bottom: 1px solid #aaaaaa;
+  padding-top: 2px;
+  padding-left: 9px;
+  color: #444;
+  background-image: url(../images/h5.jpg);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+table.bodyTable th {
+  color: white;
+  background-color: #CC2224;
+  text-align: left;
+  font-weight: bold;
+}
+
+table.bodyTable th, table.bodyTable td {
+  font-size: 11px;
+}
+
+table.bodyTable tr.a {
+  background-color: #fff;
+}
+
+table.bodyTable tr.b {
+  background-color: #dfdfdf;
+}
+
+.source {
+  
+  	background: url(img/bgcode.gif);
+	border: 1px solid #C4C4C4;
+	border-left: 6px solid #D91623;
+	color: #333;
+	display: block;
+	margin-bottom: 12px;
+	padding: 8px 10px;
+	white-space: pre;
+	overflow:auto
+}
+dt {
+  padding: 4px 4px 4px 24px;
+  color: #333333;
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: 14px;
+  background-image: url(../images/h3.jpg);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+.subsectionTitle {
+  font-size: 13px;
+  font-weight: bold;
+  color: #666;
+
+}
+
+table {
+  font-size: 10px;
+}
+.xright a:link, .xright a:visited, .xright a:active {
+  color: #666;
+}
+.xright a:hover {
+  color: #003300;
+}
+#banner {
+  color: #efefef;
+  font-weight: bold;
+  height: 70px;
+  background: url(../images/bgheader.gif);
+}
+#navcolumn ul {
+  margin: 5px 0 15px -0em;
+}
+#navcolumn ul a {
+  color: #333333;
+  text-decoration: none;
+}
+#navcolumn ul a:hover {
+  color: #990000;
+}
+#intro {
+  border: solid #ccc 1px;
+  margin: 6px 0px 0px 0px;
+  padding: 10px 40px 10px 40px;
+}
+.subsection {
+  margin-left: 3px;
+  color: #333333;
+}
+
+.subsection p {
+  font-size: 12px;
+}
+#footer {
+  padding: 10px;
+  margin: 20px 0px 20px 0px;
+  border-top: solid #ccc 1px; 
+  color: #333333;
+}
+
+.errormark, .warningmark, .donemark, .infomark {
+  background: url(../images/icon_error_sml.gif) no-repeat;
+}
+
+.warningmark {
+  background-image: url(../images/icon_warning_sml.gif);
+}
+
+.donemark {
+  background-image: url(../images/icon_success_sml.gif);
+}
+
+.infomark {
+  background-image: url(../images/icon_info_sml.gif);
+}
+

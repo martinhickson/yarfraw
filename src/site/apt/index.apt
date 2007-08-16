@@ -1,0 +1,26 @@
+                                    ------
+                                    About
+                                    ------
+                                    Jay Liang
+                                    ------
+                                    2007/08/14
+                                    
+About YARFRAW
+
+	<<Y>>et <<A>>nother <<R>>ss <<F>>eed <<R>>eader <<A>>nd <<W>>riter is an open source API library 
+for working with RSS feed. It offers a set of data model in builder style to help developer build RSS 2.0 feed.
+(Supports for  RSS 0.9x, RSS 1.0 / RDF, Atom 0.3 and Atom 1.0 will come in later releases).
+
+Why Another Java RSS API?
+
+	Sure there are many of such libraries, but in software (and anything eles) there are always room for 
+	improvement. Someone else already did it is not a good reason for stopping new developments. The goal of this
+	project is to provide an intuitive, high quality alternative to all these other similar libraries. 
+
+Project Status
+
+	The API is now at a stable stage and fully supports RSS 2.0 feeds, you can use it in your projects. I am 
+currently lookup for developers/volunteers to share some of the workload of this project. If you are interested
+in helping out, send me a message at 'zl25-drexel AT gmail DOT com'. (You need to be reasonably proficient with
+Java, XML, Maven2, SVN and open source development in general). 
+		

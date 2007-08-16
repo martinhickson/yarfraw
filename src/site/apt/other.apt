@@ -1,0 +1,46 @@
+                                    ------
+                                    Other Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/08/14
+
+More Examples:                                     
+	
+	You can controls the max number of items to be kept in a rss feed with the appender. For example, 
+if you only want 10 items in the feed: 
+
++----------------------------------------------------------------------------------------------------+
+
+  Rss20Appender a = new Rss20Appender("text.xml");
+  a.setNumItemToKeep(10);
+    
+  //if there are more than 10 items in 'text.xml' after this item is added,
+  //the appender will remove items from the beginning of the feed and keep the last 10 items
+  a.addItem(new Item()); 
+    
++----------------------------------------------------------------------------------------------------+
+
+
+	Static method for reading feed(s):
+
++----------------------------------------------------------------------------------------------------+
+
+  File f1 = new File("f1.xml"));
+  File f2 = new File("f2.xml"));
+  File f3 = new File("f3.xml"));
+  List<Channel> channels = Rss20Utils.readAll(f1, f2, f3);
+    
++----------------------------------------------------------------------------------------------------+
+
+	Parse an XML string:
+
++----------------------------------------------------------------------------------------------------+
+
+  Document doc = XMLUtils.parseXml("<tag></tag>", false, false);
+  Element element = XMLUtils.parseXml("<tag></tag>", false, false).getDocumentElement();
+    
++----------------------------------------------------------------------------------------------------+
+	
+	  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 

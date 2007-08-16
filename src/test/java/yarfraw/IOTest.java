@@ -1,0 +1,156 @@
+package yarfraw;
+
+import java.io.File;
+import java.util.List;
+
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.junit.Test;
+
+import yarfraw.rss20.datamodel.Channel;
+import yarfraw.rss20.datamodel.Item;
+import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.rss20.io.Rss20Appender;
+import yarfraw.rss20.io.Rss20Reader;
+import yarfraw.rss20.io.Rss20Writer;
+import yarfraw.rss20.utils.Rss20Utils;
+/**
+ * Some unit tests for Reader/Writer/Appender
+ * 
+ * @author jliang
+ *
+ */
+public class IOTest extends TestCase{
+
+  @Test
+  public void testBuilder() throws Exception{
+    Channel c = BuilderTest.buildChannel();
+    Rss20Writer w = new Rss20Writer(File.createTempFile("yarfraw", ".xml"));
+    w.writeChannel(c);
+    w.writeChannel(c, new ValidationEventHandler(){
+
+      public boolean handleEvent(ValidationEvent event) {
+        System.out.println(event);
+        return false;
+      }
+      
+    });
+  }
+  
+  @Test
+  public void testRead() throws Exception{
+    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/rdf.xml").toURI());
+    Channel c = r.readChannel();
+    r.readChannel(new ValidationEventHandler(){
+
+      public boolean handleEvent(ValidationEvent event) {
+        // TODO Auto-generated method stub
+        return false;
+      }
+      
+    });
+    System.out.println(c);
+//    assertTrue("Title is not the same", "digg".equals(c.getTitle()));
+//    assertTrue("language is not the same", "en-us".equals(c.getLanguage().getLanguage().toLowerCase()));
+//    assertTrue("Link is not the same", "http://digg.com/".equals(c.getLink().toString()));
+    //TODO: put more asserts
+  }
+  
+  @Test
+  public void testRead2() throws Exception{
+    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
+    Channel c = r.readChannel();
+    Channel c2 = BuilderTest.buildChannel();
+    assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
+    assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));
+    assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategoryString(), c2.getCategoryString()));
+    assertTrue("Cloud not equal!", EqualsBuilder.reflectionEquals(c.getCloud(), c2.getCloud()));
+    assertTrue("Description not equal!", EqualsBuilder.reflectionEquals(c.getDescription(), c2.getDescription()));
+    assertTrue("Docs not equal!", EqualsBuilder.reflectionEquals(c.getDocs(), c2.getDocs()));
+    assertTrue("Generator not equal!", EqualsBuilder.reflectionEquals(c.getGenerator(), c2.getGenerator()));
+    assertTrue("Image not equal!", EqualsBuilder.reflectionEquals(c.getImage(), c2.getImage()));
+    assertTrue("Items list not equal!", EqualsBuilder.reflectionEquals(c.getItems(), c2.getItems()));
+    assertTrue("Language not equal!", EqualsBuilder.reflectionEquals(c.getLanguage(), c2.getLanguage()));
+    assertTrue("LastBuildDate not equal!", EqualsBuilder.reflectionEquals(c.getLastBuildDate(), c2.getLastBuildDate()));
+    assertTrue("Link not equal!", EqualsBuilder.reflectionEquals(c.getLink(), c2.getLink()));
+    assertTrue("ManagingEditor not equal!", EqualsBuilder.reflectionEquals(c.getManagingEditor(), c2.getManagingEditor()));
+    assertTrue("PubDate not equal!", EqualsBuilder.reflectionEquals(c.getPubDate(), c2.getPubDate()));
+    assertTrue("SkipDays not equal!", EqualsBuilder.reflectionEquals(c.getSkipDays(), c2.getSkipDays()));
+    assertTrue("SkipHours not equal!", EqualsBuilder.reflectionEquals(c.getSkipHours(), c2.getSkipHours()));
+    assertTrue("TextInput not equal!", EqualsBuilder.reflectionEquals(c.getTexInput(), c2.getTexInput()));
+    assertTrue("Title not equal!", EqualsBuilder.reflectionEquals(c.getTitle(), c2.getTitle()));
+    assertTrue("TTL not equal!", EqualsBuilder.reflectionEquals(c.getTtl(), c2.getTtl()));
+    assertTrue("WebMaster not equal!", EqualsBuilder.reflectionEquals(c.getWebMaster(), c2.getWebMaster()));
+  }
+  
+
+  @Test
+  public void testRead3() throws Exception{  
+    File f1 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
+    File f2 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/reddit.xml").toURI());
+    File f3 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/theserverside-rss2.xml").toURI());
+    List<Channel> channels = Rss20Utils.readAll(f1, f2, f3);
+    assertEquals(3, channels.size());
+  }
+  
+  @Test
+  public void testRemoteRead() throws Exception{  
+    Rss20Reader reader = new Rss20Reader(new HttpURL("http://digg.com/rss/index.xml"));
+    assertTrue(reader.isRemoteRead());
+    try{
+      Channel c = reader.readChannel();
+      //this test can be indeterministic because it requires a network connection 
+      //if there no exception thrown, then we should have the channel read
+      assertTrue("Remote read failed", c.getTitle() != null);
+    }catch (YarfrawException e) {
+      System.out.println("Failed to read from a remote url, this test requires a network connection");
+      e.printStackTrace();
+    }
+    
+    
+  }
+  
+  @Test
+  public void testAppend() throws Exception{
+    File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
+    Rss20Appender a = new Rss20Appender(f);
+    Item item = BuilderTest.buildChannel().getItems().get(0);
+    a.addItem(item);
+    Channel c = Rss20Utils.read(f);
+    assertEquals(item, c.getItems().get(c.getItems().size()-1));
+    int oldSize = c.getItems().size();
+    a.removeItem(oldSize-1);
+    c = Rss20Utils.read(f);
+    assertEquals(oldSize-1, c.getItems().size());
+  }
+  
+  @Test
+  public void testAppend2() throws Exception{
+    File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
+    File copy = File.createTempFile("YarfrawDiggCopy", ".xml");
+    
+    Rss20Writer w = new Rss20Writer(copy);
+    w.writeChannel(new Rss20Reader(f).readChannel());
+    
+    Rss20Appender a = new Rss20Appender(copy);
+    a.setNumItemToKeep(10);
+    
+    a.addItem(BuilderTest.buildChannel().getItems().get(0));
+    
+    Rss20Reader r = new Rss20Reader(copy);
+    assertEquals(10, r.readChannel().getItems().size());
+    
+    a.addAllItems(BuilderTest.buildChannel().getItems());
+    
+    assertEquals(10, r.readChannel().getItems().size());
+  }
+  
+  
+}
+
+

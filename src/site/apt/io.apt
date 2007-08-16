@@ -1,0 +1,91 @@
+                                    ------
+                                    IO Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/08/14
+
+Writing a RSS 2.0 feed
+      
+      Writing a feed is easy after the Channel object is built. This builds a RSS 2.0 feed xml file.
+Note that since every feed has only one channel, the top level 'rss' element is automatically generated
+for you, all you need to do is to pass in the channel object:
+
++----------------------------------------------------------------------------------------------------+
+	
+  Channel c = new Channel()
+				...
+				
+  Rss20Writer w = new Rss20Writer("yarfraw.xml"));
+  w.writeChannel(c);
+
++----------------------------------------------------------------------------------------------------+      
+
+	Currently the writer uses JAXB to write the xml file. You can inject your own error event handler
+to the writer is case you need to handle the event differently:
+
++----------------------------------------------------------------------------------------------------+
+	
+  w.writeChannel(c, new ValidationEventHandler(){
+	public boolean handleEvent(ValidationEvent event) {
+	//Process the event
+		return false;
+	}  
+  });
+
++----------------------------------------------------------------------------------------------------+
+
+Add/Remove items 
+	
+	Sometimes you may want simply add a couple of items to an existing feed with out modifying the 
+top level channel. You can use the 'Appender' to do that. Internally, the appender reads in the feed, 
+modifies it, and then write it back to the file:
+
++----------------------------------------------------------------------------------------------------+
+   
+    File f = new File("yarfraw.xml");
+    Rss20Appender a = new Rss20Appender(f);
+    a.addItem(item);
+    a.removeItem(2);
+
++----------------------------------------------------------------------------------------------------+
+
+Reading a RSS 2.0 feed
+
+	You can use the reader class to read any RSS 2.0 feed.
+	
++----------------------------------------------------------------------------------------------------+
+   
+    Rss20Reader r = new Rss20Reader( "yarfraw.xml");
+    Channel c = r.readChannel();
+   
++----------------------------------------------------------------------------------------------------+
+	
+	The reader is capable of reading a feed from a remote http url:
+	
++----------------------------------------------------------------------------------------------------+
+   
+    Rss20Reader reader = new Rss20Reader(new HttpURL("http://somewhere.com/rssfeed.xml"));
+    Channel c = r.readChannel();
+    
+    //check whether a reader is reading from a remote server
+    reader.isRemoteRead();
+   
++----------------------------------------------------------------------------------------------------+
+		
+	Similarly, you can add your own event handler:
+	
++----------------------------------------------------------------------------------------------------+
+   
+  r.readChannel(new ValidationEventHandler(){
+      public boolean handleEvent(ValidationEvent event) {
+      	//Process the event
+        return false;
+      }
+  });
+   
++----------------------------------------------------------------------------------------------------+
+
+  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

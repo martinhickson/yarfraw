@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<faqs title="Frequently Asked Questions">
+
+  <part id="general">
+    <title>General</title>
+   
+    <faq id="reference">
+      <question>
+       Where do I find more documentations and references?
+      </question>
+      <answer>
+       The <a href="apidocs/index.html">Javadoc</a> is a great source of documentations.
+       This API relies heavily on generated code from this <a href="rss20.xsd">schema</a>. If you understand XML schmea, then you
+       should take a look at the schema, it will give you some insights on how objects are mapped to xml and 
+       vice versa.
+      </answer>
+    </faq>
+    
+    <faq id="more-info">
+      <question>
+       Where do I get more supports?
+      </question>
+      <answer>
+       Use <a href="http://sourceforge.net/forum/?group_id=203266">support forum</a>
+       and <a href="http://sourceforge.net/mail/?group_id=203266">user mailing list</a>.
+      </answer>
+    </faq>
+
+  </part>
+</faqs>

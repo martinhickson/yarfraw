@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="http://feeds.feedburner.com/~d/styles/rss2full.xsl" type="text/xsl" media="screen"?><?xml-stylesheet href="http://feeds.feedburner.com/~d/styles/itemcontent.css" type="text/css" media="screen"?><rss xmlns:jf="http://www.jivesoftware.com/xmlns/jiveforums/rss" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+
+
+
+<channel>
+
+    
+       <link>http://www.theserverside.com</link>
+     
+
+    <description>TheServerSide is a developer community, containing up-to-date news, discussions, patterns, resources, and media</description>
+    <language>en</language>
+    <copyright>Copyright 2000-2006 TheServerSide</copyright>
+    <lastBuildDate>Mon, 13 Aug 2007 13:42:02 -0400</lastBuildDate>
+    <generator>Jive Forums Professional 4.2.3 (www.jivesoftware.com)</generator>
+    <managingEditor>editor@theserverside.com</managingEditor>
+    <webMaster>editor@theserverside.com</webMaster>
+    <ttl>60</ttl>
+    <image>
+        <url>http://www.theserverside.com/tt/skin/images/feed-logo.jpg</url>
+        <title>TheServerSide</title>
+        <link>http://www.theserverside.com</link>
+    </image>
+
+   <pubDate>Mon, 13 Aug 2007 13:42:02 -0400</pubDate>
+
+
+
+    <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.theserverside.com/rss/theserverside-rss2.xml" type="application/rss+xml" /><feedburner:browserFriendly>This is an XML content feed. It is intended to be viewed in a newsreader or syndicated to another site, subject to copyright and fair use.</feedburner:browserFriendly><item>
+        <title><![CDATA[Oracle Coherence 3.3 released]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/143722062/thread.tss</link>
+
+        
+        <description>Oracle has released Oracle Coherence 3.3, an in-memory data grid and the latest hot-pluggable component of Oracle Fusion Middleware. In addition to being branded as Oracle rather than Tangosol, this release features enhanced performance, Quality-of-Service and clustering capabilities as well as Extreme Transaction Processing.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=dfC4k8"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=dfC4k8" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=pDD4q4hE"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=pDD4q4hE" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=4FUceFUx"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=4FUceFUx" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=xnLmgDK6"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=xnLmgDK6" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/143722062" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Mon, 13 Aug 2007 13:22:28 -0400</pubDate>
+        <jf:modificationDate>Mon, 13 Aug 2007 13:22:28 -0400</jf:modificationDate>
+        <author>Joseph Ottinger@nospam.com</author>
+        <jf:replyCount>1</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46552</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46552</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Managing Smartcards with Hard Token Management Framework]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/143654333/thread.tss</link>
+
+        
+        <description>After long and heavy development, the first beta of the Hard Token Management Framework and its first application suite 'ToLiMa' have been released. Hard Token Management Framework is used to manage the complete lifecycle of an organization's Smartcard and/or USB dongles.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=x012rw"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=x012rw" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=QUOUx0GR"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=QUOUx0GR" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=k5crVtgT"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=k5crVtgT" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=qAyBds0f"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=qAyBds0f" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/143654333" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Mon, 13 Aug 2007 09:36:17 -0400</pubDate>
+        <jf:modificationDate>Mon, 13 Aug 2007 10:16:21 -0400</jf:modificationDate>
+        <author>Tomas Gustavsson@nospam.com</author>
+        <jf:replyCount>2</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46543</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46543</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Podcast: Rod Johnson and Spring 2.1]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/142807361/thread.tss</link>
+
+        
+        <description>In this podcast, Rod Johnson talked with TheServerSide about the upcoming Spring 2.1 release, the Java EE 6 specification (with which Interface21 is involved), and some other Spring-isms.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=uVpC8r"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=uVpC8r" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=URxnamVu"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=URxnamVu" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=YIZpckD4"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=YIZpckD4" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=B4ztUr5g"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=B4ztUr5g" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/142807361" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Fri, 10 Aug 2007 12:49:21 -0400</pubDate>
+        <jf:modificationDate>Fri, 10 Aug 2007 12:49:21 -0400</jf:modificationDate>
+        <author>Joseph Ottinger@nospam.com</author>
+        <jf:replyCount>1</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46537</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46537</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[A Hibernate Urban Legend]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/142807362/thread.tss</link>
+
+        
+        <description>Somewhere along the line java developers came to believe that Hibernate protects you from SQL injection. I'm not sure where they came to believe that. Maybe it is because you no longer have to write SQL and Hibernate does many other magical things - it has to protect you against SQL injection. I'm tired of telling java developers that HQL has the same vulnerabilities as SQL. You can make yourself vulnerable to SQL injection with Hibernate, too, if you avoid named parameters.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=m3M78Z"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=m3M78Z" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=lyvd0Jgc"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=lyvd0Jgc" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=2gai68MI"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=2gai68MI" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=khScNEkO"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=khScNEkO" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/142807362" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Fri, 10 Aug 2007 12:44:25 -0400</pubDate>
+        <jf:modificationDate>Mon, 13 Aug 2007 12:10:51 -0400</jf:modificationDate>
+        <author>Rajesh Patel@nospam.com</author>
+        <jf:replyCount>26</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46532</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46532</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[ChainBuilder ESB 1.1 with Framework for Custom JBI Components]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/142409174/thread.tss</link>
+
+        
+        <description>Bostech has announced the release of ChainBuilder ESB 1.1. This release adds a framework for creating custom Java Business Integration (JBI) components, critical HL7 Healthcare message support, and the ability to leverage disparate applications which use TCP/IP, POP3, IMAP and SMTP protocols.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=VNoWXd"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=VNoWXd" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=9gO04rG4"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=9gO04rG4" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=uX1kTKUS"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=uX1kTKUS" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=o1lGXTa3"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=o1lGXTa3" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/142409174" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Thu, 09 Aug 2007 11:47:48 -0400</pubDate>
+        <jf:modificationDate>Mon, 13 Aug 2007 10:41:38 -0400</jf:modificationDate>
+        <author>Eric Lu@nospam.com</author>
+        <jf:replyCount>5</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46513</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46513</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Blandware has released AtLeap 0.53]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/142409175/thread.tss</link>
+
+        
+        <description>Blandware AtLeap is a free Java multilingual CMS (Content Management System) with full-text search engine. Blandware AtLeap is a framework which allows you to rapidly start your own Web application. This version adds Tomcat 6 and Java 6 support, an updated FCKEditor and TinyMCE, adds Virtual Layouts and the facility to download and upload DB snapshots and some.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=PqIvDX"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=PqIvDX" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=hw3YjETO"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=hw3YjETO" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=zk8pGKLS"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=zk8pGKLS" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=2TnSVcJ2"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=2TnSVcJ2" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/142409175" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Thu, 09 Aug 2007 11:46:02 -0400</pubDate>
+        <jf:modificationDate>Mon, 13 Aug 2007 11:52:55 -0400</jf:modificationDate>
+        <author>Andrey Grebnev@nospam.com</author>
+        <jf:replyCount>5</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46518</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46518</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Project jMaki:  TheServerSide Video Tech Brief]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/142010718/thread.tss</link>
+
+        
+        <description>The Project jMaki is an AJAX framework that provides a lightweight model for creating AJAX-enabled web applications compatible with most server-side technologies, from Java to PHP.  Greg Murray, jMaki's project lead, tells us how to use it and participate in its development.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=k5RwKa"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=k5RwKa" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=38BKLvQE"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=38BKLvQE" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=Bv3MWFAz"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=Bv3MWFAz" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=WVpT61lS"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=WVpT61lS" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/142010718" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Wed, 08 Aug 2007 10:10:38 -0400</pubDate>
+        <jf:modificationDate>Wed, 08 Aug 2007 10:10:38 -0400</jf:modificationDate>
+        <author>Eugene Ciurana@nospam.com</author>
+        <jf:replyCount>1</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46502</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46502</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Eclipse Web Tools Platform Book Released]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/141991096/thread.tss</link>
+
+        
+        <description>The first Web Tools Platform (WTP) book in the Eclipse Series, Eclipse Web Tools Platform: Developing Java Web Application by Naci Dai, Lawrence Mandel, and Arthur Ryman has been released. This newspost contains a summary of the book's content.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=auY9hX"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=auY9hX" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=hj2qoY79"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=hj2qoY79" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=Xr4rRJmk"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=Xr4rRJmk" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=XS4euNOk"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=XS4euNOk" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/141991096" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Wed, 08 Aug 2007 09:22:12 -0400</pubDate>
+        <jf:modificationDate>Wed, 08 Aug 2007 19:10:58 -0400</jf:modificationDate>
+        <author>Lawrence Mandel@nospam.com</author>
+        <jf:replyCount>3</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46500</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46500</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[No More JSF Views, Integrating ZK with Seam]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/141991097/thread.tss</link>
+
+        
+        <description>JBoss Seam has been tightly coupled with JSF components as the only &amp;quot;view&amp;quot; choice. You now have at least one more choice. In the article &amp;quot;How to Integrate ZK with Seam&amp;quot;, Dennis Chen demonstrates two examples of to integrate the ZK Ajax Rich Client framework with Seam.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=R0Z6xM"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=R0Z6xM" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=ABzwsL0j"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=ABzwsL0j" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=Qe9k4cud"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=Qe9k4cud" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=zIj7W2H7"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=zIj7W2H7" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/141991097" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Wed, 08 Aug 2007 09:20:35 -0400</pubDate>
+        <jf:modificationDate>Thu, 09 Aug 2007 22:01:32 -0400</jf:modificationDate>
+        <author>Henri Chen@nospam.com</author>
+        <jf:replyCount>12</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46501</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46501</feedburner:origLink></item>
+
+
+
+    <item>
+        <title><![CDATA[Differences between client-side and server-side state for JSF]]></title>
+        <link>http://feeds.feedburner.com/~r/techtarget/tsscom/home/~3/141570154/thread.tss</link>
+
+        
+        <description>The Glassfish Wiki has a new FAQ posted, with the subject title &amp;quot;What are the differences between Server and Client side state saving and what are the benefits/drawbacks of each?&amp;quot; Both are easy to use, being a simple parameter in web.xml, but the implications of them aren't always clear. This FAQ tries to summarize the two methods.
+&lt;p&gt;&lt;a href="http://feeds.feedburner.com/~a/techtarget/tsscom/home?a=ENic9N"&gt;&lt;img src="http://feeds.feedburner.com/~a/techtarget/tsscom/home?i=ENic9N" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;&lt;div class="feedflare"&gt;
+&lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=JsxKkA9b"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=JsxKkA9b" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=CIsSuShz"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=CIsSuShz" border="0"&gt;&lt;/img&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/techtarget/tsscom/home?a=dtmy9Fq3"&gt;&lt;img src="http://feeds.feedburner.com/~f/techtarget/tsscom/home?i=dtmy9Fq3" border="0"&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src="http://feeds.feedburner.com/~r/techtarget/tsscom/home/~4/141570154" height="1" width="1"/&gt;</description>
+        
+
+        <pubDate>Tue, 07 Aug 2007 07:23:03 -0400</pubDate>
+        <jf:modificationDate>Wed, 08 Aug 2007 22:20:21 -0400</jf:modificationDate>
+        <author>Joseph Ottinger@nospam.com</author>
+        <jf:replyCount>32</jf:replyCount>
+        <category>Java, J2EE</category>
+        <guid isPermaLink="false">http://www.theserverside.com/news/thread.tss?thread_id=46490</guid>
+    <feedburner:origLink>http://www.theserverside.com/news/thread.tss?thread_id=46490</feedburner:origLink></item>
+
+
+ 
+ <title><![CDATA[TheServerSide.com: News]]></title>
+ 
+</channel>
+</rss>
