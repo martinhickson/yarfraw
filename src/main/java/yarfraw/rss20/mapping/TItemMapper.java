@@ -7,12 +7,12 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-import yarfraw.rss20.datamodel.Category;
-import yarfraw.rss20.datamodel.Enclosure;
-import yarfraw.rss20.datamodel.Guid;
-import yarfraw.rss20.datamodel.Item;
-import yarfraw.rss20.datamodel.Source;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Enclosure;
+import yarfraw.core.datamodel.Guid;
+import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.Source;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TCategory;
 import yarfraw.generated.rss20.elements.TEnclosure;
 import yarfraw.generated.rss20.elements.TGuid;

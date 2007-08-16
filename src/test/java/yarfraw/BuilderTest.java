@@ -18,16 +18,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import yarfraw.rss20.datamodel.Category;
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.Cloud;
-import yarfraw.rss20.datamodel.Day;
-import yarfraw.rss20.datamodel.Guid;
-import yarfraw.rss20.datamodel.Image;
-import yarfraw.rss20.datamodel.Item;
-import yarfraw.rss20.datamodel.TextInput;
-import yarfraw.rss20.datamodel.ValidationException;
-import yarfraw.rss20.datamodel.ValidationLevel;
+import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Cloud;
+import yarfraw.core.datamodel.Day;
+import yarfraw.core.datamodel.Guid;
+import yarfraw.core.datamodel.Image;
+import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.TextInput;
+import yarfraw.core.datamodel.ValidationException;
+import yarfraw.core.datamodel.ValidationLevel;
 import yarfraw.rss20.io.Rss20Reader;
 import yarfraw.rss20.io.Rss20Writer;
 /**

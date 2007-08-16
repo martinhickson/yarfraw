@@ -1,4 +1,4 @@
-package yarfraw.rss20.datamodel;
+package yarfraw.core.datamodel;
 
 import java.net.URI;
 import java.net.URISyntaxException;

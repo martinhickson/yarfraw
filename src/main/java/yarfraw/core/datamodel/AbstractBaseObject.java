@@ -1,4 +1,4 @@
-package yarfraw.rss20.datamodel;
+package yarfraw.core.datamodel;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

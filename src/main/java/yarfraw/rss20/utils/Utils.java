@@ -8,7 +8,7 @@ import javax.xml.namespace.QName;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
-import yarfraw.rss20.datamodel.ValidationException;
+import yarfraw.core.datamodel.ValidationException;
 
 /**
  * Utilities methods.

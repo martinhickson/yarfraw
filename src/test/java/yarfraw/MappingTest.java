@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
-import yarfraw.rss20.datamodel.Channel;
+import yarfraw.core.datamodel.Channel;
 import yarfraw.rss20.io.Rss20Writer;
 import yarfraw.rss20.mapping.ChannelMapperImpl;
 import yarfraw.rss20.mapping.TChannelMapper;

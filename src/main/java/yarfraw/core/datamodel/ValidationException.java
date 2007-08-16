@@ -1,4 +1,4 @@
-package yarfraw.rss20.datamodel;
+package yarfraw.core.datamodel;
 /**
  * Indicates mal-formness of the rss data model. 
  * @author jliang

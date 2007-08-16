@@ -19,8 +19,8 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.io.IOUtils;
 
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.generated.rss20.elements.TRssChannel;
 import yarfraw.rss20.mapping.ChannelMapperImpl;

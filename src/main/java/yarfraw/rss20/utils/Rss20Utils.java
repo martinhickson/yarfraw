@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.rss20.io.Rss20Reader;
 
 /**

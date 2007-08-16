@@ -12,8 +12,8 @@ import javax.xml.bind.ValidationEventHandler;
 
 import org.apache.commons.io.IOUtils;
 
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.rss20.utils.Utils;

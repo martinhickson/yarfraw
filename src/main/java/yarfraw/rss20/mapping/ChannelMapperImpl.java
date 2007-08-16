@@ -8,13 +8,13 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-import yarfraw.rss20.datamodel.Category;
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.Cloud;
-import yarfraw.rss20.datamodel.Day;
-import yarfraw.rss20.datamodel.Image;
-import yarfraw.rss20.datamodel.TextInput;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Cloud;
+import yarfraw.core.datamodel.Day;
+import yarfraw.core.datamodel.Image;
+import yarfraw.core.datamodel.TextInput;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TCategory;
 import yarfraw.generated.rss20.elements.TCloud;
 import yarfraw.generated.rss20.elements.TImage;

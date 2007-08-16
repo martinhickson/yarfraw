@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.Item;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.YarfrawException;
 /**
  * Provides a set of function to facilitate modifications to an RSS 2.0 feed.
  * <br/>

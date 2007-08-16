@@ -12,9 +12,9 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
-import yarfraw.rss20.datamodel.Channel;
-import yarfraw.rss20.datamodel.Item;
-import yarfraw.rss20.datamodel.YarfrawException;
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.rss20.io.Rss20Appender;
 import yarfraw.rss20.io.Rss20Reader;
 import yarfraw.rss20.io.Rss20Writer;

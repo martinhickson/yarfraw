@@ -1,4 +1,4 @@
-package yarfraw.rss20.datamodel;
+package yarfraw.core.datamodel;
 
 import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.generated.rss20.elements.TEnclosure;
