@@ -1,7 +1,7 @@
 package yarfraw.rss20.datamodel;
 
-import generated.ObjectFactory;
-import generated.TEnclosure;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TEnclosure;
 
 import java.math.BigInteger;
 import java.net.URI;

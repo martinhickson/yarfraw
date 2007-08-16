@@ -14,8 +14,8 @@ import org.apache.commons.io.IOUtils;
 
 import yarfraw.rss20.datamodel.Channel;
 import yarfraw.rss20.datamodel.YarfrawException;
-import generated.ObjectFactory;
-import generated.TRss;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.rss20.utils.Utils;
 /**
  * Provides a set of function to facilitate writing to an RSS 2.0 feed.
@@ -76,7 +76,7 @@ public class Rss20Writer extends AbstractBaseIO{
   
   private Marshaller getMarshaller() throws JAXBException{
     if(_m==null){
-      _m = JAXBContext.newInstance(Utils.JAXB_CONTEXT).createMarshaller();
+      _m = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createMarshaller();
     }
     return _m;
   }

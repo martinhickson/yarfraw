@@ -2,8 +2,8 @@ package yarfraw.rss20.datamodel;
 
 import javax.xml.bind.JAXBElement;
 
-import generated.ObjectFactory;
-import generated.TCategory;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TCategory;
 import yarfraw.rss20.utils.Utils;
 
 

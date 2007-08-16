@@ -5,8 +5,8 @@ import java.net.URISyntaxException;
 
 import javax.xml.bind.JAXBElement;
 
-import generated.ObjectFactory;
-import generated.TImage;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TImage;
 import yarfraw.rss20.utils.Utils;
 
 /**

@@ -15,7 +15,7 @@
 
 	<!-- Import the RDF namespace schema for rdf:resource -->
 	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-		schemaLocation="metardf.xsd" />
+		schemaLocation="rss10rdf.xsd" />
 
 	<xs:element name="item" type="rss10:tRss10Item" />
 	<xs:element name="channel" type="rss10:tRss10Channel" />

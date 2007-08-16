@@ -21,8 +21,8 @@ import org.apache.commons.io.IOUtils;
 
 import yarfraw.rss20.datamodel.Channel;
 import yarfraw.rss20.datamodel.YarfrawException;
-import generated.TRss;
-import generated.TRssChannel;
+import yarfraw.generated.rss20.elements.TRss;
+import yarfraw.generated.rss20.elements.TRssChannel;
 import yarfraw.rss20.mapping.ChannelMapperImpl;
 import yarfraw.rss20.utils.Utils;
 /**
@@ -134,7 +134,7 @@ public class Rss20Reader extends AbstractBaseIO{
   
   private Unmarshaller getUnMarshaller() throws JAXBException{
     if(_u==null){
-      _u = JAXBContext.newInstance(Utils.JAXB_CONTEXT).createUnmarshaller();
+      _u = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();
     }
     return _u;
   }

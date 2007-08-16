@@ -4,9 +4,9 @@ import java.math.BigInteger;
 
 import javax.xml.bind.JAXBElement;
 
-import generated.ObjectFactory;
-import generated.TCloud;
-import generated.TCloudProtocol;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TCloud;
+import yarfraw.generated.rss20.elements.TCloudProtocol;
 import yarfraw.rss20.utils.Utils;
 
 /**

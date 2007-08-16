@@ -1,7 +1,7 @@
 package yarfraw.rss20.datamodel;
 
-import generated.ObjectFactory;
-import generated.TSource;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TSource;
 
 import java.net.URI;
 import java.net.URISyntaxException;

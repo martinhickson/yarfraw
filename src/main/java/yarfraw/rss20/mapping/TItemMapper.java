@@ -13,11 +13,11 @@ import yarfraw.rss20.datamodel.Guid;
 import yarfraw.rss20.datamodel.Item;
 import yarfraw.rss20.datamodel.Source;
 import yarfraw.rss20.datamodel.YarfrawException;
-import generated.TCategory;
-import generated.TEnclosure;
-import generated.TGuid;
-import generated.TRssItem;
-import generated.TSource;
+import yarfraw.generated.rss20.elements.TCategory;
+import yarfraw.generated.rss20.elements.TEnclosure;
+import yarfraw.generated.rss20.elements.TGuid;
+import yarfraw.generated.rss20.elements.TRssItem;
+import yarfraw.generated.rss20.elements.TSource;
 import yarfraw.rss20.utils.Utils;
 
 /**

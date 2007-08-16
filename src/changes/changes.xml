@@ -4,7 +4,7 @@
   </properties>
   <body>
     <release version="8/14/2007" date="TBD" description="First stable mile stone release">
-    <action dev="jliang" type="add">
+      <action dev="jliang" type="add">
         Added remote rss feed reader.
       </action>
       <action dev="jliang" type="add">
@@ -18,6 +18,9 @@
       </action>
 	  <action dev="jliang" type="add">
         Added missing Javadoc. 
+      </action>
+      <action dev="jliang" type="TODO">
+        Added support for RDF/RSS 1.0 
       </action>      
     </release>
   </body>

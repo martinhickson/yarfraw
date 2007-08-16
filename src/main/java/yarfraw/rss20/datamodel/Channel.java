@@ -26,11 +26,11 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import generated.ObjectFactory;
-import generated.TRssChannel;
-import generated.TSkipDay;
-import generated.TSkipDaysList;
-import generated.TSkipHoursList;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TRssChannel;
+import yarfraw.generated.rss20.elements.TSkipDay;
+import yarfraw.generated.rss20.elements.TSkipDaysList;
+import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.rss20.utils.Utils;
 import yarfraw.rss20.utils.XMLUtils;
 /**

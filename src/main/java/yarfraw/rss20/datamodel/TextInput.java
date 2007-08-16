@@ -5,8 +5,8 @@ import java.net.URISyntaxException;
 
 import javax.xml.bind.JAXBElement;
 
-import generated.ObjectFactory;
-import generated.TTextInput;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TTextInput;
 /**
  *A channel may optionally contain a <textInput> sub-element, which contains four required sub-elements.<br/>
  *&lt;title> -- The label of the Submit button in the text input area.<br/>

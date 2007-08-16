@@ -23,8 +23,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import generated.ObjectFactory;
-import generated.TRssItem;
+import yarfraw.generated.rss20.elements.ObjectFactory;
+import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.rss20.utils.Utils;
 import yarfraw.rss20.utils.XMLUtils;
 

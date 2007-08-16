@@ -15,15 +15,15 @@ import yarfraw.rss20.datamodel.Day;
 import yarfraw.rss20.datamodel.Image;
 import yarfraw.rss20.datamodel.TextInput;
 import yarfraw.rss20.datamodel.YarfrawException;
-import generated.TCategory;
-import generated.TCloud;
-import generated.TImage;
-import generated.TRssChannel;
-import generated.TRssItem;
-import generated.TSkipDay;
-import generated.TSkipDaysList;
-import generated.TSkipHoursList;
-import generated.TTextInput;
+import yarfraw.generated.rss20.elements.TCategory;
+import yarfraw.generated.rss20.elements.TCloud;
+import yarfraw.generated.rss20.elements.TImage;
+import yarfraw.generated.rss20.elements.TRssChannel;
+import yarfraw.generated.rss20.elements.TRssItem;
+import yarfraw.generated.rss20.elements.TSkipDay;
+import yarfraw.generated.rss20.elements.TSkipDaysList;
+import yarfraw.generated.rss20.elements.TSkipHoursList;
+import yarfraw.generated.rss20.elements.TTextInput;
 import yarfraw.rss20.utils.Utils;
 
 /**

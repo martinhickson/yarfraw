@@ -44,7 +44,7 @@ public class IOTest extends TestCase{
   
   @Test
   public void testRead() throws Exception{
-    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/rdf.xml").toURI());
+    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     Channel c = r.readChannel();
     r.readChannel(new ValidationEventHandler(){
 
@@ -54,10 +54,9 @@ public class IOTest extends TestCase{
       }
       
     });
-    System.out.println(c);
-//    assertTrue("Title is not the same", "digg".equals(c.getTitle()));
-//    assertTrue("language is not the same", "en-us".equals(c.getLanguage().getLanguage().toLowerCase()));
-//    assertTrue("Link is not the same", "http://digg.com/".equals(c.getLink().toString()));
+    assertTrue("Title is not the same", "digg".equals(c.getTitle()));
+    assertTrue("language is not the same", "en-us".equals(c.getLanguage().getLanguage().toLowerCase()));
+    assertTrue("Link is not the same", "http://digg.com/".equals(c.getLink().toString()));
     //TODO: put more asserts
   }
   

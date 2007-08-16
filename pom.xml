@@ -113,15 +113,37 @@
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <configuration>
-        	<verbose>true</verbose>
-        </configuration>
+        
         <executions>
           <execution>
+          	<id>rss20</id>
+	        <configuration>
+	        	<verbose>true</verbose>
+	        	<generatePackage>yarfraw.generated.rss20.elements</generatePackage>
+	        	<schemaIncludes>
+	        		<schemaInclude>rss20*.xsd</schemaInclude>
+	        	</schemaIncludes>
+	        	<generateDirectory>${project.build.directory}/generated-sources/rss20</generateDirectory>
+	        </configuration>  
             <goals>
               <goal>generate</goal>
             </goals>
           </execution>
+		  <execution>
+		  	<id>rss10</id>
+	        <configuration>
+	        	<verbose>true</verbose>
+	        	<generatePackage>yarfraw.generated.rss10.elements</generatePackage>
+	        	<schemaIncludes>
+	        		<schemaInclude>rss10*.xsd</schemaInclude>
+	        	</schemaIncludes>
+	        	<forceRegenerate>true</forceRegenerate>
+	        	<generateDirectory>${project.build.directory}/generated-sources/rss10</generateDirectory>
+	        </configuration>  
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>          
         </executions>
       </plugin>
       <plugin>
@@ -211,7 +233,7 @@
 				<minimumTokens>80</minimumTokens>
 				<targetJdk>1.5</targetJdk>
 				<excludes>
-					<exclude>**/yarfraw/rss20/elements/*.java</exclude>
+					<exclude>**/yarfraw/generated/rss?0/elements/*.java</exclude>
 				</excludes>
 			</configuration>
 		</plugin>
