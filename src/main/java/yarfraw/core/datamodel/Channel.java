@@ -797,7 +797,7 @@ public class Channel extends AbstractBaseObject{
     if(_items != null){
       for(Item t : _items){
         if(t != null){
-          ret.getItem().add(t.toTItemJAXB().getValue());
+          ret.getItem().add(t.toRss20ItemJAXB().getValue());
         }
       }
     }
@@ -854,7 +854,7 @@ public class Channel extends AbstractBaseObject{
     return ret;
   }
 
-  public JAXBElement<TRssChannel> toTChannelJAXB(){
+  public JAXBElement<TRssChannel> toRss20ChannelJAXB(){
     return new ObjectFactory().createChannel(toChannel());
   }
 }

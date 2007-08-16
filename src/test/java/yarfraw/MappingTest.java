@@ -26,7 +26,7 @@ public class MappingTest extends TestCase{
     Channel c = BuilderTest.buildChannel();
     
     TChannelMapper<Channel> mapper = ChannelMapperImpl.getInstance();
-    Channel c2 =  mapper.execute(c.toTChannelJAXB().getValue());
+    Channel c2 =  mapper.execute(c.toRss20ChannelJAXB().getValue());
 
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
     assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));

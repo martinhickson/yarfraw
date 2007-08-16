@@ -61,7 +61,7 @@ public class Rss20Writer extends AbstractBaseIO{
       m.setEventHandler(validationEventHandler);
       TRss rss = new TRss();
       rss.setVersion(2.0d);
-      rss.setChannel(channel.toTChannelJAXB().getValue());
+      rss.setChannel(channel.toRss20ChannelJAXB().getValue());
       out = new FileOutputStream(_file);
       m.marshal(new ObjectFactory().createRss(rss), out);
     } catch (JAXBException e) {

@@ -477,7 +477,7 @@ public class Item extends AbstractBaseObject{
     return ret;
   }
 
-  public JAXBElement<TRssItem> toTItemJAXB(){
+  public JAXBElement<TRssItem> toRss20ItemJAXB(){
     return new ObjectFactory().createItem(toTItem());
   }
 }

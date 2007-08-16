@@ -3,8 +3,11 @@ package yarfraw.rss20.io;
 import java.io.File;
 import java.net.URI;
 
+import yarfraw.core.datamodel.FeedFormat;
+
 abstract class AbstractBaseIO{
   protected File _file;
+  protected FeedFormat _format = null;
   
   public AbstractBaseIO(){}
   public AbstractBaseIO(File file){
@@ -21,5 +24,19 @@ abstract class AbstractBaseIO{
   public AbstractBaseIO(URI uri){
     this(new File(uri));
   }
+  public File getFile() {
+    return _file;
+  }
+  public void setFile(File file) {
+    _file = file;
+  }
+  
+  public FeedFormat getFormat() {
+    return _format;
+  }
+  public void setFormat(FeedFormat format) {
+    _format = format;
+  }
+  
   
 }
