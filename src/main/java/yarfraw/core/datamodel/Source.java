@@ -1,12 +1,7 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TSource;
-
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.xml.bind.JAXBElement;
 /**
  * {@link Source} is an optional sub-element of {@link Item}.
  * <p/>
@@ -65,17 +60,5 @@ public class Source extends AbstractBaseObject{
   public void validate(ValidationLevel level) throws ValidationException {
 
   }
-  
-  private TSource toTSource(){
-    TSource ret = new TSource();
-    if(_url != null){
-      ret.setUrl(_url.toString());
-    }
-    ret.setValue(_source);
-    return ret;
-  }
-  
-  public JAXBElement<TSource> toTSourceJAXB(){
-    return new ObjectFactory().createTRssItemSource(toTSource());
-  }
+
 }

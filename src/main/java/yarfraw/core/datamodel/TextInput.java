@@ -2,11 +2,6 @@ package yarfraw.core.datamodel;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.xml.bind.JAXBElement;
-
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TTextInput;
 /**
  *A channel may optionally contain a <textInput> sub-element, which contains four required sub-elements.<br/>
  *&lt;title> -- The label of the Submit button in the text input area.<br/>
@@ -130,20 +125,5 @@ public class TextInput extends AbstractBaseObject{
   public void validate(ValidationLevel level) throws ValidationException {
     // TODO Auto-generated method stub
     
-  }
-  
-  private TTextInput toTTextInput(){
-    TTextInput ret = new TTextInput();
-    ret.setDescription(_description);
-    if(_link != null){
-      ret.setLink(_link.toString());
-    }
-    ret.setName(_name);
-    ret.setTitle(_title);
-    return ret;
-  }
-  
-  public JAXBElement<TTextInput> toTTextInputJAXB(){
-    return new ObjectFactory().createTRssChannelTextInput(toTTextInput());
   }
 }

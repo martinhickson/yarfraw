@@ -1,7 +1,6 @@
 package yarfraw.core.datamodel;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,7 +16,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -26,11 +24,6 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TRssChannel;
-import yarfraw.generated.rss20.elements.TSkipDay;
-import yarfraw.generated.rss20.elements.TSkipDaysList;
-import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.rss20.utils.Utils;
 import yarfraw.rss20.utils.XMLUtils;
 /**
@@ -754,107 +747,4 @@ public class Channel extends AbstractBaseObject{
     }    
   }
   
-  private TRssChannel toChannel(){
-    TRssChannel ret = new TRssChannel();
-    List<Object> elementList = ret.getTitleOrLinkOrDescription();
-    ObjectFactory factory = new ObjectFactory();
-    if(_otherElements != null){
-      ret.getAny().addAll(_otherElements);
-    }
-    if(_otherAttributes != null){
-      ret.getOtherAttributes().putAll(_otherAttributes);
-    }
-    if(_category != null){
-      for(Category c : _category){
-        if(c != null){
-          elementList.add(c.toTCategoryJAXB());
-        }
-      }
-    }
-    
-    if(_cloud != null){
-      elementList.add(_cloud.toTCloudJAXB());
-    }
-    if(_copyright != null){
-      elementList.add(factory.createTRssChannelCopyright(_copyright));
-    }
-    if(_description != null){
-      elementList.add(factory.createTRssChannelDescription(_description));
-    }
-
-    if(_docs != null){
-      elementList.add(factory.createTRssChannelDocs(_docs.toString()));
-    }
-    
-    if(_generator != null){
-      elementList.add(factory.createTRssChannelGenerator(_generator));
-    }
-
-    if(_image != null){
-      elementList.add(_image.toTImageJAXB());
-    }
-    
-    if(_items != null){
-      for(Item t : _items){
-        if(t != null){
-          ret.getItem().add(t.toRss20ItemJAXB().getValue());
-        }
-      }
-    }
-    
-    if(_language != null){
-      elementList.add(factory.createTRssChannelLanguage(_language.getLanguage()));
-    }
-    if(_link != null){
-      elementList.add(factory.createTRssChannelLink(_link.toString()));
-    }
-    SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
-    if(_lastBuildDate != null){
-      elementList.add(factory.createTRssChannelLastBuildDate(format.format(_lastBuildDate)));
-    }
-    
-    if(_managingEditor != null){
-      elementList.add(factory.createTRssChannelManagingEditor(_managingEditor));
-    }
-    
-    if(_pubDate != null){
-      elementList.add(factory.createTRssChannelPubDate(format.format(_pubDate)));
-    }
-
-    if(_skipDays != null){
-      TSkipDaysList tdl = new TSkipDaysList();
-      for(Day day : _skipDays){
-        tdl.getDay().add(TSkipDay.fromValue(day.toString()));
-      }
-      elementList.add(new ObjectFactory().createSkipDays( tdl));
-    }
-
-    if(_skipHours != null){
-      TSkipHoursList thl = new TSkipHoursList();
-      thl.getHour().addAll(_skipHours);
-      elementList.add(new ObjectFactory().createSkipHours( thl));
-    }
-    
-    if(_texInput != null){
-      elementList.add( _texInput.toTTextInputJAXB());      
-    }
-
-    if(_title != null){
-      elementList.add(factory.createTRssChannelTitle(_title));
-    }
-
-    if(_ttl != null){
-      elementList.add(factory.createTRssChannelTtl(new BigInteger(String.valueOf(_ttl))));
-    }
-
-    if(_webMaster != null){
-      elementList.add(factory.createTRssChannelWebMaster(_webMaster));
-    }
-    
-    return ret;
-  }
-
-  public JAXBElement<TRssChannel> toRss20ChannelJAXB(){
-    return new ObjectFactory().createChannel(toChannel());
-  }
 }

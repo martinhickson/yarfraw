@@ -1,9 +1,5 @@
 package yarfraw.core.datamodel;
 
-import javax.xml.bind.JAXBElement;
-
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.rss20.utils.Utils;
 
 /**
@@ -65,16 +61,5 @@ public class Guid extends AbstractBaseObject{
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     Utils.validateNotNull("Guid: Guid value should not be null", _guid);
-  }
-  
-  private TGuid toTGuid(){
-    TGuid ret = new TGuid();
-    ret.setIsPermaLink(_isPermaLink);
-    ret.setValue(_guid);
-    return ret;
-  }
-  
-  public JAXBElement<TGuid> toTGuidJAXB(){
-    return new ObjectFactory().createTRssItemGuid(toTGuid());
   }
 }

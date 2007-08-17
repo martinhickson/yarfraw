@@ -1,13 +1,7 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TEnclosure;
-
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.xml.bind.JAXBElement;
 
 import yarfraw.rss20.utils.Utils;
 
@@ -112,20 +106,5 @@ public class Enclosure extends AbstractBaseObject{
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     Utils.validateNotNull("Encloure: All fields in the enclosure object should be not null", _length, _mimeType, _url, _value);
-  }
-  
-  private TEnclosure toTEnclosure(){
-    TEnclosure ret = new TEnclosure();
-    ret.setLength(new BigInteger(String.valueOf(_length)));
-    ret.setType(_mimeType);
-    if(_url != null){
-      ret.setUrl(_url.toString());
-    }
-    ret.setValue(_value);
-    return ret;
-  }
-  
-  public JAXBElement<TEnclosure> toTEnclosureJAXB(){
-    return new ObjectFactory().createTRssItemEnclosure(toTEnclosure());
   }
 }

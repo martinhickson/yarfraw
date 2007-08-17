@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -23,8 +22,6 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.rss20.utils.Utils;
 import yarfraw.rss20.utils.XMLUtils;
 
@@ -424,60 +421,5 @@ public class Item extends AbstractBaseObject{
       Utils.validateEmails("Item: Author email is invalid", _author);
     }
   }
-  
-  private TRssItem toTItem(){
-    TRssItem ret = new ObjectFactory().createTRssItem();
-    List<Object> elementList = ret.getTitleOrDescriptionOrLink();
-    ObjectFactory factory = new ObjectFactory();
-    if(_otherElements != null){
-      ret.getTitleOrDescriptionOrLink().addAll(_otherElements);
-    }
-    if(_otherAttributes != null){
-      ret.getOtherAttributes().putAll(_otherAttributes);
-    }
-    if(_author != null){
-      elementList.add(factory.createTRssItemAuthor(_author));
-    }
-    
-    if(_category != null){
-      for(Category c : _category){
-        if(c != null){
-          elementList.add(c.toTCategoryJAXB());
-        }
-      }
-    }
-    
-    if(_comments != null){
-      elementList.add(factory.createTRssItemComments(_comments.toString()));      
-    }
-    if(_description != null){
-      elementList.add(factory.createTRssItemDescription(_description));
-    }
-    if(_enclosure != null){
-      elementList.add(_enclosure.toTEnclosureJAXB());
-    }
-    if(_guid != null){
-      elementList.add(_guid.toTGuidJAXB());
-    }
-    if(_link != null){
-      elementList.add(factory.createTRssItemLink(_link.toString()));
-    }
-    
-    if(_pubDate != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
-      elementList.add(factory.createTRssItemPubDate(format.format(_pubDate)));
-    }
-    if(_source != null){
-      elementList.add(_source.toTSourceJAXB());
-    }
-    if(_title != null){
-      elementList.add(factory.createTRssItemTitle(_title));
-    }
-    
-    return ret;
-  }
 
-  public JAXBElement<TRssItem> toRss20ItemJAXB(){
-    return new ObjectFactory().createItem(toTItem());
-  }
 }

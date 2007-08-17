@@ -1,12 +1,5 @@
 package yarfraw.core.datamodel;
 
-import java.math.BigInteger;
-
-import javax.xml.bind.JAXBElement;
-
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TCloud;
-import yarfraw.generated.rss20.elements.TCloudProtocol;
 import yarfraw.rss20.utils.Utils;
 
 /**
@@ -92,19 +85,5 @@ public class Cloud extends AbstractBaseObject{
     catch (Exception e) {
       throw new ValidationException(e.getMessage());
     }
-  }
-  
-  private TCloud toTCloud(){
-    TCloud ret = new TCloud();
-    ret.setDomain(_domain);
-    ret.setPath(_path);
-    ret.setPort(new BigInteger(String.valueOf(_port)));
-    ret.setProtocol(TCloudProtocol.fromValue(_protocol));
-    ret.setRegisterProcedure(_registerProcedure);
-    return ret;
-  }
-  
-  public JAXBElement<TCloud> toTCloudJAXB(){
-    return new ObjectFactory().createTRssChannelCloud(toTCloud());
   }
 }

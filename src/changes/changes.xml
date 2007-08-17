@@ -21,7 +21,10 @@
       </action>
       <action dev="jliang" type="TODO">
         Added support for RDF/RSS 1.0 
-      </action>      
+      </action>
+	  <action dev="jliang" type="TODO">
+        Added support for Atom 1.0 
+      </action>                  
     </release>
   </body>
 </document>

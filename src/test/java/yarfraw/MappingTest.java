@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
 import yarfraw.rss20.io.Rss20Writer;
 import yarfraw.rss20.mapping.ChannelMapperImpl;
 import yarfraw.rss20.mapping.TChannelMapper;
@@ -26,7 +27,7 @@ public class MappingTest extends TestCase{
     Channel c = BuilderTest.buildChannel();
     
     TChannelMapper<Channel> mapper = ChannelMapperImpl.getInstance();
-    Channel c2 =  mapper.execute(c.toRss20ChannelJAXB().getValue());
+    Channel c2 =  mapper.execute(ToRss20ChannelImpl.getInstance().execute(c).getValue());
 
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
     assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));

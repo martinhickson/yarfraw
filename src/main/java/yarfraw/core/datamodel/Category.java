@@ -1,9 +1,5 @@
 package yarfraw.core.datamodel;
 
-import javax.xml.bind.JAXBElement;
-
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TCategory;
 import yarfraw.rss20.utils.Utils;
 
 
@@ -70,16 +66,5 @@ public class Category extends AbstractBaseObject{
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     Utils.validateNotNull(_category, "Category: Category value should not be null");
-  }
-  
-  private TCategory toTCategory(){
-    TCategory ret = new TCategory();
-    ret.setDomain(_domain);
-    ret.setValue(_category);
-    return ret;
-  }
-
-  public JAXBElement<TCategory> toTCategoryJAXB(){
-    return new ObjectFactory().createTRssChannelCategory(toTCategory());
   }
 }

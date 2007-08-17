@@ -3,10 +3,6 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.xml.bind.JAXBElement;
-
-import yarfraw.generated.rss20.elements.ObjectFactory;
-import yarfraw.generated.rss20.elements.TImage;
 import yarfraw.rss20.utils.Utils;
 
 /**
@@ -260,24 +256,5 @@ public class Image extends AbstractBaseObject{
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     Utils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
-  }
-  
-  private TImage toTImage(){
-    TImage ret = new TImage();
-    ret.setDescription(_description);
-    ret.setHeight(_height);
-    ret.setWidth(_width);
-    if(_link != null){
-      ret.setLink(_link.toString());      
-    }
-    ret.setTitle(_title);
-    if(_url != null){
-      ret.setUrl(_url.toString());
-    }
-    return ret;
-  }
-  
-  public JAXBElement<TImage> toTImageJAXB(){
-    return new ObjectFactory().createTRssChannelImage(toTImage());
   }
 }
