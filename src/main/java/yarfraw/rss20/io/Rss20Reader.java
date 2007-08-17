@@ -20,6 +20,7 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.io.IOUtils;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.generated.rss20.elements.TRssChannel;
@@ -32,7 +33,10 @@ import yarfraw.rss20.utils.Utils;
  */
 public class Rss20Reader extends AbstractBaseIO{
   
-  private Unmarshaller _u;
+  private Unmarshaller _rss20Unmarshaller;
+  private Unmarshaller _rss10Unmarshaller;
+  private Unmarshaller _atom10Unmarshaller;
+  
   private HttpURL _httpUrl = null;
   private HttpClientParams _httpClientParams = null;
   
@@ -87,6 +91,8 @@ public class Rss20Reader extends AbstractBaseIO{
       input = getStream();
       u = getUnMarshaller();
       u.setEventHandler(validationEventHandler);
+      //TODO: implement backward mapping for rss10
+      
       JAXBElement<TRss> o = (JAXBElement<TRss>)u.unmarshal(input);
       TRss rss =  o.getValue();
       TRssChannel channel = rss.getChannel();
@@ -133,9 +139,26 @@ public class Rss20Reader extends AbstractBaseIO{
   
   
   private Unmarshaller getUnMarshaller() throws JAXBException{
-    if(_u==null){
-      _u = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+    Unmarshaller ret = _rss20Unmarshaller;
+    if(_format == FeedFormat.RSS20){
+      if(_rss20Unmarshaller==null){
+        _rss20Unmarshaller = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      }
+      ret = _rss20Unmarshaller;
+    }else if(_format == FeedFormat.RSS10){
+      if(_rss10Unmarshaller==null){
+        _rss10Unmarshaller = JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createUnmarshaller();
+      }
+      ret = _rss10Unmarshaller;
+    }else if(_format == FeedFormat.ATOM10){
+      if(_atom10Unmarshaller==null){
+        _atom10Unmarshaller = JAXBContext.newInstance(Utils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      }
+      ret = _atom10Unmarshaller;
+    }else{
+      throw new UnsupportedOperationException("Unknown Feed Format");
     }
-    return _u;
+    
+    return ret;
   }
 }

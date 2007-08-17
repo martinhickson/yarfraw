@@ -1,8 +1,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rss10="http://purl.org/rss/1.0/" 
-	targetNamespace="http://purl.org/rss/1.0/"
-	elementFormDefault="unqualified" >
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	targetNamespace="http://purl.org/rss/1.0/">
 
 	<xs:annotation>
 		<xs:documentation xml:lang="en" >
@@ -17,9 +18,18 @@
 	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 		schemaLocation="rss10rdf.xsd" />
 
+	<!-- Syndication module -->
+	<xs:import namespace="http://purl.org/rss/1.0/modules/syndication/"
+		schemaLocation="rss10sy.xsd" />
+	
+	<!-- Dublin Core module -->
+	<xs:import namespace="http://purl.org/dc/elements/1.1/"
+		schemaLocation="rss10dc.xsd" />
+			
 	<xs:element name="item" type="rss10:tRss10Item" />
 	<xs:element name="channel" type="rss10:tRss10Channel" />
 	<xs:element name="image" type="rss10:tRss10Image" />
+	<xs:element name="textinput" type="rss10:tRss10TextInput" />
 
 	<xs:element name="items" >
 		<xs:complexType>
@@ -58,6 +68,12 @@
 								<xs:documentation>The URL of the item.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element ref="dc:description" minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:publisher"  minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:creator" minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:rights" minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="dc:date" minOccurs="0" maxOccurs="1" />
 						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Extensibility element.</xs:documentation>
@@ -103,7 +119,15 @@
 					</xs:annotation>
 				</xs:element>
 				<xs:element ref="rss10:items" minOccurs="1" maxOccurs="1" />
-				<xs:element name="item" type="rss10:tRss10Item" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element ref="sy:updatePeriod"  minOccurs="0" maxOccurs="1" />
+				<xs:element ref="sy:updateFrequency" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="sy:updateBase" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="dc:publisher" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:creator" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:rights" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:date" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:language" minOccurs="0" maxOccurs="1" />
 				<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Extensibility element.</xs:documentation>

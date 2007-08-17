@@ -38,6 +38,7 @@ public class Image extends AbstractBaseObject{
   private Integer _width =88;
   private Integer _height = 31;
   private String _description;
+  private RdfAttributes _rdfAttributes;
   public Image(){}
   public static Image create(){
     return new Image();
@@ -253,6 +254,22 @@ public class Image extends AbstractBaseObject{
     _description = description;
     return this;
   }
+
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public RdfAttributes getRdfAttributes() {
+    return _rdfAttributes;
+  }
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public void setRdfAttributes(RdfAttributes rdfAttributes) {
+    _rdfAttributes = rdfAttributes;
+  }
+  
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     Utils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);

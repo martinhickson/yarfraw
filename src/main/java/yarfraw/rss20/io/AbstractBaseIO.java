@@ -7,8 +7,7 @@ import yarfraw.core.datamodel.FeedFormat;
 
 abstract class AbstractBaseIO{
   protected File _file;
-  protected FeedFormat _format = null;
-  
+  protected FeedFormat _format = FeedFormat.RSS20; //default
   public AbstractBaseIO(){}
   public AbstractBaseIO(File file){
     if(file == null){
@@ -31,12 +30,26 @@ abstract class AbstractBaseIO{
     _file = file;
   }
   
+  /**
+   * The {@link FeedFormat} this writer should be using.<br/>
+   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored  
+   * <p/>
+   * rss 2.0 is recommended, use other format if you really need to
+   */
   public FeedFormat getFormat() {
     return _format;
   }
+  /**
+   * The {@link FeedFormat} this writer should be using.<br/>
+   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored
+   * <p/>
+   * rss 2.0 is recommended, use other format if you really need to
+   *  
+   */
   public void setFormat(FeedFormat format) {
-    _format = format;
+    if(format != null){
+      _format = format;
+    } 
   }
-  
   
 }

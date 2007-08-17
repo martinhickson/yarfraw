@@ -36,6 +36,7 @@ public class Utils{
   public static final String DATE_FORMAT_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
   public static final String RSS20_JAXB_CONTEXT = "yarfraw.generated.rss20.elements";
   public static final String RSS10_JAXB_CONTEXT = "yarfraw.generated.rss10.elements";
+  public static final String ATOM10_JAXB_CONTEXT = "yarfraw.generated.atom10.elements";
   private static final Pattern EMAIL = Pattern.compile(
           "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
           Pattern.CASE_INSENSITIVE);

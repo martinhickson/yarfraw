@@ -13,6 +13,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.rss20.io.Rss20Appender;
@@ -40,6 +41,14 @@ public class IOTest extends TestCase{
       }
       
     });
+  }
+  
+  @Test
+  public void testBuilder2() throws Exception{
+    Channel c = BuilderTest.buildChannel();
+    Rss20Writer w = new Rss20Writer("yarfraw.xml");
+    w.setFormat(FeedFormat.RSS10);
+    w.writeChannel(c);
   }
   
   @Test

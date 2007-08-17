@@ -1,4 +1,4 @@
-package yarfraw.rss20.mapping;
+package yarfraw.mapping;
 /**
  * A functor class.
  * 

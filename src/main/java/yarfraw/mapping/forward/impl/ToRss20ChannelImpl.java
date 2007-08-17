@@ -33,9 +33,9 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
   }
   
   private TRssChannel toChannel(Channel ch){
-    TRssChannel ret = new TRssChannel();
-    List<Object> elementList = ret.getTitleOrLinkOrDescription();
     ObjectFactory factory = new ObjectFactory();
+    TRssChannel ret = factory.createTRssChannel();
+    List<Object> elementList = ret.getTitleOrLinkOrDescription();
     if(ch.getOtherElements() != null){
       ret.getAny().addAll(ch.getOtherElements());
     }

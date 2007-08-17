@@ -10,32 +10,39 @@
 		</xs:documentation>
 	</xs:annotation>
 
-	<!-- this is a forward reference to the DC schema, which contains a backward reference to
-		here. If this were the only inelegant bit, it would be OK. But see below for worst stuff... -->
-	
-	<!-- Import the namespace schema for dc:* -->
 	<xs:import namespace="http://purl.org/rss/1.0/" schemaLocation="rss10.xsd" />
 
 	<xs:element name="RDF">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="channel" type="rss10:tRss10Channel" form="unqualified" />
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="rss10:channel"  minOccurs="1" />
+					<!--  <xs:element ref="rss10:image" minOccurs="0" />  this is ignored, so remove to avoid confusion -->
+					<xs:element ref="rss10:item" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element ref="rss10:textinput"  minOccurs="0" />
+					<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Extensibility element.</xs:documentation>
+					</xs:annotation>
+				</xs:any>
+				</xs:choice>
 			</xs:sequence>
+			<xs:anyAttribute namespace="##any"/>
 		</xs:complexType>
 	</xs:element>
 	
 	<!-- this is horrible. Description belongs to the RDF namespace, so that element is in the right
 		place here. But the references to stuff from the DC namespace are awful. If substitutionGroups
 		worked, the DC stuff could be encapsulated in the DC schema -->
-
+	<xs:element name="li">
+		<xs:complexType>
+			<xs:attribute name="resource" use="required" />
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Seq">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="li" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:attribute name="resource" use="required" />
-					</xs:complexType>
-				</xs:element>
+				<xs:element ref="rdf:li" minOccurs="1" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

@@ -18,6 +18,7 @@ public class TextInput extends AbstractBaseObject{
   private String _description;
   private String _name;
   private URI _link;
+  private RdfAttributes _rdfAttributes;
   public TextInput(){}
   public static TextInput create(){
     return new TextInput();
@@ -121,6 +122,23 @@ public class TextInput extends AbstractBaseObject{
     
     return this;
   }
+  
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public RdfAttributes getRdfAttributes() {
+    return _rdfAttributes;
+  }
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public void setRdfAttributes(RdfAttributes rdfAttributes) {
+    _rdfAttributes = rdfAttributes;
+  }
+  
+  
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     // TODO Auto-generated method stub

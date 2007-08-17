@@ -18,6 +18,7 @@ import yarfraw.generated.rss20.elements.TEnclosure;
 import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
+import yarfraw.mapping.Functor;
 import yarfraw.rss20.utils.Utils;
 
 /**

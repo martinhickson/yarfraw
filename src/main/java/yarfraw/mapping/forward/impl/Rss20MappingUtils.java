@@ -32,12 +32,12 @@ import yarfraw.rss20.utils.Utils;
  *
  */
 class Rss20MappingUtils {
+  private static final ObjectFactory FACTORY = new ObjectFactory();
   private Rss20MappingUtils(){}
   public static JAXBElement<TRssItem> ToRss20Item(Item item){
-    return new ObjectFactory().createItem(toTItem(item));
+    return FACTORY.createItem(toTItem(item));
   }
-  
-  
+
   public static JAXBElement<TTextInput> toRss20TextInput(TextInput input){
     TTextInput ret = new TTextInput();
     ret.setDescription(input.getDescription());
@@ -46,7 +46,7 @@ class Rss20MappingUtils {
     }
     ret.setName(input.getName());
     ret.setTitle(input.getTitle());
-    return new ObjectFactory().createTRssChannelTextInput(ret);
+    return FACTORY.createTRssChannelTextInput(ret);
   }
   
   public static JAXBElement<TImage> toRss20Image(Image image){
@@ -61,14 +61,14 @@ class Rss20MappingUtils {
     if(image.getUrl() != null){
       ret.setUrl(image.getUrl().toString());
     }
-    return new ObjectFactory().createTRssChannelImage(ret);
+    return FACTORY.createTRssChannelImage(ret);
   }
   
   public static JAXBElement<TCategory> toRss20Category(Category c){
     TCategory ret = new TCategory();
     ret.setDomain(c.getDomain());
     ret.setValue(c.getCategory());
-    return new ObjectFactory().createTRssChannelCategory(ret);
+    return FACTORY.createTRssChannelCategory(ret);
   }
   
   public static JAXBElement<TCloud> toRss20Cloud(Cloud cl){
@@ -78,7 +78,7 @@ class Rss20MappingUtils {
     ret.setPort(new BigInteger(String.valueOf(cl.getPort())));
     ret.setProtocol(TCloudProtocol.fromValue(cl.getProtocol()));
     ret.setRegisterProcedure(cl.getRegisterProcedure());
-    return new ObjectFactory().createTRssChannelCloud(ret);
+    return FACTORY.createTRssChannelCloud(ret);
   }
   
   private static JAXBElement<TEnclosure> toRss20Enclosure(Enclosure en){
@@ -89,20 +89,20 @@ class Rss20MappingUtils {
       ret.setUrl(en.getUrl().toString());
     }
     ret.setValue(en.getValue());
-    return new ObjectFactory().createTRssItemEnclosure(ret);
+    return FACTORY.createTRssItemEnclosure(ret);
   }
   
   private static JAXBElement<TGuid> toRss20Guid(Guid guid){
     TGuid ret = new TGuid();
     ret.setIsPermaLink(guid.isPermaLink());
     ret.setValue(guid.getGuid());
-    return new ObjectFactory().createTRssItemGuid(ret);
+    return FACTORY.createTRssItemGuid(ret);
   }
   
   private static TRssItem toTItem(Item item){
     TRssItem ret = new ObjectFactory().createTRssItem();
     List<Object> elementList = ret.getTitleOrDescriptionOrLink();
-    ObjectFactory factory = new ObjectFactory();
+    ObjectFactory factory = FACTORY;
     if(item.getOtherElements() != null){
       ret.getTitleOrDescriptionOrLink().addAll(item.getOtherElements());
     }
@@ -157,7 +157,7 @@ class Rss20MappingUtils {
       ret.setUrl(s.getUrl().toString());
     }
     ret.setValue(s.getSource());
-    return new ObjectFactory().createTRssItemSource(ret);
+    return FACTORY.createTRssItemSource(ret);
   }
   
 }

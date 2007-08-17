@@ -48,6 +48,7 @@ public class Item extends AbstractBaseObject{
   private Guid _guid;
   private Date _pubDate;
   private Source _source;
+  private RdfAttributes _rdfAttributes;
   private List<Element> _otherElements = new ArrayList<Element>();
   private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
   
@@ -396,6 +397,23 @@ public class Item extends AbstractBaseObject{
     _source = source;
     return this;
   }
+  
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public RdfAttributes getRdfAttributes() {
+    return _rdfAttributes;
+  }
+  /**
+   * Attributes that is only supported by RSS 1.0/RDF format
+   * @return
+   */
+  public void setRdfAttributes(RdfAttributes rdfAttributes) {
+    _rdfAttributes = rdfAttributes;
+  }
+  
+  
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     

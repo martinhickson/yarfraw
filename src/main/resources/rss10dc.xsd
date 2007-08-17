@@ -1,7 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	targetNamespace="http://purl.org/dc/elements/1.1/"
-	elementFormDefault="qualified">
+	targetNamespace="http://purl.org/dc/elements/1.1/">
 
 	<xs:annotation>
 		<xs:documentation>
@@ -287,7 +286,7 @@ Element: Rights
                formal identification system.</xs:documentation>
 		</xs:annotation>	
 	</xs:element>	
-	<xs:element name="language" type="xs:string" >
+	<xs:element name="language" type="xs:language" >
 		<xs:annotation>
 			<xs:documentation>
 			A language of the intellectual content of the resource.
