@@ -1,0 +1,6 @@
+in no particular order:
+
+- swing feed builder appp w/ web start
+- feed aggregator module w/ default data store impl + customizable data persistence layer
+- web/swing feed aggregator front end
+- maven rss feed auto generate plugin  
