@@ -1,4 +1,4 @@
-package yarfraw.rss20.mapping;
+package yarfraw.mapping.backward;
 
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRssChannel;

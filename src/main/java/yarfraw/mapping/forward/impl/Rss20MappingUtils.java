@@ -24,7 +24,7 @@ import yarfraw.generated.rss20.elements.TImage;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
 import yarfraw.generated.rss20.elements.TTextInput;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss20 Jaxb model

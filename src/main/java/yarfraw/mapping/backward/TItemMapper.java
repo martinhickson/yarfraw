@@ -1,4 +1,4 @@
-package yarfraw.rss20.mapping;
+package yarfraw.mapping.backward;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
 import yarfraw.mapping.Functor;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * This function converts a JAXB {@link TRssItem} object to a Yarfraw {@link Item} object.

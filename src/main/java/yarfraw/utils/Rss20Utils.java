@@ -1,4 +1,4 @@
-package yarfraw.rss20.utils;
+package yarfraw.utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.rss20.io.Rss20Reader;
+import yarfraw.io.Rss20Reader;
 
 /**
  * Convenient utilities methods.

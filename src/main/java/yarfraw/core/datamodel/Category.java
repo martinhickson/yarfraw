@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 
 /**

@@ -8,11 +8,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.io.Rss20Writer;
+import yarfraw.mapping.backward.ChannelMapperImpl;
+import yarfraw.mapping.backward.TChannelMapper;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
-import yarfraw.rss20.io.Rss20Writer;
-import yarfraw.rss20.mapping.ChannelMapperImpl;
-import yarfraw.rss20.mapping.TChannelMapper;
-import yarfraw.rss20.utils.Rss20Utils;
+import yarfraw.utils.Rss20Utils;
 /**
  * Some unit tests.
  * 

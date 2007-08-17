@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * It specifies a web service that supports the rssCloud interface which can be implemented in HTTP-POST, XML-RPC or SOAP 1.1.

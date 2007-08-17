@@ -1,4 +1,4 @@
-package yarfraw.rss20.mapping;
+package yarfraw.mapping.backward;
 
 import java.util.Locale;
 import java.util.Map;
@@ -24,7 +24,7 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.generated.rss20.elements.TTextInput;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * This function converts a JAXB {@link TRssChannel} object to a Yarfraw {@link Channel} object.

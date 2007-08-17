@@ -1,4 +1,4 @@
-package yarfraw.rss20.io;
+package yarfraw.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelItemImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 /**
  * Provides a set of function to facilitate writing to an RSS 2.0 feed.
  * <br/>

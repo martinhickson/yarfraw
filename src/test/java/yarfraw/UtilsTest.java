@@ -8,7 +8,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.rss20.utils.FeedFormatDetector;
+import yarfraw.utils.FeedFormatDetector;
 
 /**
  * Util class tests.

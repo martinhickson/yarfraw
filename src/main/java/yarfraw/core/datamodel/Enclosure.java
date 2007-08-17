@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * Describes a media object that is attached to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltenclosuregtSubelementOfLtitemgt More.}

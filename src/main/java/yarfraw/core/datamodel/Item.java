@@ -22,8 +22,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.rss20.utils.Utils;
-import yarfraw.rss20.utils.XMLUtils;
+import yarfraw.utils.Utils;
+import yarfraw.utils.XMLUtils;
 
 /**
  * A channel may contain any number of {@link Item}s. 

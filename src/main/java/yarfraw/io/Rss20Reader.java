@@ -1,4 +1,4 @@
-package yarfraw.rss20.io;
+package yarfraw.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,8 +24,8 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.generated.rss20.elements.TRssChannel;
-import yarfraw.rss20.mapping.ChannelMapperImpl;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.mapping.backward.ChannelMapperImpl;
+import yarfraw.utils.Utils;
 /**
  * Provides a set of function to facilitate reading of an RSS 2.0 feed.
  * @author jliang

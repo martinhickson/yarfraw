@@ -10,13 +10,12 @@ import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.generated.rss10.elements.Li;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.Seq;
 import yarfraw.generated.rss10.elements.TRss10Channel;
-import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
+import yarfraw.generated.rss10.elements.Seq.Li;
 import yarfraw.mapping.forward.ToRss10Channel;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 public class ToRss10ChannelImpl implements ToRss10Channel{
   private static ToRss10Channel _instance = new ToRss10ChannelImpl();

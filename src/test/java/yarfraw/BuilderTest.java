@@ -28,8 +28,8 @@ import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.ValidationLevel;
-import yarfraw.rss20.io.Rss20Reader;
-import yarfraw.rss20.io.Rss20Writer;
+import yarfraw.io.Rss20Reader;
+import yarfraw.io.Rss20Writer;
 /**
  * Some unit tests.
  * 

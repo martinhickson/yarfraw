@@ -11,7 +11,7 @@ import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.mapping.forward.ToRss10ChannelItem;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
   private static ToRss10ChannelItem _instance = new ToRss10ChannelItemImpl();

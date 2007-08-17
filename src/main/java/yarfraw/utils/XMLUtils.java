@@ -1,4 +1,4 @@
-package yarfraw.rss20.utils;
+package yarfraw.utils;
 
 import java.io.IOException;
 import java.io.StringReader;

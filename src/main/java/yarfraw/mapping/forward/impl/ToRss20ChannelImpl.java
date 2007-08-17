@@ -17,7 +17,7 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.mapping.forward.ToRss20Channel;
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 public class ToRss20ChannelImpl implements ToRss20Channel{
 

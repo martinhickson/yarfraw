@@ -1,4 +1,4 @@
-package yarfraw.rss20.io;
+package yarfraw.io;
 
 import java.io.File;
 import java.net.URI;

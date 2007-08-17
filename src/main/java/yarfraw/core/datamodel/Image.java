@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import yarfraw.rss20.utils.Utils;
+import yarfraw.utils.Utils;
 
 /**
  * {@link Image} is an optional sub-element of {@link Image}, 

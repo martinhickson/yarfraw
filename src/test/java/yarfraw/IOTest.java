@@ -16,10 +16,10 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.rss20.io.Rss20Appender;
-import yarfraw.rss20.io.Rss20Reader;
-import yarfraw.rss20.io.Rss20Writer;
-import yarfraw.rss20.utils.Rss20Utils;
+import yarfraw.io.Rss20Appender;
+import yarfraw.io.Rss20Reader;
+import yarfraw.io.Rss20Writer;
+import yarfraw.utils.Rss20Utils;
 /**
  * Some unit tests for Reader/Writer/Appender
  * 

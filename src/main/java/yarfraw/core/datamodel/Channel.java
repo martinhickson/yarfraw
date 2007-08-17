@@ -24,8 +24,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.rss20.utils.Utils;
-import yarfraw.rss20.utils.XMLUtils;
+import yarfraw.utils.Utils;
+import yarfraw.utils.XMLUtils;
 /**
  * The name of the channel. It's how people refer to your service. 
  * If you have an HTML website that contains the same information as your RSS file, 

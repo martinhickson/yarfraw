@@ -1,4 +1,4 @@
-package yarfraw.rss20.utils;
+package yarfraw.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
