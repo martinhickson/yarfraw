@@ -1,13 +1,10 @@
 package yarfraw.mapping.forward.impl;
 
-import java.util.List;
-
 import javax.xml.bind.JAXBElement;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.TRss10Channel;
-import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.mapping.forward.ToRss10Channel;
 
 public class ToRss10ChannelImpl implements ToRss10Channel{
@@ -19,9 +16,9 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
  
   public JAXBElement<TRss10Channel> execute(Channel ch)
       throws YarfrawException {
-    TRss10Channel ret = new TRss10Channel();
-    List<Object> elementList = ret.getTitleOrLinkOrDescription();
-    ObjectFactory factory = new ObjectFactory();
+//    TRss10Channel ret = new TRss10Channel();
+//    List<Object> elementList = ret.getTitleOrLinkOrDescription();
+//    ObjectFactory factory = new ObjectFactory();
 //    if(ch.getOtherElements() != null){
 //      
 //      ret.getAny().addAll(ch.getOtherElements());

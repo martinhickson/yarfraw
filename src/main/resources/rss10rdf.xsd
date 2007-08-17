@@ -1,46 +1,46 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rss10="http://purl.org/rss/1.0/"
 	targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
-	<xsd:annotation>
-		<xsd:documentation>
+	<xs:annotation>
+		<xs:documentation>
 			Based on dcmes-rdf.xsd from www.dublincore.org and modified to allow processing
 			with Castor.
-		</xsd:documentation>
-	</xsd:annotation>
+		</xs:documentation>
+	</xs:annotation>
 
 	<!-- this is a forward reference to the DC schema, which contains a backward reference to
 		here. If this were the only inelegant bit, it would be OK. But see below for worst stuff... -->
 	
 	<!-- Import the namespace schema for dc:* -->
-	<xsd:import namespace="http://purl.org/rss/1.0/" schemaLocation="rss10.xsd" />
+	<xs:import namespace="http://purl.org/rss/1.0/" schemaLocation="rss10.xsd" />
 
-	<xsd:element name="RDF">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="channel" type="rss10:tRss10Channel" form="unqualified" />
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="RDF">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="channel" type="rss10:tRss10Channel" form="unqualified" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	
 	<!-- this is horrible. Description belongs to the RDF namespace, so that element is in the right
 		place here. But the references to stuff from the DC namespace are awful. If substitutionGroups
 		worked, the DC stuff could be encapsulated in the DC schema -->
 
-	<xsd:element name="Seq">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="li" maxOccurs="unbounded">
-					<xsd:complexType>
-						<xsd:attribute name="resource" use="required" />
-					</xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="Seq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="li" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="resource" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
-	<xsd:attribute name="about" type="xsd:anyURI" />
-	<xsd:attribute name="resource" type="xsd:anyURI" />
+	<xs:attribute name="about" type="xs:anyURI" />
+	<xs:attribute name="resource" type="xs:anyURI" />
 
-</xsd:schema>
+</xs:schema>
