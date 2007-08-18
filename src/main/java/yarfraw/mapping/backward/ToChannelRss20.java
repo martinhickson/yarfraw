@@ -1,7 +1,8 @@
 package yarfraw.mapping.backward;
 
+import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRssChannel;
 import yarfraw.mapping.Functor;
 
-public interface  TChannelMapper<ReturnType> extends Functor<ReturnType, TRssChannel, YarfrawException>{}
+public interface ToChannelRss20 extends Functor<Channel, TRssChannel, YarfrawException>{}

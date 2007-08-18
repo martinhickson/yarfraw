@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.ObjectUtils;
 
 import yarfraw.core.datamodel.ValidationException;
 
@@ -21,7 +21,7 @@ public class Utils{
   private Utils(){}
   
   public static boolean same(QName qn1, QName qn2){
-    return EqualsBuilder.reflectionEquals(qn1, qn2);
+    return ObjectUtils.equals(qn1, qn2);
   }
   
   public static void validateNotNull(String message, Object... o) throws ValidationException{

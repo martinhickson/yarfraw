@@ -1,4 +1,4 @@
-package yarfraw.mapping.backward;
+package yarfraw.mapping.backward.impl;
 
 import java.util.Map;
 
@@ -18,16 +18,9 @@ import yarfraw.generated.rss20.elements.TEnclosure;
 import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
-import yarfraw.mapping.Functor;
 import yarfraw.utils.Utils;
 
-/**
- * This function converts a JAXB {@link TRssItem} object to a Yarfraw {@link Item} object.
- * 
- * @author jliang
- *
- */
-public class TItemMapper implements Functor<Item, TRssItem, YarfrawException>{
+class Rss20MappingUtils{
 
   private final static QName _TRssItemComments_QNAME = new QName("", "comments");
   private final static QName _TRssItemEnclosure_QNAME = new QName("", "enclosure");
@@ -39,13 +32,11 @@ public class TItemMapper implements Functor<Item, TRssItem, YarfrawException>{
   private final static QName _TRssItemPubDate_QNAME = new QName("", "pubDate");
   private final static QName _TRssItemSource_QNAME = new QName("", "source");
   private final static QName _TRssItemAuthor_QNAME = new QName("", "author");
-
-  private static final Functor<Item, TRssItem, YarfrawException> _instance = new TItemMapper();
-  public static Functor<Item, TRssItem, YarfrawException> getInstance(){
-    return _instance;
-  }
+  
+  private Rss20MappingUtils(){}
+  
   @SuppressWarnings("unchecked")
-  public Item execute(TRssItem ti) throws YarfrawException {
+  public static Item toItem(TRssItem ti) throws YarfrawException {
     if(ti == null){
       return null;
     }
@@ -112,5 +103,4 @@ public class TItemMapper implements Functor<Item, TRssItem, YarfrawException>{
 
     return item;
   }
-  
 }

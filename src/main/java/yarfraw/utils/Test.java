@@ -22,6 +22,7 @@ public class Test{
       RDF rdf = (RDF)u.unmarshal(input);
       
       for(Object o : rdf.getChannelOrItemOrTextinput()){
+        
         System.out.println(ToStringBuilder.reflectionToString(o, ToStringStyle.MULTI_LINE_STYLE));
       }
       

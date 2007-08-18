@@ -12,6 +12,19 @@ import java.net.URISyntaxException;
 public class RdfAttributes{
   public URI _resource;
   public URI _about;
+  
+  public RdfAttributes() {}
+  
+  public RdfAttributes(URI resource, URI about) {
+    super();
+    _resource = resource;
+    _about = about;
+  }
+  public RdfAttributes(String resource, String about) throws URISyntaxException {
+    super();
+    setResource(resource);
+    setAbout(about);
+  }
   public URI getResource() {
     return _resource;
   }

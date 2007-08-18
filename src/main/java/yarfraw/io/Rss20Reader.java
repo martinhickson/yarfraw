@@ -24,7 +24,7 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.generated.rss20.elements.TRssChannel;
-import yarfraw.mapping.backward.ChannelMapperImpl;
+import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.utils.Utils;
 /**
  * Provides a set of function to facilitate reading of an RSS 2.0 feed.
@@ -96,7 +96,7 @@ public class Rss20Reader extends AbstractBaseIO{
       JAXBElement<TRss> o = (JAXBElement<TRss>)u.unmarshal(input);
       TRss rss =  o.getValue();
       TRssChannel channel = rss.getChannel();
-      return ChannelMapperImpl.getInstance().execute(channel);
+      return ToChannelRss20Impl.getInstance().execute(channel);
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);
     }

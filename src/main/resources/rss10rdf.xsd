@@ -1,7 +1,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rss10="http://purl.org/rss/1.0/"
-	targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	elementFormDefault="qualified">
 
 	<xs:annotation>
 		<xs:documentation>

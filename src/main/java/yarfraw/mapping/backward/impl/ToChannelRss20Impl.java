@@ -1,4 +1,4 @@
-package yarfraw.mapping.backward;
+package yarfraw.mapping.backward.impl;
 
 import java.util.Locale;
 import java.util.Map;
@@ -24,15 +24,10 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.generated.rss20.elements.TTextInput;
+import yarfraw.mapping.backward.ToChannelRss20;
 import yarfraw.utils.Utils;
 
-/**
- * This function converts a JAXB {@link TRssChannel} object to a Yarfraw {@link Channel} object.
- * 
- * @author jliang
- *
- */
-public class ChannelMapperImpl implements TChannelMapper<Channel>{
+public class ToChannelRss20Impl implements ToChannelRss20{
 
   private final static QName _TRssItemTitle_QNAME = new QName("", "title");
   private final static QName _TRssItemDescription_QNAME = new QName("", "description");
@@ -55,12 +50,13 @@ public class ChannelMapperImpl implements TChannelMapper<Channel>{
   private final static QName _TRssChannelGenerator_QNAME = new QName("", "generator");
   private final static QName _TRssChannelCopyright_QNAME = new QName("", "copyright");
 
-  private static final TChannelMapper<Channel> _instance = new ChannelMapperImpl();
+  private static final ToChannelRss20 _instance = new ToChannelRss20Impl();
   
-  private ChannelMapperImpl(){}
-  public static TChannelMapper<Channel> getInstance(){
+  private ToChannelRss20Impl() {}
+  public static ToChannelRss20 getInstance(){
     return _instance;
   }
+  
   @SuppressWarnings("unchecked")
   public Channel execute(TRssChannel ch) throws YarfrawException {
     if(ch == null){
@@ -70,7 +66,7 @@ public class ChannelMapperImpl implements TChannelMapper<Channel>{
     try {
       if(ch.getItem() != null){
         for(TRssItem item : ch.getItem()){
-          c.additem(TItemMapper.getInstance().execute(item));
+          c.additem(Rss20MappingUtils.toItem(item));
         }
       }
       if(ch.getOtherAttributes() != null){
@@ -89,7 +85,7 @@ public class ChannelMapperImpl implements TChannelMapper<Channel>{
           }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             c.setLink((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _Item_QNAME)) {
-            c.additem(TItemMapper.getInstance().execute((TRssItem)jaxbElement.getValue()));
+            c.additem(Rss20MappingUtils.toItem((TRssItem)jaxbElement.getValue()));
           }
           else if (Utils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
             c.setDescription((String)jaxbElement.getValue());
@@ -174,7 +170,7 @@ public class ChannelMapperImpl implements TChannelMapper<Channel>{
           TTextInput in = (TTextInput)o;
           c.setTexInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
         }else if (o instanceof TRssItem) {
-          c.additem(TItemMapper.getInstance().execute((TRssItem)o));
+          c.additem(Rss20MappingUtils.toItem((TRssItem)o));
         }
         else if (o instanceof Element) {
           Element e = (Element) o;

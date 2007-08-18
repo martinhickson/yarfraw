@@ -1,6 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-	targetNamespace="http://purl.org/rss/1.0/modules/syndication/">
+	targetNamespace="http://purl.org/rss/1.0/modules/syndication/"
+	elementFormDefault="qualified">
 
 	<xs:annotation>
 		<xs:documentation>

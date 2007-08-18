@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.io.Rss20Writer;
-import yarfraw.mapping.backward.ChannelMapperImpl;
-import yarfraw.mapping.backward.TChannelMapper;
+import yarfraw.mapping.backward.ToChannelRss20;
+import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
 import yarfraw.utils.Rss20Utils;
 /**
@@ -26,7 +26,7 @@ public class MappingTest extends TestCase{
     
     Channel c = BuilderTest.buildChannel();
     
-    TChannelMapper<Channel> mapper = ChannelMapperImpl.getInstance();
+    ToChannelRss20 mapper = ToChannelRss20Impl.getInstance();
     Channel c2 =  mapper.execute(ToRss20ChannelImpl.getInstance().execute(c).getValue());
 
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));

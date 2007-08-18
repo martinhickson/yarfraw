@@ -1,0 +1,213 @@
+package yarfraw.mapping.backward.impl;
+
+import static yarfraw.utils.Utils.same;
+
+import java.math.BigInteger;
+import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.w3c.dom.Element;
+
+import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Image;
+import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.RdfAttributes;
+import yarfraw.core.datamodel.TextInput;
+import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.Li;
+import yarfraw.generated.rss10.elements.RDF;
+import yarfraw.generated.rss10.elements.Seq;
+import yarfraw.generated.rss10.elements.TRss10Channel;
+import yarfraw.generated.rss10.elements.TRss10Image;
+import yarfraw.generated.rss10.elements.TRss10Item;
+import yarfraw.generated.rss10.elements.TRss10TextInput;
+import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
+class Rss10MappingUtils{
+  private static final int MIN_PER_DAY = 60*24;
+  private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
+  private static final int MIN_PER_MONTH = MIN_PER_DAY*30;
+  private static final int MIN_PER_YEAR = MIN_PER_DAY*365;
+  private final static QName _TRss10ItemLink_QNAME = new QName("http://purl.org/rss/1.0/", "link");
+  private final static QName _TRss10ItemTitle_QNAME = new QName("http://purl.org/rss/1.0/", "title");
+  private final static QName _TRss10ItemDescription_QNAME = new QName("http://purl.org/rss/1.0/", "description");
+
+  private final static QName _Publisher_QNAME = new QName("http://purl.org/dc/elements/1.1/", "publisher");
+  private final static QName _Language_QNAME = new QName("http://purl.org/dc/elements/1.1/", "language");
+  private final static QName _Creator_QNAME = new QName("http://purl.org/dc/elements/1.1/", "creator");
+  private final static QName _Rights_QNAME = new QName("http://purl.org/dc/elements/1.1/", "rights");
+  private final static QName _Subject_QNAME = new QName("http://purl.org/dc/elements/1.1/", "subject");
+  private final static QName _Date_QNAME = new QName("http://purl.org/dc/elements/1.1/", "date");
+  
+  private final static QName _UpdateFrequency_QNAME = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateFrequency");
+  
+  private Rss10MappingUtils(){}
+  
+  private static Integer calculateTtl(UpdatePeriodEnum updatePeriod, BigInteger updateFrequency){
+    if(updatePeriod == null && updateFrequency == null){
+      return null;
+    }
+    int freq = updateFrequency == null ? 1: updateFrequency.intValue();
+    if(updatePeriod == UpdatePeriodEnum.HOURLY){
+      return Math.max(1, 60/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.DAILY){
+      return Math.max(1, MIN_PER_DAY/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.MONTHLY){
+      return Math.max(1, MIN_PER_MONTH/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.WEEKLY){
+      return Math.max(1, MIN_PER_WEEK/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.YEARLY){
+      return Math.max(1, MIN_PER_YEAR/freq);
+    }else{
+      return null;
+    }
+  }
+  
+  @SuppressWarnings("unchecked")
+  public static Channel toChannel(TRss10Channel ch, RDF rdf) throws YarfrawException{
+    Channel ret = new Channel();
+    if(ch.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(ch.getOtherAttributes());
+    }
+    UpdatePeriodEnum updatePeriod = null;
+    BigInteger updateFrequency = null;
+    Map<String, Integer> ordering = new HashMap<String, Integer>();
+    try {
+      List<Item> items = toItems(rdf.getChannelOrItemOrTextinput());
+      for(Object o : ch.getTitleOrLinkOrDescription()){
+        if(o == null)
+          continue;
+        
+        if (o instanceof JAXBElement) {
+          JAXBElement jaxb = (JAXBElement) o;
+          if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
+            ret.setTitle((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
+            ret.setDescription((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
+            ret.setLink((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _UpdateFrequency_QNAME)){
+            updateFrequency = (BigInteger)jaxb.getValue();
+          }else if(same(jaxb.getName(), _Subject_QNAME)){
+            ret.addCategory((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _Publisher_QNAME)){
+            ret.setWebMaster((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _Creator_QNAME)){
+            ret.setManagingEditor((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _Rights_QNAME)){
+            ret.setCopyright((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _Date_QNAME)){
+            ret.setPubDate((String)jaxb.getValue());
+          }else if(same(jaxb.getName(), _Language_QNAME)){
+            ret.setLanguage(new Locale((String)jaxb.getValue()));
+          }else{
+            //TODO: ignore?
+          }
+        }else if(o instanceof UpdatePeriodEnum){
+          updatePeriod = (UpdatePeriodEnum)o;
+        }else if(o instanceof TRss10Image){
+          ret.setImage(toImage((TRss10Image)o));
+        }else if(o instanceof TRss10TextInput){
+          ret.setTexInput(toTextInput((TRss10TextInput)o));
+        }else if(o instanceof Seq){
+          Seq seq = (Seq)o;
+          int i = 0;
+          for(Li li : seq.getLi()){
+            ordering.put(li.getResource(), i++);
+          }
+        }else if (o instanceof Element) {
+          Element e = (Element) o;
+          ret.getOtherElements().add(e);
+        }else{
+            //FIXME: not sure what to do yet
+        }
+        ret.setTtl(calculateTtl(updatePeriod, updateFrequency));
+        if(ordering.entrySet().size() != 0){
+          Collections.sort(items, new ItemComparacotr(ordering)); 
+        }
+        
+      }      
+    } catch (Exception e) {
+      throw new YarfrawException("Unable to map feed to channel", e);
+    }
+    return ret;
+  }
+  
+  private static class ItemComparacotr implements Comparator<Item>{
+    Map<String, Integer> _ordering = null;
+    public ItemComparacotr(Map<String, Integer> ordering){
+      _ordering = ordering;
+    }
+    public int compare(Item o1, Item o2) {
+      return _ordering.get(o1.getRdfAttributes().getResource()).compareTo(
+          _ordering.get(o2.getRdfAttributes().getResource()));
+    }
+  }
+  
+  @SuppressWarnings("unchecked")
+  private static List<Item> toItems(List<Object> objs) throws URISyntaxException, ParseException{
+    List<Item> items = new ArrayList<Item>();
+    for(Object o : objs){
+      if (o instanceof TRss10Item) {
+        TRss10Item it = (TRss10Item) o;
+        Item item = new Item();
+        for(Object io : it.getTitleOrDescriptionOrLink()){
+          if (io instanceof JAXBElement) {
+            JAXBElement jaxb = (JAXBElement) io;
+            if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
+              item.setTitle((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
+              item.setDescription((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
+              item.setLink((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _Creator_QNAME)){
+              item.setAuthor((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _Rights_QNAME)){
+              item.setComments((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _Date_QNAME)){
+              item.setPubDate((String)jaxb.getValue());
+            }else if(same(jaxb.getName(), _Date_QNAME)){
+              item.setPubDate((String)jaxb.getValue());
+            }
+          }
+        }
+        item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? item.getLink().toString() : it.getResource(), 
+            it.getAbout()));
+        items.add(item);
+      }
+    }
+    return items;
+  }
+  
+  private static TextInput toTextInput(TRss10TextInput input) throws URISyntaxException{
+    TextInput ret = new TextInput();
+    ret.setDescription(input.getDescription());
+    ret.setLink(input.getLink());
+    ret.setTitle(input.getTitle());
+    ret.setName(input.getName());
+    if(input.getAbout() != null || input.getResource() != null){
+      ret.setRdfAttributes(new RdfAttributes(input.getAbout(), input.getResource()));
+    }
+    return ret;
+  }
+  
+  private static Image toImage(TRss10Image img) throws URISyntaxException{
+    Image ret = new Image();
+    ret.setLink(img.getLink());
+    ret.setTitle(img.getTitle());
+    ret.setUrl(img.getUrl());
+    if(img.getAbout() != null || img.getResource() != null){
+      ret.setRdfAttributes(new RdfAttributes(img.getAbout(), img.getResource()));
+    }
+    return ret;
+  }
+}
