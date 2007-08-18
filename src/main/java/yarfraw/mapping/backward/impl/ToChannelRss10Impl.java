@@ -1,5 +1,7 @@
 package yarfraw.mapping.backward.impl;
 
+import javax.xml.bind.JAXBElement;
+
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.RDF;
@@ -14,14 +16,18 @@ public class ToChannelRss10Impl implements ToChannelRss10{
     return _instance;
   }
 
+  @SuppressWarnings("unchecked")
   public Channel execute(RDF rdf) throws YarfrawException {
     if(rdf == null){
       return null;
     }
     TRss10Channel ch = null;
     for(Object o : rdf.getChannelOrItemOrTextinput()){
-      if (o instanceof TRss10Channel) {
-        ch = (TRss10Channel) o; 
+      if (o instanceof JAXBElement) {
+        Object val = ((JAXBElement)o).getValue();
+        if (val instanceof TRss10Channel) {
+          ch = (TRss10Channel) val;
+        } 
       }
     }
     return Rss10MappingUtils.toChannel(ch, rdf);

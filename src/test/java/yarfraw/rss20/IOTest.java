@@ -1,4 +1,4 @@
-package yarfraw;
+package yarfraw.rss20;
 
 import java.io.File;
 import java.util.List;

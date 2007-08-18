@@ -89,6 +89,7 @@ class Rss10MappingUtils{
         
         if (o instanceof JAXBElement) {
           JAXBElement jaxb = (JAXBElement) o;
+          Object val = jaxb.getValue();
           if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
             ret.setTitle((String)jaxb.getValue());
           }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
@@ -109,20 +110,20 @@ class Rss10MappingUtils{
             ret.setPubDate((String)jaxb.getValue());
           }else if(same(jaxb.getName(), _Language_QNAME)){
             ret.setLanguage(new Locale((String)jaxb.getValue()));
+          }else if(val instanceof UpdatePeriodEnum){
+            updatePeriod = (UpdatePeriodEnum)val;
+          }else if(val instanceof TRss10Image){
+            ret.setImage(toImage((TRss10Image)val));
+          }else if(val instanceof TRss10TextInput){
+            ret.setTexInput(toTextInput((TRss10TextInput)val));
+          }else if(val instanceof Seq){
+            Seq seq = (Seq)val;
+            int i = 0;
+            for(Li li : seq.getLi()){
+              ordering.put(li.getResource(), i++);
+            }
           }else{
             //TODO: ignore?
-          }
-        }else if(o instanceof UpdatePeriodEnum){
-          updatePeriod = (UpdatePeriodEnum)o;
-        }else if(o instanceof TRss10Image){
-          ret.setImage(toImage((TRss10Image)o));
-        }else if(o instanceof TRss10TextInput){
-          ret.setTexInput(toTextInput((TRss10TextInput)o));
-        }else if(o instanceof Seq){
-          Seq seq = (Seq)o;
-          int i = 0;
-          for(Li li : seq.getLi()){
-            ordering.put(li.getResource(), i++);
           }
         }else if (o instanceof Element) {
           Element e = (Element) o;
@@ -130,12 +131,12 @@ class Rss10MappingUtils{
         }else{
             //FIXME: not sure what to do yet
         }
-        ret.setTtl(calculateTtl(updatePeriod, updateFrequency));
-        if(ordering.entrySet().size() != 0){
-          Collections.sort(items, new ItemComparacotr(ordering)); 
-        }
-        
-      }      
+      }  
+      ret.setTtl(calculateTtl(updatePeriod, updateFrequency));
+      if(ordering.entrySet().size() != 0){
+        Collections.sort(items, new ItemComparacotr(ordering)); 
+      }
+      ret.setItems(items);
     } catch (Exception e) {
       throw new YarfrawException("Unable to map feed to channel", e);
     }
@@ -157,32 +158,35 @@ class Rss10MappingUtils{
   private static List<Item> toItems(List<Object> objs) throws URISyntaxException, ParseException{
     List<Item> items = new ArrayList<Item>();
     for(Object o : objs){
-      if (o instanceof TRss10Item) {
-        TRss10Item it = (TRss10Item) o;
-        Item item = new Item();
-        for(Object io : it.getTitleOrDescriptionOrLink()){
-          if (io instanceof JAXBElement) {
-            JAXBElement jaxb = (JAXBElement) io;
-            if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
-              item.setTitle((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
-              item.setDescription((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
-              item.setLink((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _Creator_QNAME)){
-              item.setAuthor((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _Rights_QNAME)){
-              item.setComments((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _Date_QNAME)){
-              item.setPubDate((String)jaxb.getValue());
-            }else if(same(jaxb.getName(), _Date_QNAME)){
-              item.setPubDate((String)jaxb.getValue());
+      if (o instanceof JAXBElement) {
+        Object value = ((JAXBElement)o).getValue();
+        if(value instanceof TRss10Item){
+          TRss10Item it = (TRss10Item)value;
+          Item item = new Item();
+          for(Object io : it.getTitleOrDescriptionOrLink()){
+            if (io instanceof JAXBElement) {
+              JAXBElement jaxb = (JAXBElement) io;
+              if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
+                item.setTitle((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
+                item.setDescription((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
+                item.setLink((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _Creator_QNAME)){
+                item.setAuthor((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _Rights_QNAME)){
+                item.setComments((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _Date_QNAME)){
+                item.setPubDate((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), _Date_QNAME)){
+                item.setPubDate((String)jaxb.getValue());
+              }
             }
           }
+          item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? item.getLink().toString() : it.getResource(), 
+              it.getAbout()));
+          items.add(item);
         }
-        item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? item.getLink().toString() : it.getResource(), 
-            it.getAbout()));
-        items.add(item);
       }
     }
     return items;

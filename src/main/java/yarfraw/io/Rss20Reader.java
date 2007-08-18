@@ -22,8 +22,9 @@ import org.apache.commons.io.IOUtils;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss20.elements.TRss;
-import yarfraw.generated.rss20.elements.TRssChannel;
+import yarfraw.mapping.backward.impl.ToChannelRss10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.utils.Utils;
 /**
@@ -83,7 +84,6 @@ public class Rss20Reader extends AbstractBaseIO{
    * 
    * @throws YarfrawException if read operation failed.
    */
-  @SuppressWarnings("unchecked")
   public Channel readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
     Unmarshaller u;
     InputStream input = null;
@@ -91,12 +91,7 @@ public class Rss20Reader extends AbstractBaseIO{
       input = getStream();
       u = getUnMarshaller();
       u.setEventHandler(validationEventHandler);
-      //TODO: implement backward mapping for rss10
-      
-      JAXBElement<TRss> o = (JAXBElement<TRss>)u.unmarshal(input);
-      TRss rss =  o.getValue();
-      TRssChannel channel = rss.getChannel();
-      return ToChannelRss20Impl.getInstance().execute(channel);
+      return toChannel(u.unmarshal(input));
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);
     }
@@ -109,6 +104,22 @@ public class Rss20Reader extends AbstractBaseIO{
       IOUtils.closeQuietly(input);
     }
   }
+  
+  @SuppressWarnings("unchecked")
+  private Channel toChannel(Object o) throws YarfrawException{
+    if(_format == FeedFormat.RSS20){
+      return ToChannelRss20Impl.getInstance().execute(((JAXBElement<TRss>)o).getValue().getChannel());
+    }else if(_format == FeedFormat.RSS10){
+      return  ToChannelRss10Impl.getInstance().execute((RDF)o);
+    }else if(_format == FeedFormat.ATOM10){
+      //TODO;
+      throw new UnsupportedOperationException("TODO");
+    }else{
+      throw new UnsupportedOperationException("Unknown Feed Format");
+    }
+  }
+  
+  
   
   private InputStream getStream() throws HttpException, IOException{
     InputStream stream = null;

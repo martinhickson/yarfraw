@@ -1,8 +1,7 @@
-package yarfraw.rss20;
+package yarfraw.rss10;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -22,12 +21,11 @@ import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.TextInput;
-import yarfraw.core.datamodel.ValidationException;
-import yarfraw.core.datamodel.ValidationLevel;
 import yarfraw.io.Rss20Reader;
 import yarfraw.io.Rss20Writer;
 /**
@@ -150,53 +148,7 @@ public class BuilderTest{
     assertEquals(new Guid(GUID), item.getGuid());
 
   }  
-  @Test
-  public void testValidation() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
-    c.setItems(null);
-    try {
-      c.validate();
-      fail("Expecting validation error");
-    } catch (ValidationException e) {
-      //success
-    }
-  }
-  
-  @Test
-  public void testValidation2() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
-    c.setLink((String)null);
-    try {
-      c.validate();
-      fail("Expecting validation error");
-    } catch (ValidationException e) {
-      //success
-    }
-  }
-  @Test
-  public void testValidation3() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
-    c.setLink((String)null);
-    try {
-      c.validate();
-      fail("Expecting validation error");
-    } catch (ValidationException e) {
-      //success
-    }
-  }
-  
-  @Test
-  public void testValidation4() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
-    c.setManagingEditor("bad email");
-    try {
-      c.validate(ValidationLevel.STRICT);
-      fail("Expecting validation error");
-    } catch (ValidationException e) {
-      //success
-    }
-  }
-  
+
   @Test
   public void testOtherElements() throws Exception {
     Channel c = buildChannel();
@@ -220,13 +172,16 @@ public class BuilderTest{
     item.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
     
     c.additem(item);
-    File file = File.createTempFile("YarfrawTestOtherElements", ".xml");
+    File file = File.createTempFile("YarfrawTestOtherElements",".xml");
     Rss20Writer w = new Rss20Writer(file);
+    w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
     
     //make sure we can read it back
     Rss20Reader reader = new Rss20Reader(file);
-    reader.readChannel();
+    reader.setFormat(FeedFormat.RSS10);
+    Channel ch = reader.readChannel();
+    System.out.println(ch);
   }
 }
 
