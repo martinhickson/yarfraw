@@ -16,6 +16,12 @@ Why Another Java RSS API?
 	Sure there are many of such libraries, but in software (and anything eles) there are always room for 
 	improvement. Someone else already did it is not a good reason for stopping new developments. The goal of this
 	project is to provide an intuitive, high quality alternative to all these other similar libraries. 
+	
+	Another reason is that I think this push down publishing is just a wonderful idea. I wish every every website
+would offer a rss feed (now most the popular ones already do). It allows users to process much more information than they
+normally would (by visiting the website). Ever since I started using Google's Rss Reader, I can browse through the same
+amount of information that would normally take me twice as much time to do. If you are thinking about adding a Rss feed
+to your website, you really should.
 
 Project Status
 
