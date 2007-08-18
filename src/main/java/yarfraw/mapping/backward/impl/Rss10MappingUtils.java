@@ -24,6 +24,7 @@ import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.RdfAttributes;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
 import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss10.elements.Seq;
@@ -32,6 +33,7 @@ import yarfraw.generated.rss10.elements.TRss10Image;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
+import yarfraw.utils.Utils;
 class Rss10MappingUtils{
   private static final int MIN_PER_DAY = 60*24;
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
@@ -100,6 +102,7 @@ class Rss10MappingUtils{
             updateFrequency = (BigInteger)jaxb.getValue();
           }else if(same(jaxb.getName(), _Subject_QNAME)){
             ret.addCategory((String)jaxb.getValue());
+            
           }else if(same(jaxb.getName(), _Publisher_QNAME)){
             ret.setWebMaster((String)jaxb.getValue());
           }else if(same(jaxb.getName(), _Creator_QNAME)){
@@ -107,7 +110,7 @@ class Rss10MappingUtils{
           }else if(same(jaxb.getName(), _Rights_QNAME)){
             ret.setCopyright((String)jaxb.getValue());
           }else if(same(jaxb.getName(), _Date_QNAME)){
-            ret.setPubDate((String)jaxb.getValue());
+            ret.setPubDate(Utils.tryParseISODate((String)jaxb.getValue()));
           }else if(same(jaxb.getName(), _Language_QNAME)){
             ret.setLanguage(new Locale((String)jaxb.getValue()));
           }else if(val instanceof UpdatePeriodEnum){
@@ -116,12 +119,14 @@ class Rss10MappingUtils{
             ret.setImage(toImage((TRss10Image)val));
           }else if(val instanceof TRss10TextInput){
             ret.setTexInput(toTextInput((TRss10TextInput)val));
-          }else if(val instanceof Seq){
-            Seq seq = (Seq)val;
+          }else if(val instanceof Items){
+            Seq seq = ((Items)val).getSeq();
             int i = 0;
             for(Li li : seq.getLi()){
               ordering.put(li.getResource(), i++);
             }
+          }else if(val instanceof Seq){
+            
           }else{
             //TODO: ignore?
           }
@@ -149,13 +154,14 @@ class Rss10MappingUtils{
       _ordering = ordering;
     }
     public int compare(Item o1, Item o2) {
-      return _ordering.get(o1.getRdfAttributes().getResource()).compareTo(
-          _ordering.get(o2.getRdfAttributes().getResource()));
+      Integer ord1 = _ordering.get(o1.getRdfAttributes().getAbout());
+      Integer ord2 = _ordering.get(o2.getRdfAttributes().getAbout());
+      return (ord1 != null && ord2 != null) ? ord1.compareTo(ord2) : 0;
     }
   }
   
   @SuppressWarnings("unchecked")
-  private static List<Item> toItems(List<Object> objs) throws URISyntaxException, ParseException{
+  private static List<Item> toItems(List<Object> objs) throws URISyntaxException, ParseException, YarfrawException{
     List<Item> items = new ArrayList<Item>();
     for(Object o : objs){
       if (o instanceof JAXBElement) {
@@ -175,11 +181,11 @@ class Rss10MappingUtils{
               }else if(same(jaxb.getName(), _Creator_QNAME)){
                 item.setAuthor((String)jaxb.getValue());
               }else if(same(jaxb.getName(), _Rights_QNAME)){
-                item.setComments((String)jaxb.getValue());
+                item.setRights((String)jaxb.getValue());
               }else if(same(jaxb.getName(), _Date_QNAME)){
-                item.setPubDate((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _Date_QNAME)){
-                item.setPubDate((String)jaxb.getValue());
+                item.setPubDate(Utils.tryParseISODate((String)jaxb.getValue()));
+              }else if(same(jaxb.getName(), _Subject_QNAME)){
+                item.addCategory((String)jaxb.getValue());
               }
             }
           }
@@ -199,7 +205,7 @@ class Rss10MappingUtils{
     ret.setTitle(input.getTitle());
     ret.setName(input.getName());
     if(input.getAbout() != null || input.getResource() != null){
-      ret.setRdfAttributes(new RdfAttributes(input.getAbout(), input.getResource()));
+      ret.setRdfAttributes(new RdfAttributes(input.getResource(), input.getAbout()));
     }
     return ret;
   }
@@ -210,7 +216,7 @@ class Rss10MappingUtils{
     ret.setTitle(img.getTitle());
     ret.setUrl(img.getUrl());
     if(img.getAbout() != null || img.getResource() != null){
-      ret.setRdfAttributes(new RdfAttributes(img.getAbout(), img.getResource()));
+      ret.setRdfAttributes(new RdfAttributes(img.getResource(), img.getAbout()));
     }
     return ret;
   }

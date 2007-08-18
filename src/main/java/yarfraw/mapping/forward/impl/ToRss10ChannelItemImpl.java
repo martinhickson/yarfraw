@@ -1,6 +1,5 @@
 package yarfraw.mapping.forward.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
@@ -74,8 +73,7 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
     }
     
     if(item.getPubDate() != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
-      elementList.add(FACTORY.createDate(format.format(item.getPubDate())));
+      elementList.add(FACTORY.createDate(Utils.getDateAsISO8601String(item.getPubDate())));
     }
     //not supported
 //    if(item.getSource() != null){

@@ -16,9 +16,9 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.io.Rss20Appender;
-import yarfraw.io.Rss20Reader;
-import yarfraw.io.Rss20Writer;
+import yarfraw.io.FeedAppender;
+import yarfraw.io.FeedReader;
+import yarfraw.io.FeedWriter;
 import yarfraw.utils.Rss20Utils;
 /**
  * Some unit tests for Reader/Writer/Appender
@@ -31,7 +31,7 @@ public class IOTest extends TestCase{
   @Test
   public void testBuilder() throws Exception{
     Channel c = BuilderTest.buildChannel();
-    Rss20Writer w = new Rss20Writer(File.createTempFile("yarfraw", ".xml"));
+    FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
     w.writeChannel(c);
     w.writeChannel(c, new ValidationEventHandler(){
 
@@ -46,14 +46,14 @@ public class IOTest extends TestCase{
   @Test
   public void testBuilder2() throws Exception{
     Channel c = BuilderTest.buildChannel();
-    Rss20Writer w = new Rss20Writer("yarfraw.xml");
+    FeedWriter w = new FeedWriter("yarfraw.xml");
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
   }
   
   @Test
   public void testRead() throws Exception{
-    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
+    FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     Channel c = r.readChannel();
     r.readChannel(new ValidationEventHandler(){
 
@@ -71,7 +71,7 @@ public class IOTest extends TestCase{
   
   @Test
   public void testRead2() throws Exception{
-    Rss20Reader r = new Rss20Reader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
+    FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
     Channel c = r.readChannel();
     Channel c2 = BuilderTest.buildChannel();
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
@@ -108,7 +108,7 @@ public class IOTest extends TestCase{
   
   @Test
   public void testRemoteRead() throws Exception{  
-    Rss20Reader reader = new Rss20Reader(new HttpURL("http://digg.com/rss/index.xml"));
+    FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
     assertTrue(reader.isRemoteRead());
     try{
       Channel c = reader.readChannel();
@@ -126,7 +126,7 @@ public class IOTest extends TestCase{
   @Test
   public void testAppend() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
-    Rss20Appender a = new Rss20Appender(f);
+    FeedAppender a = new FeedAppender(f);
     Item item = BuilderTest.buildChannel().getItems().get(0);
     a.addItem(item);
     Channel c = Rss20Utils.read(f);
@@ -142,15 +142,15 @@ public class IOTest extends TestCase{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     File copy = File.createTempFile("YarfrawDiggCopy", ".xml");
     
-    Rss20Writer w = new Rss20Writer(copy);
-    w.writeChannel(new Rss20Reader(f).readChannel());
+    FeedWriter w = new FeedWriter(copy);
+    w.writeChannel(new FeedReader(f).readChannel());
     
-    Rss20Appender a = new Rss20Appender(copy);
+    FeedAppender a = new FeedAppender(copy);
     a.setNumItemToKeep(10);
     
     a.addItem(BuilderTest.buildChannel().getItems().get(0));
     
-    Rss20Reader r = new Rss20Reader(copy);
+    FeedReader r = new FeedReader(copy);
     assertEquals(10, r.readChannel().getItems().size());
     
     a.addAllItems(BuilderTest.buildChannel().getItems());

@@ -28,8 +28,8 @@ import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.ValidationLevel;
-import yarfraw.io.Rss20Reader;
-import yarfraw.io.Rss20Writer;
+import yarfraw.io.FeedReader;
+import yarfraw.io.FeedWriter;
 /**
  * Some unit tests.
  * 
@@ -221,11 +221,11 @@ public class BuilderTest{
     
     c.additem(item);
     File file = File.createTempFile("YarfrawTestOtherElements", ".xml");
-    Rss20Writer w = new Rss20Writer(file);
+    FeedWriter w = new FeedWriter(file);
     w.writeChannel(c);
     
     //make sure we can read it back
-    Rss20Reader reader = new Rss20Reader(file);
+    FeedReader reader = new FeedReader(file);
     reader.readChannel();
   }
 }

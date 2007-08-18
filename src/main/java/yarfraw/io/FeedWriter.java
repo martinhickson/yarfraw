@@ -31,7 +31,7 @@ import yarfraw.utils.Utils;
  * @author jliang
  *
  */
-public class Rss20Writer extends AbstractBaseIO{
+public class FeedWriter extends AbstractBaseIO{
   private static final ObjectFactory RSS20_FACTORY = new ObjectFactory();
   private static final yarfraw.generated.rss10.elements.ObjectFactory RSS10_FACTORY = 
     new yarfraw.generated.rss10.elements.ObjectFactory();
@@ -40,15 +40,15 @@ public class Rss20Writer extends AbstractBaseIO{
   private Marshaller _atom10Marshaller;
   
   
-  public Rss20Writer(File file){
+  public FeedWriter(File file){
     super(file);
   }
   
-  public Rss20Writer(String pathName){
+  public FeedWriter(String pathName){
     this(new File(pathName));
   }
   
-  public Rss20Writer(URI uri){
+  public FeedWriter(URI uri){
     this(new File(uri));
   }
 

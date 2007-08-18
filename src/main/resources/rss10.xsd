@@ -31,14 +31,14 @@
 	<xs:element name="channel" type="rss10:tRss10Channel" />
 	<xs:element name="image" type="rss10:tRss10Image" />
 	<xs:element name="textinput" type="rss10:tRss10TextInput" />
-
-	<xs:element name="items" >
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="rdf:Seq" minOccurs="1" maxOccurs="1" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="items" type="rss10:items"/>
+	
+	<xs:complexType name="items" >
+		<xs:sequence>
+			<xs:element ref="rdf:Seq" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
 	
 	<xs:complexType name="tRss10Item" >
 		<xs:annotation>

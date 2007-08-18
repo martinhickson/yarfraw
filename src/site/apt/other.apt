@@ -12,7 +12,7 @@ if you only want 10 items in the feed:
 
 +----------------------------------------------------------------------------------------------------+
 
-  Rss20Appender a = new Rss20Appender("text.xml");
+  FeedAppender a = new FeedAppender("text.xml");
   a.setNumItemToKeep(10);
     
   //if there are more than 10 items in 'text.xml' after this item is added,

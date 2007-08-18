@@ -86,7 +86,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getLink() != null){
       elementList.add(factory.createTRssChannelLink(ch.getLink().toString()));
     }
-    SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
+    SimpleDateFormat format = new SimpleDateFormat(Utils.RFC822DATE_PATTERN);
     if(ch.getLastBuildDate() != null){
       elementList.add(factory.createTRssChannelLastBuildDate(format.format(ch.getLastBuildDate())));
     }

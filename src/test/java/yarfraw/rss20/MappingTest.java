@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
-import yarfraw.io.Rss20Writer;
+import yarfraw.io.FeedWriter;
 import yarfraw.mapping.backward.ToChannelRss20;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
@@ -53,7 +53,7 @@ public class MappingTest extends TestCase{
 //    assertTrue(EqualsBuilder.reflectionEquals(c, c2));
     
     File tmp = File.createTempFile("testMapping", ".xml");
-    Rss20Writer writer = new Rss20Writer(tmp);
+    FeedWriter writer = new FeedWriter(tmp);
     
     c = Rss20Utils.read(new File( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI()));
     writer.writeChannel(c);

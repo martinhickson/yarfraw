@@ -26,11 +26,11 @@ import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.TextInput;
-import yarfraw.io.Rss20Reader;
-import yarfraw.io.Rss20Writer;
+import yarfraw.io.FeedReader;
+import yarfraw.io.FeedWriter;
 /**
  * Some unit tests.
- * 
+ * TODO: this really needs some cleanup
  * @author jliang
  *
  */
@@ -173,15 +173,35 @@ public class BuilderTest{
     
     c.additem(item);
     File file = File.createTempFile("YarfrawTestOtherElements",".xml");
-    Rss20Writer w = new Rss20Writer(file);
+    FeedWriter w = new FeedWriter(file);
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
     
     //make sure we can read it back
-    Rss20Reader reader = new Rss20Reader(file);
+    FeedReader reader = new FeedReader(file);
     reader.setFormat(FeedFormat.RSS10);
     Channel ch = reader.readChannel();
-    System.out.println(ch);
+    
+    
+    assertEquals(ch.getCopyright(), COPYRIGHT_2002_SPARTANBURG_HERALD_JOURNAL);
+    assertEquals(ch.getDescription(), DESCRIPTION);
+    
+    assertEquals(ch.getImage(), new Image(HTTP_MY_IMAGE_COM_IMAGE_JPG, TEST_IMAGE, HTTP_MY_IMAGE_COM_IMAGE_JPG));
+    assertEquals(ch.getLanguage(), Locale.ENGLISH);
+    assertEquals(ch.getLink(), new URI(HTTP_WWW_TEST_COM));
+    assertEquals(ch.getManagingEditor(), GEO_HERALD_COM);
+    
+    assertEquals(ch.getTtl(), new Integer(_60));
+    assertEquals(ch.getWebMaster(), BETTY_HERALD_COM_BETTY_GUERNSEY);
+
+    assertEquals(3, ch.getItems().size());
+    item = ch.getItems().get(0);
+    assertEquals(ITEM_1, item.getTitle());
+    assertEquals(DESC, item.getDescription());
+    assertEquals(OPRAH_OXYGEN_NET, item.getAuthor());
+    assertTrue("Category did not build correctly", 
+        item.getCategory().containsAll(Arrays.asList(new Category(CAT1), new Category(CAT2), new Category(CAT3))));
+    
   }
 }
 

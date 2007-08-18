@@ -32,7 +32,7 @@ import yarfraw.utils.Utils;
  * @author jliang
  *
  */
-public class Rss20Reader extends AbstractBaseIO{
+public class FeedReader extends AbstractBaseIO{
   
   private Unmarshaller _rss20Unmarshaller;
   private Unmarshaller _rss10Unmarshaller;
@@ -41,23 +41,23 @@ public class Rss20Reader extends AbstractBaseIO{
   private HttpURL _httpUrl = null;
   private HttpClientParams _httpClientParams = null;
   
-  public Rss20Reader(File file){
+  public FeedReader(File file){
     super(file);
   }
   
-  public Rss20Reader(String pathName){
+  public FeedReader(String pathName){
     this(new File(pathName));
   }
   
-  public Rss20Reader(URI uri){
+  public FeedReader(URI uri){
     this(new File(uri));
   }
   
-  public Rss20Reader(HttpURL httpUrl){
+  public FeedReader(HttpURL httpUrl){
     _httpUrl = httpUrl;
   }
   
-  public Rss20Reader(HttpURL httpUrl, HttpClientParams params){
+  public FeedReader(HttpURL httpUrl, HttpClientParams params){
     _httpUrl = httpUrl;
     _httpClientParams = params;
   }

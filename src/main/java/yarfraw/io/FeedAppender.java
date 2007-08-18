@@ -18,9 +18,9 @@ import yarfraw.core.datamodel.YarfrawException;
  * @author jliang
  *
  */
-public class Rss20Appender{
-  private Rss20Writer _writer;
-  private Rss20Reader _reader;
+public class FeedAppender{
+  private FeedWriter _writer;
+  private FeedReader _reader;
   private int _numItemToKeep = -1;
   
   /**
@@ -40,20 +40,20 @@ public class Rss20Appender{
    * <code>numItemToKeep</code> items in the channel.
    * 
    */
-  public Rss20Appender setNumItemToKeep(int numItemToKeep) {
+  public FeedAppender setNumItemToKeep(int numItemToKeep) {
     _numItemToKeep = numItemToKeep < 0 ? -1 : numItemToKeep;
     return this;
   }
   
-  public Rss20Appender(File file) {
-    _writer = new Rss20Writer(file);
-    _reader = new Rss20Reader(file);
+  public FeedAppender(File file) {
+    _writer = new FeedWriter(file);
+    _reader = new FeedReader(file);
   }
-  public Rss20Appender(String pathName){
+  public FeedAppender(String pathName){
     this(new File(pathName));
   }
   
-  public Rss20Appender(URI uri){
+  public FeedAppender(URI uri){
     this(new File(uri));
   } 
   
@@ -62,7 +62,7 @@ public class Rss20Appender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public Rss20Appender addItem(Item item)  throws YarfrawException{
+  public FeedAppender addItem(Item item)  throws YarfrawException{
     return addAllItems(Arrays.asList(item));
   }
   
@@ -79,11 +79,11 @@ public class Rss20Appender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public Rss20Appender addAllItems(List<Item> items) throws YarfrawException{
+  public FeedAppender addAllItems(List<Item> items) throws YarfrawException{
     Channel ch = readChannel();
     ch.getItems().addAll(items);
     ch.setItems(trimItemsList(ch.getItems()));
-    _writer = new Rss20Writer(_reader._file);
+    _writer = new FeedWriter(_reader._file);
     _writer.writeChannel(ch);
     return this;
   }
@@ -93,7 +93,7 @@ public class Rss20Appender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public Rss20Appender addAllItems(Item...items) throws YarfrawException{
+  public FeedAppender addAllItems(Item...items) throws YarfrawException{
     return addAllItems(Arrays.asList(items));
   }
   
@@ -102,7 +102,7 @@ public class Rss20Appender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public Rss20Appender removeItem(int index) throws YarfrawException{
+  public FeedAppender removeItem(int index) throws YarfrawException{
     Channel ch = readChannel();
     ch.getItems().remove(index);
     ch.setItems(trimItemsList(ch.getItems()));
@@ -115,7 +115,7 @@ public class Rss20Appender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public Rss20Appender setItem(int index, Item item) throws YarfrawException{
+  public FeedAppender setItem(int index, Item item) throws YarfrawException{
     Channel ch = readChannel();
     ch.getItems().set(index, item);
     _writer.writeChannel(ch);

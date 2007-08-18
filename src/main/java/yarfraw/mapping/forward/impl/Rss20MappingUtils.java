@@ -138,7 +138,7 @@ class Rss20MappingUtils {
     }
     
     if(item.getPubDate() != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
+      SimpleDateFormat format = new SimpleDateFormat(Utils.RFC822DATE_PATTERN);
       elementList.add(factory.createTRssItemPubDate(format.format(item.getPubDate())));
     }
     if(item.getSource() != null){

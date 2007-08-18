@@ -68,7 +68,7 @@ class Rss20MappingUtils{
           }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             item.setLink((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
-            item.setPubDate((String)jaxbElement.getValue());
+            item.setPubDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
           }else if (Utils.same(jaxbElement.getName(), _TRssItemSource_QNAME)) {
             TSource source = (TSource)jaxbElement.getValue();
             item.setSource(new Source(source.getUrl(), source.getValue()));

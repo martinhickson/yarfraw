@@ -325,9 +325,8 @@ public class Channel extends AbstractBaseObject{
     return this;
   }
   
-  public Channel setPubDate(String pubDate) throws ParseException {
+  public Channel setPubDate(String pubDate, SimpleDateFormat format) throws ParseException {
     if(pubDate != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
       _pubDate =  new Date(format.parse(pubDate).getTime());      
     }else{
       _pubDate = null;
@@ -348,9 +347,8 @@ public class Channel extends AbstractBaseObject{
     return this;
   }
 
-  public Channel setLastBuildDate(String lastBuildDate) throws ParseException {
+  public Channel setLastBuildDate(String lastBuildDate, SimpleDateFormat format) throws ParseException {
     if(lastBuildDate != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
       _lastBuildDate =  new Date(format.parse(lastBuildDate).getTime());      
     }else{
       _lastBuildDate = null;

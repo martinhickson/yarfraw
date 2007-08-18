@@ -49,6 +49,7 @@ public class Item extends AbstractBaseObject{
   private Date _pubDate;
   private Source _source;
   private RdfAttributes _rdfAttributes;
+  private String _rights;
   private List<Element> _otherElements = new ArrayList<Element>();
   private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
   
@@ -375,9 +376,8 @@ public class Item extends AbstractBaseObject{
     _pubDate = pubDate;
     return this;
   }
-  public Item setPubDate(String pubDate) throws ParseException {
+  public Item setPubDate(String pubDate, SimpleDateFormat format) throws ParseException {
     if(pubDate != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
       _pubDate =  new Date(format.parse(pubDate).getTime());      
     }else{
       _pubDate = null;
@@ -412,7 +412,18 @@ public class Item extends AbstractBaseObject{
   public void setRdfAttributes(RdfAttributes rdfAttributes) {
     _rdfAttributes = rdfAttributes;
   }
-  
+  /**
+   * Copyrights of the item, this is only used by Rss 1.0 format.
+   */
+  public String getRights() {
+    return _rights;
+  }
+  /**
+   * Copyrights of the item, this is only used by Rss 1.0 format.
+   */
+  public void setRights(String rights) {
+    _rights = rights;
+  }
   
   @Override
   public void validate(ValidationLevel level) throws ValidationException {

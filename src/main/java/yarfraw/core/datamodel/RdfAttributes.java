@@ -29,13 +29,13 @@ public class RdfAttributes{
     return _resource;
   }
   public void setResource(String resource) throws URISyntaxException {
-    _resource = new URI(resource);
+    _resource = resource == null?null: new URI(resource.trim());
   }
   public URI getAbout() {
     return _about;
   }
   public void setAbout(String about) throws URISyntaxException {
-    _about = new URI(about);
+    _about = about==null? null: new URI(about.trim());
   }
   public void setResource(URI resource) {
     _resource = resource;

@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.io.FeedReader;
 
@@ -16,7 +17,7 @@ import yarfraw.io.FeedReader;
  * @author jliang
  *
  */
-public class Rss20Utils{
+public class Rss10Utils{
     
   /**
    * Read all Rss feed and return them in a list that is in the same order.
@@ -30,6 +31,7 @@ public class Rss20Utils{
     if(!ArrayUtils.isEmpty(files)){
       for(File f : files){
         FeedReader reader = new FeedReader(f);
+        reader.setFormat(FeedFormat.RSS10);
         ret.add(reader.readChannel());
       }
     }

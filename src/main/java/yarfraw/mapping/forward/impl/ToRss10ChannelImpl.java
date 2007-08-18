@@ -1,7 +1,6 @@
 package yarfraw.mapping.forward.impl;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
@@ -10,6 +9,7 @@ import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.Seq;
@@ -81,7 +81,7 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
         if(t != null){
           Li li = factory.createLi();
           if(t.getRdfAttributes() != null){
-            li.setResource(t.getRdfAttributes().getResource().toString());
+            li.setResource(t.getRdfAttributes().getAbout().toString());
           }else{
             li.setResource(t.getLink().toString()); //use the link if no resource was specified
           }
@@ -90,7 +90,9 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
       }
     }
     
-    elementList.add(seq);
+    Items items =factory.createItems();
+    items.setSeq(seq);
+    elementList.add(factory.createItems(items));
     
     if(ch.getLanguage() != null){
       elementList.add(factory.createLanguage(ch.getLanguage().getLanguage()));
@@ -100,7 +102,7 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
       elementList.add(factory.createTRss10ChannelLink(ch.getLink().toString()));
     }
     //not supported
-    SimpleDateFormat format = new SimpleDateFormat(Utils.DATE_FORMAT_PATTERN);
+    
 //    if(ch.getLastBuildDate() != null){
 //      elementList.add(factory.createDate(format.format(ch.getLastBuildDate())));
 //    }
@@ -110,7 +112,7 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createDate(format.format(ch.getPubDate())));
+      elementList.add(factory.createDate(Utils.getDateAsISO8601String(ch.getPubDate())));
     }
 //  not supported
 //    if(ch.getSkipDays() != null){

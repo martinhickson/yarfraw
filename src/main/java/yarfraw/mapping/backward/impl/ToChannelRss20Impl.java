@@ -127,13 +127,13 @@ public class ToChannelRss20Impl implements ToChannelRss20{
           }else if (Utils.same(jaxbElement.getName(), _TRssChannelLanguage_QNAME)) {
             c.setLanguage(new Locale((String)jaxbElement.getValue()));
           }else if (Utils.same(jaxbElement.getName(), _TRssChannelLastBuildDate_QNAME)) {
-            c.setLastBuildDate((String)jaxbElement.getValue());
+            c.setLastBuildDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
           }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             c.setLink((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssChannelManagingEditor_QNAME)) {
             c.setManagingEditor((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
-            c.setPubDate((String)jaxbElement.getValue());
+            c.setPubDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
           }else if (Utils.same(jaxbElement.getName(), _TRssChannelTextInput_QNAME)) {
             TTextInput in = (TTextInput)jaxbElement.getValue();
             c.setTexInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
