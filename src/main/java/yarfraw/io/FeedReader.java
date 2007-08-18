@@ -26,6 +26,7 @@ import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.backward.impl.ToChannelRss10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
+import yarfraw.utils.FeedFormatDetector;
 import yarfraw.utils.Utils;
 /**
  * Provides a set of function to facilitate reading of an RSS 2.0 feed.
@@ -55,11 +56,23 @@ public class FeedReader extends AbstractBaseIO{
   
   public FeedReader(HttpURL httpUrl){
     _httpUrl = httpUrl;
+    //detect format automatically
+    try {
+      _format = FeedFormatDetector.getFormat(getStream());
+    } catch (Exception e) {
+      throw new RuntimeException("Unable to detect the format of the remote feed");
+    }
   }
   
   public FeedReader(HttpURL httpUrl, HttpClientParams params){
     _httpUrl = httpUrl;
     _httpClientParams = params;
+    //detect format automatically
+    try {
+      _format = FeedFormatDetector.getFormat(getStream());
+    } catch (Exception e) {
+      throw new RuntimeException("Unable to detect the format of the remote feed");
+    }
   }
   
   public HttpClientParams getHttpClientParams() {

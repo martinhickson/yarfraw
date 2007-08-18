@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 /**
@@ -23,6 +24,28 @@ public class FeedAppender{
   private FeedReader _reader;
   private int _numItemToKeep = -1;
   
+  /**
+   * The {@link FeedFormat} this writer should be using.<br/>
+   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored  
+   * <p/>
+   * rss 2.0 is recommended, use other format if you really need to
+   */
+  public FeedFormat getFormat() {
+    return _reader.getFormat();
+  }
+  /**
+   * The {@link FeedFormat} this writer should be using.<br/>
+   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored
+   * <p/>
+   * rss 2.0 is recommended, use other format if you really need to
+   *  
+   */
+  public void setFormat(FeedFormat format) {
+    if(format != null){
+      _reader.setFormat(format);
+      _writer.setFormat(format);
+    } 
+  }
   /**
    * Maximum number of items to keep in a feed. If the number of actual items
    * in the feed is greater than this number, then the appender will remove 

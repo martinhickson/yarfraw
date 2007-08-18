@@ -1,0 +1,123 @@
+                                    ------
+                                    Feed Format
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/08/18
+                                     
+Feed Formats
+
+	Currently Yarfraw supports Rss 2.0, Rss 1.0 and Atom 1.0 format. It may support other out-dated formats such as 
+Rss 0.9x and Atom 0.x formats in future releases, or it may never will. By default, Yarfraw's FeedReader class expect the 
+input feed to be of Rss 2.0 format. If the input feed is in other format, you need to explicitly change the feed 
+format of the reader to be the appropriate format of the feed that you are trying to read. If a feed source offers
+its feed in multiple format, it's highly recommended that you use the Rss 2.0 format, since Yarfraw's core data model
+is modeled based on the Rss 2.0 model. If you create a FeedReader using a HttpURL, 
+then the format is automatically detected for you using the FeedFormatDetector. Note that the auto detection will only 
+occur at construction time, that means if the format of the remote feed is changed, the FeedReader needs to be adjusted
+manually.
+
++----------------------------------------------------------------------------------------------------+
+
+  FeedReader reader = new FeedReader(file); //it's default to Rss 2.0
+  reader.setFormat(FeedFormat.RSS10); //change it to other format
+  reader.setFormat(FeedFormat.ATOM10); //change it to other format
+  //This is a remote feed
+  FeedReader reader2 = new FeedReader(new HttpURL("http://somewhere.com/has/a/rss10feed.xml"));
+  //so the format is automatically detected
+  reader2.getFormat() == FeedFormat.RSS10; 
+  
++----------------------------------------------------------------------------------------------------+
+
+	The same goes for FeedWriter and FeedAppender class. The default is Rss 2.0, and you can change it to other supported
+formats. Again, Rss 2.0 format is recommended.
+
++----------------------------------------------------------------------------------------------------+
+
+  FeedWriter writer = new FeedWriter(file); //it's default to Rss 2.0
+  FeedAppender appender = new FeedWriter(file); //it's default to Rss 2.0
+  writer.setFormat(FeedFormat.RSS10); //change it to other format    
+  appender.setFormat(FeedFormat.ATOM10); //change it to other format
+    
++----------------------------------------------------------------------------------------------------+
+
+	If you do not know the format of a feed in advance, you can use the FeedFormatDetector class to find out the format
+of the feed. The format detector reads uses the root element of the input feed to detect the format. 
+
++----------------------------------------------------------------------------------------------------+
+
+  FeedFormat format = FeedFormatDetector.getFormat(new FileInputStream("feed.xml"));
+  
++----------------------------------------------------------------------------------------------------+
+
+Mapping of different formats to the core Yarfraw models
+
+	Yarfraw provides a unified data model for all the feed formats that it supports. 
+Yarfraw's core data model is based from Rss 2.0, feed elements in other formats are mapped to these Rss 2.0 fields.
+The following table shows the mapping between feed elements in different format to Yarfraw's data model. If an element is not mapped,
+it will still be available in the *.otherElements list. Unmapped attributes are in *.otherAttributes map.
+
+	This means you can easily write a conversion utility to convert between different feed format, simply reads the original format,
+write it to a file using a different format setting. For example, to convert a Rss 2.0 feed to Rss 1.0:
+
++----------------------------------------------------------------------------------------------------+
+
+    FeedReader r = new FeedReader("rss20.xml");
+    Channel c = r.readChannel();
+    
+    File f = File.createTempFile("rss10", ".xml");
+    FeedWriter w = new FeedWriter(f);
+    w.setFormat(FeedFormat.RSS10);
+    w.writeChannel(c);
+    
+    //of course, you can read the converted feed
+    r.setFormat(FeedFormat.RSS10);
+    r.setFile(f);
+    Channel c2 = r.readChannel();
+  
++----------------------------------------------------------------------------------------------------+
+
+
+Rss 1.0 Mapping
+
+	Rss 1.0 mapping to Yarfraw core. Note that Yarfarw also supports two Rss 1.0 official extension modules: Dublin and Syndication.
+Form more information about the Rss 1.0 format, see http://web.resource.org/rss/1.0/
+	
+	Note that only the special mapping are shown below, elements that are having same identities as elements in Rss 2.0 are 
+automatically mapped to those elements. For example, \<channel /\> element is mapped to Channel, \<image\>\<title /\>\</image\> 
+is mapped to Image.title , as son on.  Also note that if a field is not mapped, when you write the Channel to Rss 1.0 format,
+the data on the filed will be ignored. For example, there's no \<cloud\> element in Rss 1.0, so Channel.cloud is ignored when
+the writer writes a Rss 1.0 format feed.
+	 
+*----------+--------------+----------------+
+| <<Elements>> | <<Yarfraw Data Model>>     | <<Comments>>       |
+*----------+--------------+----------------+
+| \<channel\>\<items /\>\</channel\> | nothing     | This is only used to sort the items, the items will be sorted according to this order if this element is present|
+*----------+--------------+----------------+
+| \<dc:title /\> | Channel.title or Item.title     |  |
+*----------+--------------+----------------+
+| \<dc:date /\>\ | Channel.PubDate  or Item.PubDate   |  |
+*----------+--------------+----------------+
+| \<dc:subject /\> | Category   |  |
+*----------+--------------+----------------+
+| \<channel\>\<dc:creator /\>\</channel\> | Channel.ManagingEditor     |  |
+*----------+--------------+----------------+
+| \<channel\>\<dc:publisher /\>\</channel\> | Channel.WebMaster     |  |
+*----------+--------------+----------------+
+| \<channel\>\<dc:rights /\>\</channel\> | Channel.CopyRights     |  |
+*----------+--------------+----------------+
+| \<item\>\<dc:description /\>\</item\> | nothing     | this is ignored, since \<item\> already has a description element |
+*----------+--------------+----------------+
+| \<item\>\<dc:rights /\>\</item\> | Item.rights     |  |
+*----------+--------------+----------------+
+| \<rdf:RDF\>\<channel /\>\</rdf:RDF\> | Channel     |  |
+*----------+--------------+----------------+
+| \<rdf:RDF\>\<image /\>\</rdf:RDF\> | nothing     | This element is ignored |
+*----------+--------------+----------------+
+| \<rdf:RDF\>\<item /\>\</rdf:RDF\> | nothing     | This element is ignored |
+*----------+--------------+----------------+
+| \<rdf:RDF\>\<textinput /\>\</rdf:RDF\> | nothing     | This element is ignored |
+*----------+--------------+----------------+
+Rss 1.0 Format Mapping
+
+	

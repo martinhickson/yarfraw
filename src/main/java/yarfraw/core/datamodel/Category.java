@@ -8,6 +8,11 @@ import yarfraw.utils.Utils;
  * Follows the same rules as the <item>-level {@link http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt category} element. 
  * More info: {@link http://cyber.law.harvard.edu/rss/rss.html#syndic8}
  * 
+ * <p/>
+ * for Rss 1.0 format, the &lt;dc:subject> element of RDF's extension module is mapped to this field.
+ * <br/>
+ * see http://web.resource.org/rss/1.0/ - 'Dublin Core'
+ * 
  * @author jliang
  *
  */

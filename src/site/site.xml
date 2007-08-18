@@ -29,6 +29,7 @@
 	  <item name="About"    href="index.html" />    
       <item name="Builder Usage"    href="builder.html" />
       <item name="Reader/Writer Usage"    href="io.html" />
+      <item name="Feed Format"    href="format.html" />
       <item name="Other Examples"    href="other.html" />
       <item name="Installation"    href="installation.html" />
       <item name="FAQ"    href="faq.html" />            
