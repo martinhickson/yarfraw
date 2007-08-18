@@ -109,11 +109,10 @@
             </goals>
           </execution>
         </executions>
-      </plugin>    
+      </plugin>
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        
         <executions>
           <execution>
           	<id>atom10</id>
@@ -153,6 +152,7 @@
 	        	</schemaIncludes>
 	        	<forceRegenerate>true</forceRegenerate>
 	        	<generateDirectory>${project.build.directory}/generated-sources/rss10</generateDirectory>
+	        	<strict>false</strict>
 	        </configuration>  
             <goals>
               <goal>generate</goal>
@@ -192,7 +192,14 @@
       <layout>legacy</layout>
     </pluginRepository>
   </pluginRepositories>
-  
+  <repositories>
+	<repository>
+		<id>java.net</id>
+		<name>java.net Maven Repository</name>
+		<url>https://maven-repository.dev.java.net/nonav/repository</url>
+		<layout>legacy</layout>
+	</repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>commons-httpclient</groupId>
