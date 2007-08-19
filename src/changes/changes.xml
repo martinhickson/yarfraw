@@ -13,6 +13,9 @@
       <action dev="jliang" type="update">
         Fixed a couple of bugs in the core data model.
       </action>
+      <action de="jliang" type="add">
+      added getElementByNs method to Channel and Item
+      </action>      
       <action dev="jliang" type="add">
         Added a lot more unit tests.
       </action>
