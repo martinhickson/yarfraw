@@ -19,6 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -291,7 +292,26 @@ public class Item extends AbstractBaseObject{
     return this;
   }
   
-  
+  /**
+   * Search through the other element list and return the first element that matches
+   * both input the namespaceURI and the localName.
+   * 
+   * @param namespaceURI - namespaceURI of the element to be search for
+   * @param localName - localName of the element
+   * @return - null if no matching element is found,
+   * the matching element otherwise.
+   */
+  public Element getElementByNS(String namespaceURI, String localName){
+    if(CollectionUtils.isEmpty(_otherElements)){
+      return null;
+    }
+    for(Element e : _otherElements){
+      if(ObjectUtils.equals(localName, e.getLocalName()) && ObjectUtils.equals(namespaceURI, e.getNamespaceURI())){
+        return e;
+      }
+    }
+    return null;
+  }
   
   /**
    * Other additional elements that are not in the Rss 2.0 specs.

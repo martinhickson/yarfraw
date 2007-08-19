@@ -72,8 +72,23 @@ Reading a RSS 2.0 feed
     reader.isRemoteRead();
    
 +----------------------------------------------------------------------------------------------------+
+
+	If the feed contains extensibility elements that are not in the official specs, those elements will be read
+into the Channel(or Item)'s otherElements list. You can get all these elements by calling Channel.getElements
+or there is a convenient method you can use to quickly get an specific element from the list. For example, the feed
+from {{digg.com}} has an element call \<digg:diggCount\>, you can get this element by using the following code:
+
++----------------------------------------------------------------------------------------------------+
+
+    FeedReader r = new FeedReader(new HttpURL("http://www.digg.com/rss/index.xml"));
+    Channel c = r.readChannel();   
+    Element e = c.getItems().get(0).getElementByNS("http://digg.com/docs/diggrss/", "diggCount");
+    System.out.println(e.getTextContent());
+   
++----------------------------------------------------------------------------------------------------+
 		
-	Similarly, you can add your own event handler:
+		
+	Similar to FeedWriter, you can add your own event handler:
 	
 +----------------------------------------------------------------------------------------------------+
    

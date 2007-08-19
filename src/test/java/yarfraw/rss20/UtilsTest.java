@@ -6,8 +6,11 @@ import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.w3c.dom.Element;
 
+import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.io.FeedReader;
 import yarfraw.utils.FeedFormatDetector;
 
 /**
@@ -38,6 +41,12 @@ public class UtilsTest extends TestCase{
     }
   }
   
-  
+  public void testOtherElementSearch() throws Exception {
+    FeedReader r = new FeedReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
+    Channel c = r.readChannel();
+//    <digg:diggCount>429</digg:diggCount>
+    Element e = c.getItems().get(0).getElementByNS("http://digg.com/docs/diggrss/", "diggCount");
+    assertEquals("429", e.getTextContent());
+  }
   
 }
