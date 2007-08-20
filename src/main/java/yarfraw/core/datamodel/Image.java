@@ -40,6 +40,10 @@ public class Image extends AbstractBaseObject{
   private String _description;
   private RdfAttributes _rdfAttributes;
   public Image(){}
+  
+  /**
+   * Creates an empty {@link Image} where width is set to 88 and height is set to 31
+   */
   public static Image create(){
     return new Image();
   }

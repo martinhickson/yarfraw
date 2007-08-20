@@ -40,11 +40,12 @@ public class Enclosure extends AbstractBaseObject{
    * It has three required attributes. url says where the enclosure is located, length says how big it is in bytes, and type says what its type is, a standard MIME type.
    * @throws URISyntaxException 
    */  
-  public Enclosure(String url, long length, String mimeType) throws URISyntaxException {
+  public Enclosure(String url, long length, String mimeType, String value) throws URISyntaxException {
     super();
     setUrl(url);
     setLength(length);
     setMimeType(mimeType);
+    setValue(value);
   }
   /**
    * where the enclosure is located,

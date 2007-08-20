@@ -22,9 +22,11 @@ import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
+import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.Source;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.ValidationLevel;
@@ -99,7 +101,8 @@ public class BuilderTest{
                          .addCategory(CAT1, CAT2)
                          .addCategory(new Category(CAT3).setDomain(HTTP_SOMEDOMAIN))
                          .setComments("    "+HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290)
-                         .setGuid(new Guid(GUID)),
+                         .setGuid(new Guid(GUID))
+                         .setSource(new Source("http://someurl", "a string of source")),
                new Item().setTitle(ITEM2)
                          .setLink(HTTP_SOMELINK_COM)
                          .setDescription(DESC)
@@ -107,7 +110,13 @@ public class BuilderTest{
                          .addCategory(CAT1, CAT2)
                          .addCategory(new Category(CAT3).setDomain(HTTP_SOMEDOMAIN))
                          .setComments(HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290+"\t\t")
-                         .setGuid(new Guid(GUID)));
+                         .setGuid(new Guid(GUID))
+                         .setEnclosure(Enclosure.create().setLength(10)
+                                 .setMimeType("someMineType")
+                                 .setUrl("www.somewhere.com")
+                                 .setValue("optional value")));
+       
+      
       return channel;
   }
 

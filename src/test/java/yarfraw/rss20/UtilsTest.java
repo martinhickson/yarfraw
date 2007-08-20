@@ -47,6 +47,9 @@ public class UtilsTest extends TestCase{
 //    <digg:diggCount>429</digg:diggCount>
     Element e = c.getItems().get(0).getElementByNS("http://digg.com/docs/diggrss/", "diggCount");
     assertEquals("429", e.getTextContent());
+//  <my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
+    e = c.getElementByNS("http://my.company.com/", "newElement");
+    assertEquals("new element", e.getTextContent());
   }
   
 }

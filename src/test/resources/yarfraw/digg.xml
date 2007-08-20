@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:digg="http://digg.com/docs/diggrss/">
 <channel>
+<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
 <title>digg</title>
 <language>en-us</language><link>http://digg.com/</link>
 <description>digg</description>

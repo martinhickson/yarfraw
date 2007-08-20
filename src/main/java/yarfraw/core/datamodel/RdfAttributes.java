@@ -14,7 +14,9 @@ public class RdfAttributes{
   public URI _about;
   
   public RdfAttributes() {}
-  
+  public static RdfAttributes create(){
+    return new RdfAttributes();
+  }
   public RdfAttributes(URI resource, URI about) {
     super();
     _resource = resource;

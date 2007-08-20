@@ -55,13 +55,7 @@ public class FeedReader extends AbstractBaseIO{
   }
   
   public FeedReader(HttpURL httpUrl){
-    _httpUrl = httpUrl;
-    //detect format automatically
-    try {
-      _format = FeedFormatDetector.getFormat(getStream());
-    } catch (Exception e) {
-      throw new RuntimeException("Unable to detect the format of the remote feed");
-    }
+    this(httpUrl, null);
   }
   
   public FeedReader(HttpURL httpUrl, HttpClientParams params){

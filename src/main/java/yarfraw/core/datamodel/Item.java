@@ -43,7 +43,7 @@ public class Item extends AbstractBaseObject{
   private URI _link;
   private String _description;
   private String _author;
-  private Set<Category> _category;
+  private Set<Category> _category = new HashSet<Category>();
   private URI _comments;
   private Enclosure _enclosure;
   private Guid _guid;

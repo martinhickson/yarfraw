@@ -23,14 +23,14 @@ import yarfraw.utils.Utils;
 class Rss20MappingUtils{
 
   private final static QName _TRssItemComments_QNAME = new QName("", "comments");
-  private final static QName _TRssItemEnclosure_QNAME = new QName("", "enclosure");
+//  private final static QName _TRssItemEnclosure_QNAME = new QName("", "enclosure");
   private final static QName _TRssItemTitle_QNAME = new QName("", "title");
   private final static QName _TRssItemDescription_QNAME = new QName("", "description");
-  private final static QName _TRssItemCategory_QNAME = new QName("", "category");
-  private final static QName _TRssItemGuid_QNAME = new QName("", "guid");
+//  private final static QName _TRssItemCategory_QNAME = new QName("", "category");
+//  private final static QName _TRssItemGuid_QNAME = new QName("", "guid");
   private final static QName _TRssItemLink_QNAME = new QName("", "link");
   private final static QName _TRssItemPubDate_QNAME = new QName("", "pubDate");
-  private final static QName _TRssItemSource_QNAME = new QName("", "source");
+//  private final static QName _TRssItemSource_QNAME = new QName("", "source");
   private final static QName _TRssItemAuthor_QNAME = new QName("", "author");
   
   private Rss20MappingUtils(){}
@@ -53,43 +53,32 @@ class Rss20MappingUtils{
         }
         if (o instanceof JAXBElement) {
           JAXBElement jaxbElement = (JAXBElement) o;
+          Object val = jaxbElement.getValue();
           if(Utils.same(jaxbElement.getName(), _TRssItemAuthor_QNAME)){
             item.setAuthor((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssItemComments_QNAME)) {
             item.setComments((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
             item.setDescription((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemEnclosure_QNAME)) {
-            TEnclosure en = (TEnclosure)jaxbElement.getValue();
-            item.setEnclosure(new Enclosure(en.getUrl(), en.getLength().longValue(), en.getType()));
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemGuid_QNAME)) {
-            TGuid guid = (TGuid)jaxbElement.getValue();
-            item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
           }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             item.setLink((String)jaxbElement.getValue());
           }else if (Utils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
             item.setPubDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemSource_QNAME)) {
-            TSource source = (TSource)jaxbElement.getValue();
-            item.setSource(new Source(source.getUrl(), source.getValue()));
           }else if (Utils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)) {
             item.setTitle((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemCategory_QNAME)) {
-            TCategory cat = (TCategory)jaxbElement.getValue();
+          }else if (val instanceof TCategory) {
+            TCategory cat = (TCategory) val;
             item.addCategory(new Category(cat.getValue(), cat.getDomain()));
+          }else if (val instanceof TEnclosure) {
+            TEnclosure en = (TEnclosure)val;
+            item.setEnclosure(new Enclosure(en.getUrl(), en.getLength().longValue(), en.getType(), en.getValue()));
+          }else if (val instanceof TGuid) {
+            TGuid guid = (TGuid)val;
+            item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
+          }else if (val instanceof TSource) {
+            TSource source = (TSource)val;
+            item.setSource(new Source(source.getUrl(), source.getValue()));
           }
-        }else if (o instanceof TCategory) {
-          TCategory cat = (TCategory) o;
-          item.addCategory(new Category(cat.getValue(), cat.getDomain()));
-        }else if (o instanceof TEnclosure) {
-          TEnclosure en = (TEnclosure)o;
-          item.setEnclosure(new Enclosure(en.getUrl(), en.getLength().longValue(), en.getType()));
-        }else if (o instanceof TGuid) {
-          TGuid guid = (TGuid)o;
-          item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
-        }else if (o instanceof TSource) {
-          TSource source = (TSource)o;
-          item.setSource(new Source(source.getUrl(), source.getValue()));
         }else if (o instanceof Element) {
           Element e = (Element) o;
           item.getOtherElements().add(e);

@@ -60,8 +60,12 @@ public class Channel extends AbstractBaseObject{
   private List<Element> _otherElements = new ArrayList<Element>();
   private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
   
+  /**
+   * Creates an empty {@link Channel} object where locale is set to {@link Locale.US}
+   * and pubDate is set to <code>new Date(System.currentTimeMillis())</code>
+   */
   public static Channel create(){
-    return new Channel();
+    return new Channel().setLanguage(Locale.US).setPubDate(new Date(System.currentTimeMillis()));
   }
   public Channel(){}
   /**

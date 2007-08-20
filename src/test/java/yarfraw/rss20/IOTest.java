@@ -9,7 +9,9 @@ import javax.xml.bind.ValidationEventHandler;
 import junit.framework.TestCase;
 
 import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
@@ -72,6 +74,7 @@ public class IOTest extends TestCase{
   @Test
   public void testRead2() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
+    assertTrue(!r.isRemoteRead());
     Channel c = r.readChannel();
     Channel c2 = BuilderTest.buildChannel();
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
@@ -119,8 +122,35 @@ public class IOTest extends TestCase{
       System.out.println("Failed to read from a remote url, this test requires a network connection");
       e.printStackTrace();
     }
+  }
+  
+  @Test
+  public void testRemoteRead2() throws Exception{  
+    FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
+    assertTrue(reader.isRemoteRead());
+    try{
+      HttpClientParams params = new HttpClientParams();
+      params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
+      reader.setHttpClientParams(params);
+      Channel c = reader.readChannel();
+      //this test can be indeterministic because it requires a network connection 
+      //if there no exception thrown, then we should have the channel read
+      assertTrue("Remote read failed", c.getTitle() != null);
+    }catch (YarfrawException e) {
+      System.out.println("Failed to read from a remote url, this test requires a network connection");
+      e.printStackTrace();
+    }
     
-    
+    try {
+      HttpClientParams params = new HttpClientParams();
+      params.setSoTimeout(20);
+      reader = new FeedReader(new HttpURL("http://nowhere.com"));
+      reader.readChannel();
+      fail("should failed");
+    }
+    catch (Exception e) {
+      // success;
+    }
   }
   
   @Test
@@ -156,6 +186,14 @@ public class IOTest extends TestCase{
     a.addAllItems(BuilderTest.buildChannel().getItems());
     
     assertEquals(10, r.readChannel().getItems().size());
+    
+    a.setItem(0, BuilderTest.buildChannel().getItems().get(1));
+    
+    assertEquals("item not set correctly", r.readChannel().getItems().get(0), BuilderTest.buildChannel().getItems().get(1));
+    
+    a.addAllItems(BuilderTest.buildChannel().getItems().get(1));
+    
+    assertEquals("item not added correctly", r.readChannel().getItems().get(9), BuilderTest.buildChannel().getItems().get(1));
   }
   
   
