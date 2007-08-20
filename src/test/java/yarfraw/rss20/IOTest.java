@@ -34,9 +34,9 @@ public class IOTest extends TestCase{
   public void testBuilder() throws Exception{
     Channel c = BuilderTest.buildChannel();
     FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
+    c.setTitle("<test>test</test>");
     w.writeChannel(c);
     w.writeChannel(c, new ValidationEventHandler(){
-
       public boolean handleEvent(ValidationEvent event) {
         System.out.println(event);
         return false;
@@ -48,7 +48,7 @@ public class IOTest extends TestCase{
   @Test
   public void testBuilder2() throws Exception{
     Channel c = BuilderTest.buildChannel();
-    FeedWriter w = new FeedWriter("yarfraw.xml");
+    FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
   }

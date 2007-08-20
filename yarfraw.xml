@@ -1,1 +1,80 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns4:RDF xmlns="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/" xmlns:ns4="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><ns3:channel><subject>cat2</subject><subject>cat1</subject><rights>Copyright 2002, Spartanburg Herald-Journal</rights><ns3:description>Descritpion ......... </ns3:description><ns3:image><ns3:url>http://my.image.com/image.jpg</ns3:url><ns3:title>Test Image</ns3:title><ns3:link>http://my.image.com/image.jpg</ns3:link></ns3:image><ns3:items><ns4:Seq><ns4:li resource="http://somelink.com/"/><ns4:li resource="http://somelink.com/"/></ns4:Seq></ns3:items><language>en</language><ns3:link>http://www.test.com</ns3:link><creator>geo@herald.com</creator><date>2007-08-20T17:35:21-04:00</date><ns3:textinput><ns3:title>Title</ns3:title><ns3:description>Descritpion</ns3:description><ns3:name>name</ns3:name><ns3:link>http://link.com/link</ns3:link></ns3:textinput><ns3:title>Test Title</ns3:title><ns2:updatePeriod>daily</ns2:updatePeriod><ns2:updateFrequency>24</ns2:updateFrequency><publisher>betty@herald.com (Betty Guernsey)</publisher></ns3:channel><ns3:item ns4:about="http://somelink.com/"><creator>oprah@oxygen.net</creator><subject>cat3</subject><subject>cat2</subject><subject>cat1</subject><ns3:description>desc</ns3:description><ns3:link>http://somelink.com/</ns3:link><ns3:title>Item 1</ns3:title></ns3:item><ns3:item ns4:about="http://somelink.com/"><creator>oprah@oxygen.net</creator><subject>cat3</subject><subject>cat2</subject><subject>cat1</subject><ns3:description>desc</ns3:description><ns3:link>http://somelink.com/</ns3:link><ns3:title>Item2</ns3:title></ns3:item></ns4:RDF>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss version="2.0">
+	<channel>
+		<category>cat2</category>
+		<category>cat1</category>
+		<cloud protocol="soap" registerProcedure="pingMe" path="/RPC2"
+			port="80" domain="rpc.sys.com" />
+		<copyright>
+			Copyright 2002, Spartanburg Herald-Journal
+		</copyright>
+		<description>Descritpion .........</description>
+		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+		<generator>MightyInHouse Content System v2.3</generator>
+		<image>
+			<url>http://my.image.com/image.jpg</url>
+			<title>Test Image</title>
+			<link>http://my.image.com/image.jpg</link>
+			<width>88</width>
+			<height>31</height>
+		</image>
+		<language>en</language>
+		<link>http://www.test.com</link>
+		<lastBuildDate>Mon, 20 Aug 2007 19:32:16 EDT</lastBuildDate>
+		<managingEditor>geo@herald.com</managingEditor>
+		<pubDate>Mon, 20 Aug 2007 19:32:16 EDT</pubDate>
+		<skipDays>
+			<day>Sunday</day>
+			<day>Saturday</day>
+		</skipDays>
+		<skipHours>
+			<hour>2</hour>
+			<hour>4</hour>
+			<hour>1</hour>
+			<hour>3</hour>
+			<hour>5</hour>
+			<hour>12</hour>
+			<hour>0</hour>
+		</skipHours>
+		<textInput>
+			<title>Title</title>
+			<description>Descritpion</description>
+			<name>name</name>
+			<link>http://link.com/link</link>
+		</textInput>
+		<title>&lt;test&gt;test&lt;/test&gt;</title>
+		<ttl>60</ttl>
+		<webMaster>betty@herald.com (Betty Guernsey)</webMaster>
+		<item>
+			<author>oprah@oxygen.net</author>
+			<category domain="http://somedomain">cat3</category>
+			<category>cat2</category>
+			<category>cat1</category>
+			<comments>
+				http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290
+			</comments>
+			<description>desc</description>
+			<guid isPermaLink="true">GUID</guid>
+			<link>http://somelink.com/</link>
+			<source url="http://someurl">a string of source</source>
+			<title>Item 1</title>
+		</item>
+		<item>
+			<author>oprah@oxygen.net</author>
+			<category domain="http://somedomain">cat3</category>
+			<category>cat2</category>
+			<category>cat1</category>
+			<comments>
+				http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290
+			</comments>
+			<description>desc</description>
+			<enclosure type="someMineType" length="10"
+				url="www.somewhere.com">
+				optional value
+			</enclosure>
+			<guid isPermaLink="true">GUID</guid>
+			<link>http://somelink.com/</link>
+			<title>Item2</title>
+		</item>
+	</channel>
+</rss>

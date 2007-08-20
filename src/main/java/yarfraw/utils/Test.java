@@ -1,31 +1,19 @@
 package yarfraw.utils;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 
-import yarfraw.generated.rss10.elements.RDF;
+import yarfraw.core.datamodel.FeedFormat;
 
 public class Test{
   public static void main(String[] args) throws Exception {
-    Unmarshaller u;
+
     InputStream input = null;
     try {
-      input = new FileInputStream("rdf2.xml");
-      u = JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-      RDF rdf = (RDF)u.unmarshal(input);
-      
-      for(Object o : rdf.getChannelOrItemOrTextinput()){
-        
-        System.out.println(ToStringBuilder.reflectionToString(o, ToStringStyle.MULTI_LINE_STYLE));
-      }
-      
+      input = Thread.currentThread().getContextClassLoader().getResourceAsStream("yarfraw/atom10/atom10.xml");
+      FeedFormat format = FeedFormatDetector.getFormat(input);
+      System.out.println(format);
     }finally{
       IOUtils.closeQuietly(input);
     }

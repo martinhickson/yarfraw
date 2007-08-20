@@ -28,6 +28,9 @@ public class FeedFormatDetector{
   private static final String RSS = "rss";
   private static final String VERSION = "version";
   private static final String RDF = ":RDF";
+  private static final String FEED = "feed";
+  
+//  <feed xmlns="http://www.w3.org/2005/Atom">
   
   private static final FormatDetectionHandler FormatDetectionHandler = new FormatDetectionHandler();
   
@@ -74,7 +77,10 @@ public class FeedFormatDetector{
         throw new EarlyTerminationException(FeedFormat.RSS20);
       }else if (StringUtils.isNotEmpty(qName) && qName.endsWith(RDF)) {
         throw new EarlyTerminationException(FeedFormat.RSS10);
-      }else{
+      }else if (FEED.equals(qName)) {
+        throw new EarlyTerminationException(FeedFormat.ATOM10);
+      }
+      else{
        //does not recognize the format from the root element, the format must be unknown
         throw new EarlyTerminationException(FeedFormat.UNKNOWN);
       }
