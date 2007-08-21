@@ -20,6 +20,7 @@ import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.generated.rss20.elements.TRss;
+import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelItemImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
@@ -35,6 +36,7 @@ public class FeedWriter extends AbstractBaseIO{
   private static final ObjectFactory RSS20_FACTORY = new ObjectFactory();
   private static final yarfraw.generated.rss10.elements.ObjectFactory RSS10_FACTORY = 
     new yarfraw.generated.rss10.elements.ObjectFactory();
+
   private Marshaller _rss20Marshaller;
   private Marshaller _rss10Marshaller;
   private Marshaller _atom10Marshaller;
@@ -103,8 +105,7 @@ public class FeedWriter extends AbstractBaseIO{
       }
       return rdf;
     }else if(_format == FeedFormat.ATOM10){
-      //TODO
-      throw new UnsupportedOperationException("Not yet implemented");
+      return ToAtom10ChannelImpl.getInstance().execute(channel);
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }

@@ -39,6 +39,8 @@ public class Image extends AbstractBaseObject{
   private Integer _height = 31;
   private String _description;
   private RdfAttributes _rdfAttributes;
+  private AtomAttributes _atomAttributes;
+  
   public Image(){}
   
   /**
@@ -273,6 +275,15 @@ public class Image extends AbstractBaseObject{
   public void setRdfAttributes(RdfAttributes rdfAttributes) {
     _rdfAttributes = rdfAttributes;
   }
+  
+  public AtomAttributes getAtomAttributes() {
+    return _atomAttributes;
+  }
+  public Image setAtomAttributes(AtomAttributes atomAttributes) {
+    _atomAttributes = atomAttributes;
+    return this;
+  }
+  
   
   @Override
   public void validate(ValidationLevel level) throws ValidationException {

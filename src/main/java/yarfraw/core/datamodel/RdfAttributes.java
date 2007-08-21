@@ -9,9 +9,9 @@ import java.net.URISyntaxException;
  * @author jliang
  *
  */
-public class RdfAttributes{
-  public URI _resource;
-  public URI _about;
+public class RdfAttributes extends AbstractBaseObject{
+  private URI _resource;
+  private URI _about;
   
   public RdfAttributes() {}
   public static RdfAttributes create(){
@@ -30,20 +30,29 @@ public class RdfAttributes{
   public URI getResource() {
     return _resource;
   }
-  public void setResource(String resource) throws URISyntaxException {
+  public RdfAttributes setResource(String resource) throws URISyntaxException {
     _resource = resource == null?null: new URI(resource.trim());
+    return this;
   }
   public URI getAbout() {
     return _about;
   }
-  public void setAbout(String about) throws URISyntaxException {
+  public RdfAttributes setAbout(String about) throws URISyntaxException {
     _about = about==null? null: new URI(about.trim());
+    return this;
   }
-  public void setResource(URI resource) {
+  public RdfAttributes setResource(URI resource) {
     _resource = resource;
+    return this;
   }
-  public void setAbout(URI about) {
+  public RdfAttributes setAbout(URI about) {
     _about = about;
+    return this;
+  }
+  @Override
+  public void validate(ValidationLevel level) throws ValidationException {
+    // TODO Auto-generated method stub
+    
   }
 
 }

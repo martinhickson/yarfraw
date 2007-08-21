@@ -19,6 +19,7 @@ import yarfraw.utils.Utils;
 public class Category extends AbstractBaseObject{
   private String _category;
   private String _domain;
+  private AtomAttributes _atomAttributes;
   public Category() {}
   public static Category create(){
     return new Category();
@@ -65,6 +66,14 @@ public class Category extends AbstractBaseObject{
    */
   public Category setDomain(String domain) {
     _domain = domain;
+    return this;
+  }
+  
+  public AtomAttributes getAtomAttributes() {
+    return _atomAttributes;
+  }
+  public Category setAtomAttributes(AtomAttributes atomAttributes) {
+    _atomAttributes = atomAttributes;
     return this;
   }
   
