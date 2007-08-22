@@ -37,9 +37,9 @@ import yarfraw.utils.Utils;
  */
 public class FeedReader extends AbstractBaseIO{
   
-  private Unmarshaller _rss20Unmarshaller;
-  private Unmarshaller _rss10Unmarshaller;
-  private Unmarshaller _atom10Unmarshaller;
+  private static Unmarshaller _rss20Unmarshaller;
+  private static Unmarshaller _rss10Unmarshaller;
+  private static Unmarshaller _atom10Unmarshaller;
   
   private HttpURL _httpUrl = null;
   private HttpClientParams _httpClientParams = null;
@@ -93,14 +93,29 @@ public class FeedReader extends AbstractBaseIO{
    * 
    * @throws YarfrawException if read operation failed.
    */
+  public static Channel readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
+    Unmarshaller u;
+    try {
+      u = getUnMarshaller(format, true);
+      return toChannel(format, u.unmarshal(inputStream));
+    } catch (JAXBException e) {
+      throw new YarfrawException("Unable to unmarshal file", e);
+    }
+  }
+  
+  /**
+   * Reads a channel from the feed file with a custom {@link ValidationEventHandler}
+   * 
+   * @throws YarfrawException if read operation failed.
+   */
   public Channel readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
     Unmarshaller u;
     InputStream input = null;
     try {
       input = getStream();
-      u = getUnMarshaller();
+      u = getUnMarshaller(_format, validationEventHandler != null); //if handler is not null, then we need a new instance
       u.setEventHandler(validationEventHandler);
-      return toChannel(u.unmarshal(input));
+      return toChannel(_format, u.unmarshal(input));
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);
     }
@@ -115,12 +130,12 @@ public class FeedReader extends AbstractBaseIO{
   }
   
   @SuppressWarnings("unchecked")
-  private Channel toChannel(Object o) throws YarfrawException{
-    if(_format == FeedFormat.RSS20){
+  private static Channel toChannel(FeedFormat format, Object o) throws YarfrawException{
+    if(format == FeedFormat.RSS20){
       return ToChannelRss20Impl.getInstance().execute(((JAXBElement<TRss>)o).getValue().getChannel());
-    }else if(_format == FeedFormat.RSS10){
+    }else if(format == FeedFormat.RSS10){
       return  ToChannelRss10Impl.getInstance().execute((RDF)o);
-    }else if(_format == FeedFormat.ATOM10){
+    }else if(format == FeedFormat.ATOM10){
       return ToChannelAtom10Impl.getInstance().execute(((JAXBElement<FeedType>)o).getValue());
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
@@ -157,19 +172,28 @@ public class FeedReader extends AbstractBaseIO{
   }
   
   
-  private Unmarshaller getUnMarshaller() throws JAXBException{
+  private static synchronized Unmarshaller getUnMarshaller(FeedFormat format, boolean createNewInstance) throws JAXBException{
     Unmarshaller ret = _rss20Unmarshaller;
-    if(_format == FeedFormat.RSS20){
+    if(format == FeedFormat.RSS20){
+      if(createNewInstance){
+        return JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      }
       if(_rss20Unmarshaller==null){
         _rss20Unmarshaller = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();
       }
       ret = _rss20Unmarshaller;
-    }else if(_format == FeedFormat.RSS10){
+    }else if(format == FeedFormat.RSS10){
+      if(createNewInstance){
+        return JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createUnmarshaller();
+      }
       if(_rss10Unmarshaller==null){
         _rss10Unmarshaller = JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createUnmarshaller();
       }
       ret = _rss10Unmarshaller;
-    }else if(_format == FeedFormat.ATOM10){
+    }else if(format == FeedFormat.ATOM10){
+      if(createNewInstance){
+        return JAXBContext.newInstance(Utils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      }
       if(_atom10Unmarshaller==null){
         _atom10Unmarshaller = JAXBContext.newInstance(Utils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
       }
