@@ -18,6 +18,7 @@ import yarfraw.utils.XMLUtils;
 
 public class AtomContent extends AtomAttributes{
   private List<Element> _otherElements = new ArrayList<Element>();
+  private List<String> _contentText = new ArrayList<String>();
   private AtomTextAttributes.TextType _type = AtomTextAttributes.TextType.text;
   private String _src;
   
@@ -26,6 +27,18 @@ public class AtomContent extends AtomAttributes{
     return new AtomContent();
   }
 
+  public AtomContent addContentText(String contentText){
+    _contentText = _contentText != null ? _contentText : new ArrayList<String>();
+    _contentText.add(contentText);
+    return this;
+  }
+  
+  public List<String> getContentText() {
+    return _contentText;
+  }
+  public void setContentText(List<String> contentText) {
+    _contentText = contentText;
+  }
   @Override
   public AtomContent setBase(String base) {
     super.setBase(base);
@@ -40,6 +53,12 @@ public class AtomContent extends AtomAttributes{
   @Override
   public AtomContent setOtherAttributes(Map<QName, String> otherAttributes) {
     super.setOtherAttributes(otherAttributes);
+    return this;
+  }
+  
+  @Override
+  public AtomContent addOtherAttributes(QName namespace, String attribute) {
+    super.addOtherAttributes(namespace, attribute);
     return this;
   }
   

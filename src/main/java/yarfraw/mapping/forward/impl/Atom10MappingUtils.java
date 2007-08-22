@@ -1,5 +1,6 @@
 package yarfraw.mapping.forward.impl;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,6 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import yarfraw.core.datamodel.AtomAttributes;
 import yarfraw.core.datamodel.AtomContent;
 import yarfraw.core.datamodel.AtomId;
+import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Category;
@@ -33,6 +35,23 @@ public class Atom10MappingUtils{
   private static final ObjectFactory FACTORY = new ObjectFactory ();
   private Atom10MappingUtils(){}
 
+  public static LinkType toLink(AtomLink link){
+    LinkType ret = FACTORY.createLinkType();
+    ret.setBase(link.getBase() == null?null:link.getBase().toString());
+    ret.setLang(link.getLang() == null?null:link.getLang().getLanguage());
+    if(link.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(link.getOtherAttributes());
+    }
+    ret.setContent(link.getOtherContent());
+    ret.setHref(link.getHref());
+    ret.setHreflang(link.getHreflang());
+    ret.setLength(link.getLength() == null? null : new BigInteger(String.valueOf(link.getLength())));
+    ret.setRel(link.getRel());
+    ret.setTitle(link.getTitle());
+    ret.setType(link.getType());
+    return ret;
+  }
+  
   public  static EntryType toEntry(Item item) throws YarfrawException{
     EntryType ret = FACTORY.createEntryType();
     List<Object> elementList = ret.getAuthorOrCategoryOrContent();
@@ -74,11 +93,18 @@ public class Atom10MappingUtils{
 //    if(item.getComments() != null){
 //      elementList.add(factory.createTRssItemComments(item.getComments().toString()));      
 //    }
-    if(item.getDescription() != null){
+    if(item.getDescription() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.summary) != null){
       elementList.add(factory.createEntryTypeSummary(
               Atom10MappingUtils.toTextType(
                       item.getAtomTextAttributeByElement(AtomTextElementEnum.summary),
               item.getDescription())));
+    }
+    
+    if(item.getRights() != null || item.getAtomTextAttributeByElement(AtomTextElementEnum.rights) != null){
+      elementList.add(factory.createEntryTypeRights(
+              Atom10MappingUtils.toTextType(
+                      item.getAtomTextAttributeByElement(AtomTextElementEnum.rights),
+              item.getRights())));
     }
 //  not supported
 //    if(item.getEnclosure() != null){
@@ -89,11 +115,15 @@ public class Atom10MappingUtils{
 //      elementList.add(item.getGuid().getGuid());
 //    }
     
-    //partially supported
-    if(item.getLink() != null){
-      LinkType link = factory.createLinkType();
-      link.setHref(item.getLink().toString());
-      elementList.add(factory.createFeedTypeLink(link));
+    //ignore, use atom link
+//    if(item.getLink() != null ){
+//      LinkType link = factory.createLinkType();
+//      link.setHref(item.getLink().toString());
+//      elementList.add(factory.createFeedTypeLink(link));
+//    }
+//    
+    for(AtomLink atomLink : item.getAtomLinks()){
+      elementList.add(factory.createLink(toLink(atomLink)));
     }
     
     //partially supported
@@ -107,7 +137,7 @@ public class Atom10MappingUtils{
 //      elementList.add(toRss20Source(item.getSource()));
 //    }
     
-    if(item.getTitle() != null){
+    if(item.getTitle() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.title) != null){
       elementList.add(factory.createEntryTypeTitle(
               Atom10MappingUtils.toTextType(
                       item.getAtomTextAttributeByElement(AtomTextElementEnum.title),
@@ -130,6 +160,7 @@ public class Atom10MappingUtils{
     }
     ret.setSrc(content.getSrc() == null? null: content.getSrc().toString());
     ret.getContent().addAll(content.getOtherElements());
+    ret.getContent().addAll(content.getContentText());
     return ret;
   }
   
@@ -166,8 +197,14 @@ public class Atom10MappingUtils{
       text.setBase(attr.getBase() == null?null:attr.getBase().toString());
       text.setLang(attr.getLang() == null?null:attr.getLang().getLanguage());
       text.setType(attr.getType() == null?null:attr.getType().name());
+      if(attr.getXhtmlDiv() != null){
+        text.getContent().add(attr.getXhtmlDiv());
+      }
     }
-    text.getContent().add(content);
+    if(content != null){
+      text.getContent().add(content);
+    }
+
     return text;
   }
 

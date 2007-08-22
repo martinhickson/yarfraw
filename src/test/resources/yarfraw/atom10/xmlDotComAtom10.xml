@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd'
+xml:lang='en-US'>
+
+<title>XML.com</title>
+<link rel="alternate" type="text/html" href="http://www.xml.com/" hreflang="en" title="XML.com" />
+<subtitle type='text'>XML.com Articles and Weblogs</subtitle>
+<rights>Copyright O'Reilly Media, Inc.</rights>
+<id>http://www.xml.com/</id>
+<updated>2007-08-22T10:17:16-08:00</updated>
+<link rel="self" type="application/atom+xml" href="http://www.oreillynet.com/pub/feed/20"/>
+<itunes:author>O'Reilly Media, Inc.</itunes:author>
+<itunes:category text='Technology' />
+<itunes:explicit>no</itunes:explicit>
+<itunes:owner>
+<itunes:name>O'Reilly Media, Inc.</itunes:name>
+<itunes:email>webmaster@oreillynet.com</itunes:email>
+</itunes:owner>
+
+<entry>
+	<title>Finally is all starting to look like plumbing in XML</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/finally_is_all_starting_to_loo.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/finally_is_all_starting_to_loo.html?CMP=OTC-TY3388567169&amp;ATT=Finally+is+all+starting+to+look+like+plumbing+in+XML'/>
+	<summary type='html'>
+	I've heard it 1000 times since '97. "XML, it's just plumbing". Maybe, but it hasn't really felt that way in past years. Too much was still unsettled, and and there were too many people who were not interested in letting...
+	</summary>
+	<author><name>Uche Ogbuji</name></author>
+	<updated>2007-08-22T10:17:16-08:00</updated>
+</entry>
+
+<entry>
+	<title>Ignite Boston</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/ignite_boston.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/ignite_boston.html?CMP=OTC-TY3388567169&amp;ATT=Ignite+Boston'/>
+	<summary type='html'>
+	Let's show our tech colleagues around the country that Boston/Cambridge have a vibrant tech community that gets involved in talking about cool new technologies and ideas....  Another reason we wanted to announce this event this early, is so those of you who would like speak for five minutes on something cool, new, or exciting you can get into the queue sooner rather than later.
+	</summary>
+	<author><name>Mike Hendrickson</name></author>
+	<updated>2007-08-21T07:17:31-08:00</updated>
+</entry>
+
+<entry>
+	<title>Dear WhyFirefoxIsBlocked.com,</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/dear_whyfirefoxisblockedcom.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/dear_whyfirefoxisblockedcom.html?CMP=OTC-TY3388567169&amp;ATT=Dear+WhyFirefoxIsBlocked+com'/>
+	<summary type='html'>
+	Don't fight the Internet! I promise, you'll lose. Why FireFox is Blocked The Mozilla Foundation and its Commercial arm, the Mozilla Corporation, has allowed and endorsed Ad Block Plus, a plug-in that blocks advertisement on web sites and also prevents...
+	</summary>
+	<author><name>M. David Peterson</name></author>
+	<updated>2007-08-20T00:16:32-08:00</updated>
+</entry>
+
+<entry>
+	<title>If You Don't Know What The Problems Are, Please Don't Try To Fix Them!</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/if_you_dont_know_what_the_prob.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/if_you_dont_know_what_the_prob.html?CMP=OTC-TY3388567169&amp;ATT=If+You+Don+t+Know+What+The+Problems+Are+Please+Don+t+Try+To+Fix+Them'/>
+	<summary type='html'>
+	Don't you just love Jeffrey Zeldman? I know I do for the simple fact that he has no problem saying it like it is and in many cases he's right on the money, Jeffrey Zeldman Presents : What crisis? The...
+	</summary>
+	<author><name>M. David Peterson</name></author>
+	<updated>2007-08-18T21:46:18-08:00</updated>
+</entry>
+
+<entry>
+	<title>Feature Request: BitTorrent Plugin For Darcs, Mercurial, etc.</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/feature_request_bittorrent_plu.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/feature_request_bittorrent_plu.html?CMP=OTC-TY3388567169&amp;ATT=Feature+Request+BitTorrent+Plugin+For+Darcs+Mercurial+etc'/>
+	<summary type='html'>
+	As per a comment I made to a post from Eric Larson to the internal Vibe* mailing list regarding the usage of Mercurial instead of Subversion for our RCS, Of course maybe someone will come along and create a BitTorrent-based...
+	</summary>
+	<author><name>M. David Peterson</name></author>
+	<updated>2007-08-17T23:46:25-08:00</updated>
+</entry>
+
+<entry>
+	<title>[Dare Obasanjo:QOTD] Humming Birds On Crack!</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/dare_obasanjoqotd_humming_bird.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/dare_obasanjoqotd_humming_bird.html?CMP=OTC-TY3388567169&amp;ATT=Dare+Obasanjo+QOTD+Humming+Birds+On+Crack'/>
+	<summary type='html'>
+	Dare Obasanjo aka Carnage4Life - Google Working on Social Network Aggregator What I find more interesting is being able to bridge these communities instead of worrying about the 1% of users who hop from community to community like crack addled...
+	</summary>
+	<author><name>M. David Peterson</name></author>
+	<updated>2007-08-17T23:16:14-08:00</updated>
+</entry>
+
+<entry>
+	<title>XForms, XML Schema, and ROX</title>
+	<id>http://www.xml.com/pub/a/2007/08/16/xforms-xml-schema-and-rox.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/08/16/xforms-xml-schema-and-rox.html?CMP=OTC-TY3388567169&amp;ATT=XForms+XML+Schema+and+ROX'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/08/16/xforms-xml-schema-and-rox.html?CMP=OTC-TY3388567169&amp;amp;ATT=XForms+XML+Schema+and+ROX'>&lt;img src='http://www.xml.com/standard-tiles/xml/111-tarpan.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>Kurt Cagle describes ROX Server, a RESTful system for building XForms from an XML Schema and some other bits.
+	</summary>
+	<author><name>Kurt Cagle</name></author>
+	<updated>2007-08-17T12:45:10-08:00</updated>
+</entry>
+
+<entry>
+	<title>Auto-generating Standards from Schematron Schemas</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/autogenerating_standards_from.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/autogenerating_standards_from.html?CMP=OTC-TY3388567169&amp;ATT=Auto-generating+Standards+from+Schematron+Schemas'/>
+	<summary type='html'>
+	Schematron is an ISO standard (ISO/IEC IS 19757-3) schema language for expressing assertions about the presence or absence of patterns in a document, usually using XPath. ISO standards are supposed to contain verifiable statements about some technology. And there is...
+	</summary>
+	<author><name>Rick Jelliffe</name></author>
+	<updated>2007-08-17T04:47:18-08:00</updated>
+</entry>
+
+<entry>
+	<title>MacBookPro bug: reboot on closing the lid</title>
+	<id>http://www.oreillynet.com/xml/blog/2007/08/macbook_reboot_on_closing_the.html</id>
+	<link rel='alternate' href='http://www.oreillynet.com/xml/blog/2007/08/macbook_reboot_on_closing_the.html?CMP=OTC-TY3388567169&amp;ATT=MacBookPro+bug+reboot+on+closing+the+lid'/>
+	<summary type='html'>
+	One reason I'm looking forward to Tiger is that unfortunately I'm a victim of the bug where my MacBook Pro 17" occasionally reboots when I close the lid. Most of the time things are OK, but once a month or...
+	</summary>
+	<author><name>Uche Ogbuji</name></author>
+	<updated>2007-08-16T22:46:31-08:00</updated>
+</entry>
+
+<entry>
+	<title>Introducing RDFa, Part Two</title>
+	<id>http://www.xml.com/pub/a/2007/04/04/introducing-rdfa-part-two.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/04/04/introducing-rdfa-part-two.html?CMP=OTC-TY3388567169&amp;ATT=Introducing+RDFa+Part+Two'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/04/04/introducing-rdfa-part-two.html?CMP=OTC-TY3388567169&amp;amp;ATT=Introducing+RDFa+Part+Two'>&lt;img src='http://www.xml.com/2007/02/14/graphics/111-RDFa.gif' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>In this second part of a two-part series, Bob DuCharme concludes his introduction of RDFa--a new, XHTML-friendly standard syntax for RDF metadata that allows you to embed RDF metadata into the Web in a novel way.
+	</summary>
+	<author><name>Bob DuCharme</name></author>
+	<updated>2007-04-04T14:46:33-08:00</updated>
+</entry>
+
+<entry>
+	<title>A Smoother Change to Version 2.0</title>
+	<id>http://www.xml.com/pub/a/2007/04/11/a-smoother-change-to-version-20.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/04/11/a-smoother-change-to-version-20.html?CMP=OTC-TY3388567169&amp;ATT=A+Smoother+Change+to+Version+2+0'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/04/11/a-smoother-change-to-version-20.html?CMP=OTC-TY3388567169&amp;amp;ATT=A+Smoother+Change+to+Version+2+0'>&lt;img src='http://www.oreillynet.com/standard-tiles/xml/111-tarpan.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>Marc de Graauw follows up David Orchard's recent piece about versioning XML vocabularies with a piece about the Capability Compatibility Design Pattern, including code for achieving forward and backward compatibility between XML vocabulary revisions.
+	</summary>
+	<author><name>Marc de Graauw</name></author>
+	<updated>2007-04-11T14:46:33-08:00</updated>
+</entry>
+
+<entry>
+	<title>Which XML Technologies Are Beautiful?</title>
+	<id>http://www.xml.com/pub/a/2007/04/18/which-xml-techologies-are-beautiful.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/04/18/which-xml-techologies-are-beautiful.html?CMP=OTC-TY3388567169&amp;ATT=Which+XML+Technologies+Are+Beautiful'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/04/18/which-xml-techologies-are-beautiful.html?CMP=OTC-TY3388567169&amp;amp;ATT=Which+XML+Technologies+Are+Beautiful'>&lt;img src='http://www.xml.com/standard-tiles/xml/111-peacock.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>Michael Day asks an interesting question: which XML technologies are beautiful and why? He answers with some candidates. Which XML technologies do you think are most beautiful?
+	</summary>
+	<author><name>Michael Day</name></author>
+	<updated>2007-04-18T14:46:33-08:00</updated>
+</entry>
+
+<entry>
+	<title>Secure, Reliable Web Services with Apache</title>
+	<id>http://www.xml.com/pub/a/2007/05/02/sure-reliable-web-services-with-apache.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/05/02/sure-reliable-web-services-with-apache.html?CMP=OTC-TY3388567169&amp;ATT=Secure+Reliable+Web+Services+with+Apache'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/05/02/sure-reliable-web-services-with-apache.html?CMP=OTC-TY3388567169&amp;amp;ATT=Secure+Reliable+Web+Services+with+Apache'>&lt;img src='http://www.oreillynet.com/standard-tiles/xml/111-osprey.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>Kyle Gabhart returns with another look at part of the growing support for web services and SOA in Apache, this time focusing on secure messaging.
+	</summary>
+	<author><name>Kyle Gabhart</name></author>
+	<updated>2007-05-02T14:46:33-08:00</updated>
+</entry>
+
+<entry>
+	<title>XML Parser Benchmarks: Part 1</title>
+	<id>http://www.xml.com/pub/a/2007/05/09/xml-parser-benchmarks-part-1.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/05/09/xml-parser-benchmarks-part-1.html?CMP=OTC-TY3388567169&amp;ATT=XML+Parser+Benchmarks+Part+1'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/05/09/xml-parser-benchmarks-part-1.html?CMP=OTC-TY3388567169&amp;amp;ATT=XML+Parser+Benchmarks+Part+1'>&lt;img src='http://www.oreillynet.com/standard-tiles/xml/111-tarpan.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>In the golden days, XML parser performance was a perpetually hot topic. And today it's still worth knowing which modern parsers offer the best performance. In this first of a two-part series, event-based parsers are compared; in the next part, object parsers are compared.
+	</summary>
+	<author><name>Matthias Farwick, Michael Hafner</name></author>
+	<updated>2007-05-10T14:46:33-08:00</updated>
+</entry>
+
+<entry>
+	<title>XML Parser Benchmarks: Part 2</title>
+	<id>http://www.xml.com/pub/a/2007/05/16/xml-parser-benchmarks-part-2.html</id>
+	<link rel='alternate' href='http://www.xml.com/pub/a/2007/05/16/xml-parser-benchmarks-part-2.html?CMP=OTC-TY3388567169&amp;ATT=XML+Parser+Benchmarks+Part+2'/>
+	<summary type='html'>
+	&lt;a href='http://www.xml.com/pub/a/2007/05/16/xml-parser-benchmarks-part-2.html?CMP=OTC-TY3388567169&amp;amp;ATT=XML+Parser+Benchmarks+Part+2'>&lt;img src='http://www.oreillynet.com/standard-tiles/xml/111-peacock.jpg' width='111px' height='91px' alt='tile image' align='left' border='0' style='padding-right:5px;' />&lt;/a>In the golden days, XML parser performance was a perpetually hot topic. And today it's still worth knowing which modern parsers offer the best performance. In this second of a two-part series, object parsers are compared.
+	</summary>
+	<author><name>Matthias Farwick, Michael Hafner</name></author>
+	<updated>2007-05-16T14:46:33-08:00</updated>
+</entry>
+
+</feed>

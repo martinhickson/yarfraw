@@ -59,6 +59,7 @@ public class Item extends AbstractBaseObject{
   private AtomContent _atomContent;
   private AtomAttributes _atomAttributes;
   private Map<AtomTextElementEnum, AtomTextAttributes> _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
+  private List<AtomLink> _atomLinks = new ArrayList<AtomLink>();
   
   public Item(){}
   public static Item create(){
@@ -510,17 +511,34 @@ public class Item extends AbstractBaseObject{
     _rdfAttributes = rdfAttributes;
   }
   /**
-   * Copyrights of the item, this is only used by Rss 1.0 format.
+   * Copyrights of the item, this is only used by Rss 1.0 and Atom 1.0 format.
    */
   public String getRights() {
     return _rights;
   }
   /**
-   * Copyrights of the item, this is only used by Rss 1.0 format.
+   * Copyrights of the item, this is only used by Rss 1.0 and Atom 1.0 format.
    */
   public void setRights(String rights) {
     _rights = rights;
   }
+  
+  public Item addAtomLink(AtomLink atomLink){
+    if(_atomLinks == null){
+      _atomLinks = new ArrayList<AtomLink>();
+    }
+    _atomLinks.add(atomLink);
+    return this;
+  }
+  
+  public List<AtomLink> getAtomLinks() {
+    return _atomLinks;
+  }
+  
+  public void setAtomLinks(List<AtomLink> atomLinks) {
+    _atomLinks = atomLinks;
+  }
+
   
   @Override
   public void validate(ValidationLevel level) throws ValidationException {

@@ -36,7 +36,11 @@ public class AtomId extends AtomAttributes{
     super.setOtherAttributes(otherAttributes);
     return this;
   }
-  
+  @Override
+  public AtomId addOtherAttributes(QName namespace, String attribute) {
+    super.addOtherAttributes(namespace, attribute);
+    return this;
+  }
   
   public AtomId(String atomUri){
     setAtomUri(atomUri);

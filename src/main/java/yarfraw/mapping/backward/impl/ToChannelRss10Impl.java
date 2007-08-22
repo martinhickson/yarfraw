@@ -1,5 +1,7 @@
 package yarfraw.mapping.backward.impl;
 
+import static yarfraw.mapping.backward.impl.Rss10MappingUtils.toChannel;
+
 import javax.xml.bind.JAXBElement;
 
 import yarfraw.core.datamodel.Channel;
@@ -30,6 +32,6 @@ public class ToChannelRss10Impl implements ToChannelRss10{
         } 
       }
     }
-    return Rss10MappingUtils.toChannel(ch, rdf);
+    return toChannel(ch, rdf);
   }
 }

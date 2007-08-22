@@ -3,7 +3,9 @@ package yarfraw.coverage;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 
 import javax.xml.namespace.QName;
 
@@ -11,12 +13,16 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import yarfraw.core.datamodel.AtomAttributes;
+import yarfraw.core.datamodel.AtomLink;
+import yarfraw.core.datamodel.AtomTextAttributes;
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.Source;
+import yarfraw.core.datamodel.AtomTextAttributes.TextType;
 
 /**
  * Random tests to invoke code that was reported no covered in cobertura' coverage report
@@ -67,6 +73,33 @@ public class CoreDateModelTest extends TestCase{
     c = Channel.create().additem(new Item().setEnclosure(
             new Enclosure(new URI("http://someurl.com/file"), 100, "mineType", "value")));
     assertTrue("enclosure is expected",c.getItems().get(0).getEnclosure() != null);
+  }
+  
+  @Test
+  public void testAtom() throws Exception{
+    AtomAttributes attr = new AtomAttributes("base", new Locale("en"));
+    attr.setOtherAttributes(new HashMap<QName, String>());
+    assertTrue("empty attr map expected", attr.getOtherAttributes().entrySet().size()==0);
+    assertTrue("attribute was not built correctly", attr.getBase().equals("base"));
+    assertTrue("attribute was not built correctly", attr.getLang().equals(Locale.ENGLISH));
+    
+    AtomLink link = new AtomLink("href", "rel", "type", "hreflang", "title", 100);
+    assertTrue("link was not built correctly", link.getHref() != null);
+    assertTrue("link was not built correctly", link.getRel() != null);
+    assertTrue("link was not built correctly", link.getType() != null);
+    assertTrue("link was not built correctly", link.getHreflang() != null);
+    assertTrue("link was not built correctly", link.getTitle() != null);
+    assertTrue("link was not built correctly", link.getLength() != null);
+    
+    AtomTextAttributes text = new AtomTextAttributes("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+            "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+            "</div>");
+    assertTrue("text was not built correctly", text.getXhtmlDiv() != null);
+    assertTrue("text was not built correctly", text.getType() == TextType.xhtml);
+    text.setXhtmlDiv("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+            "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+            "</div>");
+    assertTrue("text was not built correctly", text.getXhtmlDiv() != null);
   }
   
   @Test

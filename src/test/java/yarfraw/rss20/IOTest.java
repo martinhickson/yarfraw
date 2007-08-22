@@ -141,6 +141,21 @@ public class IOTest extends TestCase{
       e.printStackTrace();
     }
     
+    reader = new FeedReader(new HttpURL("http://www.twit.tv/node/feed"));
+    assertTrue(reader.isRemoteRead());
+    try{
+      HttpClientParams params = new HttpClientParams();
+      params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
+      reader.setHttpClientParams(params);
+      Channel c = reader.readChannel();
+      //this test can be indeterministic because it requires a network connection 
+      //if there no exception thrown, then we should have the channel read
+      assertTrue("Remote read failed", c.getTitle() != null);
+    }catch (YarfrawException e) {
+      System.out.println("Failed to read from a remote url, this test requires a network connection");
+      e.printStackTrace();
+    }
+    
     try {
       HttpClientParams params = new HttpClientParams();
       params.setSoTimeout(20);

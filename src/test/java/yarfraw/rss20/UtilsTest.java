@@ -41,6 +41,17 @@ public class UtilsTest extends TestCase{
     }
   }
   
+  @Test
+  public void testFormatDetection3() throws Exception{
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("yarfraw/atom10/atom10.xml");
+      assertEquals(FeedFormat.ATOM10, FeedFormatDetector.getFormat(s));
+    }finally{
+      IOUtils.closeQuietly(s);
+    }
+  }
+  
   public void testOtherElementSearch() throws Exception {
     FeedReader r = new FeedReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     Channel c = r.readChannel();

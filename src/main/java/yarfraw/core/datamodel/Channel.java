@@ -64,7 +64,7 @@ public class Channel extends AbstractBaseObject{
   private AtomId _atomId;
   private AtomAttributes _atomAttributes;
   private Map<AtomTextElementEnum, AtomTextAttributes> _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
-  
+  private List<AtomLink> _atomLinks = new ArrayList<AtomLink>();
   /**
    * Creates an empty {@link Channel} object where locale is set to {@link Locale.US}
    * and pubDate is set to <code>new Date(System.currentTimeMillis())</code>
@@ -93,52 +93,6 @@ public class Channel extends AbstractBaseObject{
     setLink(link);
     setTitle(title);
     setDescription(description);
-  }
-  /**
-   * This is used to solve the incompatibility problem between rss and atom feed.
-   * In atom feed, there is a special construct for string values which provide additional information
-   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
-   * we need a place to store these additional information along with their string values.
-   */
-  public Map<AtomTextElementEnum, AtomTextAttributes> getAtomTextAttributes() {
-    return _atomTextAttributes;
-  }
-  /**
-   * This is used to solve the incompatibility problem between rss and atom feed.
-   * In atom feed, there is a special construct for string values which provide additional information
-   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
-   * we need a place to store these additional information along with their string values.
-   */
-  public Channel setAtomTextAttributes(
-          Map<AtomTextElementEnum, AtomTextAttributes> atomTextAttributes) {
-    _atomTextAttributes = atomTextAttributes;
-    return this;
-  }
-  /**
-   * This is used to solve the incompatibility problem between rss and atom feed.
-   * In atom feed, there is a special construct for string values which provide additional information
-   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
-   * we need a place to store these additional information along with their string values.
-   */
-  public Channel putAtomTextAttribute(AtomTextElementEnum element, AtomTextAttributes attribute){
-    if(_atomTextAttributes == null){
-      _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
-    }
-    _atomTextAttributes.put(element, attribute);
-    return this;
-  }
-  
-  /**
-   * Find the {@link AtomTextAttributes} of the input atom element.
-   * 
-   * @return null if the text attribute is not found.
-   * otherwise, return the {@link AtomTextAttributes} of the input element.
-   */
-  public AtomTextAttributes getAtomTextAttributeByElement(AtomTextElementEnum element){
-    if(_atomTextAttributes == null){
-      return null;
-    }
-    return _atomTextAttributes.get(element);
   }
   
   /**
@@ -788,7 +742,10 @@ public class Channel extends AbstractBaseObject{
     
     return this;
   }
-
+//=====================Atom Extentions=========================
+  
+  
+  
   public AtomId getAtomId() {
     return _atomId;
   }
@@ -803,6 +760,70 @@ public class Channel extends AbstractBaseObject{
     _atomAttributes = atomAttributes;
     return this;
   }
+  
+  /**
+   * This is used to solve the incompatibility problem between rss and atom feed.
+   * In atom feed, there is a special construct for string values which provide additional information
+   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
+   * we need a place to store these additional information along with their string values.
+   */
+  public Map<AtomTextElementEnum, AtomTextAttributes> getAtomTextAttributes() {
+    return _atomTextAttributes;
+  }
+  /**
+   * This is used to solve the incompatibility problem between rss and atom feed.
+   * In atom feed, there is a special construct for string values which provide additional information
+   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
+   * we need a place to store these additional information along with their string values.
+   */
+  public Channel setAtomTextAttributes(
+          Map<AtomTextElementEnum, AtomTextAttributes> atomTextAttributes) {
+    _atomTextAttributes = atomTextAttributes;
+    return this;
+  }
+  /**
+   * This is used to solve the incompatibility problem between rss and atom feed.
+   * In atom feed, there is a special construct for string values which provide additional information
+   * about the string, so when we map the text element from an atom feed to string field in Yarfraw's core model,
+   * we need a place to store these additional information along with their string values.
+   */
+  public Channel putAtomTextAttribute(AtomTextElementEnum element, AtomTextAttributes attribute){
+    if(_atomTextAttributes == null){
+      _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
+    }
+    _atomTextAttributes.put(element, attribute);
+    return this;
+  }
+  
+  /**
+   * Find the {@link AtomTextAttributes} of the input atom element.
+   * 
+   * @return null if the text attribute is not found.
+   * otherwise, return the {@link AtomTextAttributes} of the input element.
+   */
+  public AtomTextAttributes getAtomTextAttributeByElement(AtomTextElementEnum element){
+    if(_atomTextAttributes == null){
+      return null;
+    }
+    return _atomTextAttributes.get(element);
+  }
+
+  public Channel addAtomLink(AtomLink atomLink){
+    if(_atomLinks == null){
+      _atomLinks = new ArrayList<AtomLink>();
+    }
+    _atomLinks.add(atomLink);
+    return this;
+  }
+  
+  public List<AtomLink> getAtomLinks() {
+    return _atomLinks;
+  }
+  
+  public void setAtomLinks(List<AtomLink> atomLinks) {
+    _atomLinks = atomLinks;
+  }
+
   
   @Override
   public void validate(ValidationLevel level) throws ValidationException {

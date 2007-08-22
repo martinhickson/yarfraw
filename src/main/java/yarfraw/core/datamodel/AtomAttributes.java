@@ -19,9 +19,17 @@ public class AtomAttributes extends AbstractBaseObject{
   
   
   public AtomAttributes() {}
+
+  public AtomAttributes(String base, Locale lang) {
+    super();
+    _base = base;
+    _lang = lang;
+  }
+
   public static AtomAttributes create(){
     return new AtomAttributes();
   }
+  
   public String getBase() {
     return _base;
   }
@@ -45,6 +53,18 @@ public class AtomAttributes extends AbstractBaseObject{
     _otherAttributes = otherAttributes;
     return this;
   }
+  
+  /**
+   * Add an attribute that is not in the RSS 2.0 specs.
+   */
+  public AtomAttributes addOtherAttributes(QName namespace, String attribute) {
+    if(_otherAttributes == null){
+      _otherAttributes = new HashMap<QName, String>();
+    }
+    _otherAttributes.put(namespace, attribute);
+    return this;
+  }
+  
   @Override
   public void validate(ValidationLevel level) throws ValidationException {
     

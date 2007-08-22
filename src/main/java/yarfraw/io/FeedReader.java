@@ -22,8 +22,10 @@ import org.apache.commons.io.IOUtils;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.atom10.elements.FeedType;
 import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss20.elements.TRss;
+import yarfraw.mapping.backward.impl.ToChannelAtom10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.utils.FeedFormatDetector;
@@ -119,8 +121,7 @@ public class FeedReader extends AbstractBaseIO{
     }else if(_format == FeedFormat.RSS10){
       return  ToChannelRss10Impl.getInstance().execute((RDF)o);
     }else if(_format == FeedFormat.ATOM10){
-      //TODO;
-      throw new UnsupportedOperationException("TODO");
+      return ToChannelAtom10Impl.getInstance().execute(((JAXBElement<FeedType>)o).getValue());
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }
