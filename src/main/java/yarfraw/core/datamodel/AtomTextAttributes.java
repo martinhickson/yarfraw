@@ -13,14 +13,15 @@ import org.xml.sax.SAXException;
 import yarfraw.utils.XMLUtils;
 
 /**
- * Atom text common constructs. 
- * {@link http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.3.1}
+ * Atom text common constructs.
+ * 
+ * see http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.3.1
  * @author jliang
  *
  */
 public class AtomTextAttributes extends AtomAttributes{
   public enum TextType{
-    text, html, xhtml;
+    text, html, xhtml
   }
   private TextType _type = TextType.text;
   private Element _xhtmlDiv;

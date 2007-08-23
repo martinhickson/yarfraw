@@ -16,7 +16,7 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
   private static ToRss10ChannelItem _instance = new ToRss10ChannelItemImpl();
   private static final ObjectFactory FACTORY = new ObjectFactory();
   
-  public static final ToRss10ChannelItem getInstance(){
+  public static ToRss10ChannelItem getInstance(){
     return _instance;
   }
   

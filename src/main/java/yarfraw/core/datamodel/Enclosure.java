@@ -6,8 +6,8 @@ import java.net.URISyntaxException;
 import yarfraw.utils.Utils;
 
 /**
- * Describes a media object that is attached to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltenclosuregtSubelementOfLtitemgt More.}
- * <br/>
+ * Describes a media object that is attached to the item.
+ * 
  * It has three required attributes. url says where the enclosure is located, length says how big it is in bytes, and type says what its type is, a standard MIME type.
  * <br/>
  * The url must be an http url.

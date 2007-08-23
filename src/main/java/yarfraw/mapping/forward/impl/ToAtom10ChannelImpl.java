@@ -30,7 +30,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
   private static ToAtom10Channel _instance = new ToAtom10ChannelImpl();
   private static final ObjectFactory FACTORY = new ObjectFactory();
 
-  public static final ToAtom10Channel getInstance(){
+  public static ToAtom10Channel getInstance(){
     return _instance;
   }
   private ToAtom10ChannelImpl(){}
@@ -52,7 +52,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
     
     AtomAttributes attr = ch.getAtomAttributes();
     if(attr != null){
-      ret.setBase(attr.getBase()==null?null:attr.getBase().toString());
+      ret.setBase(attr.getBase()==null?null: attr.getBase());
       ret.setLang(attr.getLang() == null? null:attr.getLang().getLanguage());
       if(attr.getOtherAttributes() != null){
         ret.getOtherAttributes().putAll(attr.getOtherAttributes());

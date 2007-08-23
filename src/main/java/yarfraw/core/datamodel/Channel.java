@@ -66,11 +66,11 @@ public class Channel extends AbstractBaseObject{
   private Map<AtomTextElementEnum, AtomTextAttributes> _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
   private List<AtomLink> _atomLinks = new ArrayList<AtomLink>();
   /**
-   * Creates an empty {@link Channel} object where locale is set to {@link Locale.US}
+   * Creates an empty {@link Channel} object where locale is set to {@link Locale}.English
    * and pubDate is set to <code>new Date(System.currentTimeMillis())</code>
    */
   public static Channel create(){
-    return new Channel().setLanguage(Locale.US).setPubDate(new Date(System.currentTimeMillis()));
+    return new Channel().setLanguage(Locale.ENGLISH).setPubDate(new Date(System.currentTimeMillis()));
   }
   public Channel(){}
 
@@ -222,14 +222,6 @@ public class Channel extends AbstractBaseObject{
    * Note: When the locale object is translated to the language elements 
    * in the RSS feed, it uses the ISO3166 country code by calling <code>locale.getCountry</code>
    * <br/>
-   * if you want to use something other than that, use <code>setLanguageString</code> to put in 
-   * and valid language string: 
-   * {@link http://cyber.law.harvard.edu/rss/languages.html}
-   * <br/>
-   * {@link http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes}
-   * <br/>
-   * {@link http://cyber.law.harvard.edu/rss/rss.html}
-   * </p>
    */
   public Locale getLanguage() {
     return _language;
@@ -244,12 +236,7 @@ public class Channel extends AbstractBaseObject{
    * <br/>
    * if you want to use something other than that, use <code>setLanguageString</code> to put in 
    * and valid language string: 
-   * {@link http://cyber.law.harvard.edu/rss/languages.html}
-   * <br/>
-   * {@link http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes}
-   * <br/>
-   * {@link http://cyber.law.harvard.edu/rss/rss.html}
-   * </p>
+   * 
    */
   public Channel setLanguage(Locale language) {
     _language = language;
@@ -397,7 +384,7 @@ public class Channel extends AbstractBaseObject{
    * Add a element that is not specified in the Rss 2.0 specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * 
-   * @param element - any element
+   * @param xmlString - any element
    * @throws ParserConfigurationException 
    * @throws IOException 
    * @throws SAXException 
@@ -433,16 +420,14 @@ public class Channel extends AbstractBaseObject{
   
   /**
    * Specify one or more categories that the channel belongs to. 
-   * Follows the same rules as the <item>-level {@link http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt category} element. 
-   * More info: {@link http://cyber.law.harvard.edu/rss/rss.html#syndic8} 
+   * Follows the same rules as the <item>-level  category element.  
    */
   public Set<Category> getCategory() {
     return _category;
   }
   /**
    * Specify one or more categories that the channel belongs to. 
-   * Follows the same rules as the <item>-level {@link http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt category} element. 
-   * More info: {@link http://cyber.law.harvard.edu/rss/rss.html#syndic8} 
+   * Follows the same rules as the <item>-level category element.  
    */
   public Channel setCategory(Set<Category> category) {
     _category = category;
@@ -453,7 +438,7 @@ public class Channel extends AbstractBaseObject{
    * If you only want a category element with no domain attributes, you can simply use 
    * a string instead of building up a category element.
    * <br/>
-   * note that this list will overrides the {@link Channel.getCategory()} list if it's set.
+   * note that this list will overrides the {@link Channel}.getCategory() list if it's set.
    */
   public List<String> getCategoryString() {
     if(_category == null){
@@ -470,7 +455,7 @@ public class Channel extends AbstractBaseObject{
    * If you only want a category element with no domain attributes, you can simply use 
    * a string instead of building up a category element.
    * <br/>
-   * note that this list will suppress the {@link Channel.getCategory()} list if it's set.
+   * note that this list will suppress the {@link Channel}.getCategory() list if it's set.
    */
   public Channel setCategoryString(Set<String> categoryString) {
     if(categoryString == null){
@@ -686,7 +671,7 @@ public class Channel extends AbstractBaseObject{
    */
   public Channel setSkipHours(Set<Integer> skipHours) {
     for(Integer i : skipHours){
-      if(i == null || i.intValue() <0 || i.intValue() >23){
+      if(i == null || i <0 || i >23){
         throw new IllegalArgumentException("all skip hour must be a value that is a number between 0 and 23");
       }
     }

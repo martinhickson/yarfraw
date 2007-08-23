@@ -78,7 +78,7 @@ public class Cloud extends AbstractBaseObject{
     }
     
     try {
-      if(_port != null && (_port.intValue() < 0 || _port.intValue() > 65535)){
+      if(_port != null && (_port < 0 || _port > 65535)){
         throw new ValidationException("Cloud: Invalid port number");
       }
     }

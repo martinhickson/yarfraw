@@ -1,6 +1,8 @@
 package yarfraw.core.datamodel;
 
-
+/**
+ * Indicates an unexpected error occurs.
+ */
 public class YarfrawException extends Exception{
 
   private static final long serialVersionUID = 1L;

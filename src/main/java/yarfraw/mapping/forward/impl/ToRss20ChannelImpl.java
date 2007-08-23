@@ -23,7 +23,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
 
    private static ToRss20Channel _instance = new ToRss20ChannelImpl();
    
-   public static final ToRss20Channel getInstance(){
+   public static ToRss20Channel getInstance(){
      return _instance;
    }
   

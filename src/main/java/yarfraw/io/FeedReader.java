@@ -144,8 +144,8 @@ public class FeedReader extends AbstractBaseIO{
   
   
   
-  private InputStream getStream() throws HttpException, IOException{
-    InputStream stream = null;
+  private InputStream getStream() throws IOException{
+    InputStream stream;
     if(isRemoteRead()){
       GetMethod get = new GetMethod(_httpUrl.toString());
       get.setFollowRedirects(true);
@@ -173,7 +173,7 @@ public class FeedReader extends AbstractBaseIO{
   
   
   private static synchronized Unmarshaller getUnMarshaller(FeedFormat format, boolean createNewInstance) throws JAXBException{
-    Unmarshaller ret = _rss20Unmarshaller;
+    Unmarshaller ret;
     if(format == FeedFormat.RSS20){
       if(createNewInstance){
         return JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createUnmarshaller();

@@ -51,12 +51,8 @@ public class Guid extends AbstractBaseObject{
     return _isPermaLink;
   }
   public Guid setPermaLink(Boolean isPermaLink) {
-    if(isPermaLink == null){
-      _isPermaLink = true;
-    }else{
-      _isPermaLink = isPermaLink;
-    }
-    return this;
+      _isPermaLink = isPermaLink == null || isPermaLink;
+      return this;
   }
   @Override
   public void validate(ValidationLevel level) throws ValidationException {

@@ -251,14 +251,14 @@ public class Item extends AbstractBaseObject{
     return this;
   }
   /**
-   * Email address of the author of the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltauthorgtSubelementOfLtitemgt More}
+   * Email address of the author of the item. 
    * 
    */
   public String getAuthor() {
     return _author;
   }
   /**
-   * Email address of the author of the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltauthorgtSubelementOfLtitemgt More}
+   * Email address of the author of the item. 
    * 
    */
   public Item setAuthor(String author) {
@@ -266,13 +266,13 @@ public class Item extends AbstractBaseObject{
     return this;
   }
   /**
-   * Includes the item in one or more categories. {@link http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt More}
+   * Includes the item in one or more categories. 
    */
   public Set<Category> getCategory() {
     return _category;
   }
   /**
-   * Includes the item in one or more categories. {@link http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt More}
+   * Includes the item in one or more categories. 
    */
   public Item setCategory(Set<Category> category) {
     _category = category;
@@ -283,7 +283,7 @@ public class Item extends AbstractBaseObject{
    * If you only want a category element with no domain attributes, you can simply use 
    * a string instead of building up a category element.
    * <br/>
-   * note that this list will overrides the {@link Channel.getCategory()} list if it's set.
+   * note that this list will overrides the {@link Channel}.getCategory() list if it's set.
    */
   public List<String> getCategoryString() {
     if(_category == null){
@@ -299,7 +299,7 @@ public class Item extends AbstractBaseObject{
    * If you only want a category element with no domain attributes, you can simply use 
    * a string instead of building up a category element.
    * <br/>
-   * note that this list will suppress the {@link Channel.getCategory()} list if it's set.
+   * note that this list will suppress the {@link Channel}.getCategory() list if it's set.
    */
   public Item setCategoryString(Set<String> categoryString) {
     if(categoryString == null){
@@ -343,13 +343,13 @@ public class Item extends AbstractBaseObject{
   }
 
   /**
-   * URI of a page for comments relating to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltcommentsgtSubelementOfLtitemgt More}
+   * URI of a page for comments relating to the item. 
    */
   public URI getComments() {
     return _comments;
   }
   /**
-   * URI of a page for comments relating to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltcommentsgtSubelementOfLtitemgt More}
+   * URI of a page for comments relating to the item. 
    */
   public Item setComments(URI comments) {
     _comments = comments;
@@ -357,7 +357,7 @@ public class Item extends AbstractBaseObject{
   }
   
   /**
-   * URI of a page for comments relating to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltcommentsgtSubelementOfLtitemgt More}
+   * URI of a page for comments relating to the item. 
    * @throws URISyntaxException 
    * if <code>comments</code> is an invalid url 
    */
@@ -422,7 +422,7 @@ public class Item extends AbstractBaseObject{
    * Add a element that is not specified in the Rss 2.0 specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * 
-   * @param element - any element
+   * @param xmlString - any element
    * @throws ParserConfigurationException 
    * @throws IOException 
    * @throws SAXException 
@@ -436,39 +436,39 @@ public class Item extends AbstractBaseObject{
   }  
   
   /**
-   * Describes a media object that is attached to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltenclosuregtSubelementOfLtitemgt More}
+   * Describes a media object that is attached to the item.
    */
   public Enclosure getEnclosure() {
     return _enclosure;
   }
   /**
-   * Describes a media object that is attached to the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltenclosuregtSubelementOfLtitemgt More}
+   * Describes a media object that is attached to the item.
    */
   public Item setEnclosure(Enclosure enclosure) {
     _enclosure = enclosure;
     return this;
   }
   /**
-   * A string that uniquely identifies the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltguidgtSubelementOfLtitemgt More}
+   * A string that uniquely identifies the item.
    */
   public Guid getGuid() {
     return _guid;
   }
   /**
-   * A string that uniquely identifies the item. {@link http://cyber.law.harvard.edu/rss/rss.html#ltguidgtSubelementOfLtitemgt More}
+   * A string that uniquely identifies the item.
    */
   public Item setGuid(Guid guid) {
     _guid = guid;
     return this;
   }
   /**
-   * Indicates when the item was published. {@link http://cyber.law.harvard.edu/rss/rss.html#ltpubdategtSubelementOfLtitemgt More}
+   * Indicates when the item was published.
    */
   public Date getPubDate() {
     return _pubDate;
   }
   /**
-   * Indicates when the item was published. {@link http://cyber.law.harvard.edu/rss/rss.html#ltpubdategtSubelementOfLtitemgt More}
+   * Indicates when the item was published.
    */
   public Item setPubDate(Date pubDate) {
     _pubDate = pubDate;
@@ -483,13 +483,13 @@ public class Item extends AbstractBaseObject{
     return this;
   }
   /**
-   *  The RSS channel that the item came from. {@link http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt More}
+   *  The RSS channel that the item came from. 
    */
   public Source getSource() {
     return _source;
   }
   /**
-   *  The RSS channel that the item came from. {@link http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt More}
+   *  The RSS channel that the item came from. 
    */
   public Item setSource(Source source) {
     _source = source;
