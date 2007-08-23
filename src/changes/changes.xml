@@ -3,7 +3,7 @@
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="8/14/2007" date="TBD" description="First stable mile stone release">
+    <release version="0.7" date="TBD" description="First stable mile stone release">
       <action dev="jliang" type="add">
         Added remote rss feed reader.
       </action>
@@ -22,12 +22,22 @@
 	  <action dev="jliang" type="add">
         Added missing Javadoc. 
       </action>
-      <action dev="jliang" type="TODO">
+
+      <action dev="jliang" type="add">
         Added support for RDF/RSS 1.0 
       </action>
+	  <action dev="jliang" type="add">
+        Added support for read/write to io streams 
+      </action>              
 	  <action dev="jliang" type="TODO">
         Added support for Atom 1.0 
-      </action>                  
+      </action>
+	  <action dev="jliang" type="TODO">
+        Added support for Custom parsing 
+      </action>
+	  <action dev="jliang" type="TODO">
+        Added support for quick parsing 
+      </action>                                                                       
     </release>
   </body>
 </document>
