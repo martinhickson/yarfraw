@@ -5,6 +5,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+/**
+ * An abstract base object for the core data model
+ */
 abstract class AbstractBaseObject{
   
   @Override
