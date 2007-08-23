@@ -642,7 +642,7 @@ public class Channel extends AbstractBaseObject{
    * <br/>
    * http://cyber.law.harvard.edu/rss/rss.html#lttextinputgtSubelementOfLtchannelgt
    */
-  public Channel setTexInput(TextInput texInput) {
+  public Channel setTextInput(TextInput texInput) {
     _texInput = texInput;
     return this;
   }
@@ -805,8 +805,9 @@ public class Channel extends AbstractBaseObject{
     return _atomLinks;
   }
   
-  public void setAtomLinks(List<AtomLink> atomLinks) {
+  public Channel setAtomLinks(List<AtomLink> atomLinks) {
     _atomLinks = atomLinks;
+    return this;
   }
 
   

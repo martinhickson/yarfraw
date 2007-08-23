@@ -30,8 +30,6 @@ public class FeedFormatDetector{
   private static final String RDF = ":RDF";
   private static final String FEED = "feed";
   
-//  <feed xmlns="http://www.w3.org/2005/Atom">
-  
   private static final FormatDetectionHandler FormatDetectionHandler = new FormatDetectionHandler();
   
   /**
@@ -77,7 +75,7 @@ public class FeedFormatDetector{
         throw new EarlyTerminationException(FeedFormat.RSS20);
       }else if (StringUtils.isNotEmpty(qName) && qName.endsWith(RDF)) {
         throw new EarlyTerminationException(FeedFormat.RSS10);
-      }else if (FEED.equals(qName)) {
+      }else if (FEED.equals(qName) && isAtom10(attributes)) {
         throw new EarlyTerminationException(FeedFormat.ATOM10);
       }
       else{
@@ -85,6 +83,20 @@ public class FeedFormatDetector{
         throw new EarlyTerminationException(FeedFormat.UNKNOWN);
       }
     }
+  }
+  private static final String XMLNS = "xmlns";
+  private static final String ATOM10_XMLNS = "http://www.w3.org/2005/Atom";
+  private static boolean isAtom10(Attributes attributes){
+    if(attributes == null){
+      return true; //an optimistic guess
+    }
+    for(int i =0; i< attributes.getLength(); i++){
+      if(attributes.getQName(i).startsWith(XMLNS)
+              && attributes.getValue(i).startsWith(ATOM10_XMLNS)){
+        return true;
+      }
+    }
+    return false;
   }
   
   /**

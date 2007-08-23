@@ -90,7 +90,7 @@ public class BuilderTest{
       .setCloud(CLOUD)
       .setTtl(_60)
       .setImage("   "+HTTP_MY_IMAGE_COM_IMAGE_JPG, TEST_IMAGE, "   "+HTTP_MY_IMAGE_COM_IMAGE_JPG)
-      .setTexInput(new TextInput(TITLE, DESCRITPION, NAME, HTTP_LINK_COM_LINK))
+      .setTextInput(new TextInput(TITLE, DESCRITPION, NAME, HTTP_LINK_COM_LINK))
       .addSkipDay(Day.Saturday, Day.Sunday)
       .addSkipHour(12, 0, 1, 2, 3, 4, 5)
       

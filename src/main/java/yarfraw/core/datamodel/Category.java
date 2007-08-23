@@ -37,8 +37,9 @@ public class Category extends AbstractBaseObject{
   public String getCategory() {
     return _category;
   }
-  public void setCategory(String category) {
+  public Category setCategory(String category) {
     _category = category;
+    return this;
   }
   /**
    * a string that identifies a categorization taxonomy. 

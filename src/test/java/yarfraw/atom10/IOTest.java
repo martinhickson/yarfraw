@@ -4,6 +4,7 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
@@ -138,4 +139,19 @@ public class IOTest extends TestCase{
     assertTrue("TTL not equal!", EqualsBuilder.reflectionEquals(c.getTtl(), c2.getTtl()));
     assertTrue("WebMaster not equal!", EqualsBuilder.reflectionEquals(c.getWebMaster(), c2.getWebMaster()));
   }
+
+  @Test
+  public void testRemoteRead() throws Exception{
+    try {
+      FeedReader reader = new FeedReader(new HttpURL("http://www.google.com/news?output%5Cx3datom=&output=atom"));
+      assertTrue("isRemoteRead", reader.isRemoteRead());
+      if(reader.getFormat() != FeedFormat.UNKNOWN){
+        System.out.println("Google news' atom feed should be an unsupported atom 0.3 format");
+      }
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
 }

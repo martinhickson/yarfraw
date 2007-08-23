@@ -131,7 +131,7 @@ public class ToChannelRss20Impl implements ToChannelRss20{
                 image.getWidth(), image.getHeight(), image.getDescription()));
           }else if (val instanceof TTextInput) {
             TTextInput in = (TTextInput)val;
-            c.setTexInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
+            c.setTextInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
           }else{
             //TODO: ignore?
           }

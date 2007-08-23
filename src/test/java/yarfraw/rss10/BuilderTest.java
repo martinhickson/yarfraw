@@ -25,9 +25,11 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.RdfAttributes;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
+import yarfraw.utils.Utils;
 /**
  * Some unit tests.
  * TODO: this really needs some cleanup
@@ -86,7 +88,7 @@ public class BuilderTest{
       .setCloud(CLOUD)
       .setTtl(_60)
       .setImage("   "+HTTP_MY_IMAGE_COM_IMAGE_JPG, TEST_IMAGE, "   "+HTTP_MY_IMAGE_COM_IMAGE_JPG)
-      .setTexInput(new TextInput(TITLE, DESCRITPION, NAME, HTTP_LINK_COM_LINK))
+      .setTextInput(new TextInput(TITLE, DESCRITPION, NAME, HTTP_LINK_COM_LINK))
       .addSkipDay(Day.Saturday, Day.Sunday)
       .addSkipHour(12, 0, 1, 2, 3, 4, 5)
       
@@ -202,6 +204,60 @@ public class BuilderTest{
     assertTrue("Category did not build correctly", 
         item.getCategory().containsAll(Arrays.asList(new Category(CAT1), new Category(CAT2), new Category(CAT3))));
     
+  }
+  
+  @Test
+  public void testBuild2() throws Exception{
+    Channel c = exampleRDF();
+    FeedWriter w = new FeedWriter(File.createTempFile("rss10",".xml"));
+    w.setFormat(FeedFormat.RSS10);
+    w.writeChannel(c);
+  }
+  
+  public static Channel exampleRDF() throws Exception{
+    Channel ret = new Channel().addOtherAttributes(
+            new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about"), 
+            "http://meerkat.oreillynet.com/?_fl=rss1.0")
+            .setTitle("Meerkat")
+            .setLink("http://meerkat.oreillynet.com")
+            .setDescription("Meerkat: An Open Wire Service")
+            .setWebMaster("The O'Reilly Network")
+            .setManagingEditor("Rael Dornfest (mailto:rael@oreilly.com)")
+            .setCopyright("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
+            .setPubDate(Utils.tryParseISODate("2000-01-01T12:00+00:00"))
+            //time to live is 30 minutes
+            .setTtl(30) //this will be converted to updatePeriod='hourly' & updateFrequency='2'
+            //update base is not supported, add it manually if you really have to 
+            .addOtherElement("<sy:updateBase xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\">2000-01-01T12:00+00:00</sy:updateBase>")
+            //model only supports 1 image and 1 textinput per channel, you can add them manually tho
+            .setTextInput(new TextInput().setLink("http://meerkat.oreillynet.com"))
+            .setImage(new Image().setTitle("Meerkat Powered!")
+                                 .setUrl("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")
+                                 .setLink("http://meerkat.oreillynet.com")
+                                 .setRdfAttributes(new RdfAttributes()
+                                       .setAbout("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")))
+            .additem(new Item().setRdfAttributes(new RdfAttributes().setAbout("http://c.moreover.com/click/here.pl?r123"))
+                               .setTitle("XML: A Disruptive Technology")
+                               .setLink("http://c.moreover.com/click/here.pl?r123")
+                               .setDescription("XML is placing increasingly heavy loads on the existing technical infrastructure of the Internet.")
+                               .setAuthor("Simon St.Laurent (mailto:simonstl@simonstl.com)")
+                               //item level publisher is not supported, you need to add it manually
+                               .addOtherElement("<dc:publisher xmlns:dc=\"http://purl.org/dc/elements/1.1/\">The O'Reilly Network</dc:publisher>")
+                               .setRights("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
+                               .addCategory("XML")
+                               //company module extension is not supported, add them manually then 
+                               .addOtherElement("<co:name xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML.com</co:name>")
+                               .addOtherElement("<co:market xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">NASDAQ</co:market>")
+                               .addOtherElement("<co:symbol xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML</co:symbol>")
+                               )
+            .setTextInput(new TextInput().setRdfAttributes(
+                    new RdfAttributes().setAbout("http://meerkat.oreillynet.com"))
+                    .setTitle("Search Meerkat")
+                    .setDescription("Search Meerkat's RSS Database...")
+                    .setName("s")
+                    .setLink("http://meerkat.oreillynet.com/"));
+             
+             return ret;       
   }
 }
 

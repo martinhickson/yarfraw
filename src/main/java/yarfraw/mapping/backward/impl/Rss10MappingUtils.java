@@ -118,7 +118,7 @@ class Rss10MappingUtils{
           }else if(val instanceof TRss10Image){
             ret.setImage(toImage((TRss10Image)val));
           }else if(val instanceof TRss10TextInput){
-            ret.setTexInput(toTextInput((TRss10TextInput)val));
+            ret.setTextInput(toTextInput((TRss10TextInput)val));
           }else if(val instanceof Items){
             Seq seq = ((Items)val).getSeq();
             int i = 0;

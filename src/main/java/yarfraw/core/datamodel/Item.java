@@ -507,8 +507,9 @@ public class Item extends AbstractBaseObject{
    * Attributes that is only supported by RSS 1.0/RDF format
    * @return
    */
-  public void setRdfAttributes(RdfAttributes rdfAttributes) {
+  public Item setRdfAttributes(RdfAttributes rdfAttributes) {
     _rdfAttributes = rdfAttributes;
+    return this;
   }
   /**
    * Copyrights of the item, this is only used by Rss 1.0 and Atom 1.0 format.
@@ -519,8 +520,9 @@ public class Item extends AbstractBaseObject{
   /**
    * Copyrights of the item, this is only used by Rss 1.0 and Atom 1.0 format.
    */
-  public void setRights(String rights) {
+  public Item setRights(String rights) {
     _rights = rights;
+    return this;
   }
   
   public Item addAtomLink(AtomLink atomLink){
@@ -535,8 +537,9 @@ public class Item extends AbstractBaseObject{
     return _atomLinks;
   }
   
-  public void setAtomLinks(List<AtomLink> atomLinks) {
+  public Item setAtomLinks(List<AtomLink> atomLinks) {
     _atomLinks = atomLinks;
+    return this;
   }
 
   

@@ -36,8 +36,9 @@ public class AtomContent extends AtomAttributes{
   public List<String> getContentText() {
     return _contentText;
   }
-  public void setContentText(List<String> contentText) {
+  public AtomContent setContentText(List<String> contentText) {
     _contentText = contentText;
+    return this;
   }
   @Override
   public AtomContent setBase(String base) {

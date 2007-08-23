@@ -134,8 +134,9 @@ public class TextInput extends AbstractBaseObject{
    * Attributes that is only supported by RSS 1.0/RDF format
    * @return
    */
-  public void setRdfAttributes(RdfAttributes rdfAttributes) {
+  public TextInput setRdfAttributes(RdfAttributes rdfAttributes) {
     _rdfAttributes = rdfAttributes;
+    return this;
   }
   
   
