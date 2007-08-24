@@ -1,5 +1,15 @@
 package yarfraw.mapping.backward.impl;
 
+import static yarfraw.mapping.ElementQName.RSS10_CREATOR;
+import static yarfraw.mapping.ElementQName.RSS10_DATE;
+import static yarfraw.mapping.ElementQName.RSS10_DESCRIPTION;
+import static yarfraw.mapping.ElementQName.RSS10_LANGUAGE;
+import static yarfraw.mapping.ElementQName.RSS10_PUBLISHER;
+import static yarfraw.mapping.ElementQName.RSS10_RIGHTS;
+import static yarfraw.mapping.ElementQName.RSS10_SUBJECT;
+import static yarfraw.mapping.ElementQName.RSS10_LINK;
+import static yarfraw.mapping.ElementQName.RSS10_ITEM_TITLE;
+import static yarfraw.mapping.ElementQName.RSS10_UPDATEFREQUENCY;
 import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
@@ -14,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
@@ -39,18 +48,6 @@ class Rss10MappingUtils{
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
   private static final int MIN_PER_MONTH = MIN_PER_DAY*30;
   private static final int MIN_PER_YEAR = MIN_PER_DAY*365;
-  private final static QName _TRss10ItemLink_QNAME = new QName("http://purl.org/rss/1.0/", "link");
-  private final static QName _TRss10ItemTitle_QNAME = new QName("http://purl.org/rss/1.0/", "title");
-  private final static QName _TRss10ItemDescription_QNAME = new QName("http://purl.org/rss/1.0/", "description");
-
-  private final static QName _Publisher_QNAME = new QName("http://purl.org/dc/elements/1.1/", "publisher");
-  private final static QName _Language_QNAME = new QName("http://purl.org/dc/elements/1.1/", "language");
-  private final static QName _Creator_QNAME = new QName("http://purl.org/dc/elements/1.1/", "creator");
-  private final static QName _Rights_QNAME = new QName("http://purl.org/dc/elements/1.1/", "rights");
-  private final static QName _Subject_QNAME = new QName("http://purl.org/dc/elements/1.1/", "subject");
-  private final static QName _Date_QNAME = new QName("http://purl.org/dc/elements/1.1/", "date");
-  
-  private final static QName _UpdateFrequency_QNAME = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateFrequency");
   
   private Rss10MappingUtils(){}
   
@@ -92,26 +89,26 @@ class Rss10MappingUtils{
         if (o instanceof JAXBElement) {
           JAXBElement jaxb = (JAXBElement) o;
           Object val = jaxb.getValue();
-          if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
+          if(same(jaxb.getName(), RSS10_ITEM_TITLE)){
             ret.setTitle((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
             ret.setDescription((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_LINK)){
             ret.setLink((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _UpdateFrequency_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_UPDATEFREQUENCY)){
             updateFrequency = (BigInteger)jaxb.getValue();
-          }else if(same(jaxb.getName(), _Subject_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_SUBJECT)){
             ret.addCategory((String)jaxb.getValue());
             
-          }else if(same(jaxb.getName(), _Publisher_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_PUBLISHER)){
             ret.setWebMaster((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _Creator_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_CREATOR)){
             ret.setManagingEditor((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _Rights_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_RIGHTS)){
             ret.setCopyright((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), _Date_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_DATE)){
             ret.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
-          }else if(same(jaxb.getName(), _Language_QNAME)){
+          }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
             ret.setLanguage(new Locale((String)jaxb.getValue()));
           }else if(val instanceof UpdatePeriodEnum){
             updatePeriod = (UpdatePeriodEnum)val;
@@ -172,19 +169,19 @@ class Rss10MappingUtils{
           for(Object io : it.getTitleOrDescriptionOrLink()){
             if (io instanceof JAXBElement) {
               JAXBElement jaxb = (JAXBElement) io;
-              if(same(jaxb.getName(), _TRss10ItemTitle_QNAME)){
+              if(same(jaxb.getName(), RSS10_ITEM_TITLE)){
                 item.setTitle((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _TRss10ItemDescription_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
                 item.setDescription((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _TRss10ItemLink_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_LINK)){
                 item.setLink((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _Creator_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_CREATOR)){
                 item.setAuthor((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _Rights_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_RIGHTS)){
                 item.setRights((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), _Date_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_DATE)){
                 item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
-              }else if(same(jaxb.getName(), _Subject_QNAME)){
+              }else if(same(jaxb.getName(), RSS10_SUBJECT)){
                 item.addCategory((String)jaxb.getValue());
               }
             }

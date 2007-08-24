@@ -1,4 +1,10 @@
 package yarfraw.mapping.backward.impl;
+import static yarfraw.mapping.ElementQName.RSS20_DESCRIPTION;
+import static yarfraw.mapping.ElementQName.RSS20_LINK;
+import static yarfraw.mapping.ElementQName.RSS20_PUBDATE;
+import static yarfraw.mapping.ElementQName.RSS20_TITLE;
+import static yarfraw.mapping.ElementQName.RSS20_AUTHOR;
+import static yarfraw.mapping.ElementQName.RSS20_COMMENTS;
 
 import java.util.Map;
 
@@ -22,16 +28,6 @@ import yarfraw.utils.CommonUtils;
 
 class Rss20MappingUtils{
 
-  private final static QName _TRssItemComments_QNAME = new QName("", "comments");
-//  private final static QName _TRssItemEnclosure_QNAME = new QName("", "enclosure");
-  private final static QName _TRssItemTitle_QNAME = new QName("", "title");
-  private final static QName _TRssItemDescription_QNAME = new QName("", "description");
-//  private final static QName _TRssItemCategory_QNAME = new QName("", "category");
-//  private final static QName _TRssItemGuid_QNAME = new QName("", "guid");
-  private final static QName _TRssItemLink_QNAME = new QName("", "link");
-  private final static QName _TRssItemPubDate_QNAME = new QName("", "pubDate");
-//  private final static QName _TRssItemSource_QNAME = new QName("", "source");
-  private final static QName _TRssItemAuthor_QNAME = new QName("", "author");
   
   private Rss20MappingUtils(){}
   
@@ -54,17 +50,17 @@ class Rss20MappingUtils{
         if (o instanceof JAXBElement) {
           JAXBElement jaxbElement = (JAXBElement) o;
           Object val = jaxbElement.getValue();
-          if(CommonUtils.same(jaxbElement.getName(), _TRssItemAuthor_QNAME)){
+          if(CommonUtils.same(jaxbElement.getName(), RSS20_AUTHOR)){
             item.setAuthor((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemComments_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COMMENTS)) {
             item.setComments((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
             item.setDescription((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
             item.setLink((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
             item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
             item.setTitle((String)jaxbElement.getValue());
           }else if (val instanceof TCategory) {
             TCategory cat = (TCategory) val;

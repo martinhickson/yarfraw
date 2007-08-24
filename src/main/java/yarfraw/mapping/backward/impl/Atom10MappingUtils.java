@@ -1,5 +1,13 @@
 package yarfraw.mapping.backward.impl;
 
+import static yarfraw.mapping.ElementQName.ATOM10_TITLE;
+import static yarfraw.mapping.ElementQName.ATOM10_PUBLISHED;
+import static yarfraw.mapping.ElementQName.ATOM10_RIGHTS;
+import static yarfraw.mapping.ElementQName.ATOM10_SUMMARY;
+import static yarfraw.mapping.ElementQName.ATOM10_UPDATED;
+import static yarfraw.mapping.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.mapping.ElementQName.ATOM10_EMAIL;
+
 import java.net.URISyntaxException;
 import java.util.Locale;
 
@@ -36,13 +44,7 @@ import yarfraw.utils.CommonUtils;
  */
 class Atom10MappingUtils{
   private static final String XHTML = "xhtml";
-  private final static QName _PersonTypeEmail_QNAME = new QName("http://www.w3.org/2005/Atom", "email");
-  private final static QName _EntryTypePublished_QNAME = new QName("http://www.w3.org/2005/Atom", "published");
-  private final static QName _EntryTypeTitle_QNAME = new QName("http://www.w3.org/2005/Atom", "title");
-  private final static QName _EntryTypeRights_QNAME = new QName("http://www.w3.org/2005/Atom", "rights");
-  private final static QName _EntryTypeUpdated_QNAME = new QName("http://www.w3.org/2005/Atom", "updated");
-  private final static QName _EntryTypeSummary_QNAME = new QName("http://www.w3.org/2005/Atom", "summary");
-  private final static QName _EntryTypeAuthor_QNAME = new QName("http://www.w3.org/2005/Atom", "author");
+
   /**
    * Use this method with cautions, it checks the type of the input {@link TextType},
    * and automatically copy all the attributes from to input {@link AtomTextAttributes}.
@@ -93,7 +95,7 @@ class Atom10MappingUtils{
     for(Object o : person.getNameOrUriOrEmail()){
       if (o instanceof JAXBElement) {
         JAXBElement jaxb = (JAXBElement) o;
-        if(CommonUtils.same(_PersonTypeEmail_QNAME, jaxb.getName())){
+        if(CommonUtils.same(ATOM10_EMAIL, jaxb.getName())){
           return (String)jaxb.getValue();
         }
       }
@@ -115,7 +117,7 @@ class Atom10MappingUtils{
         JAXBElement<?> jaxb = (JAXBElement<?>) o;
         Object val = jaxb.getValue();
         
-        if (CommonUtils.same(jaxb.getName(), _EntryTypeAuthor_QNAME)) {
+        if (CommonUtils.same(jaxb.getName(), ATOM10_AUTHOR)) {
           ret.setAuthor(extractEmail((PersonType)val));
         }else if(val instanceof CategoryType){
           ret.addCategory(toCategory((CategoryType)val));
@@ -142,21 +144,21 @@ class Atom10MappingUtils{
         }//contributor are ignored
         else if(val instanceof LinkType){ 
           ret.addAtomLink(toAtomLink((LinkType)val));
-        }else if (CommonUtils.same(jaxb.getName(), _EntryTypePublished_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), ATOM10_PUBLISHED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
-        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeRights_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
           ret.setRights(convenientExtractText(ret, AtomTextElementEnum.rights, text));
         }//source not supported
-        else if (CommonUtils.same(jaxb.getName(), _EntryTypeSummary_QNAME)) {
+        else if (CommonUtils.same(jaxb.getName(), ATOM10_SUMMARY)) {
           TextType text = (TextType) val;
           ret.setDescription(convenientExtractText(ret, AtomTextElementEnum.summary, text));
-        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeTitle_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), ATOM10_TITLE)) {
           TextType text = (TextType) val;
           ret.setTitle(convenientExtractText(ret, AtomTextElementEnum.title, text));
-        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeUpdated_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());

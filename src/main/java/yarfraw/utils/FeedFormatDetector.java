@@ -10,7 +10,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.commons.lang.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.ext.DefaultHandler2;
 
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
@@ -65,7 +65,7 @@ public class FeedFormatDetector{
     }
   }
   
-  private static class FormatDetectionHandler extends DefaultHandler{
+  private static class FormatDetectionHandler extends DefaultHandler2{
     public void startElement(String uri, String localName,
             String qName, Attributes attributes) throws EarlyTerminationException{
        

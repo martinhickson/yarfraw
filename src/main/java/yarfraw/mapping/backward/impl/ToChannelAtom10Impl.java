@@ -1,17 +1,20 @@
 package yarfraw.mapping.backward.impl;
-
+import static yarfraw.mapping.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.mapping.ElementQName.ATOM10_RIGHTS;
+import static yarfraw.mapping.ElementQName.ATOM10_TITLE;
+import static yarfraw.mapping.ElementQName.ATOM10_UPDATED;
+import static yarfraw.mapping.ElementQName.ATOM10_SUBTITLE;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractEmail;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractTextContent;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomId;
+import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomLink;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toCategory;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toImage;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toItem;
-import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomLink;
 
 import java.util.Locale;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
@@ -40,12 +43,6 @@ import yarfraw.utils.CommonUtils;
  */
 public class ToChannelAtom10Impl implements ToChannelAtom10{
 
-  private final static QName _EntryTypeTitle_QNAME = new QName("http://www.w3.org/2005/Atom", "title");
-  private final static QName _EntryTypeRights_QNAME = new QName("http://www.w3.org/2005/Atom", "rights");
-  private final static QName _EntryTypeUpdated_QNAME = new QName("http://www.w3.org/2005/Atom", "updated");
-  private final static QName _EntryTypeAuthor_QNAME = new QName("http://www.w3.org/2005/Atom", "author");
-  private final static QName _SourceTypeSubtitle_QNAME = new QName("http://www.w3.org/2005/Atom", "subtitle");
-  
   private static final ToChannelAtom10 _instance = new ToChannelAtom10Impl();
     
   private ToChannelAtom10Impl() {}
@@ -84,13 +81,13 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
         if (o instanceof JAXBElement<?>) {
           JAXBElement<?> jaxbElement = (JAXBElement<?>) o;
           Object val = jaxbElement.getValue();
-          if (CommonUtils.same(jaxbElement.getName(), _EntryTypeTitle_QNAME)) {
+          if (CommonUtils.same(jaxbElement.getName(), ATOM10_TITLE)) {
             TextType text = (TextType) val;
             c.setTitle(convenientExtractText(c, AtomTextElementEnum.title, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), _SourceTypeSubtitle_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
             TextType text = (TextType) val;
             c.setDescription(convenientExtractText(c, AtomTextElementEnum.subtitle, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeAuthor_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_AUTHOR)) {
             c.setManagingEditor(extractEmail((PersonType)val));
           }else if(val instanceof CategoryType){
             c.addCategory(toCategory((CategoryType)val));
@@ -105,11 +102,11 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
           }else if(val instanceof LinkType){ 
             c.addAtomLink(toAtomLink((LinkType)val));
           }//logo not supported
-          else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeRights_QNAME)) {
+          else if (CommonUtils.same(jaxbElement.getName(), ATOM10_RIGHTS)) {
             //partially supported
             TextType text = (TextType) val;
             c.setCopyright(convenientExtractText(c, AtomTextElementEnum.rights, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeUpdated_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_UPDATED)) {
             //partially supported
             DateTimeType dt = (DateTimeType) val;
             c.setPubDate(dt.getValue().toGregorianCalendar().getTime());
