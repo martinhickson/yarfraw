@@ -16,7 +16,7 @@ import yarfraw.generated.rss10.elements.Seq;
 import yarfraw.generated.rss10.elements.TRss10Channel;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.mapping.forward.ToRss10Channel;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 public class ToRss10ChannelImpl implements ToRss10Channel{
   private static ToRss10Channel _instance = new ToRss10ChannelImpl();
@@ -112,7 +112,7 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createDate(Utils.getDateAsISO8601String(ch.getPubDate())));
+      elementList.add(factory.createDate(CommonUtils.getDateAsISO8601String(ch.getPubDate())));
     }
 //  not supported
 //    if(ch.getSkipDays() != null){

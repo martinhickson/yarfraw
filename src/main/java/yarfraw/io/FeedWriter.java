@@ -25,9 +25,9 @@ import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelItemImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 /**
- * Provides a set of function to facilitate writing to an RSS 2.0 feed.
+ * Provides a set of function to facilitate writing to a feed.
  * <br/>
  * *Note* This class is not thread safe.
  * @author jliang
@@ -133,26 +133,26 @@ public class FeedWriter extends AbstractBaseIO{
     Marshaller ret = _rss20Marshaller;
     if(format == FeedFormat.RSS20){
       if(createNewInstance){
-        return JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createMarshaller();
+        return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
       }
       if(_rss20Marshaller==null){
-        _rss20Marshaller = JAXBContext.newInstance(Utils.RSS20_JAXB_CONTEXT).createMarshaller();
+        _rss20Marshaller = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
       }
       ret = _rss20Marshaller;
     }else if(format == FeedFormat.RSS10){
       if(createNewInstance){
-        return JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createMarshaller();
+        return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
       }
       if(_rss10Marshaller==null){
-        _rss10Marshaller = JAXBContext.newInstance(Utils.RSS10_JAXB_CONTEXT).createMarshaller();
+        _rss10Marshaller = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
       }
       ret = _rss10Marshaller;
     }else if(format == FeedFormat.ATOM10){
       if(createNewInstance){
-        return JAXBContext.newInstance(Utils.ATOM10_JAXB_CONTEXT).createMarshaller();
+        return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
       }
       if(_atom10Marshaller==null){
-        _atom10Marshaller = JAXBContext.newInstance(Utils.ATOM10_JAXB_CONTEXT).createMarshaller();
+        _atom10Marshaller = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
       }
       ret = _atom10Marshaller;
     }else{

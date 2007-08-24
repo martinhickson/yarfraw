@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Describes a media object that is attached to the item.
@@ -105,7 +105,10 @@ public class Enclosure extends AbstractBaseObject{
     return this;
   }
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    Utils.validateNotNull("Encloure: All fields in the enclosure object should be not null", _length, _mimeType, _url, _value);
+  public void validate(FeedFormat format) throws ValidationException {
+    if(format == FeedFormat.ATOM10){
+      return;//no support
+    }
+    CommonUtils.validateNotNull("Encloure: All fields in the enclosure object should be not null", _length, _mimeType, _url, _value);
   }
 }

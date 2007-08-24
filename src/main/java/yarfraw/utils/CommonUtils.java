@@ -21,9 +21,9 @@ import yarfraw.core.datamodel.YarfrawException;
  * @author jliang
  *
  */
-public class Utils{
+public class CommonUtils{
   
-  private Utils(){}
+  private CommonUtils(){}
   
   public static final String RFC822DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
   public static final String ISO8601DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssZ";

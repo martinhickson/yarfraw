@@ -27,7 +27,7 @@ import yarfraw.generated.atom10.elements.IdType;
 import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * TODO: document me
@@ -93,7 +93,7 @@ class Atom10MappingUtils{
     for(Object o : person.getNameOrUriOrEmail()){
       if (o instanceof JAXBElement) {
         JAXBElement jaxb = (JAXBElement) o;
-        if(Utils.same(_PersonTypeEmail_QNAME, jaxb.getName())){
+        if(CommonUtils.same(_PersonTypeEmail_QNAME, jaxb.getName())){
           return (String)jaxb.getValue();
         }
       }
@@ -115,7 +115,7 @@ class Atom10MappingUtils{
         JAXBElement<?> jaxb = (JAXBElement<?>) o;
         Object val = jaxb.getValue();
         
-        if (Utils.same(jaxb.getName(), _EntryTypeAuthor_QNAME)) {
+        if (CommonUtils.same(jaxb.getName(), _EntryTypeAuthor_QNAME)) {
           ret.setAuthor(extractEmail((PersonType)val));
         }else if(val instanceof CategoryType){
           ret.addCategory(toCategory((CategoryType)val));
@@ -142,21 +142,21 @@ class Atom10MappingUtils{
         }//contributor are ignored
         else if(val instanceof LinkType){ 
           ret.addAtomLink(toAtomLink((LinkType)val));
-        }else if (Utils.same(jaxb.getName(), _EntryTypePublished_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), _EntryTypePublished_QNAME)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
-        }else if (Utils.same(jaxb.getName(), _EntryTypeRights_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeRights_QNAME)) {
           TextType text = (TextType) val;
           ret.setRights(convenientExtractText(ret, AtomTextElementEnum.rights, text));
         }//source not supported
-        else if (Utils.same(jaxb.getName(), _EntryTypeSummary_QNAME)) {
+        else if (CommonUtils.same(jaxb.getName(), _EntryTypeSummary_QNAME)) {
           TextType text = (TextType) val;
           ret.setDescription(convenientExtractText(ret, AtomTextElementEnum.summary, text));
-        }else if (Utils.same(jaxb.getName(), _EntryTypeTitle_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeTitle_QNAME)) {
           TextType text = (TextType) val;
           ret.setTitle(convenientExtractText(ret, AtomTextElementEnum.title, text));
-        }else if (Utils.same(jaxb.getName(), _EntryTypeUpdated_QNAME)) {
+        }else if (CommonUtils.same(jaxb.getName(), _EntryTypeUpdated_QNAME)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());

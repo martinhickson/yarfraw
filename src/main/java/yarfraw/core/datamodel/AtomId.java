@@ -1,10 +1,11 @@
 package yarfraw.core.datamodel;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
-
 
 /**
  * The "atom:id" element conveys a permanent, universally unique identifier for an entry or feed.
@@ -54,5 +55,14 @@ public class AtomId extends AtomAttributes{
     _atomUri = atomUri;
     return this;
   }
-  
+  @Override
+  public void validate(FeedFormat format) throws ValidationException {
+    try {
+      @SuppressWarnings("unused")
+      URI uri = new URI(_atomUri);
+    }
+    catch (URISyntaxException e) {
+      throw new ValidationException("Atom uri should be a valid uri");
+    }
+  }
 }

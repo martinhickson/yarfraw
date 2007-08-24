@@ -7,8 +7,8 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 
 /**
- * Atom 1.0 additional attributes to the feed elements.
- * 
+ * Atom 1.0 additional attributes to the feed elements.<br/>
+ * see http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.3
  * @author jliang
  *
  */
@@ -55,7 +55,7 @@ public class AtomAttributes extends AbstractBaseObject{
   }
   
   /**
-   * Add an attribute that is not in the RSS 2.0 specs.
+   * Add an attribute that is not in the RSS specs.
    */
   public AtomAttributes addOtherAttributes(QName namespace, String attribute) {
     if(_otherAttributes == null){
@@ -66,7 +66,7 @@ public class AtomAttributes extends AbstractBaseObject{
   }
   
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
+  public void validate(FeedFormat format) throws ValidationException {
     
   }
 

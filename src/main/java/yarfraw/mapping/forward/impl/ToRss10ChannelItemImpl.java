@@ -10,7 +10,7 @@ import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.mapping.forward.ToRss10ChannelItem;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
   private static ToRss10ChannelItem _instance = new ToRss10ChannelItemImpl();
@@ -73,7 +73,7 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
     }
     
     if(item.getPubDate() != null){
-      elementList.add(FACTORY.createDate(Utils.getDateAsISO8601String(item.getPubDate())));
+      elementList.add(FACTORY.createDate(CommonUtils.getDateAsISO8601String(item.getPubDate())));
     }
     //not supported
 //    if(item.getSource() != null){

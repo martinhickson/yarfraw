@@ -24,7 +24,7 @@ import yarfraw.generated.rss20.elements.TImage;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
 import yarfraw.generated.rss20.elements.TTextInput;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss20 Jaxb model
@@ -138,7 +138,7 @@ class Rss20MappingUtils {
     }
     
     if(item.getPubDate() != null){
-      SimpleDateFormat format = new SimpleDateFormat(Utils.RFC822DATE_PATTERN);
+      SimpleDateFormat format = new SimpleDateFormat(CommonUtils.RFC822DATE_PATTERN);
       elementList.add(factory.createTRssItemPubDate(format.format(item.getPubDate())));
     }
     if(item.getSource() != null){

@@ -17,7 +17,7 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.mapping.forward.ToRss20Channel;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 public class ToRss20ChannelImpl implements ToRss20Channel{
 
@@ -86,7 +86,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getLink() != null){
       elementList.add(factory.createTRssChannelLink(ch.getLink().toString()));
     }
-    SimpleDateFormat format = new SimpleDateFormat(Utils.RFC822DATE_PATTERN);
+    SimpleDateFormat format = new SimpleDateFormat(CommonUtils.RFC822DATE_PATTERN);
     if(ch.getLastBuildDate() != null){
       elementList.add(factory.createTRssChannelLastBuildDate(format.format(ch.getLastBuildDate())));
     }

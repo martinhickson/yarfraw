@@ -60,11 +60,15 @@ public class AtomTextAttributes extends AtomAttributes{
     super.setOtherAttributes(otherAttributes);
     return this;
   }
-
+/**
+ * The single xhtml div element if the text construct is an xhtml construct 
+ */
   public Element getXhtmlDiv() {
     return _xhtmlDiv;
   }
-
+  /**
+   * The single xhtml div element if the text construct is an xhtml construct 
+   */
   public AtomTextAttributes setXhtmlDiv(Element xhtmlDiv) {
     _xhtmlDiv = xhtmlDiv;
     _type = TextType.xhtml;

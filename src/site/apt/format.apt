@@ -131,7 +131,7 @@ Rss 1.0 Format Mapping
             .setWebMaster("The O'Reilly Network")
             .setManagingEditor("Rael Dornfest (mailto:rael@oreilly.com)")
             .setCopyright("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
-            .setPubDate(Utils.tryParseISODate("2000-01-01T12:00+00:00"))
+            .setPubDate(CommonUtils.tryParseISODate("2000-01-01T12:00+00:00"))
             //time to live is 30 minutes
             .setTtl(30) //this will be converted to updatePeriod='hourly' & updateFrequency='2'
             //update base is not supported, add it manually if you really have to 
@@ -316,7 +316,7 @@ Atom 1.0
                                 .setType("audio/mpeg")
                                 .setLength(1337))
             .setAtomId(new AtomId("tag:example.org,2003:3.2397"))
-            .setPubDate(Utils.tryParseISODate("2003-12-13T08:29:29-04:00"))
+            .setPubDate(CommonUtils.tryParseISODate("2003-12-13T08:29:29-04:00"))
             //person's name, uri elements are not supported
             .setAuthor("f8dy@example.com")
             //contributor element are not supported

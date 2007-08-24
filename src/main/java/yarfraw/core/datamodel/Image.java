@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * {@link Image} is an optional sub-element of {@link Image}, 
@@ -287,7 +287,12 @@ public class Image extends AbstractBaseObject{
   
   
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    Utils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
+  public void validate(FeedFormat format) throws ValidationException {
+    if(format == FeedFormat.RSS20){
+      CommonUtils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
+    }else{
+      CommonUtils.validateNotNull("Image: url should not be null", _url);
+    }
+    
   }
 }

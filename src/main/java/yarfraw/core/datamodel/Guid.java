@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * {@link Guid} is an optional sub-element of {@link Item}.<br/>
@@ -55,7 +55,10 @@ public class Guid extends AbstractBaseObject{
       return this;
   }
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    Utils.validateNotNull("Guid: Guid value should not be null", _guid);
+  public void validate(FeedFormat format) throws ValidationException {
+    if(format == FeedFormat.ATOM10){
+      return;//no support
+    }
+    CommonUtils.validateNotNull("Guid: Guid value should not be null", _guid);
   }
 }

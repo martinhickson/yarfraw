@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * It specifies a web service that supports the rssCloud interface which can be implemented in HTTP-POST, XML-RPC or SOAP 1.1.
@@ -71,8 +71,12 @@ public class Cloud extends AbstractBaseObject{
     return this;
   }
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    Utils.validateNotNull("Cloud: All fields in the cloud object should be not null", _domain, _path, _port, _protocol, _registerProcedure);
+  public void validate(FeedFormat format) throws ValidationException {
+    if(format != FeedFormat.RSS20){
+      return; //no support
+    }
+    
+    CommonUtils.validateNotNull("Cloud: All fields in the cloud object should be not null", _domain, _path, _port, _protocol, _registerProcedure);
     if(!_protocol.equals("xml-rpc") && !_protocol.equals("http-post") && !_protocol.equals("soap")){
       throw new ValidationException("Cloud: Protocol should be one of the following: xml-rpc, soap, http-post");
     }

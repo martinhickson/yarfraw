@@ -31,7 +31,7 @@ import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
 import yarfraw.mapping.backward.ToChannelAtom10;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 /**
  * TODO: document me
@@ -84,13 +84,13 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
         if (o instanceof JAXBElement<?>) {
           JAXBElement<?> jaxbElement = (JAXBElement<?>) o;
           Object val = jaxbElement.getValue();
-          if (Utils.same(jaxbElement.getName(), _EntryTypeTitle_QNAME)) {
+          if (CommonUtils.same(jaxbElement.getName(), _EntryTypeTitle_QNAME)) {
             TextType text = (TextType) val;
             c.setTitle(convenientExtractText(c, AtomTextElementEnum.title, text));
-          }else if (Utils.same(jaxbElement.getName(), _SourceTypeSubtitle_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _SourceTypeSubtitle_QNAME)) {
             TextType text = (TextType) val;
             c.setDescription(convenientExtractText(c, AtomTextElementEnum.subtitle, text));
-          }else if (Utils.same(jaxbElement.getName(), _EntryTypeAuthor_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeAuthor_QNAME)) {
             c.setManagingEditor(extractEmail((PersonType)val));
           }else if(val instanceof CategoryType){
             c.addCategory(toCategory((CategoryType)val));
@@ -105,11 +105,11 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
           }else if(val instanceof LinkType){ 
             c.addAtomLink(toAtomLink((LinkType)val));
           }//logo not supported
-          else if (Utils.same(jaxbElement.getName(), _EntryTypeRights_QNAME)) {
+          else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeRights_QNAME)) {
             //partially supported
             TextType text = (TextType) val;
             c.setCopyright(convenientExtractText(c, AtomTextElementEnum.rights, text));
-          }else if (Utils.same(jaxbElement.getName(), _EntryTypeUpdated_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _EntryTypeUpdated_QNAME)) {
             //partially supported
             DateTimeType dt = (DateTimeType) val;
             c.setPubDate(dt.getValue().toGregorianCalendar().getTime());

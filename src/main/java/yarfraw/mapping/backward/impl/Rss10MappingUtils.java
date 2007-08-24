@@ -1,6 +1,6 @@
 package yarfraw.mapping.backward.impl;
 
-import static yarfraw.utils.Utils.same;
+import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
 import java.net.URISyntaxException;
@@ -33,7 +33,7 @@ import yarfraw.generated.rss10.elements.TRss10Image;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 class Rss10MappingUtils{
   private static final int MIN_PER_DAY = 60*24;
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
@@ -110,7 +110,7 @@ class Rss10MappingUtils{
           }else if(same(jaxb.getName(), _Rights_QNAME)){
             ret.setCopyright((String)jaxb.getValue());
           }else if(same(jaxb.getName(), _Date_QNAME)){
-            ret.setPubDate(Utils.tryParseISODate((String)jaxb.getValue()));
+            ret.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
           }else if(same(jaxb.getName(), _Language_QNAME)){
             ret.setLanguage(new Locale((String)jaxb.getValue()));
           }else if(val instanceof UpdatePeriodEnum){
@@ -183,7 +183,7 @@ class Rss10MappingUtils{
               }else if(same(jaxb.getName(), _Rights_QNAME)){
                 item.setRights((String)jaxb.getValue());
               }else if(same(jaxb.getName(), _Date_QNAME)){
-                item.setPubDate(Utils.tryParseISODate((String)jaxb.getValue()));
+                item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
               }else if(same(jaxb.getName(), _Subject_QNAME)){
                 item.addCategory((String)jaxb.getValue());
               }

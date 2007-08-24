@@ -15,7 +15,12 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import yarfraw.utils.XMLUtils;
-
+/**
+ * Data model of the 'atom:content' element in Atom 1.0 specs.<br/>
+ * http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#atomContent
+ * @author jliang
+ *
+ */
 public class AtomContent extends AtomAttributes{
   private List<Element> _otherElements = new ArrayList<Element>();
   private List<String> _contentText = new ArrayList<String>();
@@ -27,15 +32,23 @@ public class AtomContent extends AtomAttributes{
     return new AtomContent();
   }
 
+  /**
+   * Any text content.
+   */
   public AtomContent addContentText(String contentText){
     _contentText = _contentText != null ? _contentText : new ArrayList<String>();
     _contentText.add(contentText);
     return this;
   }
-  
+  /**
+   * Any text content.
+   */
   public List<String> getContentText() {
     return _contentText;
   }
+  /**
+   * Any text content.
+   */
   public AtomContent setContentText(List<String> contentText) {
     _contentText = contentText;
     return this;
@@ -63,24 +76,38 @@ public class AtomContent extends AtomAttributes{
     return this;
   }
   
+  /**
+   * atom:content MAY have a "src" attribute, whose value MUST be an IRI reference [RFC3987]. If the "src" attribute is present, atom:content MUST be empty. Atom Processors MAY use the IRI to retrieve the content, and MAY chose to ignore remote content or present it in a different manner than local content.
+   * <p/>
+   * If the "src" attribute is present, the "type" attribute SHOULD be provided and MUST be a MIME media type [MIMEREG], rather than "text", "html", or "xhtml". The value is advisory; that is to say, when the corresponding URI (mapped from an IRI, if necessary), is dereferenced, if the server providing that content also provides a media type, the server-provided media type is authoritative.
+   */
   public String getSrc(){
     return _src;
   }
-  
+  /**
+   * atom:content MAY have a "src" attribute, whose value MUST be an IRI reference [RFC3987]. If the "src" attribute is present, atom:content MUST be empty. Atom Processors MAY use the IRI to retrieve the content, and MAY chose to ignore remote content or present it in a different manner than local content.
+   * <p/>
+   * If the "src" attribute is present, the "type" attribute SHOULD be provided and MUST be a MIME media type [MIMEREG], rather than "text", "html", or "xhtml". The value is advisory; that is to say, when the corresponding URI (mapped from an IRI, if necessary), is dereferenced, if the server providing that content also provides a media type, the server-provided media type is authoritative.
+   */  
   public AtomContent setSrc(String src) {
     _src = src;
     return this;
   }
-    
+  /**
+   * On the atom:content element, the value of the "type" attribute MAY be one of "text", "html", or "xhtml". Failing that, it MUST conform to the syntax of a MIME media type, but MUST NOT be a composite type (see Section 4.2.6 of [MIMEREG]). If the type attribute is not provided, Atom Processors MUST behave as though it were present with a value of "text".
+   */  
   public AtomTextAttributes.TextType getType() {
     return _type;
   }
+  /**
+   * On the atom:content element, the value of the "type" attribute MAY be one of "text", "html", or "xhtml". Failing that, it MUST conform to the syntax of a MIME media type, but MUST NOT be a composite type (see Section 4.2.6 of [MIMEREG]). If the type attribute is not provided, Atom Processors MUST behave as though it were present with a value of "text".
+   */  
   public AtomContent setType(AtomTextAttributes.TextType type) {
     _type = type;
     return this;
   }
   /**
-   * Other additional elements that are not in the Rss 2.0 specs.
+   * Other additional elements that are not in the specs.
    */
   public List<Element> getOtherElements() {
     return _otherElements;

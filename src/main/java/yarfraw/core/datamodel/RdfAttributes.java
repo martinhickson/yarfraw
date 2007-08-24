@@ -50,8 +50,7 @@ public class RdfAttributes extends AbstractBaseObject{
     return this;
   }
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    // TODO Auto-generated method stub
+  public void validate(FeedFormat format) throws ValidationException {
     
   }
 

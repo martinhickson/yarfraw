@@ -25,7 +25,7 @@ import org.apache.commons.lang.ObjectUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 /**
  * The name of the channel. It's how people refer to your service. 
@@ -96,20 +96,20 @@ public class Channel extends AbstractBaseObject{
   }
   
   /**
-   * Any other attribute that is not in the RSS 2.0 specs.
+   * Any other attribute that is not in the RSS specs.
    */
   public Map<QName, String> getOtherAttributes() {
     return _otherAttributes;
   }
   /**
-   * Any other attribute that is not in the RSS 2.0 specs.
+   * Any other attribute that is not in the RSS specs.
    */
   public Channel setOtherAttributes(Map<QName, String> otherAttributes) {
     _otherAttributes = otherAttributes;
     return this;
   }
   /**
-   * Add an attribute that is not in the RSS 2.0 specs.
+   * Add an attribute that is not in the RSS specs.
    */
   public Channel addOtherAttributes(QName namespace, String attribute) {
     if(_otherAttributes == null){
@@ -812,35 +812,32 @@ public class Channel extends AbstractBaseObject{
 
   
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
+  public void validate(FeedFormat format) throws ValidationException {
     if(CollectionUtils.isEmpty(_items)){
       throw new ValidationException("Channel: You should have at least 1 item");
     }
     
     for(Item item : _items){
-      Utils.validateNotNull("Channel: All item should not be null", item);
-      item.validate(level);
+      CommonUtils.validateNotNull("Channel: All item should not be null", item);
+      item.validate(format);
     }
     
     
-    Utils.validateNotNull("Channel: Title, Link and Description should not be null", _title, _link, _description);
+    CommonUtils.validateNotNull("Channel: Title, Link and Description should not be null", _title, _link, _description);
   
-    if(level == ValidationLevel.STRICT){
-      Utils.validateEmails("Channel: Email addresses are invalid", _managingEditor, _webMaster);    
-    }
     if(_category != null){
       for(Category c: _category){
-        c.validate(level);
+        c.validate(format);
       }
     }
     if(_cloud != null){
-      _cloud.validate(level);
+      _cloud.validate(format);
     }
     if(_image != null){
-      _image.validate(level);
+      _image.validate(format);
     }
     if(_texInput != null){
-      _texInput.validate(level);
+      _texInput.validate(format);
     }    
   }
   

@@ -23,13 +23,13 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
 import yarfraw.core.datamodel.Enclosure;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.Source;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.ValidationException;
-import yarfraw.core.datamodel.ValidationLevel;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
 /**
@@ -164,7 +164,7 @@ public class BuilderTest{
     Channel c = buildChannel();
     c.setItems(null);
     try {
-      c.validate();
+      c.validate(FeedFormat.RSS20);
       fail("Expecting validation error");
     } catch (ValidationException e) {
       //success
@@ -176,7 +176,7 @@ public class BuilderTest{
     Channel c = buildChannel();
     c.setLink((String)null);
     try {
-      c.validate();
+      c.validate(FeedFormat.RSS20);
       fail("Expecting validation error");
     } catch (ValidationException e) {
       //success
@@ -187,25 +187,13 @@ public class BuilderTest{
     Channel c = buildChannel();
     c.setLink((String)null);
     try {
-      c.validate();
+      c.validate(FeedFormat.RSS20);
       fail("Expecting validation error");
     } catch (ValidationException e) {
       //success
     }
   }
-  
-  @Test
-  public void testValidation4() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
-    c.setManagingEditor("bad email");
-    try {
-      c.validate(ValidationLevel.STRICT);
-      fail("Expecting validation error");
-    } catch (ValidationException e) {
-      //success
-    }
-  }
-  
+    
   @Test
   public void testOtherElements() throws Exception {
     Channel c = buildChannel();

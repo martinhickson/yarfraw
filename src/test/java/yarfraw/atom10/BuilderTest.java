@@ -22,7 +22,7 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.io.FeedWriter;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 
 public class BuilderTest extends TestCase{
@@ -55,7 +55,7 @@ public class BuilderTest extends TestCase{
                               .setType("audio/mpeg")
                               .setLength(1337))
           .setAtomId(new AtomId("tag:example.org,2003:3.2397"))
-          .setPubDate(Utils.tryParseISODate("2003-12-13T08:29:29-04:00"))
+          .setPubDate(CommonUtils.tryParseISODate("2003-12-13T08:29:29-04:00"))
           //person's name, uri elements are not supported
           .setAuthor("f8dy@example.com")
           //contributor element are not supported

@@ -57,7 +57,7 @@ public class Source extends AbstractBaseObject{
     return this;
   }
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
+  public void validate(FeedFormat format) throws ValidationException {
 
   }
 

@@ -23,7 +23,6 @@ import org.apache.commons.lang.ObjectUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.Utils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -544,28 +543,24 @@ public class Item extends AbstractBaseObject{
 
   
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
+  public void validate(FeedFormat format) throws ValidationException {
     
     if(_title == null && _description == null){
       throw new ValidationException("Item: At least one of title or description must be present.");
     }
     if(_category != null){
       for(Category c: _category){
-        c.validate(level);
+        c.validate(format);
       }
     }
     if(_enclosure != null){
-      _enclosure.validate(level);
+      _enclosure.validate(format);
     }
     if(_guid != null){
-      _guid.validate(level);
+      _guid.validate(format);
     }
     if(_source != null){
-      _source.validate(level);
-    }
-    
-    if(level == ValidationLevel.STRICT){
-      Utils.validateEmails("Item: Author email is invalid", _author);
+      _source.validate(format);
     }
   }
 

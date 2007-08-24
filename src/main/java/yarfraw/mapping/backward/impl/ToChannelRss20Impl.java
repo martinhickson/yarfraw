@@ -25,7 +25,7 @@ import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.generated.rss20.elements.TTextInput;
 import yarfraw.mapping.backward.ToChannelRss20;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 public class ToChannelRss20Impl implements ToChannelRss20{
 
@@ -81,29 +81,29 @@ public class ToChannelRss20Impl implements ToChannelRss20{
         if (o instanceof JAXBElement) {
           JAXBElement jaxbElement = (JAXBElement) o;
           Object val = jaxbElement.getValue();
-          if(Utils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)){
+          if(CommonUtils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)){
             c.setTitle((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             c.setLink((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
             c.setDescription((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelCopyright_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelCopyright_QNAME)) {
             c.setCopyright((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelDocs_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelDocs_QNAME)) {
             c.setDocs((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelGenerator_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelGenerator_QNAME)) {
             c.setGenerator((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelLanguage_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelLanguage_QNAME)) {
             c.setLanguage(new Locale((String)jaxbElement.getValue()));
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelLastBuildDate_QNAME)) {
-            c.setLastBuildDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelManagingEditor_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelLastBuildDate_QNAME)) {
+            c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelManagingEditor_QNAME)) {
             c.setManagingEditor((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
-            c.setPubDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelTtl_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
+            c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelTtl_QNAME)) {
             c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
-          }else if (Utils.same(jaxbElement.getName(), _TRssChannelWebMaster_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelWebMaster_QNAME)) {
             c.setWebMaster((String)jaxbElement.getValue());
           }else if (val instanceof TCategory) {
             TCategory cat = (TCategory) val;

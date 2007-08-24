@@ -1,6 +1,8 @@
 package yarfraw.rss20;
 
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 import junit.framework.TestCase;
 
@@ -10,8 +12,10 @@ import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.ValidationException;
 import yarfraw.io.FeedReader;
 import yarfraw.utils.FeedFormatDetector;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Util class tests.
@@ -49,6 +53,16 @@ public class UtilsTest extends TestCase{
       assertEquals(FeedFormat.ATOM10, FeedFormatDetector.getFormat(s));
     }finally{
       IOUtils.closeQuietly(s);
+    }
+  }
+  
+  @Test
+  public void testValidation() throws MalformedURLException, URISyntaxException{
+    try {
+      CommonUtils.validateEmails("bad", "bad");
+      fail("Expecting validation error");
+    } catch (ValidationException e) {
+      //success
     }
   }
   

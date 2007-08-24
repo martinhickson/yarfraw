@@ -3,7 +3,9 @@
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="0.7" date="TBD" description="First stable mile stone release">
+  	<release version="0.8" date="TBD">
+  	</release>
+    <release version="0.7-RC" date="TBD" description="Release candidate of first major mile stone">
       <action dev="jliang" type="add">
         Added remote rss feed reader.
       </action>
@@ -29,7 +31,7 @@
 	  <action dev="jliang" type="add">
         Added support for read/write to io streams 
       </action>              
-	  <action dev="jliang" type="TODO">
+	  <action dev="jliang" type="add">
         Added support for Atom 1.0 
       </action>
 	  <action dev="jliang" type="TODO">

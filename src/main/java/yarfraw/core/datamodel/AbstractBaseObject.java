@@ -23,8 +23,5 @@ abstract class AbstractBaseObject{
     return HashCodeBuilder.reflectionHashCode(this);
   }
   
-  public void validate() throws ValidationException{
-    validate(ValidationLevel.NORMAL);
-  }
-  public abstract void validate(ValidationLevel level) throws ValidationException;
+  public abstract void validate(FeedFormat format) throws ValidationException;
 }

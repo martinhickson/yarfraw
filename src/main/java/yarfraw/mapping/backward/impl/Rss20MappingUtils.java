@@ -18,7 +18,7 @@ import yarfraw.generated.rss20.elements.TEnclosure;
 import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 class Rss20MappingUtils{
 
@@ -54,17 +54,17 @@ class Rss20MappingUtils{
         if (o instanceof JAXBElement) {
           JAXBElement jaxbElement = (JAXBElement) o;
           Object val = jaxbElement.getValue();
-          if(Utils.same(jaxbElement.getName(), _TRssItemAuthor_QNAME)){
+          if(CommonUtils.same(jaxbElement.getName(), _TRssItemAuthor_QNAME)){
             item.setAuthor((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemComments_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemComments_QNAME)) {
             item.setComments((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
             item.setDescription((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
             item.setLink((String)jaxbElement.getValue());
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
-            item.setPubDate((String)jaxbElement.getValue(), Utils.RFC_FORMAT);
-          }else if (Utils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
+            item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)) {
             item.setTitle((String)jaxbElement.getValue());
           }else if (val instanceof TCategory) {
             TCategory cat = (TCategory) val;

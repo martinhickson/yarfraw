@@ -29,7 +29,7 @@ import yarfraw.core.datamodel.RdfAttributes;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 /**
  * Some unit tests.
  * TODO: this really needs some cleanup
@@ -224,7 +224,7 @@ public class BuilderTest{
             .setWebMaster("The O'Reilly Network")
             .setManagingEditor("Rael Dornfest (mailto:rael@oreilly.com)")
             .setCopyright("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
-            .setPubDate(Utils.tryParseISODate("2000-01-01T12:00+00:00"))
+            .setPubDate(CommonUtils.tryParseISODate("2000-01-01T12:00+00:00"))
             //time to live is 30 minutes
             .setTtl(30) //this will be converted to updatePeriod='hourly' & updateFrequency='2'
             //update base is not supported, add it manually if you really have to 

@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.utils.Utils;
+import yarfraw.utils.CommonUtils;
 
 
 /**
@@ -80,7 +80,7 @@ public class Category extends AbstractBaseObject{
   }
   
   @Override
-  public void validate(ValidationLevel level) throws ValidationException {
-    Utils.validateNotNull(_category, "Category: Category value should not be null");
+  public void validate(FeedFormat format) throws ValidationException {
+    CommonUtils.validateNotNull(_category, "Category: Category value should not be null");
   }
 }
