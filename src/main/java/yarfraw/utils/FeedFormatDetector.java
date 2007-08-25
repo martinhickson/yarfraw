@@ -27,7 +27,10 @@ public class FeedFormatDetector{
 
   private static final String RSS = "rss";
   private static final String VERSION = "version";
-  private static final String RDF = ":RDF";
+  private static final String VERSION_20 = "2.0";
+  private static final String RDF = "RDF";
+  private static final String RDF_NS_URI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+  private static final String ATOM10_XMLNS = "http://www.w3.org/2005/Atom";  
   private static final String FEED = "feed";
   
   private static final FormatDetectionHandler FormatDetectionHandler = new FormatDetectionHandler();
@@ -45,6 +48,7 @@ public class FeedFormatDetector{
       throw new IllegalArgumentException("Null stream received");
     }
     SAXParserFactory factory = SAXParserFactory.newInstance();
+    factory.setNamespaceAware(true);
     try {
       SAXParser parser = factory.newSAXParser();
       parser.parse(stream, FormatDetectionHandler);
@@ -68,14 +72,14 @@ public class FeedFormatDetector{
   private static class FormatDetectionHandler extends DefaultHandler2{
     public void startElement(String uri, String localName,
             String qName, Attributes attributes) throws EarlyTerminationException{
-       
+
     //just check the root element is enough
-      if(RSS.equals(qName)
-              && attributes.getValue(StringUtils.EMPTY, VERSION) != null ){
+      if(RSS.equals(localName)
+              && VERSION_20.equals(attributes.getValue(StringUtils.EMPTY, VERSION))){
         throw new EarlyTerminationException(FeedFormat.RSS20);
-      }else if (StringUtils.isNotEmpty(qName) && qName.endsWith(RDF)) {
+      }else if (RDF.equals(localName) && RDF_NS_URI.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.RSS10);
-      }else if (FEED.equals(qName) && isAtom10(attributes)) {
+      }else if (FEED.equals(localName) && ATOM10_XMLNS.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.ATOM10);
       }
       else{
@@ -84,20 +88,8 @@ public class FeedFormatDetector{
       }
     }
   }
-  private static final String XMLNS = "xmlns";
-  private static final String ATOM10_XMLNS = "http://www.w3.org/2005/Atom";
-  private static boolean isAtom10(Attributes attributes){
-    if(attributes == null){
-      return true; //an optimistic guess
-    }
-    for(int i =0; i< attributes.getLength(); i++){
-      if(attributes.getQName(i).startsWith(XMLNS)
-              && attributes.getValue(i).startsWith(ATOM10_XMLNS)){
-        return true;
-      }
-    }
-    return false;
-  }
+  
+  
   
   /**
    * An exception to be thrown for letting us to terminate the parsing prematurely

@@ -1,4 +1,4 @@
-package yarfraw.io.parser;
+package yarfraw.mapping;
 import static yarfraw.mapping.ElementQName.*;
 import javax.xml.namespace.QName;
 
@@ -11,7 +11,7 @@ import yarfraw.core.datamodel.FeedFormat;
  * @author jliang
  *
  */
-enum CoreRssElementEnum {
+public enum CoreRssElementEnum {
   //XXX: using ">" to guaranteed that no actual name contains this character
   Channel(RSS10_CHANNEL, RSS20_CHANNEL, ATOM10_FEED),
   Channel_title(RSS10_TITLE, RSS20_TITLE, ATOM10_TITLE),

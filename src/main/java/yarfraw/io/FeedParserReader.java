@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.net.URI;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.httpclient.HttpURL;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.io.parser.FeedSAXParser;
+import yarfraw.mapping.backward.ToChannelDOM;
+import yarfraw.utils.XMLUtils;
 /**
  * Provides a set of function to facilitate parsing of a RSS feed using a custom parser.
  * @author jliang
@@ -37,13 +37,11 @@ public class FeedParserReader extends AbstractBaseFeedParser{
     super(httpUrl, null);
   }
   
-  public Channel parseChannel(FeedSAXParser feedParser) throws YarfrawException{
-    SAXParserFactory factory = SAXParserFactory.newInstance();
+  public Channel parseChannel(ToChannelDOM toChannelDOMMapper) throws YarfrawException{
     try {
-      SAXParser parser = factory.newSAXParser();
-      feedParser.setFormat(_format);
-      parser.parse(getStream(), feedParser);
-      return feedParser.getChannel();
+      Document doc = XMLUtils.parseXml(getStream(), false, true);
+      toChannelDOMMapper.setFeedFormat(_format);
+      return toChannelDOMMapper.execute(doc);
     }
     catch (ParserConfigurationException e) {
       throw new YarfrawException("Format Detection Failed", e);
