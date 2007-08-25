@@ -1,22 +1,21 @@
 package yarfraw.utils;
 
-import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.io.FeedParserReader;
-import yarfraw.mapping.backward.impl.ToChannelDOMSimplifiedImpl;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import yarfraw.mapping.backward.impl.parser.ToChannelDOMAtomImpl;
+import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 
 public class Test{
 
-  public static void main(String[] args) throws YarfrawException {
-    FeedParserReader p = new FeedParserReader("rdfModule.xml");
-//    p.setFormat(FeedFormat.RSS10);
-//    p.parseChannel(new ToChannelDOMSimplifiedImpl());
-    
-    
-    p = new FeedParserReader("yarfraw.xml");
-    p.setFormat(FeedFormat.RSS20);
-    p.parseChannel(new ToChannelDOMSimplifiedImpl());
-    
+  public static void main(String[] args) throws Exception {
+    Document doc = XMLUtils.parseXml(new FileInputStream("atom10b.xml"), false, false);
+    new ToChannelDOMAtomImpl().execute(doc);
   }
 
 }

@@ -43,6 +43,17 @@ public class CommonUtils{
           "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$",
           Pattern.CASE_INSENSITIVE);
   public static final SimpleDateFormat RFC_FORMAT = new SimpleDateFormat(RFC822DATE_PATTERN);
+  
+  public static final SimpleDateFormat[] NON_ISO8601_FORMAT = new SimpleDateFormat[]{
+    new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z"),
+    new SimpleDateFormat("EEE, dd MMM yyyy HH:mm zzzz"),
+    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSzzzz"),
+    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sszzzz"),
+    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+    RFC_FORMAT,
+    new SimpleDateFormat("EEE, dd MMM yy HH:mm:ss z")
+  };
+  
 //  public static final SimpleDateFormat ISO_FORMAT = new SimpleDateFormat(ISO8601DATE_PATTERN);
 
   /**
@@ -73,7 +84,24 @@ public class CommonUtils{
       + ":" + result.substring(result.length()-2);
     return result;
   }
-  
+
+  public static Date tryParseDate(String dateString){
+    Date ret = null;
+    try {
+      ret = tryParseISODate(dateString);
+      return ret;
+    } catch (Exception e) {
+      for(SimpleDateFormat format : NON_ISO8601_FORMAT){
+        try {
+          ret = format.parse(dateString);
+          return ret;
+        } catch (Exception ee) {
+          //keep trying
+        }
+      }
+    }
+    return ret;
+  }
   /**
    * Try to parse a date string using different formatting string.
    * <br/>
@@ -127,5 +155,9 @@ public class CommonUtils{
         }
       }
     }
+  }
+  
+  public static String emptyIfNull(String str){
+    return str == null?StringUtils.EMPTY:str;
   }
 }

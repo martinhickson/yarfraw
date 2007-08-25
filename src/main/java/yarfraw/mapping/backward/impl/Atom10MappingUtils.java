@@ -239,7 +239,7 @@ class Atom10MappingUtils{
     }
     image.setAtomAttributes(attr);
     try {
-      image.setLink(icon.getValue());
+      image.setUrl(icon.getValue());
     }
     catch (URISyntaxException e) {
       //it's not required to be a valid link, but generally it should be

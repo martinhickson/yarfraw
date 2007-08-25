@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.mapping.backward.ToChannelDOM;
+import yarfraw.mapping.ToChannelDOMMapper;
 import yarfraw.utils.XMLUtils;
 /**
  * Provides a set of function to facilitate parsing of a RSS feed using a custom parser.
@@ -37,11 +37,10 @@ public class FeedParserReader extends AbstractBaseFeedParser{
     super(httpUrl, null);
   }
   
-  public Channel parseChannel(ToChannelDOM toChannelDOMMapper) throws YarfrawException{
+  public Channel parseChannel(ToChannelDOMMapper toChannelMapper) throws YarfrawException{
     try {
       Document doc = XMLUtils.parseXml(getStream(), false, true);
-      toChannelDOMMapper.setFeedFormat(_format);
-      return toChannelDOMMapper.execute(doc);
+      return toChannelMapper.execute(doc);
     }
     catch (ParserConfigurationException e) {
       throw new YarfrawException("Format Detection Failed", e);

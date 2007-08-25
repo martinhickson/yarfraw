@@ -107,7 +107,7 @@ class Rss10MappingUtils{
           }else if(same(jaxb.getName(), RSS10_RIGHTS)){
             ret.setCopyright((String)jaxb.getValue());
           }else if(same(jaxb.getName(), RSS10_DATE)){
-            ret.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
+            ret.setPubDate(CommonUtils.tryParseDate((String)jaxb.getValue()));
           }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
             ret.setLanguage(new Locale((String)jaxb.getValue()));
           }else if(val instanceof UpdatePeriodEnum){

@@ -210,7 +210,7 @@ public class Atom10MappingUtils{
 
   public static IconType toIcon(Image image) {
     IconType icon = FACTORY.createIconType();
-    icon.setValue(image.getLink() == null?null: image.getLink().toString());
+    icon.setValue(image.getUrl() == null?null: image.getUrl().toString());
     AtomAttributes attr = image.getAtomAttributes();
     if(attr != null){
       icon.setBase(attr.getBase()==null?null:attr.getBase().toString());

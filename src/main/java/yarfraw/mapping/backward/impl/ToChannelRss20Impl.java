@@ -1,5 +1,5 @@
 package yarfraw.mapping.backward.impl;
-
+import static yarfraw.mapping.ElementQName.*;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,27 +28,6 @@ import yarfraw.mapping.backward.ToChannelRss20;
 import yarfraw.utils.CommonUtils;
 
 public class ToChannelRss20Impl implements ToChannelRss20{
-
-  private final static QName _TRssItemTitle_QNAME = new QName("", "title");
-  private final static QName _TRssItemDescription_QNAME = new QName("", "description");
-//  private final static QName _TRssItemCategory_QNAME = new QName("", "category");
-  private final static QName _TRssItemLink_QNAME = new QName("", "link");
-//  private final static QName _Item_QNAME = new QName("", "item");
-//  private final static QName _Channel_QNAME = new QName("", "channel");
-  private final static QName _TRssItemPubDate_QNAME = new QName("", "pubDate");
-  private final static QName _TRssChannelTtl_QNAME = new QName("", "ttl");
-  private final static QName _TRssChannelWebMaster_QNAME = new QName("", "webMaster");
-//  private final static QName _TRssChannelSkipDays_QNAME = new QName("", "skipDays");
-//  private final static QName _TRssChannelCloud_QNAME = new QName("", "cloud");
-  private final static QName _TRssChannelLanguage_QNAME = new QName("", "language");
-//  private final static QName _TRssChannelSkipHours_QNAME = new QName("", "skipHours");
-//  private final static QName _TRssChannelTextInput_QNAME = new QName("", "textInput");
-  private final static QName _TRssChannelManagingEditor_QNAME = new QName("", "managingEditor");
-  private final static QName _TRssChannelDocs_QNAME = new QName("", "docs");
-  private final static QName _TRssChannelLastBuildDate_QNAME = new QName("", "lastBuildDate");
-//  private final static QName _TRssChannelImage_QNAME = new QName("", "image");
-  private final static QName _TRssChannelGenerator_QNAME = new QName("", "generator");
-  private final static QName _TRssChannelCopyright_QNAME = new QName("", "copyright");
 
   private static final ToChannelRss20 _instance = new ToChannelRss20Impl();
   
@@ -81,29 +60,37 @@ public class ToChannelRss20Impl implements ToChannelRss20{
         if (o instanceof JAXBElement) {
           JAXBElement jaxbElement = (JAXBElement) o;
           Object val = jaxbElement.getValue();
-          if(CommonUtils.same(jaxbElement.getName(), _TRssItemTitle_QNAME)){
+          if(CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)){
             c.setTitle((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemLink_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
             c.setLink((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemDescription_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
             c.setDescription((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelCopyright_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
             c.setCopyright((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelDocs_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DOCS)) {
             c.setDocs((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelGenerator_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_GENERATOR)) {
             c.setGenerator((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelLanguage_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LANGUAGE)) {
             c.setLanguage(new Locale((String)jaxbElement.getValue()));
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelLastBuildDate_QNAME)) {
-            c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelManagingEditor_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
+            try {
+              c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+            } catch (Exception e) {
+              c.setLastBuildDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+            }
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
             c.setManagingEditor((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssItemPubDate_QNAME)) {
-            c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelTtl_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
+            try {
+              c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+            } catch (Exception e) {
+              c.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+            }
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TTL)) {
             c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
-          }else if (CommonUtils.same(jaxbElement.getName(), _TRssChannelWebMaster_QNAME)) {
+          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_WEBMASTER)) {
             c.setWebMaster((String)jaxbElement.getValue());
           }else if (val instanceof TCategory) {
             TCategory cat = (TCategory) val;

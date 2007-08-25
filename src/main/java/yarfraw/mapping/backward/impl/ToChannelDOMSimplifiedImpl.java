@@ -1,91 +1,103 @@
-package yarfraw.mapping.backward.impl;
-
-import java.util.EnumSet;
-
-import javax.xml.namespace.QName;
-
-import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.traversal.DocumentTraversal;
-import org.w3c.dom.traversal.NodeFilter;
-import org.w3c.dom.traversal.TreeWalker;
-
-import yarfraw.core.datamodel.Channel;
-import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.mapping.CoreRssElementEnum;
-import yarfraw.mapping.backward.ToChannelDOM;
-
-public class ToChannelDOMSimplifiedImpl implements ToChannelDOM, NodeFilter{
-  protected EnumSet<CoreRssElementEnum> _elementsOfInterest;
-  protected FeedFormat _format;
-  public ToChannelDOMSimplifiedImpl() {
-    super();
-    _elementsOfInterest = EnumSet.allOf(CoreRssElementEnum.class);
-  }
-  public ToChannelDOMSimplifiedImpl(
-      EnumSet<CoreRssElementEnum> elementsOfInterest) {
-    super();
-    _elementsOfInterest = elementsOfInterest;
-  }
-
-  public EnumSet<CoreRssElementEnum> getElementsOfInterest() {
-    return _elementsOfInterest;
-  }
-
-  public void setElementsOfInterest(EnumSet<CoreRssElementEnum> elementsOfInterest) {
-    _elementsOfInterest = elementsOfInterest;
-  }
-  
-  public Channel execute(Document doc) throws YarfrawException {
-    DOMImplementation domimpl = doc.getImplementation();
-    if (domimpl.hasFeature("Traversal", "2.0")) {
-
-      Node root = doc.getDocumentElement();
-      int whattoshow = NodeFilter.SHOW_ELEMENT;
-
-      boolean expandreferences = false;
-
-      DocumentTraversal traversal = (DocumentTraversal)doc;
-      TreeWalker walker = traversal.createTreeWalker(root, 
-                                                     whattoshow, 
-                                                     this, //node filter 
-                                                     expandreferences);
-      Node n = walker.nextNode();
-      while(n != null){
-//        System.out.println(current);
-//        System.out.println(current.getTextContent());
-        System.out.println(n.getPrefix()+"  "+n.getNodeName()+"  "+n.getBaseURI()+" "+n.getLocalName()+"  "+n.getNamespaceURI());
-        
-        n = walker.nextNode();
-        
-      }
-
-   } else {
-      throw new YarfrawException("The input DOM implementation does not support TreeWalker traversal");
-   }
-    return null;
-  }
-  
-  public short acceptNode(Node n) {
-    for(CoreRssElementEnum e : _elementsOfInterest){
-      QName expected = e.getName(_format);
-      if(StringUtils.equals(emptyIfNull(n.getNamespaceURI()), expected.getNamespaceURI()) 
-          && StringUtils.equals(n.getLocalName(), expected.getLocalPart())){
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    }
-    return NodeFilter.FILTER_REJECT;
-  }
-  
-  private static String emptyIfNull(String str){
-    return str == null?StringUtils.EMPTY:str;
-  }
-  public void setFeedFormat(FeedFormat format) {
-    _format = format; 
-  }
-  
-}
-
+//package yarfraw.mapping.backward.impl;
+//
+//import static yarfraw.mapping.CoreRssElementEnum.Channel;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_category;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_description;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_image;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_language;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_link;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_pubdate;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_textinput;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_title;
+//import static yarfraw.mapping.CoreRssElementEnum.Channel_ttl;
+//
+//import java.util.EnumSet;
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//import javax.xml.namespace.QName;
+//
+//import org.w3c.dom.Document;
+//
+//import yarfraw.core.datamodel.Channel;
+//import yarfraw.core.datamodel.FeedFormat;
+//import yarfraw.core.datamodel.Item;
+//import yarfraw.core.datamodel.YarfrawException;
+//import yarfraw.mapping.CoreRssElementEnum;
+//import yarfraw.mapping.backward.ToChannelDOM;
+//
+///**
+// * This class is not thread safe.
+// * @author jliang
+// *
+// */
+//public class ToChannelDOMSimplifiedImpl implements ToChannelDOM{
+//  private static final EnumSet<CoreRssElementEnum> CHANNEL_SET = EnumSet.of(
+//      Channel,Channel_title,Channel_link, Channel_description,Channel_language,  
+//      Channel_pubdate,Channel_ttl,Channel_image,Channel_textinput,Channel_category);
+//  private static final EnumSet<CoreRssElementEnum> ITEM_SET = EnumSet.complementOf(CHANNEL_SET);
+//  
+//  protected EnumSet<CoreRssElementEnum> _elementsOfInterest;
+//  protected FeedFormat _format;
+//  protected Channel _channel = null;
+//  protected Item _item = null;
+//  //use hash map for lookup so we dont need to iterate thru the list every time
+//  private final Map<QName, CoreRssElementEnum> _elementsOfInterestMap = new HashMap<QName, CoreRssElementEnum>();
+//  
+//  public ToChannelDOMSimplifiedImpl() {
+//    super();
+//    _elementsOfInterest = EnumSet.allOf(CoreRssElementEnum.class);
+//  }
+//  public ToChannelDOMSimplifiedImpl(
+//      EnumSet<CoreRssElementEnum> elementsOfInterest) {
+//    super();
+//    setElementsOfInterest(elementsOfInterest);
+//  }
+//
+//  public EnumSet<CoreRssElementEnum> getElementsOfInterest() {
+//    return EnumSet.copyOf(_elementsOfInterest);
+//  }
+//
+//  public Channel execute(Document doc) throws YarfrawException {
+//
+//    return null;
+//  }
+//  
+//  public void setElementsOfInterest(EnumSet<CoreRssElementEnum> elementsOfInterest) {
+//    //make sure if sub element is of interest, the parent is also in the interest set
+//    for(CoreRssElementEnum e : elementsOfInterest){
+//      if(CHANNEL_SET.contains(e)) 
+//          if(!elementsOfInterest.contains(Channel)){
+//            throw new IllegalArgumentException("ElementsOfInterest Set contains sub-element of Channel, but does not contain Channel");
+//          }else{
+//            break;
+//          }
+//      }
+//  
+//    for(CoreRssElementEnum e : elementsOfInterest){
+//      if(ITEM_SET.contains(e)){
+//        if(!elementsOfInterest.contains(Channel)){
+//          throw new IllegalArgumentException("ElementsOfInterest Set contains sub-element of Item, but does not contain Item");
+//        }else{
+//          break;
+//        }
+//      }      
+//    }
+//      
+//    _elementsOfInterest = EnumSet.copyOf(elementsOfInterest);
+//    populateQNameMap();
+//  }
+//  
+//  public void setFeedFormat(FeedFormat format) {
+//    _format = format;
+//    populateQNameMap();
+//  }
+//  
+//  private void populateQNameMap(){
+//    _elementsOfInterestMap.clear();
+//    for(CoreRssElementEnum e : _elementsOfInterest){
+//      _elementsOfInterestMap.put(e.getName(_format), e);
+//    }
+//  }  
+//}
+//

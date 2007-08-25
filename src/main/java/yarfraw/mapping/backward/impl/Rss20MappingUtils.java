@@ -59,7 +59,11 @@ class Rss20MappingUtils{
           }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
             item.setLink((String)jaxbElement.getValue());
           }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
-            item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+            try {
+              item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+            } catch (Exception e) {
+              item.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+            }
           }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
             item.setTitle((String)jaxbElement.getValue());
           }else if (val instanceof TCategory) {
