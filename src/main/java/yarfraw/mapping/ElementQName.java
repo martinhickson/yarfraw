@@ -37,7 +37,7 @@ public class ElementQName{
   public final static QName RSS10_CONTRIBUTOR = new QName("http://purl.org/dc/elements/1.1/", "contributor");
   public final static QName RSS10_UPDATEFREQUENCY = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateFrequency");
   
-  public final static QName RSS10_ITEM_TITLE = new QName("http://purl.org/dc/elements/1.1/", "title");
+  public final static QName RSS10_DC_ITEM_TITLE = new QName("http://purl.org/dc/elements/1.1/", "title");
   public final static QName RSS10_PUBLISHER = new QName("http://purl.org/dc/elements/1.1/", "publisher");
   public final static QName RSS10_TYPE = new QName("http://purl.org/dc/elements/1.1/", "type");
   public final static QName RSS10_LANGUAGE = new QName("http://purl.org/dc/elements/1.1/", "language");

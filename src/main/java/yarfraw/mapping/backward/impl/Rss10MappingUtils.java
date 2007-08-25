@@ -4,11 +4,11 @@ import static yarfraw.mapping.ElementQName.RSS10_CREATOR;
 import static yarfraw.mapping.ElementQName.RSS10_DATE;
 import static yarfraw.mapping.ElementQName.RSS10_DESCRIPTION;
 import static yarfraw.mapping.ElementQName.RSS10_LANGUAGE;
+import static yarfraw.mapping.ElementQName.RSS10_LINK;
 import static yarfraw.mapping.ElementQName.RSS10_PUBLISHER;
 import static yarfraw.mapping.ElementQName.RSS10_RIGHTS;
 import static yarfraw.mapping.ElementQName.RSS10_SUBJECT;
-import static yarfraw.mapping.ElementQName.RSS10_LINK;
-import static yarfraw.mapping.ElementQName.RSS10_ITEM_TITLE;
+import static yarfraw.mapping.ElementQName.RSS10_TITLE;
 import static yarfraw.mapping.ElementQName.RSS10_UPDATEFREQUENCY;
 import static yarfraw.utils.CommonUtils.same;
 
@@ -89,7 +89,7 @@ class Rss10MappingUtils{
         if (o instanceof JAXBElement) {
           JAXBElement jaxb = (JAXBElement) o;
           Object val = jaxb.getValue();
-          if(same(jaxb.getName(), RSS10_ITEM_TITLE)){
+          if(same(jaxb.getName(), RSS10_TITLE)){
             ret.setTitle((String)jaxb.getValue());
           }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
             ret.setDescription((String)jaxb.getValue());
@@ -169,7 +169,7 @@ class Rss10MappingUtils{
           for(Object io : it.getTitleOrDescriptionOrLink()){
             if (io instanceof JAXBElement) {
               JAXBElement jaxb = (JAXBElement) io;
-              if(same(jaxb.getName(), RSS10_ITEM_TITLE)){
+              if(same(jaxb.getName(), RSS10_TITLE)){
                 item.setTitle((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
                 item.setDescription((String)jaxb.getValue());
