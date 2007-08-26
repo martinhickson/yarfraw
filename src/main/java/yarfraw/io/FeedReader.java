@@ -35,7 +35,17 @@ public class FeedReader  extends AbstractBaseFeedParser{
   private static Unmarshaller _rss20Unmarshaller;
   private static Unmarshaller _rss10Unmarshaller;
   private static Unmarshaller _atom10Unmarshaller;
+  public FeedReader(File file, FeedFormat format){
+    super(file, format);
+  }
   
+  public FeedReader(String pathName, FeedFormat format){
+    super(new File(pathName), format);
+  }
+  
+  public FeedReader(URI uri, FeedFormat format){
+    super(new File(uri), format);
+  }  
   public FeedReader(File file){
     super(file);
   }

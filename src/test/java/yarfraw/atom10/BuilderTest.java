@@ -4,6 +4,7 @@ import static yarfraw.core.datamodel.AtomTextAttributes.TextType.html;
 import static yarfraw.core.datamodel.AtomTextAttributes.TextType.text;
 import static yarfraw.core.datamodel.AtomTextAttributes.TextType.xhtml;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -71,7 +72,7 @@ public class BuilderTest extends TestCase{
   public void testBuild() throws Exception{
 
     Channel ch = buildChannel();
-    FeedWriter writer = new FeedWriter("atom10.xml");
+    FeedWriter writer = new FeedWriter(File.createTempFile("atom10",".xml"));
     writer.setFormat(FeedFormat.ATOM10);
     writer.writeChannel(ch);
                                                               

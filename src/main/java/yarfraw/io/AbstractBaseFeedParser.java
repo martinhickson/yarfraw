@@ -11,6 +11,7 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.utils.FeedFormatDetector;
 /**
  * Provides a set of function to facilitate parsing of a RSS feed.
@@ -21,7 +22,17 @@ abstract class AbstractBaseFeedParser extends AbstractBaseIO{
   
   protected HttpURL _httpUrl = null;
   protected HttpClientParams _httpClientParams = null;
+  public AbstractBaseFeedParser(File file, FeedFormat format){
+    super(file, format);
+  }
   
+  public AbstractBaseFeedParser(String pathName, FeedFormat format){
+    super(new File(pathName), format);
+  }
+  
+  public AbstractBaseFeedParser(URI uri, FeedFormat format){
+    super(new File(uri), format);
+  } 
   public AbstractBaseFeedParser(File file){
     super(file);
   }

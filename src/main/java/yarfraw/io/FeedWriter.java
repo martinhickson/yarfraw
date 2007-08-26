@@ -42,6 +42,17 @@ public class FeedWriter extends AbstractBaseIO{
   private static Marshaller _rss10Marshaller;
   private static Marshaller _atom10Marshaller;
   
+  public FeedWriter(File file, FeedFormat format){
+    super(file, format);
+  }
+  
+  public FeedWriter(String pathName, FeedFormat format){
+    super(new File(pathName), format);
+  }
+  
+  public FeedWriter(URI uri, FeedFormat format){
+    super(new File(uri), format);
+  }  
   
   public FeedWriter(File file){
     super(file);

@@ -59,7 +59,7 @@ import yarfraw.utils.XMLUtils;
  * @author jliang
  *
  */
-public class ToChannelDOMAtomImpl extends BaseToChannelDOMImpl{
+public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
   private Map<CoreRssElementEnum, Node> _elementsNodeMap = new HashMap<CoreRssElementEnum, Node>();
   private static final DOMSerializer DOM_SERIALIZER = new DOMSerializer();
  

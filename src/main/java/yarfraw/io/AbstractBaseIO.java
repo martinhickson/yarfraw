@@ -9,20 +9,36 @@ abstract class AbstractBaseIO{
   protected File _file;
   protected FeedFormat _format = FeedFormat.RSS20; //default
   public AbstractBaseIO(){}
-  public AbstractBaseIO(File file){
+  
+  public AbstractBaseIO(File file, FeedFormat format){
     if(file == null){
       throw new IllegalArgumentException("File cannot be null");
     }
     _file = file;
+    setFormat(format);
+  }
+  
+  public AbstractBaseIO(String pathName, FeedFormat format){
+    this(new File(pathName), format);
+  }
+  
+  public AbstractBaseIO(URI uri, FeedFormat format){
+    this(new File(uri), format);
+  }
+  
+  public AbstractBaseIO(File file){
+    this(file, FeedFormat.RSS20);
   }
   
   public AbstractBaseIO(String pathName){
-    this(new File(pathName));
+    this(new File(pathName), FeedFormat.RSS20);
   }
   
   public AbstractBaseIO(URI uri){
-    this(new File(uri));
+    this(new File(uri), FeedFormat.RSS20);
   }
+  
+  
   public File getFile() {
     return _file;
   }

@@ -23,6 +23,30 @@ public class FeedAppender{
   private FeedWriter _writer;
   private FeedReader _reader;
   private int _numItemToKeep = -1;
+
+  public FeedAppender(File file, FeedFormat format) {
+    _writer = new FeedWriter(file);
+    _reader = new FeedReader(file);
+    setFormat(format);
+  }
+  public FeedAppender(String pathName, FeedFormat format){
+    this(new File(pathName), format);
+  }
+  
+  public FeedAppender(URI uri, FeedFormat format){
+    this(new File(uri), format);
+  }
+  
+  public FeedAppender(File file) {
+    this(file, FeedFormat.RSS20);
+  }
+  public FeedAppender(String pathName){
+    this(new File(pathName), FeedFormat.RSS20);
+  }
+  
+  public FeedAppender(URI uri){
+    this(new File(uri), FeedFormat.RSS20);
+  } 
   
   /**
    * The {@link FeedFormat} this writer should be using.<br/>
@@ -68,17 +92,7 @@ public class FeedAppender{
     return this;
   }
   
-  public FeedAppender(File file) {
-    _writer = new FeedWriter(file);
-    _reader = new FeedReader(file);
-  }
-  public FeedAppender(String pathName){
-    this(new File(pathName));
-  }
-  
-  public FeedAppender(URI uri){
-    this(new File(uri));
-  } 
+
   
   /**
    * Adds an item to the end of the current feed.

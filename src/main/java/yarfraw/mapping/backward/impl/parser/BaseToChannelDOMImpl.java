@@ -15,14 +15,14 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.mapping.CoreRssElementEnum;
-import yarfraw.mapping.ToChannelDOMMapper;
+import yarfraw.mapping.ToChannelDOMParser;
 
 /**
  * This class is not thread safe.
  * @author jliang
  *
  */
-abstract class BaseToChannelDOMImpl implements ToChannelDOMMapper{
+abstract class BaseToChannelDOMImpl implements ToChannelDOMParser{
   protected EnumSet<CoreRssElementEnum> _elementsOfInterest;
   protected Channel _channel = null;
   protected Item _item = null;
