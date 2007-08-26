@@ -42,7 +42,6 @@ public class Atom10MappingUtils{
     if(link.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(link.getOtherAttributes());
     }
-    ret.setContent(link.getOtherContent());
     ret.setHref(link.getHref());
     ret.setHreflang(link.getHreflang());
     ret.setLength(link.getLength() == null? null : new BigInteger(String.valueOf(link.getLength())));

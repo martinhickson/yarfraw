@@ -1,30 +1,32 @@
 package yarfraw.mapping.backward.impl.parser;
 
 import static yarfraw.core.datamodel.FeedFormat.ATOM10;
-import static yarfraw.mapping.AttributesQName.ATOM10_CATEGORY_SCHEME;
-import static yarfraw.mapping.AttributesQName.ATOM10_CATEGORY_TERM;
-import static yarfraw.mapping.AttributesQName.ATOM10_ENTRY_SRC;
-import static yarfraw.mapping.AttributesQName.ATOM10_ENTRY_TYPE;
-import static yarfraw.mapping.AttributesQName.ATOM10_LINK_HREF;
-import static yarfraw.mapping.AttributesQName.ATOM10_LINK_LENGTH;
-import static yarfraw.mapping.AttributesQName.ATOM10_LINK_REL;
-import static yarfraw.mapping.AttributesQName.ATOM10_LINK_TITLE;
-import static yarfraw.mapping.AttributesQName.ATOM10_LINK_TYPE;
-import static yarfraw.mapping.CoreRssElementEnum.Atom_Entry_Content;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_category;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_description;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_image;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_link;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_pubdate;
-import static yarfraw.mapping.CoreRssElementEnum.Channel_title;
-import static yarfraw.mapping.CoreRssElementEnum.Item;
-import static yarfraw.mapping.CoreRssElementEnum.Item_author;
-import static yarfraw.mapping.CoreRssElementEnum.Item_category;
-import static yarfraw.mapping.CoreRssElementEnum.Item_description;
-import static yarfraw.mapping.CoreRssElementEnum.Item_guid;
-import static yarfraw.mapping.CoreRssElementEnum.Item_link;
-import static yarfraw.mapping.CoreRssElementEnum.Item_pubdate;
-import static yarfraw.mapping.CoreRssElementEnum.Item_title;
+import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_SCHEME;
+import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_TERM;
+import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_SRC;
+import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_TYPE;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF_LANG;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_LENGTH;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_REL;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_TITLE;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_TYPE;
+import static yarfraw.io.parser.CoreRssElementEnum.Atom_Entry_Content;
+import static yarfraw.io.parser.CoreRssElementEnum.Atom_Id;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_category;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_description;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_image;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_link;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_pubdate;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_title;
+import static yarfraw.io.parser.CoreRssElementEnum.Item;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_author;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_category;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_description;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_guid;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_link;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_pubdate;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_title;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -49,7 +51,7 @@ import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.core.datamodel.AtomTextAttributes.TextType;
-import yarfraw.mapping.CoreRssElementEnum;
+import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.utils.CommonUtils;
 import yarfraw.utils.DOMSerializer;
 import yarfraw.utils.NodeProcessor;
@@ -103,6 +105,9 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         Item item = new Item();
         XMLUtils.traverseTreeDepthFirst(node, new EntryProcessor(_elementsOfInterestMap, item));
         _channel.additem(item);
+        return NodeFilter.FILTER_REJECT;
+      }else if(element == Atom_Id){
+        _channel.setAtomId(new AtomId(node.getTextContent()));
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_title || element == Item_title){
         _channel.setTitle(node.getTextContent());
@@ -161,6 +166,9 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
       }else if(element == Item_description){
         _item.setDescription(StringUtils.trim(node.getTextContent()));
         return NodeFilter.FILTER_REJECT;
+      }else if(element == Atom_Id){
+        _item.setAtomId(new AtomId(node.getTextContent()));
+        return NodeFilter.FILTER_REJECT;
       }else if(element == Atom_Entry_Content){
         //this is tricky
         AtomContent content = new AtomContent();
@@ -208,12 +216,12 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
   }
   
   private static AtomLink toAtomLink(Node node){
-    AtomLink link = new AtomLink().setHref(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF))
-    .setHreflang(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF))
-    .setRel(XMLUtils.getAttributeValue(node, ATOM10_LINK_REL))
-    .setType(XMLUtils.getAttributeValue(node, ATOM10_LINK_TYPE))
-    .setTitle(XMLUtils.getAttributeValue(node, ATOM10_LINK_TITLE));
-    String length = XMLUtils.getAttributeValue(node, ATOM10_LINK_LENGTH);
+    AtomLink link = new AtomLink().setHref(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF.getLocalPart()))
+    .setHreflang(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF_LANG.getLocalPart()))
+    .setRel(XMLUtils.getAttributeValue(node, ATOM10_LINK_REL.getLocalPart()))
+    .setType(XMLUtils.getAttributeValue(node, ATOM10_LINK_TYPE.getLocalPart()))
+    .setTitle(XMLUtils.getAttributeValue(node, ATOM10_LINK_TITLE.getLocalPart()));
+    String length = XMLUtils.getAttributeValue(node, ATOM10_LINK_LENGTH.getLocalPart());
     if(length != null){
       link.setLength(Integer.valueOf(length));
     }
@@ -225,4 +233,5 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
                           .setDomain(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_SCHEME.getLocalPart()));
   }
 }
+
 

@@ -1,6 +1,7 @@
 package yarfraw.mapping.backward.impl.parser;
-
-import static yarfraw.mapping.CoreRssElementEnum.*;
+import static yarfraw.io.parser.CoreRssElementEnum.CHANNEL_SET;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel;
+import static yarfraw.io.parser.CoreRssElementEnum.ITEM_SET;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -14,8 +15,8 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.mapping.CoreRssElementEnum;
-import yarfraw.mapping.ToChannelDOMParser;
+import yarfraw.io.parser.CoreRssElementEnum;
+import yarfraw.io.parser.ToChannelDOMParser;
 
 /**
  * This class is not thread safe.

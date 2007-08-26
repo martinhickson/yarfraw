@@ -1,10 +1,10 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.mapping.ElementQName.RSS20_DESCRIPTION;
-import static yarfraw.mapping.ElementQName.RSS20_LINK;
-import static yarfraw.mapping.ElementQName.RSS20_PUBDATE;
-import static yarfraw.mapping.ElementQName.RSS20_TITLE;
-import static yarfraw.mapping.ElementQName.RSS20_AUTHOR;
-import static yarfraw.mapping.ElementQName.RSS20_COMMENTS;
+import static yarfraw.io.parser.ElementQName.RSS20_AUTHOR;
+import static yarfraw.io.parser.ElementQName.RSS20_COMMENTS;
+import static yarfraw.io.parser.ElementQName.RSS20_DESCRIPTION;
+import static yarfraw.io.parser.ElementQName.RSS20_LINK;
+import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
+import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 
 import java.util.Map;
 

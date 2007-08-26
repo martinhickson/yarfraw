@@ -1,9 +1,9 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.mapping.ElementQName.ATOM10_AUTHOR;
-import static yarfraw.mapping.ElementQName.ATOM10_RIGHTS;
-import static yarfraw.mapping.ElementQName.ATOM10_TITLE;
-import static yarfraw.mapping.ElementQName.ATOM10_UPDATED;
-import static yarfraw.mapping.ElementQName.ATOM10_SUBTITLE;
+import static yarfraw.io.parser.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.io.parser.ElementQName.ATOM10_RIGHTS;
+import static yarfraw.io.parser.ElementQName.ATOM10_SUBTITLE;
+import static yarfraw.io.parser.ElementQName.ATOM10_TITLE;
+import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractEmail;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractTextContent;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomId;

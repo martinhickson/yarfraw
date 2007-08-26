@@ -1,15 +1,14 @@
 package yarfraw.mapping.backward.impl;
-
-import static yarfraw.mapping.ElementQName.RSS10_CREATOR;
-import static yarfraw.mapping.ElementQName.RSS10_DATE;
-import static yarfraw.mapping.ElementQName.RSS10_DESCRIPTION;
-import static yarfraw.mapping.ElementQName.RSS10_LANGUAGE;
-import static yarfraw.mapping.ElementQName.RSS10_LINK;
-import static yarfraw.mapping.ElementQName.RSS10_PUBLISHER;
-import static yarfraw.mapping.ElementQName.RSS10_RIGHTS;
-import static yarfraw.mapping.ElementQName.RSS10_SUBJECT;
-import static yarfraw.mapping.ElementQName.RSS10_TITLE;
-import static yarfraw.mapping.ElementQName.RSS10_UPDATEFREQUENCY;
+import static yarfraw.io.parser.ElementQName.RSS10_CREATOR;
+import static yarfraw.io.parser.ElementQName.RSS10_DATE;
+import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
+import static yarfraw.io.parser.ElementQName.RSS10_LANGUAGE;
+import static yarfraw.io.parser.ElementQName.RSS10_LINK;
+import static yarfraw.io.parser.ElementQName.RSS10_PUBLISHER;
+import static yarfraw.io.parser.ElementQName.RSS10_RIGHTS;
+import static yarfraw.io.parser.ElementQName.RSS10_SUBJECT;
+import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
+import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
 import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;

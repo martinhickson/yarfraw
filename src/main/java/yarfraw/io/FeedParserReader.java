@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.mapping.ToChannelDOMParser;
+import yarfraw.io.parser.ToChannelDOMParser;
 import yarfraw.utils.XMLUtils;
 /**
  * Provides a set of function to facilitate parsing of a RSS feed using a custom parser.

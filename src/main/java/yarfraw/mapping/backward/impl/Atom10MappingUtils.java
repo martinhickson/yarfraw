@@ -1,12 +1,12 @@
 package yarfraw.mapping.backward.impl;
 
-import static yarfraw.mapping.ElementQName.ATOM10_TITLE;
-import static yarfraw.mapping.ElementQName.ATOM10_PUBLISHED;
-import static yarfraw.mapping.ElementQName.ATOM10_RIGHTS;
-import static yarfraw.mapping.ElementQName.ATOM10_SUMMARY;
-import static yarfraw.mapping.ElementQName.ATOM10_UPDATED;
-import static yarfraw.mapping.ElementQName.ATOM10_AUTHOR;
-import static yarfraw.mapping.ElementQName.ATOM10_EMAIL;
+import static yarfraw.io.parser.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.io.parser.ElementQName.ATOM10_EMAIL;
+import static yarfraw.io.parser.ElementQName.ATOM10_PUBLISHED;
+import static yarfraw.io.parser.ElementQName.ATOM10_RIGHTS;
+import static yarfraw.io.parser.ElementQName.ATOM10_SUMMARY;
+import static yarfraw.io.parser.ElementQName.ATOM10_TITLE;
+import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
 
 import java.net.URISyntaxException;
 import java.util.Locale;
@@ -182,7 +182,7 @@ class Atom10MappingUtils{
     if(link.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(link.getOtherAttributes());
     }
-    ret.setOtherContent(link.getContent());
+
     ret.setHref(link.getHref());
     ret.setHreflang(link.getHreflang());
     ret.setLength(link.getLength() == null ? null : link.getLength().intValue());

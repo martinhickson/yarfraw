@@ -1,5 +1,17 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.mapping.ElementQName.*;
+import static yarfraw.io.parser.ElementQName.RSS20_COPYRIGHTS;
+import static yarfraw.io.parser.ElementQName.RSS20_DESCRIPTION;
+import static yarfraw.io.parser.ElementQName.RSS20_DOCS;
+import static yarfraw.io.parser.ElementQName.RSS20_GENERATOR;
+import static yarfraw.io.parser.ElementQName.RSS20_LANGUAGE;
+import static yarfraw.io.parser.ElementQName.RSS20_LAST_BUILD_DATE;
+import static yarfraw.io.parser.ElementQName.RSS20_LINK;
+import static yarfraw.io.parser.ElementQName.RSS20_MANAGINGEDITOR;
+import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
+import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
+import static yarfraw.io.parser.ElementQName.RSS20_TTL;
+import static yarfraw.io.parser.ElementQName.RSS20_WEBMASTER;
+
 import java.util.Locale;
 import java.util.Map;
 

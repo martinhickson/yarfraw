@@ -22,7 +22,6 @@ public class AtomLink extends AtomAttributes{
   private String _hreflang;
   private String _title;
   private Integer _length;
-  private String _otherContent;
   
   public AtomLink(){}
 
@@ -116,15 +115,6 @@ public class AtomLink extends AtomAttributes{
     return this;
   }
 
-  public String getOtherContent() {
-    return _otherContent;
-  }
-
-  public AtomLink setOtherContent(String otherContent) {
-    _otherContent = otherContent;
-    return this;
-  }
-  
   @Override
   public AtomLink addOtherAttributes(QName namespace, String attribute) {
     super.addOtherAttributes(namespace, attribute);
