@@ -18,7 +18,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomContent;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
@@ -123,7 +123,7 @@ class Atom10MappingUtils{
           ret.addCategory(toCategory((CategoryType)val));
         }else if(val instanceof ContentType){
           ContentType c = (ContentType)val;
-          AtomContent content = new AtomContent();
+          Content content = new Content();
           attr.setBase(c.getBase());
           attr.setLang(c.getLang() == null ? null : new Locale(c.getLang()));
           if(c.getOtherAttributes() != null){
@@ -140,7 +140,7 @@ class Atom10MappingUtils{
           }
           content.setSrc(c.getSrc());
           content.setType(c.getType() == null? null : yarfraw.core.datamodel.AtomTextAttributes.TextType.valueOf(c.getType()));
-          ret.setAtomContent(content);
+          ret.setContent(content);
         }//contributor are ignored
         else if(val instanceof LinkType){ 
           ret.addAtomLink(toAtomLink((LinkType)val));

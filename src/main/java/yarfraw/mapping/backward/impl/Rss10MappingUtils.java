@@ -43,6 +43,7 @@ import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.utils.CommonUtils;
 class Rss10MappingUtils{
+  private static final String ENCODED = "encoded";
   private static final int MIN_PER_DAY = 60*24;
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
   private static final int MIN_PER_MONTH = MIN_PER_DAY*30;
@@ -182,6 +183,12 @@ class Rss10MappingUtils{
                 item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
               }else if(same(jaxb.getName(), RSS10_SUBJECT)){
                 item.addCategory((String)jaxb.getValue());
+              }else if (o instanceof Element) {
+                Element e = (Element) o;
+                if(ENCODED.equals(e.getLocalName())){
+                  item.getContent().addContentText(e.getTextContent());
+                }
+                item.getOtherElements().add(e);
               }
             }
           }

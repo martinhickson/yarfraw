@@ -41,7 +41,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
-import yarfraw.core.datamodel.AtomContent;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.Category;
@@ -171,7 +171,7 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }else if(element == Atom_Entry_Content){
         //this is tricky
-        AtomContent content = new AtomContent();
+        Content content = new Content();
         content.setSrc(XMLUtils.getAttributeValue(node, ATOM10_ENTRY_SRC.getLocalPart()));
         String type = XMLUtils.getAttributeValue(node, ATOM10_ENTRY_TYPE.getLocalPart());
         content.setType(type == null ? TextType.text: TextType.valueOf(type));
@@ -183,11 +183,11 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
             //FIXME: log warning
           }
           content.addContentText(writer.toString());
-          _item.setAtomContent(content);
+          _item.setContent(content);
         }else{
           content.addContentText(node.getTextContent());
         }
-        _item.setAtomContent(content);
+        _item.setContent(content);
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){  
         Category cat = new Category();

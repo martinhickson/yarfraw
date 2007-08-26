@@ -1,7 +1,15 @@
 package yarfraw.mapping.backward.impl.parser;
-import static yarfraw.io.parser.CoreRssElementEnum.CHANNEL_SET;
+
 import static yarfraw.io.parser.CoreRssElementEnum.Channel;
-import static yarfraw.io.parser.CoreRssElementEnum.ITEM_SET;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_category;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_description;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_image;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_language;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_link;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_pubdate;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_textinput;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_title;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_ttl;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -24,6 +32,11 @@ import yarfraw.io.parser.ToChannelDOMParser;
  *
  */
 abstract class BaseToChannelDOMImpl implements ToChannelDOMParser{
+
+  private static final EnumSet<CoreRssElementEnum> CHANNEL_SET = EnumSet.of(
+      Channel,Channel_title,Channel_link, Channel_description,Channel_language,  
+      Channel_pubdate,Channel_ttl,Channel_image,Channel_textinput,Channel_category);
+  private static final EnumSet<CoreRssElementEnum> ITEM_SET = EnumSet.complementOf(CHANNEL_SET);
   protected EnumSet<CoreRssElementEnum> _elementsOfInterest;
   protected Channel _channel = null;
   protected Item _item = null;

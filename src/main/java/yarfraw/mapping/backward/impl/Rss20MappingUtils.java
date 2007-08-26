@@ -29,6 +29,8 @@ import yarfraw.utils.CommonUtils;
 class Rss20MappingUtils{
 
   
+  private static final String ENCODED = "encoded";
+
   private Rss20MappingUtils(){}
   
   @SuppressWarnings("unchecked")
@@ -81,6 +83,9 @@ class Rss20MappingUtils{
           }
         }else if (o instanceof Element) {
           Element e = (Element) o;
+          if(ENCODED.equals(e.getLocalName())){
+            item.getContent().addContentText(e.getTextContent());
+          }
           item.getOtherElements().add(e);
         }else{
             //FIXME: not sure what to do yet

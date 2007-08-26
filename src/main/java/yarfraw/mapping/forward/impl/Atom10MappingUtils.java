@@ -11,7 +11,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomContent;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
@@ -143,14 +143,14 @@ public class Atom10MappingUtils{
               item.getTitle())));
     }
 
-    if(item.getAtomContent() !=  null){
-      elementList.add(factory.createEntryTypeContent(toContent(item.getAtomContent())));
+    if(item.getContent() !=  null){
+      elementList.add(factory.createEntryTypeContent(toContent(item.getContent())));
     }
     
     return ret;
   }
   
-  public static ContentType toContent(AtomContent content){
+  public static ContentType toContent(Content content){
     ContentType ret = FACTORY.createContentType();
     ret.setBase(content.getBase() == null?null:content.getBase().toString());
     ret.setLang(content.getLang() == null?null:content.getLang().getLanguage());

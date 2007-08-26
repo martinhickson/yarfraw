@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import yarfraw.core.datamodel.AtomContent;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
@@ -60,7 +60,7 @@ public class BuilderTest extends TestCase{
           //person's name, uri elements are not supported
           .setAuthor("f8dy@example.com")
           //contributor element are not supported
-          .setAtomContent(new AtomContent().setType(xhtml)
+          .setContent(new Content().setType(xhtml)
                                            .setBase("http://diveintomark.org/")
                                            .setLang(Locale.US)
                                            .addOtherElement("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
@@ -80,7 +80,7 @@ public class BuilderTest extends TestCase{
   
   @Test
   public void testAtomContent() throws Exception{
-    AtomContent content = AtomContent.create()
+    Content content = Content.create()
                                      .addContentText("text content")
                                      .addOtherAttributes(new QName("http://ns", "myattr"), "value")
                                      .addOtherElement(XMLUtils.parseXml("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+

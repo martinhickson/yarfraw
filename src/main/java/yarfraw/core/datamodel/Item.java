@@ -52,10 +52,10 @@ public class Item extends AbstractBaseObject{
   private String _rights;
   private List<Element> _otherElements = new ArrayList<Element>();
   private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
+  private Content _content;
   
   //atom extension
   private AtomId _atomId;
-  private AtomContent _atomContent;
   private AtomAttributes _atomAttributes;
   private Map<AtomTextElementEnum, AtomTextAttributes> _atomTextAttributes = new HashMap<AtomTextElementEnum, AtomTextAttributes>();
   private List<AtomLink> _atomLinks = new ArrayList<AtomLink>();
@@ -96,11 +96,14 @@ public class Item extends AbstractBaseObject{
     _source = source;
   }
 
-  public AtomContent getAtomContent() {
-    return _atomContent;
+  public Content getContent() {
+    if(_content == null){
+      _content = new Content();
+    }
+    return _content;
   }
-  public Item setAtomContent(AtomContent atomContent) {
-    _atomContent = atomContent;
+  public Item setContent(Content content) {
+    _content = content;
     return this;
   }
   

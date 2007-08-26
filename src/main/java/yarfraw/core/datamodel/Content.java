@@ -21,21 +21,21 @@ import yarfraw.utils.XMLUtils;
  * @author jliang
  *
  */
-public class AtomContent extends AtomAttributes{
+public class Content extends AtomAttributes{
   private List<Element> _otherElements = new ArrayList<Element>();
   private List<String> _contentText = new ArrayList<String>();
   private AtomTextAttributes.TextType _type = AtomTextAttributes.TextType.text;
   private String _src;
   
-  public AtomContent() {}
-  public static AtomContent create(){
-    return new AtomContent();
+  public Content() {}
+  public static Content create(){
+    return new Content();
   }
 
   /**
    * Any text content.
    */
-  public AtomContent addContentText(String contentText){
+  public Content addContentText(String contentText){
     _contentText = _contentText != null ? _contentText : new ArrayList<String>();
     _contentText.add(contentText);
     return this;
@@ -49,29 +49,29 @@ public class AtomContent extends AtomAttributes{
   /**
    * Any text content.
    */
-  public AtomContent setContentText(List<String> contentText) {
+  public Content setContentText(List<String> contentText) {
     _contentText = contentText;
     return this;
   }
   @Override
-  public AtomContent setBase(String base) {
+  public Content setBase(String base) {
     super.setBase(base);
     return this;
   }
   @Override
-  public AtomContent setLang(Locale lang) {
+  public Content setLang(Locale lang) {
     super.setLang(lang);
     return this;
   }
   
   @Override
-  public AtomContent setOtherAttributes(Map<QName, String> otherAttributes) {
+  public Content setOtherAttributes(Map<QName, String> otherAttributes) {
     super.setOtherAttributes(otherAttributes);
     return this;
   }
   
   @Override
-  public AtomContent addOtherAttributes(QName namespace, String attribute) {
+  public Content addOtherAttributes(QName namespace, String attribute) {
     super.addOtherAttributes(namespace, attribute);
     return this;
   }
@@ -89,7 +89,7 @@ public class AtomContent extends AtomAttributes{
    * <p/>
    * If the "src" attribute is present, the "type" attribute SHOULD be provided and MUST be a MIME media type [MIMEREG], rather than "text", "html", or "xhtml". The value is advisory; that is to say, when the corresponding URI (mapped from an IRI, if necessary), is dereferenced, if the server providing that content also provides a media type, the server-provided media type is authoritative.
    */  
-  public AtomContent setSrc(String src) {
+  public Content setSrc(String src) {
     _src = src;
     return this;
   }
@@ -102,7 +102,7 @@ public class AtomContent extends AtomAttributes{
   /**
    * On the atom:content element, the value of the "type" attribute MAY be one of "text", "html", or "xhtml". Failing that, it MUST conform to the syntax of a MIME media type, but MUST NOT be a composite type (see Section 4.2.6 of [MIMEREG]). If the type attribute is not provided, Atom Processors MUST behave as though it were present with a value of "text".
    */  
-  public AtomContent setType(AtomTextAttributes.TextType type) {
+  public Content setType(AtomTextAttributes.TextType type) {
     _type = type;
     return this;
   }
@@ -116,7 +116,7 @@ public class AtomContent extends AtomAttributes{
    * Other additional elements that are not in the specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    */
-  public AtomContent setOtherElements(List<Element> otherElements) {
+  public Content setOtherElements(List<Element> otherElements) {
     _otherElements = otherElements;
     return this;
   }
@@ -125,7 +125,7 @@ public class AtomContent extends AtomAttributes{
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * @param element - any element
    */
-  public AtomContent addOtherElement(Element element){
+  public Content addOtherElement(Element element){
     if(_otherElements == null){
       _otherElements = new ArrayList<Element>();
     }
@@ -138,7 +138,7 @@ public class AtomContent extends AtomAttributes{
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * 
    */
-  public AtomContent addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
+  public Content addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
     if(_otherElements == null){
       _otherElements = new ArrayList<Element>();
     }
