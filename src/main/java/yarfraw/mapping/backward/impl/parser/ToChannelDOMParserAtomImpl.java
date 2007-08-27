@@ -5,6 +5,7 @@ import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_SCHEME;
 import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_TERM;
 import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_SRC;
 import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_TYPE;
+import static yarfraw.io.parser.AttributesQName.ATOM10_LANGUAGE;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF_LANG;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_LENGTH;
@@ -16,6 +17,7 @@ import static yarfraw.io.parser.CoreRssElementEnum.Atom_Id;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_category;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_description;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_image;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel_language;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_link;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_pubdate;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_title;
@@ -27,25 +29,29 @@ import static yarfraw.io.parser.CoreRssElementEnum.Item_guid;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_link;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_pubdate;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_title;
+import static yarfraw.io.parser.ElementQName.ATOM10_EMAIL;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
-import java.util.HashMap;
+import java.util.EnumSet;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
-import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
@@ -62,13 +68,28 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
-  private Map<CoreRssElementEnum, Node> _elementsNodeMap = new HashMap<CoreRssElementEnum, Node>();
-  private static final DOMSerializer DOM_SERIALIZER = new DOMSerializer();
  
+  private static final DOMSerializer DOM_SERIALIZER = new DOMSerializer();
+  private static final Log LOG = LogFactory.getLog(ToChannelDOMParserAtomImpl.class);
+
+  public ToChannelDOMParserAtomImpl() {
+    super();
+  }
+  public ToChannelDOMParserAtomImpl(
+      EnumSet<CoreRssElementEnum> elementsOfInterest) {
+    super(elementsOfInterest);
+  }
+  
   public Channel execute(Document doc) throws YarfrawException {
     Channel ret = new Channel();
-    _elementsNodeMap.clear();
     Node feed = doc.getDocumentElement();
+  //atom 1.0 has the language element as an attribute at the channel/feed level
+    if(_elementsOfInterest.contains(Channel_language)){
+      String lang = XMLUtils.getAttributeValue(feed, ATOM10_LANGUAGE.getLocalPart());
+      if(lang != null){
+        ret.setLanguage(new Locale(lang)); 
+      }
+    }
     XMLUtils.traverseTreeDepthFirst(feed, 
         new FeedProcessor(_elementsOfInterestMap, ret));
     return ret;
@@ -123,7 +144,7 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
           _channel.setImage(new Image().setUrl(node.getTextContent()));
         }
         catch (URISyntaxException e) {
-          //it's not required to be a valid link, but generally it should be
+          LOG.warn("Unable to parse <"+Channel_image.getName(ATOM10).getLocalPart()+">'s url content");
         }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_pubdate){
@@ -178,9 +199,9 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         if(content.getType() == TextType.xhtml){
           StringWriter writer = new StringWriter();
           try {
-            DOM_SERIALIZER.serializeNode(node, writer, "");
+            DOM_SERIALIZER.serializeNode(node.getFirstChild(), writer, StringUtils.EMPTY);
           } catch (IOException e) {
-            //FIXME: log warning
+            LOG.warn("The content of the <content> element should be xhtml, but unable");
           }
           content.addContentText(writer.toString());
           _item.setContent(content);
@@ -204,7 +225,10 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         _item.addAtomLink(toAtomLink(node));
         return NodeFilter.FILTER_REJECT;
       }else if(element == Item_author){
-        _item.setAuthor(StringUtils.trim(node.getTextContent()));
+        Node email = XMLUtils.getChildrenNodeByName(node, ATOM10_EMAIL.getLocalPart());
+        if(email != null){
+          _item.setAuthor(email.getTextContent());
+        }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Item_guid){
         _item.setAtomId(new AtomId(node.getTextContent()));

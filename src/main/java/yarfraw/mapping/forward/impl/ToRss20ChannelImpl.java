@@ -19,6 +19,11 @@ import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.mapping.forward.ToRss20Channel;
 import yarfraw.utils.CommonUtils;
 
+/**
+ * Util methods for mapping Yarfraw core model to Rss20 Jaxb model
+ * @author jliang
+ *
+ */
 public class ToRss20ChannelImpl implements ToRss20Channel{
 
    private static ToRss20Channel _instance = new ToRss20ChannelImpl();

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Item;
@@ -17,9 +20,14 @@ import yarfraw.generated.rss10.elements.TRss10Channel;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.mapping.forward.ToRss10Channel;
 import yarfraw.utils.CommonUtils;
-
+/**
+ * Util methods for mapping Yarfraw core model to Rss10 Jaxb model
+ * @author jliang
+ *
+ */
 public class ToRss10ChannelImpl implements ToRss10Channel{
   private static ToRss10Channel _instance = new ToRss10ChannelImpl();
+  private static final Log LOG = LogFactory.getLog(ToRss10ChannelImpl.class);
   private static final ObjectFactory FACTORY = new ObjectFactory();
   private static final int MIN_PER_DAY = 60*24;
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
@@ -51,9 +59,9 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
     }
     
     //NOT SUPPORTED
-//    if(ch.getCloud() != null){
-//      elementList.add(Rss20MappingUtils.toRss20Cloud(ch.getCloud()));
-//    }
+    if(ch.getCloud() != null){
+      LOG.info("Channel.Cloud is not supported in Rss 1.0 feed. It will be ignored.");
+    }
     
     if(ch.getCopyright() != null){
       elementList.add(factory.createRights(ch.getCopyright()));
@@ -63,14 +71,14 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
     }
 
   //NOT SUPPORTED
-//    if(ch.getDocs() != null){
-//      elementList.add(factory.createTRssChannelDocs(ch.getDocs().toString()));
-//    }
+    if(ch.getDocs() != null){
+      LOG.info("Channel.Docs is not supported in Rss 1.0 feed. It will be ignored.");
+    }
     //NOT SUPPORTED
-//    if(ch.getGenerator() != null){
-//      elementList.add(factory.createCreator(ch.getGenerator()));
-//    }
-//
+    if(ch.getGenerator() != null){
+      LOG.info("Channel.Generator is not supported in Rss 1.0 feed. It will be ignored.");
+    }
+
     if(ch.getImage() != null){
       elementList.add(Rss10MappingUtils.toRss10Image(ch.getImage()));
     }
@@ -103,9 +111,9 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
     }
     //not supported
     
-//    if(ch.getLastBuildDate() != null){
-//      elementList.add(factory.createDate(format.format(ch.getLastBuildDate())));
-//    }
+    if(ch.getLastBuildDate() != null){
+      LOG.info("Channel.LastBuildDate is not supported in Rss 1.0 feed. It will be ignored.");
+    }
     
     if(ch.getManagingEditor() != null){
       elementList.add(factory.createCreator(ch.getManagingEditor()));
@@ -115,19 +123,13 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
       elementList.add(factory.createDate(CommonUtils.getDateAsISO8601String(ch.getPubDate())));
     }
 //  not supported
-//    if(ch.getSkipDays() != null){
-//      TSkipDaysList tdl = new TSkipDaysList();
-//      for(Day day : ch.getSkipDays()){
-//        tdl.getDay().add(TSkipDay.fromValue(day.toString()));
-//      }
-//      elementList.add(new ObjectFactory().createSkipDays( tdl));
-//    }
-//
-//    if(ch.getSkipHours() != null){
-//      TSkipHoursList thl = new TSkipHoursList();
-//      thl.getHour().addAll(ch.getSkipHours());
-//      elementList.add(new ObjectFactory().createSkipHours( thl));
-//    }
+    if(ch.getSkipDays() != null){
+      LOG.info("Channel.SkipDays is not supported in Rss 1.0 feed. It will be ignored.");
+    }
+
+    if(ch.getSkipHours() != null){
+      LOG.info("Channel.SkipHours is not supported in Rss 1.0 feed. It will be ignored.");
+    }
     
     if(ch.getTexInput() != null){
       elementList.add(Rss10MappingUtils.toRss10TextInput(ch.getTexInput()));      

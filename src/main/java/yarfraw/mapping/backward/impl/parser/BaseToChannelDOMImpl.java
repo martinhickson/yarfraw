@@ -21,7 +21,6 @@ import org.w3c.dom.Document;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.io.parser.ToChannelDOMParser;
@@ -38,8 +37,7 @@ abstract class BaseToChannelDOMImpl implements ToChannelDOMParser{
       Channel_pubdate,Channel_ttl,Channel_image,Channel_textinput,Channel_category);
   private static final EnumSet<CoreRssElementEnum> ITEM_SET = EnumSet.complementOf(CHANNEL_SET);
   protected EnumSet<CoreRssElementEnum> _elementsOfInterest;
-  protected Channel _channel = null;
-  protected Item _item = null;
+  
   //use hash map for lookup so we dont need to iterate thru the list every time
   protected final Map<QName, CoreRssElementEnum> _elementsOfInterestMap = new HashMap<QName, CoreRssElementEnum>();
   

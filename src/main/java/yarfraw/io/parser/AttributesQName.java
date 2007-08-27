@@ -19,6 +19,7 @@ public class AttributesQName{
   public final static QName ATOM10_LINK_LENGTH = new QName("http://www.w3.org/2005/Atom", "length");
   public final static QName ATOM10_LINK_TITLE = new QName("http://www.w3.org/2005/Atom", "title");
   public final static QName ATOM10_LINK_HREF_LANG = new QName("http://www.w3.org/2005/Atom", "hreflang");
+  public final static QName ATOM10_LANGUAGE = new QName("http://www.w3.org/XML/1998/namespace", "lang");
   public final static QName RSS20_RSS_VERSION = new QName("", "version");
   
 }

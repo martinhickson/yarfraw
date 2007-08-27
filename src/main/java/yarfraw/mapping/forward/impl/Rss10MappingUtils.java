@@ -2,6 +2,9 @@ package yarfraw.mapping.forward.impl;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.generated.rss10.elements.ObjectFactory;
@@ -16,14 +19,16 @@ import yarfraw.generated.rss10.elements.TRss10TextInput;
 class Rss10MappingUtils {
   private Rss10MappingUtils(){}
   private static final ObjectFactory FACTORY = new ObjectFactory ();
-  
+  private static final Log LOG = LogFactory.getLog(Rss10MappingUtils.class);
   public static JAXBElement<TRss10Image> toRss10Image(Image image){
     TRss10Image ret = FACTORY.createTRss10Image();
     //not supported
-//    ret.setDescription(image.getDescription());
-//    ret.setHeight(image.getHeight());
-//    ret.setWidth(image.getWidth());
-
+    if(image.getDescription() != null
+        || image.getHeight() != null
+        || image.getWidth() != null){
+      LOG.info("description, height, width are not supported in Rss 1.0's image element. They will be ignored");
+    }
+    
     if(image.getRdfAttributes() != null){
       ret.setAbout(image.getRdfAttributes().getAbout() == null ? null : image.getRdfAttributes().getAbout().toString());
       ret.setResource(image.getRdfAttributes().getResource() == null ? null : image.getRdfAttributes().getResource().toString());

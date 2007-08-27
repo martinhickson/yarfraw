@@ -25,7 +25,11 @@ import yarfraw.generated.atom10.elements.GeneratorType;
 import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.mapping.forward.ToAtom10Channel;
-
+/**
+ * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
+ * @author jliang
+ *
+ */
 public class ToAtom10ChannelImpl implements ToAtom10Channel{
   private static ToAtom10Channel _instance = new ToAtom10ChannelImpl();
   private static final ObjectFactory FACTORY = new ObjectFactory();
@@ -102,7 +106,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
     }
 
     //already cover by atom attribute
-    if(ch.getLanguage() != null  && ret.getLang() != null){
+    if(ch.getLanguage() != null){ //this will override it
       ret.setLang(ch.getLanguage().getLanguage());
     }
 

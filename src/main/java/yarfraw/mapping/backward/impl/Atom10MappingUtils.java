@@ -18,12 +18,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.generated.atom10.elements.CategoryType;
@@ -162,6 +162,8 @@ class Atom10MappingUtils{
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+        }else if(val instanceof IdType){
+          ret.setAtomId(toAtomId((IdType)val));
         }else{
           //FIXME: ignore?
         }

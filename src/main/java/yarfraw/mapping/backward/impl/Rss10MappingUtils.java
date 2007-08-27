@@ -24,6 +24,9 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.Channel;
@@ -48,6 +51,7 @@ class Rss10MappingUtils{
   private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
   private static final int MIN_PER_MONTH = MIN_PER_DAY*30;
   private static final int MIN_PER_YEAR = MIN_PER_DAY*365;
+  private static final Log LOG = LogFactory.getLog(Rss10MappingUtils.class);
   
   private Rss10MappingUtils(){}
   
@@ -122,16 +126,14 @@ class Rss10MappingUtils{
             for(Li li : seq.getLi()){
               ordering.put(li.getResource(), i++);
             }
-          }else if(val instanceof Seq){
-            
           }else{
-            //TODO: ignore?
+            LOG.warn("Unexpected JAXBElement: "+ToStringBuilder.reflectionToString(jaxb)+" this should not happen!");
           }
         }else if (o instanceof Element) {
           Element e = (Element) o;
           ret.getOtherElements().add(e);
         }else{
-            //FIXME: not sure what to do yet
+          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
         }
       }  
       ret.setTtl(calculateTtl(updatePeriod, updateFrequency));

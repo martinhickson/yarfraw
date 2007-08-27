@@ -10,13 +10,16 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.AtomTextAttributes;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
@@ -30,9 +33,14 @@ import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
-
+/**
+ * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
+ * @author jliang
+ *
+ */
 public class Atom10MappingUtils{
   private static final ObjectFactory FACTORY = new ObjectFactory ();
+  private static final Log LOG = LogFactory.getLog(Atom10MappingUtils.class);
   private Atom10MappingUtils(){}
 
   public static LinkType toLink(AtomLink link){
@@ -89,9 +97,9 @@ public class Atom10MappingUtils{
         }
     }
 //    not supported
-//    if(item.getComments() != null){
-//      elementList.add(factory.createTRssItemComments(item.getComments().toString()));      
-//    }
+    if(item.getComments() != null){
+      LOG.info("Item.Comments field is not supported by Atom 1.0. It will be ignored");      
+    }
     if(item.getDescription() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.summary) != null){
       elementList.add(factory.createEntryTypeSummary(
               Atom10MappingUtils.toTextType(
@@ -106,21 +114,19 @@ public class Atom10MappingUtils{
               item.getRights())));
     }
 //  not supported
-//    if(item.getEnclosure() != null){
-//      elementList.add(toRss20Enclosure(item.getEnclosure()));
-//    }
+    if(item.getEnclosure() != null){
+      LOG.info("Item.Enclosure field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add enclosure element to item");
+    }
 //  not supported
-//    if(item.getGuid() != null){
-//      elementList.add(item.getGuid().getGuid());
-//    }
+    if(item.getGuid() != null){
+      LOG.info("Item.Guid field is not supported by Atom 1.0. It will be ignored. Use Item.AtomId to add unique id to item");
+    }
     
     //ignore, use atom link
-//    if(item.getLink() != null ){
-//      LinkType link = factory.createLinkType();
-//      link.setHref(item.getLink().toString());
-//      elementList.add(factory.createFeedTypeLink(link));
-//    }
-//    
+    if(item.getLink() != null ){
+      LOG.info("Item.Link field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add link elements to item");
+    }
+
     for(AtomLink atomLink : item.getAtomLinks()){
       elementList.add(factory.createLink(toLink(atomLink)));
     }
@@ -132,9 +138,9 @@ public class Atom10MappingUtils{
       elementList.add(factory.createEntryTypePublished(date));
     }
 //not supported
-//    if(item.getSource() != null){
-//      elementList.add(toRss20Source(item.getSource()));
-//    }
+    if(item.getSource() != null){
+      LOG.info("Item.Source field is not supported by Atom 1.0. It will be ignored");
+    }
     
     if(item.getTitle() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.title) != null){
       elementList.add(factory.createEntryTypeTitle(

@@ -11,6 +11,8 @@ import javax.xml.namespace.QName;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.YarfrawException;
@@ -22,8 +24,8 @@ import yarfraw.core.datamodel.YarfrawException;
  *
  */
 public class CommonUtils{
+  private static final Log LOG = LogFactory.getLog(CommonUtils.class);
   
-  private CommonUtils(){}
   
   public static final String RFC822DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
   public static final String ISO8601DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssZ";
@@ -56,6 +58,7 @@ public class CommonUtils{
   
 //  public static final SimpleDateFormat ISO_FORMAT = new SimpleDateFormat(ISO8601DATE_PATTERN);
 
+  private CommonUtils(){}
   /**
    * Remove last occurrence of the character c in s
    */
@@ -99,6 +102,9 @@ public class CommonUtils{
           //keep trying
         }
       }
+    }
+    if(ret == null){
+      LOG.warn("Unparsable dateString "+dateString+", returning null");
     }
     return ret;
   }

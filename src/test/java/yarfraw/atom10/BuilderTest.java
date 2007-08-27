@@ -30,6 +30,7 @@ public class BuilderTest extends TestCase{
   
   public static Channel buildChannel() throws Exception{
     return  Channel.create()
+    .setLanguage(Locale.ENGLISH)
     .setTitle("dive into mark")
     .setDescription("A <em>lot</em> of effort went into making this effortless")
     .setPubDate("2005-07-10T12:29:29Z", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"))

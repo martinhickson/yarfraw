@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
@@ -11,11 +14,15 @@ import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.mapping.forward.ToRss10ChannelItem;
 import yarfraw.utils.CommonUtils;
-
+/**
+ * Util methods for mapping Yarfraw core model to Rss10 Jaxb model
+ * @author jliang
+ *
+ */
 public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
   private static ToRss10ChannelItem _instance = new ToRss10ChannelItemImpl();
   private static final ObjectFactory FACTORY = new ObjectFactory();
-  
+  private static final Log LOG = LogFactory.getLog(ToRss10ChannelItemImpl.class);
   public static ToRss10ChannelItem getInstance(){
     return _instance;
   }
@@ -50,19 +57,19 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
     }
     
     //not supported
-//    if(item.getComments() != null){
-//      elementList.add(factory.createTRssItemComments(item.getComments().toString()));      
-//    }
+    if(item.getComments() != null){
+      LOG.info("Item.Comments is not supported in Rss 1.0 feed. It will be ignored.");      
+    }
     if(item.getDescription() != null){
       elementList.add(FACTORY.createTRss10ItemDescription(item.getDescription()));
     }
   //not supported
-//    if(item.getEnclosure() != null){
-//      elementList.add(toRss20Enclosure(item.getEnclosure()));
-//    }
-//    if(item.getGuid() != null){
-//      elementList.add(toRss20Guid(item.getGuid()));
-//    }
+    if(item.getEnclosure() != null){
+      LOG.warn("Item.Enclosure is not supported in Rss 1.0 feed. It will be ignored. Use Rss 2.0 or Atom 1.0 to add enclosure");
+    }
+    if(item.getGuid() != null){
+      LOG.warn("Item.Guid is not supported in Rss 1.0 feed. It will be ignored. Use Rss 2.0 or Atom 1.0 to add unique Id");
+    }
     if(item.getLink() != null){
       elementList.add(FACTORY.createTRss10ItemLink(item.getLink().toString()));
       ret.setAbout(item.getLink().toString());
@@ -76,9 +83,9 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
       elementList.add(FACTORY.createDate(CommonUtils.getDateAsISO8601String(item.getPubDate())));
     }
     //not supported
-//    if(item.getSource() != null){
-//      elementList.add(toRss20Source(item.getSource()));
-//    }
+    if(item.getSource() != null){
+      LOG.info("Item.Source is not supported in Rss 1.0 feed. It will be ignored. ");
+    }
     if(item.getTitle() != null){
       elementList.add(FACTORY.createTRss10ItemTitle(item.getTitle()));
     }

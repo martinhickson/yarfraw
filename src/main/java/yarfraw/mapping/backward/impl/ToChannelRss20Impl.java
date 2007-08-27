@@ -18,6 +18,9 @@ import java.util.Map;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.Category;
@@ -40,7 +43,7 @@ import yarfraw.mapping.backward.ToChannelRss20;
 import yarfraw.utils.CommonUtils;
 
 public class ToChannelRss20Impl implements ToChannelRss20{
-
+  private static final Log LOG = LogFactory.getLog(ToChannelRss20Impl.class);
   private static final ToChannelRss20 _instance = new ToChannelRss20Impl();
   
   private ToChannelRss20Impl() {}
@@ -132,14 +135,14 @@ public class ToChannelRss20Impl implements ToChannelRss20{
             TTextInput in = (TTextInput)val;
             c.setTextInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
           }else{
-            //TODO: ignore?
+            LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
           }
         }
         else if (o instanceof Element) {
           Element e = (Element) o;
           c.getOtherElements().add(e);
         }else{
-          //FIXME not sure what to do yet
+          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
         }
       }                                           
     }

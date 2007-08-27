@@ -11,6 +11,9 @@ import java.util.Map;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.Category;
@@ -28,7 +31,7 @@ import yarfraw.utils.CommonUtils;
 
 class Rss20MappingUtils{
 
-  
+  private static final Log LOG = LogFactory.getLog(Rss20MappingUtils.class);
   private static final String ENCODED = "encoded";
 
   private Rss20MappingUtils(){}
@@ -80,6 +83,8 @@ class Rss20MappingUtils{
           }else if (val instanceof TSource) {
             TSource source = (TSource)val;
             item.setSource(new Source(source.getUrl(), source.getValue()));
+          }else{
+            LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
           }
         }else if (o instanceof Element) {
           Element e = (Element) o;
@@ -88,7 +93,7 @@ class Rss20MappingUtils{
           }
           item.getOtherElements().add(e);
         }else{
-            //FIXME: not sure what to do yet
+          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
         }
       }
     } catch (Exception e1) {
