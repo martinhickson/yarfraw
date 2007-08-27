@@ -2,6 +2,8 @@ package yarfraw.mapping.backward.impl;
 
 import static yarfraw.mapping.backward.impl.Rss10MappingUtils.toChannel;
 
+import java.net.URISyntaxException;
+
 import javax.xml.bind.JAXBElement;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +13,7 @@ import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss10.elements.TRss10Channel;
+import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.mapping.backward.ToChannelRss10;
 
 public class ToChannelRss10Impl implements ToChannelRss10{
@@ -28,14 +31,28 @@ public class ToChannelRss10Impl implements ToChannelRss10{
       return null;
     }
     TRss10Channel ch = null;
+    
+    TRss10TextInput ti = null;
     for(Object o : rdf.getChannelOrItemOrTextinput()){
       if (o instanceof JAXBElement) {
         Object val = ((JAXBElement)o).getValue();
         if (val instanceof TRss10Channel) {
           ch = (TRss10Channel) val;
-        } 
+          
+        }else if(val instanceof TRss10TextInput){
+          ti = (TRss10TextInput)val;
+        }
       }
     }
-    return toChannel(ch, rdf);
+    Channel channel = toChannel(ch, rdf);
+    if(ti != null){
+      try {
+        channel.setTextInput(Rss10MappingUtils.toTextInput(ti));
+      }
+      catch (URISyntaxException e) {
+        throw new YarfrawException("Unable to parse <textinpu>", e);
+      }
+    }
+    return channel;
   }
 }

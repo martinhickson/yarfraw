@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,14 +15,11 @@ import org.apache.commons.io.IOUtils;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.generated.rss10.elements.RDF;
 import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
-import yarfraw.mapping.forward.impl.ToRss10ChannelItemImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
 import yarfraw.utils.CommonUtils;
 /**
@@ -35,9 +31,6 @@ import yarfraw.utils.CommonUtils;
  */
 public class FeedWriter extends AbstractBaseIO{
   private static final ObjectFactory RSS20_FACTORY = new ObjectFactory();
-  private static final yarfraw.generated.rss10.elements.ObjectFactory RSS10_FACTORY = 
-    new yarfraw.generated.rss10.elements.ObjectFactory();
-
   private static Marshaller _rss20Marshaller;
   private static Marshaller _rss10Marshaller;
   private static Marshaller _atom10Marshaller;
@@ -122,17 +115,7 @@ public class FeedWriter extends AbstractBaseIO{
       rss.setChannel(ToRss20ChannelImpl.getInstance().execute(channel).getValue());
       return RSS20_FACTORY.createRss(rss);
     }else if(format == FeedFormat.RSS10){
-      RDF rdf = RSS10_FACTORY.createRDF();
-      List<Object> elementList = rdf.getChannelOrItemOrTextinput();
-      elementList.add(ToRss10ChannelImpl.getInstance().execute(channel));
-      if(channel.getItems() != null){
-        for(Item item : channel.getItems()){
-          if(item != null){
-            elementList.add(ToRss10ChannelItemImpl.getInstance().execute(item));
-          }
-        }
-      }
-      return rdf;
+      return ToRss10ChannelImpl.getInstance().execute(channel);
     }else if(format == FeedFormat.ATOM10){
       return ToAtom10ChannelImpl.getInstance().execute(channel);
     }else{

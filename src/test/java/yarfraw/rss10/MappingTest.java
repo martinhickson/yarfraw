@@ -9,15 +9,11 @@ import org.junit.Test;
 
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
-import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.RDF;
-import yarfraw.generated.rss10.elements.TRss10Channel;
 import yarfraw.io.FeedWriter;
 import yarfraw.mapping.backward.ToChannelRss10;
 import yarfraw.mapping.backward.impl.ToChannelRss10Impl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
-import yarfraw.mapping.forward.impl.ToRss10ChannelItemImpl;
 import yarfraw.utils.Rss10Utils;
 
 /**
@@ -34,12 +30,9 @@ public class MappingTest extends TestCase{
     Channel c = BuilderTest.buildChannel();
     
     ToChannelRss10 mapper = ToChannelRss10Impl.getInstance();
-    RDF rdf = new RDF();
-    TRss10Channel ch10 = ToRss10ChannelImpl.getInstance().execute(c).getValue();
-    rdf.getChannelOrItemOrTextinput().add(new ObjectFactory().createChannel(ch10));
-    for(Item item : c.getItems()){
-      rdf.getChannelOrItemOrTextinput().add(ToRss10ChannelItemImpl.getInstance().execute(item));
-    }
+
+    RDF rdf = ToRss10ChannelImpl.getInstance().execute(c);
+
     Channel c2 =  mapper.execute(rdf);
 
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
@@ -55,7 +48,7 @@ public class MappingTest extends TestCase{
     assertTrue("Link not equal!", EqualsBuilder.reflectionEquals(c.getLink(), c2.getLink()));
     assertTrue("ManagingEditor not equal!", EqualsBuilder.reflectionEquals(c.getManagingEditor(), c2.getManagingEditor()));
     assertTrue("PubDate not equal!", EqualsBuilder.reflectionEquals(c.getPubDate(), c2.getPubDate()));
-    
+
     assertTrue("TextInput not equal!", EqualsBuilder.reflectionEquals(c.getTexInput(), c2.getTexInput()));
     assertTrue("Title not equal!", EqualsBuilder.reflectionEquals(c.getTitle(), c2.getTitle()));
     assertTrue("TTL not equal!", EqualsBuilder.reflectionEquals(c.getTtl(), c2.getTtl()));

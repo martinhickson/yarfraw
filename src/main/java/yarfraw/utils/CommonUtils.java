@@ -1,5 +1,11 @@
 package yarfraw.utils;
 
+import static yarfraw.utils.CommonConstants.MIN_PER_DAY;
+import static yarfraw.utils.CommonConstants.MIN_PER_MONTH;
+import static yarfraw.utils.CommonConstants.MIN_PER_WEEK;
+import static yarfraw.utils.CommonConstants.MIN_PER_YEAR;
+
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 
 /**
  * Utilities methods.
@@ -165,5 +172,29 @@ public class CommonUtils{
   
   public static String emptyIfNull(String str){
     return str == null?StringUtils.EMPTY:str;
+  }
+  
+  /**
+   * calculate the ttl value from updatePeriod and updateFrequency
+   * @return null if anything unexpcted occurs
+   */
+  public static Integer calculateTtl(UpdatePeriodEnum updatePeriod, BigInteger updateFrequency){
+    if(updatePeriod == null && updateFrequency == null){
+      return null;
+    }
+    int freq = updateFrequency == null ? 1: updateFrequency.intValue();
+    if(updatePeriod == UpdatePeriodEnum.HOURLY){
+      return Math.max(1, 60/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.DAILY){
+      return Math.max(1, MIN_PER_DAY/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.MONTHLY){
+      return Math.max(1, MIN_PER_MONTH/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.WEEKLY){
+      return Math.max(1, MIN_PER_WEEK/freq);
+    }else if(updatePeriod == UpdatePeriodEnum.YEARLY){
+      return Math.max(1, MIN_PER_YEAR/freq);
+    }else{
+      return null;
+    }
   }
 }

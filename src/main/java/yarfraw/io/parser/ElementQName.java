@@ -27,6 +27,8 @@ public class ElementQName{
   public final static QName ATOM10_FEED = new QName("http://www.w3.org/2005/Atom", "feed");
 
   public final static QName RSS10_LINK = new QName("http://purl.org/rss/1.0/", "link");
+  public final static QName RSS10_URL = new QName("http://purl.org/rss/1.0/", "url");
+  public final static QName RSS10_NAME = new QName("http://purl.org/rss/1.0/", "name");
   public final static QName RSS10_IMAGE = new QName("http://purl.org/rss/1.0/", "image");
   public final static QName RSS10_TITLE = new QName("http://purl.org/rss/1.0/", "title");
   public final static QName RSS10_DESCRIPTION = new QName("http://purl.org/rss/1.0/", "description");

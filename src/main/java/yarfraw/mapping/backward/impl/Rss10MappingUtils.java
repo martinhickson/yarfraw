@@ -8,8 +8,8 @@ import static yarfraw.io.parser.ElementQName.RSS10_PUBLISHER;
 import static yarfraw.io.parser.ElementQName.RSS10_RIGHTS;
 import static yarfraw.io.parser.ElementQName.RSS10_SUBJECT;
 import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
+import static yarfraw.io.parser.ElementQName.RSS10_UPDATEBASE;
 import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
-import static yarfraw.io.parser.ElementQName.*;
 import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
@@ -48,32 +48,13 @@ import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.utils.CommonUtils;
 class Rss10MappingUtils{
   private static final String ENCODED = "encoded";
-  private static final int MIN_PER_DAY = 60*24;
-  private static final int MIN_PER_WEEK = MIN_PER_DAY*7;
-  private static final int MIN_PER_MONTH = MIN_PER_DAY*30;
-  private static final int MIN_PER_YEAR = MIN_PER_DAY*365;
+
   private static final Log LOG = LogFactory.getLog(Rss10MappingUtils.class);
   
   private Rss10MappingUtils(){}
   
-  private static Integer calculateTtl(UpdatePeriodEnum updatePeriod, BigInteger updateFrequency){
-    if(updatePeriod == null && updateFrequency == null){
-      return null;
-    }
-    int freq = updateFrequency == null ? 1: updateFrequency.intValue();
-    if(updatePeriod == UpdatePeriodEnum.HOURLY){
-      return Math.max(1, 60/freq);
-    }else if(updatePeriod == UpdatePeriodEnum.DAILY){
-      return Math.max(1, MIN_PER_DAY/freq);
-    }else if(updatePeriod == UpdatePeriodEnum.MONTHLY){
-      return Math.max(1, MIN_PER_MONTH/freq);
-    }else if(updatePeriod == UpdatePeriodEnum.WEEKLY){
-      return Math.max(1, MIN_PER_WEEK/freq);
-    }else if(updatePeriod == UpdatePeriodEnum.YEARLY){
-      return Math.max(1, MIN_PER_YEAR/freq);
-    }else{
-      return null;
-    }
+  public static Integer calculateTtl(UpdatePeriodEnum updatePeriod, BigInteger updateFrequency){
+    return CommonUtils.calculateTtl(updatePeriod, updateFrequency);
   }
   
   @SuppressWarnings("unchecked")
@@ -206,7 +187,7 @@ class Rss10MappingUtils{
     return items;
   }
   
-  private static TextInput toTextInput(TRss10TextInput input) throws URISyntaxException{
+  public static TextInput toTextInput(TRss10TextInput input) throws URISyntaxException{
     TextInput ret = new TextInput();
     ret.setDescription(input.getDescription());
     ret.setLink(input.getLink());

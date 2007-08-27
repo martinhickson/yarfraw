@@ -6,6 +6,7 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.io.parser.ToChannelDOMParser;
 import yarfraw.mapping.backward.impl.parser.ToChannelDOMParserAtomImpl;
+import yarfraw.mapping.backward.impl.parser.ToChannelDOMParserRss10Impl;
 
 public class ToChannelDOMParserFactory{
   private static final ToChannelDOMParserFactory _instance = new ToChannelDOMParserFactory();
@@ -20,7 +21,7 @@ public class ToChannelDOMParserFactory{
     }else if(format == FeedFormat.RSS20){
       throw new IllegalArgumentException("nothing yet");
     }else if(format == FeedFormat.RSS10){
-      throw new IllegalArgumentException("nothing yet");
+      return new ToChannelDOMParserRss10Impl(elementOfInterests);
     }else{
       throw new IllegalArgumentException("Unknow feed format: "+format);
     }
