@@ -9,6 +9,7 @@ import static yarfraw.io.parser.ElementQName.RSS10_RIGHTS;
 import static yarfraw.io.parser.ElementQName.RSS10_SUBJECT;
 import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
 import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
+import static yarfraw.io.parser.ElementQName.*;
 import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
@@ -120,6 +121,8 @@ class Rss10MappingUtils{
             ret.setImage(toImage((TRss10Image)val));
           }else if(val instanceof TRss10TextInput){
             ret.setTextInput(toTextInput((TRss10TextInput)val));
+          }else if(same(jaxb.getName(), RSS10_UPDATEBASE)){
+            LOG.info("<updateBase> element is ignored.");
           }else if(val instanceof Items){
             Seq seq = ((Items)val).getSeq();
             int i = 0;
