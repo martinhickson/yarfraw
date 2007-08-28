@@ -17,7 +17,6 @@ import org.junit.Test;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Item;
-import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -111,24 +110,26 @@ public class IOTest extends TestCase{
   
   @Test
   public void testRemoteRead() throws Exception{  
-    FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
-    assertTrue(reader.isRemoteRead());
+    
     try{
+      FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
+      assertTrue(reader.isRemoteRead());
       Channel c = reader.readChannel();
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (YarfrawException e) {
+    }catch (Exception e) {
       System.out.println("Failed to read from a remote url, this test requires a network connection");
       e.printStackTrace();
     }
   }
   
   @Test
-  public void testRemoteRead2() throws Exception{  
-    FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
-    assertTrue(reader.isRemoteRead());
+  public void testRemoteRead2() throws Exception{
+    FeedReader reader = null;
     try{
+      reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
+      assertTrue(reader.isRemoteRead());
       HttpClientParams params = new HttpClientParams();
       params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
       reader.setHttpClientParams(params);
@@ -136,14 +137,15 @@ public class IOTest extends TestCase{
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (YarfrawException e) {
+    }catch (Exception e) {
       System.out.println("Failed to read from a remote url, this test requires a network connection");
       e.printStackTrace();
     }
     
-    reader = new FeedReader(new HttpURL("http://www.twit.tv/node/feed"));
-    assertTrue(reader.isRemoteRead());
+    
     try{
+      reader = new FeedReader(new HttpURL("http://www.twit.tv/node/feed"));
+      assertTrue(reader.isRemoteRead());
       HttpClientParams params = new HttpClientParams();
       params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
       reader.setHttpClientParams(params);
@@ -151,7 +153,7 @@ public class IOTest extends TestCase{
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (YarfrawException e) {
+    }catch (Exception e) {
       System.out.println("Failed to read from a remote url, this test requires a network connection");
       e.printStackTrace();
     }

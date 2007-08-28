@@ -3,8 +3,6 @@ package yarfraw.mapping.backward.impl.parser;
 import static yarfraw.core.datamodel.FeedFormat.ATOM10;
 import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_SCHEME;
 import static yarfraw.io.parser.AttributesQName.ATOM10_CATEGORY_TERM;
-import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_SRC;
-import static yarfraw.io.parser.AttributesQName.ATOM10_ENTRY_TYPE;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LANGUAGE;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_HREF_LANG;
@@ -12,8 +10,8 @@ import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_LENGTH;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_REL;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_TITLE;
 import static yarfraw.io.parser.AttributesQName.ATOM10_LINK_TYPE;
-import static yarfraw.io.parser.CoreRssElementEnum.Atom_Entry_Content;
 import static yarfraw.io.parser.CoreRssElementEnum.Atom_Id;
+import static yarfraw.io.parser.CoreRssElementEnum.Channel;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_category;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_description;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_image;
@@ -22,6 +20,7 @@ import static yarfraw.io.parser.CoreRssElementEnum.Channel_link;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_pubdate;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_title;
 import static yarfraw.io.parser.CoreRssElementEnum.Item;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_Encoded_Content;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_author;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_category;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_description;
@@ -31,8 +30,6 @@ import static yarfraw.io.parser.CoreRssElementEnum.Item_pubdate;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_title;
 import static yarfraw.io.parser.ElementQName.ATOM10_EMAIL;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.util.EnumSet;
 import java.util.Locale;
@@ -51,15 +48,12 @@ import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.AtomLink;
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
-import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.core.datamodel.AtomTextAttributes.TextType;
 import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.utils.CommonUtils;
-import yarfraw.utils.DOMSerializer;
 import yarfraw.utils.NodeProcessor;
 import yarfraw.utils.XMLUtils;
 /**
@@ -69,7 +63,6 @@ import yarfraw.utils.XMLUtils;
  */
 public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
  
-  private static final DOMSerializer DOM_SERIALIZER = new DOMSerializer();
   private static final Log LOG = LogFactory.getLog(ToChannelDOMParserAtomImpl.class);
 
   public ToChannelDOMParserAtomImpl() {
@@ -91,7 +84,7 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
       }
     }
     XMLUtils.traverseTreeDepthFirst(feed, 
-        new FeedProcessor(_elementsOfInterestMap, ret));
+        new FeedProcessor(_elementsOfInterestMap, _elementsOfInterest, ret));
     return ret;
   }
 
@@ -106,13 +99,16 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
   private static class FeedProcessor implements NodeProcessor{
     Map<QName, CoreRssElementEnum> _elementsOfInterestMap;
     Channel _channel;
+    EnumSet<CoreRssElementEnum> _elementsOfInterest;
     public FeedProcessor(
-        Map<QName, CoreRssElementEnum> elementsOfInterestMap,
-        Channel channel) {
-      super();
-      _elementsOfInterestMap = elementsOfInterestMap;
-      _channel = channel;
-    }
+            Map<QName, CoreRssElementEnum> elementsOfInterestMap,
+            EnumSet<CoreRssElementEnum> elementsOfInterest,
+            Channel channel) {
+          super();
+          _elementsOfInterestMap = elementsOfInterestMap;
+          _channel = channel;
+          _elementsOfInterest = elementsOfInterest;
+        }
     public void postProcess(Node node) {}
 
     public short preProcess(Node node) {
@@ -122,22 +118,28 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
       QName name = XMLUtils.getQName(node);
       CoreRssElementEnum element = _elementsOfInterestMap.get(name);
       
-      if(element == Item){
+      if(element == Channel){
+        return NodeFilter.FILTER_ACCEPT;
+      }else if(element == Item){
         Item item = new Item();
-        XMLUtils.traverseTreeDepthFirst(node, new EntryProcessor(_elementsOfInterestMap, item));
+        XMLUtils.traverseTreeDepthFirst(node, new EntryProcessor(_elementsOfInterestMap, _elementsOfInterest, item));
         _channel.additem(item);
         return NodeFilter.FILTER_REJECT;
       }else if(element == Atom_Id){
         _channel.setAtomId(new AtomId(node.getTextContent()));
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_title || element == Item_title){
-        _channel.setTitle(node.getTextContent());
+        if(_elementsOfInterest.contains(Channel_title)){
+          _channel.setTitle(node.getTextContent());
+        }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_description){
         _channel.setDescription(node.getTextContent());
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){
-        _channel.addCategory(toCategory(node));
+        if(_elementsOfInterest.contains(Channel_category)){
+          _channel.addCategory(toCategory(node));
+        }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_image){
         try {
@@ -154,10 +156,12 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }//no text input for atom10
       else if(element == Channel_link || element == Item_link){
-        _channel.addAtomLink(toAtomLink(node));
+        if(_elementsOfInterest.contains(Channel_link)){
+          _channel.addAtomLink(toAtomLink(node));
+        }
         return NodeFilter.FILTER_REJECT;
       }
-      return NodeFilter.FILTER_ACCEPT;
+      return NodeFilter.FILTER_REJECT;
     }
   }
 
@@ -168,10 +172,16 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
   private static class EntryProcessor implements NodeProcessor{
     Map<QName, CoreRssElementEnum> _elementsOfInterestMap;
     Item _item;
-    public EntryProcessor(Map<QName, CoreRssElementEnum> elementsOfInterestMap, Item item){
-      _item = item;
-      _elementsOfInterestMap = elementsOfInterestMap;
-    }
+    EnumSet<CoreRssElementEnum> _elementsOfInterest;
+    public EntryProcessor(
+            Map<QName, CoreRssElementEnum> elementsOfInterestMap,
+            EnumSet<CoreRssElementEnum> elementsOfInterest,
+            Item item) {
+          super();
+          _elementsOfInterestMap = elementsOfInterestMap;
+          _item = item;
+          _elementsOfInterest = elementsOfInterest;
+        }
     public void postProcess(Node node) {}
 
     public short preProcess(Node node) {
@@ -181,40 +191,28 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
       QName name = XMLUtils.getQName(node);
       CoreRssElementEnum element = _elementsOfInterestMap.get(name);
       
-      if(element == Channel_title || element == Item_title){
-        _item.setTitle(StringUtils.trim(node.getTextContent()));
+      if(element == Item){
+        return NodeFilter.FILTER_ACCEPT;
+      }if(element == Channel_title || element == Item_title){
+        if(_elementsOfInterest.contains(Item_title)){
+          _item.setTitle(StringUtils.trim(node.getTextContent()));
+        }        
         return NodeFilter.FILTER_REJECT;
       }else if(element == Item_description){
-        _item.setDescription(StringUtils.trim(node.getTextContent()));
+        if(_elementsOfInterest.contains(Item_description)){
+          _item.setDescription(StringUtils.trim(node.getTextContent()));
+        }        
         return NodeFilter.FILTER_REJECT;
       }else if(element == Atom_Id){
         _item.setAtomId(new AtomId(node.getTextContent()));
         return NodeFilter.FILTER_REJECT;
-      }else if(element == Atom_Entry_Content){
-        //this is tricky
-        Content content = new Content();
-        content.setSrc(XMLUtils.getAttributeValue(node, ATOM10_ENTRY_SRC.getLocalPart()));
-        String type = XMLUtils.getAttributeValue(node, ATOM10_ENTRY_TYPE.getLocalPart());
-        content.setType(type == null ? TextType.text: TextType.valueOf(type));
-        if(content.getType() == TextType.xhtml){
-          StringWriter writer = new StringWriter();
-          try {
-            DOM_SERIALIZER.serializeNode(node.getFirstChild(), writer, StringUtils.EMPTY);
-          } catch (IOException e) {
-            LOG.warn("The content of the <content> element should be xhtml, but unable");
-          }
-          content.addContentText(writer.toString());
-          _item.setContent(content);
-        }else{
-          content.addContentText(node.getTextContent());
-        }
-        _item.setContent(content);
+      }else if(element == Item_Encoded_Content){
+        ParserUtils.setItemContent(node, _item);
         return NodeFilter.FILTER_REJECT;
-      }else if(element == Channel_category || element == Item_category){  
-        Category cat = new Category();
-        cat.setCategory(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_TERM.getLocalPart()));
-        cat.setDomain(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_SCHEME.getLocalPart()));
-        _item.addCategory(cat);
+      }else if(element == Channel_category || element == Item_category){
+        if(_elementsOfInterest.contains(Item_category)){
+          _item.addCategory(toCategory(node));
+        }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Item_pubdate){
         if(StringUtils.isNotBlank(node.getTextContent())){
@@ -222,7 +220,9 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_link || element == Item_link){
-        _item.addAtomLink(toAtomLink(node));
+        if(_elementsOfInterest.contains(Item_link)){
+          _item.addAtomLink(toAtomLink(node));
+        }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Item_author){
         Node email = XMLUtils.getChildrenNodeByName(node, ATOM10_EMAIL.getLocalPart());
@@ -234,7 +234,7 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
         _item.setAtomId(new AtomId(node.getTextContent()));
         return NodeFilter.FILTER_REJECT;
       }
-      return NodeFilter.FILTER_ACCEPT;
+      return NodeFilter.FILTER_REJECT;
     }
     
   }

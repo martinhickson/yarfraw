@@ -1,4 +1,4 @@
-package yarfraw.rss10;
+package yarfraw.rss20;
 
 import java.io.File;
 import java.util.EnumSet;
@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
-import static yarfraw.io.parser.CoreRssElementEnum.*;
+
 import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
@@ -16,6 +16,7 @@ import yarfraw.io.FeedParserReader;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
 import yarfraw.io.parser.ToChannelDOMParserFactory;
+import static yarfraw.io.parser.CoreRssElementEnum.*;
 public class ParserTest extends TestCase{
   private static final ToChannelDOMParserFactory ParserFactory = ToChannelDOMParserFactory.getInstance();
   @Test
@@ -26,14 +27,14 @@ public class ParserTest extends TestCase{
     ch.getItems().get(0).setDescription("some description");
     ch.getItems().get(0).addCategory("some item cat");
     ch.getItems().get(0).setAtomId(new AtomId("some uri"));
-    File f = File.createTempFile("rss10", ".xml");
-    FeedWriter writer = new FeedWriter(f, FeedFormat.RSS10);
+    File f = File.createTempFile("rss20", ".xml");
+    FeedWriter writer = new FeedWriter(f, FeedFormat.RSS20);
     writer.writeChannel(ch);
                                           
-    FeedReader r = new FeedReader(f, FeedFormat.RSS10);
+    FeedReader r = new FeedReader(f, FeedFormat.RSS20);
     Channel c = r.readChannel();
     FeedParserReader pr = new FeedParserReader(f);
-    Channel c2 = pr.parseChannel(ParserFactory.createParser(FeedFormat.RSS10));
+    Channel c2 = pr.parseChannel(ParserFactory.createParser(FeedFormat.RSS20));
     
     Item i1 = c.getItems().get(0);
     Item i2 = c2.getItems().get(0);
@@ -42,7 +43,7 @@ public class ParserTest extends TestCase{
     assertEquals(i1.getTitle(), i2.getTitle());
     assertEquals(i1.getDescription(), i2.getDescription());
     assertEquals(i1.getAuthor(), i2.getAuthor());
-    assertEquals(i1.getCategoryString(), i2.getCategoryString());
+    assertTrue("category not equal", i1.getCategoryString().containsAll(i2.getCategoryString()));
     assertEquals(i1.getPubDate(), i2.getPubDate());
     assertEquals(i1.getRights(), i2.getRights());
     assertEquals(i1.getAtomId(), i2.getAtomId());
@@ -69,12 +70,12 @@ public class ParserTest extends TestCase{
   @Test
   public void testBuild2() throws Exception{
 
-    FeedReader r = new FeedReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss10/rdfModule.xml").toURI(), FeedFormat.RSS10);
+    FeedReader r = new FeedReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI(), FeedFormat.RSS20);
     Channel c = r.readChannel();
     
-    FeedParserReader pr = new FeedParserReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss10/rdfModule.xml").toURI());
+    FeedParserReader pr = new FeedParserReader(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     ToChannelDOMParserFactory parserFactory = ToChannelDOMParserFactory.getInstance();
-    Channel c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS10));
+    Channel c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS20));
     
     Item i1 = c.getItems().get(0);
     Item i2 = c2.getItems().get(0);
@@ -100,7 +101,7 @@ public class ParserTest extends TestCase{
     
     assertTrue("PubDate not equal!", EqualsBuilder.reflectionEquals(c.getPubDate(), c2.getPubDate()));
     
-    assertEquals(c.getTexInput().setRdfAttributes(null), c2.getTexInput().setRdfAttributes(null));
+    assertEquals(c.getTexInput(), c2.getTexInput());
     assertTrue("Title not equal!", EqualsBuilder.reflectionEquals(c.getTitle(), c2.getTitle()));
     
   }
@@ -109,7 +110,7 @@ public class ParserTest extends TestCase{
   public void testError() throws Exception{
     try {
       ToChannelDOMParserFactory parserFactory = ToChannelDOMParserFactory.getInstance();
-      parserFactory.createParser(FeedFormat.RSS10, EnumSet.of(Channel_category));
+      parserFactory.createParser(FeedFormat.RSS20, EnumSet.of(Channel_category));
       fail("This is expected to failed");
     } catch (Exception e) {
       //success
@@ -117,7 +118,7 @@ public class ParserTest extends TestCase{
     
     try {
       ToChannelDOMParserFactory parserFactory = ToChannelDOMParserFactory.getInstance();
-      parserFactory.createParser(FeedFormat.RSS10, EnumSet.of(Item_category));
+      parserFactory.createParser(FeedFormat.RSS20, EnumSet.of(Item_category));
       fail("This is expected to failed");
     } catch (Exception e) {
       //success
@@ -133,20 +134,20 @@ public class ParserTest extends TestCase{
     ch.setImage("http://url", "title", "http://link");
     File f = File.createTempFile("rss10", ".xml");
     FeedWriter writer = new FeedWriter(f);
-    writer.setFormat(FeedFormat.RSS10);
+    writer.setFormat(FeedFormat.RSS20);
     writer.writeChannel(ch);
                                           
-    FeedReader r = new FeedReader(f, FeedFormat.RSS10);
+    FeedReader r = new FeedReader(f, FeedFormat.RSS20);
     Channel c = r.readChannel();
     FeedParserReader pr = new FeedParserReader(f);
     ToChannelDOMParserFactory parserFactory = ToChannelDOMParserFactory.getInstance();
-    Channel c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS10,
+    Channel c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS20,
         EnumSet.complementOf(EnumSet.of(Channel_image))));
 
     assertEquals(null, c2.getImage());
     assertNotNull(c.getImage());
     
-    c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS10,
+    c2 = pr.parseChannel(parserFactory.createParser(FeedFormat.RSS20,
         EnumSet.complementOf(EnumSet.of(Item_author, Item_link))));
     Item i1 = c.getItems().get(0);
     Item i2 = c2.getItems().get(0);

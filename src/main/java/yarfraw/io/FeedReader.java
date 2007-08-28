@@ -13,6 +13,7 @@ import javax.xml.bind.ValidationEventHandler;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.io.IOUtils;
 
 import yarfraw.core.datamodel.Channel;
@@ -58,7 +59,11 @@ public class FeedReader  extends AbstractBaseFeedParser{
     super(new File(uri));
   }
   
-  public FeedReader(HttpURL httpUrl){
+  public FeedReader(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
+    super(httpUrl, params);
+  }
+  
+  public FeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
   }
     /**

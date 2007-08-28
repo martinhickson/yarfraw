@@ -58,7 +58,9 @@ public class ElementQName{
   public final static QName RSS10_UPDATEPERIOD = new QName("http://purl.org/rss/1.0/modules/syndication/", "updatePeriod");
 
   public final static QName RSS20_TITLE = new QName("", "title");
+  public final static QName RSS20_NAME = new QName("", "name");
   public final static QName RSS20_TTL = new QName("", "ttl");
+  public final static QName RSS20_URL = new QName("", "url");
   public final static QName RSS20_CATEGORY = new QName("", "category");
   public final static QName RSS20_LINK = new QName("", "link");
   public final static QName RSS20_PUBDATE = new QName("", "pubDate");
@@ -84,4 +86,6 @@ public class ElementQName{
   public final static QName RSS20_SOURCE = new QName("", "source");
   public final static QName RSS20_AUTHOR = new QName("", "author");
 
+  public final static QName RSS20_WIDTH = new QName("", "width");
+  public final static QName RSS20_HEIGHT = new QName("", "height");
 }

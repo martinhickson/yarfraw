@@ -31,6 +31,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_ENCLOSURE;
 import static yarfraw.io.parser.ElementQName.RSS20_GUID;
 import static yarfraw.io.parser.ElementQName.RSS20_IMAGE;
 import static yarfraw.io.parser.ElementQName.RSS20_ITEM;
+import static yarfraw.io.parser.ElementQName.RSS20_LANGUAGE;
 import static yarfraw.io.parser.ElementQName.RSS20_LINK;
 import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
 import static yarfraw.io.parser.ElementQName.RSS20_TEXTINPUT;
@@ -54,7 +55,7 @@ public enum CoreRssElementEnum {
   Channel_link(RSS10_LINK, RSS20_LINK, ATOM10_LINK), 
   Channel_description(RSS10_DESCRIPTION, RSS20_DESCRIPTION, ATOM10_SUBTITLE),
   //language is an attribute instead of a tag in atom10
-  Channel_language(RSS10_LANGUAGE, RSS20_DESCRIPTION, new QName(">")),  
+  Channel_language(RSS10_LANGUAGE, RSS20_LANGUAGE, new QName(">")),  
   Channel_pubdate(RSS10_DATE, RSS20_PUBDATE, ATOM10_UPDATED),
   //only rss20 has ttl element
   Channel_ttl(new QName(""), RSS20_TTL, new QName(">")),
@@ -71,7 +72,7 @@ public enum CoreRssElementEnum {
   Item_pubdate(RSS10_DATE, RSS20_PUBDATE, ATOM10_PUBLISHED),
   Item_enclosure(new QName(">"), RSS20_ENCLOSURE, new QName(">")),
   Item_guid(new QName(">"), RSS20_GUID, new QName(">")),
-  Atom_Entry_Content(new QName(">"), new QName(">"), ATOM10_CONTENT),
+  Item_Encoded_Content(new QName("encoded"), new QName("encoded"), ATOM10_CONTENT),
   Atom_Id(new QName(">"), new QName(">"), ATOM10_ID);
   
   public  QName _rss10Name;

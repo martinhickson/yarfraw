@@ -7,6 +7,7 @@ import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.io.parser.ToChannelDOMParser;
 import yarfraw.mapping.backward.impl.parser.ToChannelDOMParserAtomImpl;
 import yarfraw.mapping.backward.impl.parser.ToChannelDOMParserRss10Impl;
+import yarfraw.mapping.backward.impl.parser.ToChannelDOMParserRss20Impl;
 
 public class ToChannelDOMParserFactory{
   private static final ToChannelDOMParserFactory _instance = new ToChannelDOMParserFactory();
@@ -19,7 +20,7 @@ public class ToChannelDOMParserFactory{
     if(format == FeedFormat.ATOM10){
       return new ToChannelDOMParserAtomImpl(elementOfInterests);
     }else if(format == FeedFormat.RSS20){
-      throw new IllegalArgumentException("nothing yet");
+      return new ToChannelDOMParserRss20Impl(elementOfInterests);
     }else if(format == FeedFormat.RSS10){
       return new ToChannelDOMParserRss10Impl(elementOfInterests);
     }else{

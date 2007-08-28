@@ -12,6 +12,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.utils.FeedFormatDetector;
 /**
  * Provides a set of function to facilitate parsing of a RSS feed.
@@ -45,19 +46,15 @@ abstract class AbstractBaseFeedParser extends AbstractBaseIO{
     this(new File(uri));
   }
   
-  public AbstractBaseFeedParser(HttpURL httpUrl){
+  public AbstractBaseFeedParser(HttpURL httpUrl) throws YarfrawException, IOException{
     this(httpUrl, null);
   }
   
-  public AbstractBaseFeedParser(HttpURL httpUrl, HttpClientParams params){
+  public AbstractBaseFeedParser(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
     _httpUrl = httpUrl;
     _httpClientParams = params;
     //detect format automatically
-    try {
-      _format = FeedFormatDetector.getFormat(getStream());
-    } catch (Exception e) {
-      throw new RuntimeException("Unable to detect the format of the remote feed");
-    }
+    _format = FeedFormatDetector.getFormat(getStream());
   }
   
   public HttpClientParams getHttpClientParams() {

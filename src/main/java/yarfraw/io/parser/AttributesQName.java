@@ -21,5 +21,12 @@ public class AttributesQName{
   public final static QName ATOM10_LINK_HREF_LANG = new QName("http://www.w3.org/2005/Atom", "hreflang");
   public final static QName ATOM10_LANGUAGE = new QName("http://www.w3.org/XML/1998/namespace", "lang");
   public final static QName RSS20_RSS_VERSION = new QName("", "version");
+  public final static QName RSS20_ISPERMALINK = new QName("", "isPermaLink");
+  public final static QName RSS20_ENCLOSURE_URL = new QName("", "url");
+  public final static QName RSS20_ENCLOSURE_TYPE = new QName("", "type");
+  public final static QName RSS20_ENCLOSURE_LENGTH = new QName("", "length");
+  public final static QName RSS20_CATEGORY_DOMAIN = new QName("", "domain");
+  
+  
   
 }

@@ -1,6 +1,11 @@
 package yarfraw.mapping.backward.impl.parser;
 
-import static yarfraw.core.datamodel.FeedFormat.RSS10;
+import static yarfraw.core.datamodel.FeedFormat.RSS20;
+import static yarfraw.io.parser.AttributesQName.RSS20_CATEGORY_DOMAIN;
+import static yarfraw.io.parser.AttributesQName.RSS20_ENCLOSURE_LENGTH;
+import static yarfraw.io.parser.AttributesQName.RSS20_ENCLOSURE_TYPE;
+import static yarfraw.io.parser.AttributesQName.RSS20_ENCLOSURE_URL;
+import static yarfraw.io.parser.AttributesQName.RSS20_ISPERMALINK;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_category;
 import static yarfraw.io.parser.CoreRssElementEnum.Channel_description;
@@ -16,23 +21,22 @@ import static yarfraw.io.parser.CoreRssElementEnum.Item_Encoded_Content;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_author;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_category;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_description;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_enclosure;
+import static yarfraw.io.parser.CoreRssElementEnum.Item_guid;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_link;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_pubdate;
 import static yarfraw.io.parser.CoreRssElementEnum.Item_title;
-import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
-import static yarfraw.io.parser.ElementQName.RSS10_LINK;
-import static yarfraw.io.parser.ElementQName.RSS10_NAME;
-import static yarfraw.io.parser.ElementQName.RSS10_TEXTINPUT;
-import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
-import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
-import static yarfraw.io.parser.ElementQName.RSS10_UPDATEPERIOD;
-import static yarfraw.io.parser.ElementQName.RSS10_URL;
+import static yarfraw.io.parser.ElementQName.RSS20_CHANNEL;
+import static yarfraw.io.parser.ElementQName.RSS20_DESCRIPTION;
+import static yarfraw.io.parser.ElementQName.RSS20_LINK;
+import static yarfraw.io.parser.ElementQName.RSS20_NAME;
+import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
+import static yarfraw.io.parser.ElementQName.RSS20_URL;
+import static yarfraw.io.parser.ElementQName.RSS20_WIDTH;
 import static yarfraw.mapping.backward.impl.parser.ParserUtils.getStringContent;
 
-import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -47,12 +51,13 @@ import org.w3c.dom.traversal.NodeFilter;
 
 import yarfraw.core.datamodel.Category;
 import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.io.parser.CoreRssElementEnum;
 import yarfraw.utils.CommonUtils;
 import yarfraw.utils.NodeProcessor;
@@ -62,88 +67,25 @@ import yarfraw.utils.XMLUtils;
  * @author jliang
  *
  */
-public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
+public class ToChannelDOMParserRss20Impl extends BaseToChannelDOMImpl{
  
-  private static final Log LOG = LogFactory.getLog(ToChannelDOMParserRss10Impl.class);
-  public ToChannelDOMParserRss10Impl() {
+  private static final Log LOG = LogFactory.getLog(ToChannelDOMParserRss20Impl.class);
+  public ToChannelDOMParserRss20Impl() {
     super();
   }
   
-  public ToChannelDOMParserRss10Impl(
+  public ToChannelDOMParserRss20Impl(
       EnumSet<CoreRssElementEnum> elementsOfInterest) {
     super(elementsOfInterest);
   }
   
+  //there are quite a bit of duplicate code with Rss 10 impl. The original thought was to make
+  //one parser class to handle all format, that's the why the code is set up the way it is right now,
+  //but it turns out that it will make the code very confusing to read, so i decided to separate them into one for each format
   public Channel execute(Document doc) throws YarfrawException {
     Channel ret = new Channel();
-    Node rdf = doc.getDocumentElement();
-    if(_elementsOfInterest.contains(Item)){
-      List<Node> items = XMLUtils.getChildrenNodesByName(rdf, Item.getRss10Name().getLocalPart());
-      for(Node inode : items){
-        Item item = new Item();
-        XMLUtils.traverseTreeDepthFirst(inode, new ItemProcessor(_elementsOfInterestMap, _elementsOfInterest,item));
-        if(_elementsOfInterest.contains(Item_Encoded_Content)){
-          Node encoded = XMLUtils.getChildrenNodeByName(inode, Item_Encoded_Content.getRss10Name().getLocalPart());
-          ParserUtils.setItemContent(encoded, item);
-        }
-        ret.additem(item);
-      }
-    }
-    if(_elementsOfInterest.contains(Channel)){
-      Node channel = XMLUtils.getChildrenNodeByName(rdf, Channel.getRss10Name().getLocalPart());
-      XMLUtils.traverseTreeDepthFirst(channel, new ChannelProcessor(_elementsOfInterestMap, _elementsOfInterest, ret));
-      if(_elementsOfInterest.contains(Channel_ttl)){
-        String frequency = getStringContent(channel, RSS10_UPDATEFREQUENCY.getLocalPart());
-        String period = getStringContent(channel, RSS10_UPDATEPERIOD.getLocalPart());
-        if(StringUtils.isNotBlank(period)){
-          ret.setTtl(CommonUtils.calculateTtl(UpdatePeriodEnum.fromValue(StringUtils.trim(period)),
-                  new BigInteger(frequency)));
-        }
-      }
-    }
-    
-    if(_elementsOfInterest.contains(Channel_image)){
-      Node image = XMLUtils.getChildrenNodeByName(rdf, Channel_image.getRss10Name().getLocalPart());
-      if(image != null){
-        Image img = new Image();
-        try {
-          img.setUrl(getStringContent(image, RSS10_URL.getLocalPart()));
-        }
-        catch (URISyntaxException e) {
-          LOG.warn("Unable to parse <image>'s url element", e);
-        }
-        try {
-          img.setLink(getStringContent(image, RSS10_LINK.getLocalPart()));
-          
-        }
-        catch (URISyntaxException e) {
-          LOG.warn("Unable to parse <image>'s link element", e);
-        }
-        
-        img.setDescription(getStringContent(image, RSS10_DESCRIPTION.getLocalPart()));
-        img.setTitle(getStringContent(image, RSS10_TITLE.getLocalPart()));
-        ret.setImage(img);
-      }
-      
-    }
-    
-    if(_elementsOfInterest.contains(Channel_textinput)){
-      Node n = XMLUtils.getChildrenNodeByName(rdf, RSS10_TEXTINPUT.getLocalPart());
-      if(n!= null){
-        TextInput textinput = new TextInput();
-        textinput.setDescription(getStringContent(n, RSS10_DESCRIPTION.getLocalPart()));
-        try {
-          textinput.setLink(getStringContent(n, RSS10_LINK.getLocalPart()));
-        }
-        catch (URISyntaxException e) {
-          LOG.warn("Unable to parse <link> element under <textinput>", e);
-        }
-        textinput.setName(getStringContent(n, RSS10_NAME.getLocalPart()));
-        textinput.setTitle(getStringContent(n, RSS10_TITLE.getLocalPart()));
-        ret.setTextInput(textinput);
-      }
-    }
-    
+    Node channel = XMLUtils.getChildrenNodeByName(doc.getDocumentElement(), RSS20_CHANNEL.getLocalPart());    
+    XMLUtils.traverseTreeDepthFirst(channel, new ChannelProcessor(_elementsOfInterestMap, _elementsOfInterest, ret));
     return ret;
   }
 
@@ -170,6 +112,31 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
       
       if(element == Item){
         return NodeFilter.FILTER_ACCEPT;
+      }else if(element == Item_guid){
+        Guid guid = new Guid();
+        guid.setGuid(node.getTextContent());
+        String isPermaLink = XMLUtils.getAttributeValue(node, RSS20_ISPERMALINK.getLocalPart());
+        if(isPermaLink != null){
+          guid.setPermaLink(Boolean.valueOf(isPermaLink.trim()));
+        }
+        _item.setGuid(guid);
+        return NodeFilter.FILTER_REJECT;
+      }else if(element == Item_enclosure){
+        Enclosure en = new Enclosure();
+        try {
+          en.setUrl(XMLUtils.getAttributeValue(node, RSS20_ENCLOSURE_URL.getLocalPart()));
+        } catch (URISyntaxException e) {
+          LOG.warn("Unable to parse url attribute under <enclosure>");
+        }
+        String length = XMLUtils.getAttributeValue(node, RSS20_ENCLOSURE_LENGTH.getLocalPart());
+        if(length != null){
+          en.setLength(Integer.parseInt(length.trim()));
+        }else{
+          LOG.warn("length attribute under <enclosure> required but does not exist");
+        }
+        en.setMimeType(XMLUtils.getAttributeValue(node, RSS20_ENCLOSURE_TYPE.getLocalPart()));
+        en.setValue(node.getTextContent());
+        return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_title || element == Item_title){
         if(_elementsOfInterest.contains(Item_title)){
           _item.setTitle(node.getTextContent());
@@ -185,7 +152,8 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){
         if(_elementsOfInterest.contains(Item_category)){
-          _item.addCategory(new Category(node.getTextContent()));
+          _item.addCategory(toCategory(node));
+          
         }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_pubdate || element == Item_pubdate){
@@ -238,7 +206,13 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
       if(element == Channel){
         return NodeFilter.FILTER_ACCEPT;
       }else if(element == Item){
-        LOG.warn("Unexpected element <item> under <channel>");
+        Item item = new Item();
+        XMLUtils.traverseTreeDepthFirst(node, new ItemProcessor(_elementsOfInterestMap, _elementsOfInterest, item));
+        if(_elementsOfInterest.contains(Item_Encoded_Content)){
+          Node encoded = XMLUtils.getChildrenNodeByName(node, Item_Encoded_Content.getRss20Name().getLocalPart());
+          ParserUtils.setItemContent(encoded, item);
+        }
+        _channel.additem(item);
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_language ){
         if(node.getTextContent() != null){
@@ -257,16 +231,64 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){
         if(_elementsOfInterest.contains(Channel_category)){
-          _channel.addCategory(new Category(node.getTextContent()));
+          _channel.addCategory(toCategory(node));
         }        
+        return NodeFilter.FILTER_REJECT;
+      }else if(element == Channel_ttl){
+        String ttl = node.getTextContent();
+        if(ttl != null){
+          _channel.setTtl(Integer.parseInt(ttl.trim()));          
+        }
+        return NodeFilter.FILTER_REJECT;
+      }else if(element == Channel_textinput){
+        TextInput textinput = new TextInput();
+        textinput.setDescription(getStringContent(node, RSS20_DESCRIPTION.getLocalPart()));
+        try {
+          textinput.setLink(getStringContent(node, RSS20_LINK.getLocalPart()));
+        }
+        catch (URISyntaxException e) {
+          LOG.warn("Unable to parse <link> element under <textinput>", e);
+        }
+        textinput.setName(getStringContent(node, RSS20_NAME.getLocalPart()));
+        textinput.setTitle(getStringContent(node, RSS20_TITLE.getLocalPart()));
+        _channel.setTextInput(textinput);
+        return NodeFilter.FILTER_REJECT;
+      }else if(element == Channel_image ){
+        Image img = new Image();
+        try {
+          img.setUrl(getStringContent(node, RSS20_URL.getLocalPart()));
+        }
+        catch (URISyntaxException e) {
+          LOG.warn("Unable to parse <image>'s url element", e);
+        }
+        try {
+          img.setLink(getStringContent(node, RSS20_LINK.getLocalPart()));
+          
+        }
+        catch (URISyntaxException e) {
+          LOG.warn("Unable to parse <image>'s link element", e);
+        }
+        
+        img.setDescription(getStringContent(node, RSS20_DESCRIPTION.getLocalPart()));
+        img.setTitle(getStringContent(node, RSS20_TITLE.getLocalPart()));
+        
+        String width = getStringContent(node, RSS20_WIDTH.getLocalPart());
+        String height = getStringContent(node, RSS20_WIDTH.getLocalPart());
+        if(width != null){
+          img.setWidth(Integer.parseInt(width.trim()));
+        }
+        if(height != null){
+          img.setHeight(Integer.parseInt(height.trim()));
+        }
+        _channel.setImage(img);
+        
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_pubdate || element == Item_pubdate){
         if(_elementsOfInterest.contains(Channel_pubdate) && StringUtils.isNotBlank(node.getTextContent())){
           _channel.setPubDate(CommonUtils.tryParseDate(StringUtils.trim(node.getTextContent())));
         }
         return NodeFilter.FILTER_REJECT;
-      }
-      else if(element == Channel_link || element == Item_link){
+      }else if(element == Channel_link || element == Item_link){
         if(_elementsOfInterest.contains(Channel_link)){
           try {
             _channel.setLink(node.getTextContent());
@@ -280,10 +302,15 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
       return NodeFilter.FILTER_REJECT;
     }
   }
+
+  private static Category toCategory(Node node){
+    return new Category().setCategory(node.getTextContent())
+                          .setDomain(XMLUtils.getAttributeValue(node, RSS20_CATEGORY_DOMAIN.getLocalPart()));
+  }
   
   @Override
   public FeedFormat getFormat() {
-    return RSS10;
+    return RSS20;
   }
 
 }

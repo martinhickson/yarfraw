@@ -7,6 +7,7 @@ import java.net.URI;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -33,8 +34,12 @@ public class FeedParserReader extends AbstractBaseFeedParser{
     super(new File(uri));
   }
   
-  public FeedParserReader(HttpURL httpUrl){
+  public FeedParserReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
+  }
+  
+  public FeedParserReader(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
+    super(httpUrl, params);
   }
   
   public Channel parseChannel(ToChannelDOMParser toChannelMapper) throws YarfrawException{
