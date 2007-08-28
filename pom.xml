@@ -44,9 +44,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</connection>
-    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/</developerConnection>
-    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/</url>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
+    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
+    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</url>
   </scm>
   <build>
     <extensions>
