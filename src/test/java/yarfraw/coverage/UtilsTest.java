@@ -22,7 +22,7 @@ public class UtilsTest extends TestCase{
   private static final Log LOG = LogFactory.getLog(UtilsTest.class);
   @Test
   public void testConcurrentRead() throws Exception{
-    List<Channel> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(10), 
+    List<Channel> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(5), 
             new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"),
             new HttpURL("http://bensbargains.net/rss.xml/0"),
             new HttpURL("http://rss.cnn.com/rss/money_topstories.rss"),
