@@ -31,9 +31,6 @@ import yarfraw.utils.CommonUtils;
  */
 public class FeedWriter extends AbstractBaseIO{
   private static final ObjectFactory RSS20_FACTORY = new ObjectFactory();
-  private static Marshaller _rss20Marshaller;
-  private static Marshaller _rss10Marshaller;
-  private static Marshaller _atom10Marshaller;
   
   public FeedWriter(File file, FeedFormat format){
     super(file, format);
@@ -79,7 +76,7 @@ public class FeedWriter extends AbstractBaseIO{
       throw new YarfrawException("format, channel, or outputStream is null");
     }
     try {
-      Marshaller m = getMarshaller(format, true);
+      Marshaller m = getMarshaller(format);
       m.marshal(getJaxbElementFromFormat(format, channel), outputStream);
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to write channel", e);
@@ -94,7 +91,7 @@ public class FeedWriter extends AbstractBaseIO{
   public void writeChannel(Channel channel, ValidationEventHandler validationEventHandler) throws YarfrawException{
     FileOutputStream out = null;
     try {
-      Marshaller m = getMarshaller(_format, validationEventHandler != null);
+      Marshaller m = getMarshaller(_format);
       m.setEventHandler(validationEventHandler);
       out = new FileOutputStream(_file);
       m.marshal(getJaxbElementFromFormat(_format, channel), out);
@@ -123,36 +120,16 @@ public class FeedWriter extends AbstractBaseIO{
     }
   }
   
-  private static synchronized Marshaller getMarshaller(FeedFormat format, boolean createNewInstance) throws JAXBException{
-    Marshaller ret = _rss20Marshaller;
+  private static Marshaller getMarshaller(FeedFormat format) throws JAXBException{
     if(format == FeedFormat.RSS20){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
-      }
-      if(_rss20Marshaller==null){
-        _rss20Marshaller = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
-      }
-      ret = _rss20Marshaller;
+      return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
     }else if(format == FeedFormat.RSS10){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
-      }
-      if(_rss10Marshaller==null){
-        _rss10Marshaller = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
-      }
-      ret = _rss10Marshaller;
+      return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
     }else if(format == FeedFormat.ATOM10){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
-      }
-      if(_atom10Marshaller==null){
-        _atom10Marshaller = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
-      }
-      ret = _atom10Marshaller;
+      return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }
-    
-    return ret;
+
   }
 }

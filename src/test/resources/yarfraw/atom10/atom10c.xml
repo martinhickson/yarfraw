@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+    <title>gladwell.com</title>
+    <link rel="self" type="application/atom+xml" href="http://gladwell.typepad.com/gladwellcom/atom.xml" />
+    <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/" />
+    <id>tag:typepad.com,2003:weblog-307651</id>
+    <updated></updated>
+    
+    <generator uri="http://www.typepad.com/">TypePad</generator>
+    <entry>
+        <title>Enron and Newspapers</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2007/01/enron_and_newsp.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2007/01/enron_and_newsp.html" thr:count="134" thr:updated="2007-06-20T06:16:29-04:00" />
+        <id>tag:typepad.com,2003:post-15002843</id>
+        <published>2007-01-04T10:15:07-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>Another thought on Enron, following on my New Yorker piece. One of the big points made by Jonathan Macey and others is that the Enron scandal is an example of “receiver failure” as well as “transmitter failure”: that is, that...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="xhtml" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+<div xmlns="http://www.w3.org/1999/xhtml"><p>Another thought on Enron, following on my New Yorker piece.</p>
+
+<p>One of the big points made by Jonathan Macey and others is that the Enron scandal is an example of “receiver failure” as well as “transmitter failure”: that is, that it wasn’t just the case that the company sent misleading signals. It was also the case that those who were supposed to be listening to and interpreting those signals didn’t do their job.</p>
+
+<p>The exception, of course, were newspapers. The Enron scandal was, in large part, broken by the Wall Street Journal.</p>
+
+<p>This is strange, no?</p>
+
+<p>We operate with the assumption, particularly in our understanding of what makes financial markets efficient, that those with the best incentives to ferret out the truth are those who are partial—that is, are directly involved in the process—and those who are economically motivated, who have money at stake.  So you’d think that hedge funds, shorts, arbs, and analysts—all of whom were massively partial and economically motivated—would have been the first to see the “real” Enron. </p>
+
+<p>But they weren’t. Reporters were, a group who—at least in theory—you’d think were in the least advantageous position. They aren’t partial to the proceedings. They have no money at stake. (Compared to their Wall Street counterparts, in fact, they barely make any money at all.) They aren’t (relatively speaking) as well-trained as financial intermediaries. They have to serve a general audience, which disposes them against highly technical examination. There are real limits on how much space and time they can devote to a particular story, and their rewards for doing well are almost entirely internal and professional: good reporters are rewarded, largely, by having their status elevated among other reporters. On Wall Street, seeing truth gets you a million dollar bonus. At a newspaper, it gets you a slap on the back.</p>
+
+<p>We’ve spent a lot of time, post-Enron, criticizing the flaws in the investment community’s gatekeeping activities. But I think we should also recognize what the Enron case tells us about the value of newspaper journalism. Maybe, in other words, we have underestimated the value of impartial, professionally-motivated, under-paid and overworked generalists in tackling the kind of information-rich, analysis-dependent “mysteries” that the modern world throws at us.</p>
+
+<p>All of which, of course, points out the irony of what’s happening in the newspaper business right now. We are dismantling the institution of newspaper journalism precisely at the moment when it seems to be of greatest social value. </p></div>
+</content>
+
+
+    </entry>
+    <entry>
+        <title>Enron</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2007/01/enron.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2007/01/enron.html" thr:count="144" thr:updated="2007-06-21T23:26:23-04:00" />
+        <id>tag:typepad.com,2003:post-14986329</id>
+        <published>2007-01-03T12:25:51-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>My semi-defense of Enron is now out, in this weeks’ New Yorker. And here is the link to Jonathan Macey’s wonderful law review article on the Enron case, which was my inspiration for the piece. I also have a minor...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;MsoNormal&quot; style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;span style=&quot;FONT-SIZE: 14pt&quot;&gt;&lt;/span&gt;
+
+&lt;p class=&quot;MsoNormal&quot; style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;span style=&quot;FONT-SIZE: 14pt&quot;&gt;&lt;/span&gt;
+
+&lt;p class=&quot;MsoNormal&quot; style=&quot;MARGIN: 0in 0in 0pt&quot;&gt;&lt;span style=&quot;FONT-SIZE: 14pt&quot;&gt;&lt;/span&gt;&lt;p&gt;My &lt;a href=&quot;http://www.newyorker.com/fact/content/articles/070108fa_fact&quot;&gt;semi-defense of Enron&lt;/a&gt; is now out, in this weeks’ New Yorker. &lt;br /&gt;&amp;nbsp; &amp;nbsp;&lt;br /&gt;And here is the &lt;a href=&quot;http://law.wustl.edu/WULR/81-2/Macey.pdf&quot;&gt;link&lt;/a&gt;&amp;nbsp; to Jonathan Macey’s wonderful law review article on the Enron case, which was my inspiration for the piece.&lt;/p&gt;
+
+&lt;p&gt;I also have a minor challenge for aficionados of the Enron case.&lt;/p&gt;
+
+&lt;p&gt;Years ago, when I was at the Washington Post, one of my colleagues on the science desk—Bill Booth—called up a dozen or so Nobel Laureates in physics and asked them to explain, in plain language, the nature and significance of the Higgs Boson atomic particle. None of them could. This was at a time, mind you, when the physics community was arguing passionately for the construction of a multi-billion dollar particle accelerator to look for things like the Higgs Boson.&amp;nbsp; So it wasn’t for lack of interest. They were gung-ho for nailing the Higgs Boson. They just couldn’t explain the Higgs Boson.&lt;/p&gt;
+
+&lt;p&gt;Can anyone explain—in plain language—what it is Jeff Skilling and Co. did wrong? &lt;/p&gt;
+
+&lt;p&gt;I’m not asking for an explanation for what they did wrong as businessmen. That’s plain. They did a mountain of stupid and arrogant things. Nor is this about what Skilling and company did that was unethical or in bad faith. There’s a mountain of evidence on that too. The question is strictly a legal one: according to the way the accounting rules were written at the time, what specific transgressions were Skilling guilty of that merited twenty-four years in prison? For the sake of argument, let’s stipulate that summaries must be three sentences or less. &lt;/p&gt;
+
+&lt;p&gt;When I was reporting the piece, I tried to get someone to answer this question. But everything ended up very Higgs Bosonian. &lt;/p&gt;&lt;/p&gt;
+
+&lt;/p&gt;
+
+&lt;/p&gt;
+
+&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>Bad Stereotyping</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/bad_stereotypin.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/bad_stereotypin.html" thr:count="205" thr:updated="2007-07-01T23:44:47-04:00" />
+        <id>tag:typepad.com,2003:post-14665308</id>
+        <published>2006-12-14T12:01:58-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>I was in Texas and Oklahoma last week. In the course of the trip, I was in a number of situations where I had to make conversation with people I didn’t know. Looking back on those conversations, I realize that...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;I was in Texas and Oklahoma last week. In the course of the trip, I was in a number of situations where I had to make conversation with people I didn’t know. Looking back on those conversations, I realize that when I was talking to white, male businessmen and needed to come up something to say, I generally chose the subject of college football. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; For lack of a better word, let’s call this “conversational discrimination.” I don’t assume that every stranger I meet wants to talk about college football. But I drew an inference about my conversational partner, based on his membership in the “white-male-businessmen of Texas and Oklahoma group” and used that inference to direct my behavior. As Judge Posner reminded us, in his review of Blink, in situations where one doesn’t know a lot about an individual, it may “sensible to ascribe the group&#39;s average characteristics to each member of the group, even though one knows that many members deviate from the average.” As it turns out, my assumption was largely correct. I had lot of really great conversations about college football. (Let&#39;s be clear this was not a hardship: I&#39;m happy to talk about college football until the cows come home).&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; The reason this stereotype was so useful was that I used as much of the available information about my conversational partner as I could. The fact that I was in Texas and Oklahoma mattered a lot. I wouldn’t have assumed that I could talk about college football with a similar group of white male business types from, say, Silicon Valley. The fact that they were businessmen mattered, and not, say, graphic designers or actors. The fact that they were men and not women mattered, and I know from experience that if I’m choosing a sports topic for conversation with an black male businessman, I’ll probably guess basketball—particularly if the person I’m talking to is from the East Coast. The point is the accuracy of stereotypes is a reflection—in large part—of their specificity: the more information you can use to build a generalization, the better off you are.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; This is my third (and last) comment on the Ayres study. My first point, as those of you who have been following my thoughts on this know, is that price discrimination against black males by car salesmen is morally wrong. My second point is that it is a bad business strategy. My third—and in some ways most important point—is that its lousy stereotyping.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; Let’s go back to the study. The male and female, black and white testers who Ayres sent out to car dealerships all gave the salesmen the same set of facts. They were all roughly the same age (late twenties). They all drove the same kind of car into the lot. They all dressed neatly and conservatively. They identified themselves as college-educated professionals (sample job: systems analyst at a bank). And they said they lived in the upper-income Chicago neighborhood of Streeterville. The car salesman, then, has several pieces of data from which to create his stereotype. He has the gender, race, age, occupation, educational level, and class (or at least a class proxy) of his potential customer. And what did he do? With the black men, he zeroed in on age and race, and ignored everything else. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp;In his critique of my analysis of Ayres, Judge Posner did the same thing. When he says that it may be&amp;nbsp; “sensible to ascribe the group&#39;s average characteristics to each member of the group,” the “group” he’s talking about is race. But why is Posner—like the car salesmen—so hung up about race? Wouldn’t it be just as sensible, in the case of black men, to define their “group” as the group of college-educated, upper income professionals? So too with Steve Sailer. He says that car salesman are acting rationally, based on the fact that black men—as a group—like to be seen overpaying for cars. I have made my feelings known about what I see as the motivation behind that particular comment. But let’s just focus here on its appropriateness. Why is Sailer—like Posner and Ayres’car dealers—so intent on zeroing in on what is only one of many available and relevant facts about the customer?&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; The short answer to that question, I think, is that this is what racial prejudice is: it is the irrational elevation of race-based considerations over other, equally or more relevant factors.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; But let me make two other points. First, thinking of the Ayres study this way gives us, I think, some insight into the anger that continues to be felt in the African-American community over discrimination. Put yourself in the shoes of one of those black males in Ayres study. You go to college. You get a good job. You make a lot of money. You move to a posh neighborhood. And when you walk into a car dealership all of those achievemens—and what they signal about you—vanish, and the salesmen only sees&amp;nbsp; the color of your skin. Can you understand now why I’ve been hammering away on this subject?&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; Second, some of the commenters to my previous posts seem to have been of the opinion that price discrimination represented a kind of shrewd, profit-maximization strategy by salesmen. Shrewd? Tell me what’s so shrewd about being given four critical facts about a potential customer, and deciding to discard three of them? &lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>More Thoughts On Selling Cars</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/more_thoughts_o.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/more_thoughts_o.html" thr:count="112" thr:updated="2007-06-15T12:05:09-04:00" />
+        <id>tag:typepad.com,2003:post-14606550</id>
+        <published>2006-12-12T17:13:37-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>I would like to take one more pass at the car dealer study, because I think it raises a few, additional, interesting questions. The study is described in Ian Ayres’ Pervasive Prejudice?: Non-Traditional Evidence of Race and Gender Discrimination ,...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;I would like to take one more pass at the car dealer study, because I think it raises a few, additional, interesting questions.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; The study is described in Ian Ayres’ Pervasive Prejudice?: Non-Traditional Evidence of Race and Gender Discrimination , which is a book that had a great deal of influence on my thinking when I was writing “Blink.” Ayres’ project in the book is in exploring non-traditional sources of discrimination—that is, the discrimination that persists because of some flaw or condition of the marketplace in which it is operating. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; For example, Ayres points out that McDonald’s can’t charge Hispanics more for hamburgers than white people—even if they thought that Hispanics would be willing to pay more for hamburgers—because a Hispanic standing in line behind a white person would quickly discover what was going on.&amp;nbsp; Transparency is the great antidote to discriminatory behavior. So is competition. This was Gary Becker’s argument. If a fast food restaurant tries to over-charge Hispanics, then another restaurant can open next door, and make a lot of money treating Hispanics properly. Once again, knowledge about an offending behavior has the effect of correcting the wrong. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; But are there cases, Ayres wondered, where there isn’t enough transparency and competition to correct discrimination? If I don’t know I’m being treated differently, for instance, I have no incentive to take my business elsewhere. The literature showing how much longer black men wait for taxi cabs falls into this category. It’s hard for a black man to figure out, exactly, how differently he’s being treated, and if he does, he has limited opportunity to take his business elsewhere because (at least in New York City) the number of taxicab licenses is limited by law. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; This is the context for Ayres’ study of car salesmen. Cars are high-ticket items with an awful lot of discretion built into their price—and because of a variety of cultural and historical quirks in the car marketplace there isn’t a lot of freely available information about who paid what for what. (Imagine, for example, if we bought cars the same way we bought real estate. You would ask the salesman about the Passat, with the sport package and the leather interior, and the salesman would give you “comparables” for every Passat sold in the United States in the past six months with the sport package and the leather interior. End of story. But for the inability of car dealers to join the 21st century, we wouldn’t be having this discussion about price discrimination). &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; So Ayres sent a group of black and white men and women, with identical cover stories, to hundreds of car dealerships around Chicago. Then he noted the opening prices quoted by salesmen to each gender and racial group. He wanted to create some “comparables” for the purposes of measuring price discrimination. And lo and behold he finds that black men are quoted prices about $1000, on average, higher than white men.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; My initial response to that study was simple: it’s wrong to try and charge someone more for something because of his or her gender and skin color. Reading the comments to my earlier posts, I was somewhat surprised to learn that for some people that is a controversial position. I’m guessing a lot of those who are indifferent to this kind of price discrimination are not black males. Oh well. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; So let’s move on. A good deal of the commenters made the point that the behavior of the car salesmen was rational. This was the position of Judge Richard Posner, who gave “Blink” a spanking, when he reviewed it in the New Republic two years ago. Posner wrote:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;It would not occur to Gladwell, a good liberal, that an auto salesman&#39;s discriminating on the basis of race or sex might be a rational form of the &amp;quot;rapid cognition&amp;quot; that he admires. If two groups happen to differ on average, even though there is considerable overlap between the groups, it may be sensible to ascribe the group&#39;s average characteristics to each member of the group, even though one knows that many members deviate from the average. An individual&#39;s characteristics may be difficult to determine in a brief encounter, and a salesman cannot afford to waste his time in a protracted one, and so he may quote a high price to every black shopper even though he knows that some blacks are just as shrewd and experienced car shoppers as the average white, or more so. Economists use the term &amp;quot;statistical discrimination&amp;quot; to describe this behavior&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; I am not one, ordinarily, to take issue with Judge Posner, who knows a great deal more about economics—and most everything, I suspect (except maybe the Buffalo Bills)—than me. But let’s take a little closer look at this idea: is it really in the economic self-interest--is it really rational-- of car salesmen to draw inferences about individual car-buyers from the group to which those car buyers belong?&amp;nbsp; &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; When I was reporting Blink, I talked to a number of car salesmen about this very question. They were all top salesmen—99th percentile—since it struck me that it wouldn’t be terribly useful to quiz mediocre salesmen about their strategies. (One of the salesmen I interviewed, Bob Golomb is quoted extensively in the book). They told me three things.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; First, that one of the things you quickly learn, in selling cars, is that your ability to draw inferences about individuals’ buying preferences based on&amp;nbsp; surface characteristics of race, gender, dress, age, hairstyle or manner isn’t nearly as good as you think it is. This is why I put the car salesmen material in the part of Blink devoted to the failures of rapid cognition. What I heard, over and over again, was that what a good salesman can do is draw useful inferences about an individual’s personality—that is, are they nervous? Do they need their hand held? Are they best given time and space?—and come up with better ways, as a result, of giving the customer the kind of help he or she needs. But drawing accurate inferences about an individual’s likelihood to buy is a completely different—and vastly more complicated--matter.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; Second, that price discrimination—quoting a higher price to one customer more than another—is a risky strategy, because if it backfires you lose the sale. If you quote a black man a price $1000 higher than you quote a white man—all things being equal—the black man may be less inclined to buy the car. Cars are not, after all, price inelastic goods.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; And three—building on point two—that the incentive structure of car salesmen, in recent years, has changed. It used to be the case that a salesman made his money on the profit margin of each car he sold—so the more above invoice the customer paid, the more the salesman took home in commission. Increasingly, though, the real money in selling cars, I was told, was in meeting and exceeding certain manufacturer sales quotas. You are better off, in other words, selling lots of cars at a low profit margin than a few cars at a high profit margin.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; The point is this. Even if you don’t agree that price discrimination on the basis of race and gender is reprehensible, I think you should at least consider the possibility that it’s a bad business strategy.&amp;nbsp; &lt;/p&gt;
+
+&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>Imagine My Surprise...</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/imagine_my_surp.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/imagine_my_surp.html" thr:count="171" thr:updated="2007-05-30T03:20:30-04:00" />
+        <id>tag:typepad.com,2003:post-14574130</id>
+        <published>2006-12-11T01:46:10-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>It occurs to me that some of the commenters may have slightly missed the point of my previous post. The argument is not about the merits of Ian Ayres&#39;s study. I am perfectly willing to listen to those who quarrel...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;It occurs to me that some of the commenters may have slightly missed the point of my previous post. The argument is not about the merits of Ian Ayres&#39;s study. I am perfectly willing to listen to those who quarrel with Aryes&#39; (and my) conclusion that the different prices quoted to black and white men and women are evidence of racism. But to make his case Ayres put together a study involving 242 car dealerships and a carefully selected group of testers. He engaged, in other words, in social science. If you want to dispute his conclusions, it strikes me that it is incumbent on you to prove your case, and present evidence to the contrary. Sailer didn&#39;t do that. That&#39;s the problem. In response to social science, he simply asserted--without any corroborating evidence--that the whole business simply came down to the fact that black men liked to be seen overpaying for cars. That is not an argument. That is a smear.&lt;br /&gt;&amp;nbsp; &amp;nbsp; Sailer, it turns out, has posted about my challenge on his blogs, urging his supporters &lt;br /&gt;to vote on his behalf. Apparently--as is clear from the comments section--they have complied. So I thought to myself, I&#39;ll go to Sailer&#39;s blog and make this argument about the difference between matching science with science and simply pulling a racist stereotype out of your hat. &lt;br /&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; Imagine my surprise, then, when I discovered that Steve Sailer doesn&#39;t allow readers to comment on his posts. Can you believe that?&amp;nbsp; Here we have the aggrieved Steve Sailer, donning the cloak of victim as he decries my attempt at censorship. Here we have the allies of Steve Sailer, speaking out on behalf of the virutes of the free exchange of ideas, the importance of confronting one&#39;s critics,the necessity of fighting the good fight in arena of free speech. And all the while their&amp;nbsp; leader is cowering behind the gates of a comment-free blog.&lt;br /&gt;&amp;nbsp; &amp;nbsp; Oh my. Is it possible that in addition to everything else, Steve Sailer is also a chicken?&lt;br /&gt;&amp;nbsp; &amp;nbsp; Here&#39;s the deal. Steve Sailer can post all he wants on my blog so long as he allows&lt;br /&gt;readers to post on his blog. Sound fair? &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; &lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>The Lunatic Fringe</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/the_lunatic_fri.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/the_lunatic_fri.html" thr:count="264" thr:updated="2007-04-30T12:25:47-04:00" />
+        <id>tag:typepad.com,2003:post-14564740</id>
+        <published>2006-12-10T12:11:55-05:00</published>
+        <updated>2007-07-06T14:33:27-04:00</updated>
+        <summary>By the way, is it just me or was it a little bit wierd that my innocuous example in the Defining Racism post--that it is wrong to use the color of someone&#39;s skin to draw conclusions about their innate intelligence--should...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;By the way, is it just me or was it a little bit wierd that my innocuous example in the &amp;quot;Defining Racism&amp;quot; post--that it is wrong to use the color of someone&#39;s skin to draw conclusions about their innate intelligence--should have drawn so many angry comments? As I thought should have been obvious, I don&#39;t think that the observation, or analysis, or discussion of racial differences is racist. The black-white achievement gap is real. The issue is what inferences are drawn from those observations of difference. There is enough uncertainty over what is meant by race, and enough uncertainty over what is meant by intelligence, and enough uncertainty over our ability to measure what we think is intelligence, and enough uncertainty over the science of measurement itself&amp;nbsp; that--I think--it&#39;s perfectly fair to question the motives of those who want to jump to the conclusion that the key variable in explaining this enormously complicated question is the shade of someone&#39;s skin.&amp;nbsp; Honestly. I thought we settled this issue in the 19th century.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp;But have you checked out the comments? In response to that single phrase, super-blogger Steve Sailer has written in no less than  &lt;em&gt;fourteen&lt;/em&gt; times. Good grief.  I feel like I&#39;m being stalked.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; Just to make Steve Sailer and his ilk happy, though, let me come up with a more acceptable example of what, according to my criteria, I think qualifies as a open and shut example of racism. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; In Blink, I tell the story of a study done by the law professor Ian Ayres. Ayres put togother of group of young men and women--half white and half black--and sent them to 242 car dealerships all around Chicago. All were attractive, well dressed, and well-educated. All had the same cover story: that they were professionals from a wealthy part of Chicago. All pointed to the lowest-priced car on the floor and said--&amp;quot;I&#39;m interested in buying this car.&amp;quot; Ayres&#39;s question was--all other things being equal, how does skin color and gender affect the initial price quoted by a car salesman?&amp;nbsp; His results: white men, on average, got quoted a price $725 above invoice, white women got quoted a price $935 above invoice, black women $1195 above invoice, and black men $1687 above invoice. &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; This was, I concluded, a powerful example of discrimination--of how unconscious feelings and prejudices have the effect of dramatically influencing the fairness with which we treat different groups. Hardly a controverial statement, right? Well, in criticizing my book, one reviewer defended the car salesman, and called their discrimination entirely rational. He wrote: &lt;/p&gt;
+
+&lt;p&gt;&amp;quot;Black men for whatever complicated reasons, enjoy being seen as big spenders. And car salesmen are all too willing to help them spend big.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; Let&#39;s analyze this statement according to the criteria from my racism post. First, content. Does the statement propagate false belief about a targetted group? I think it does. Since when do black men--collectively--desire to overpay for cars?  The restaurant Per Se&amp;nbsp; in Manhattan, where the prix fix is $250, is an example of a place where diners enjoy being seen as big spenders, and waiters are all too willing to help them spend big. Does that mean that Per Se is full of black men? Actually, it&#39;s full of white people. Although it could as easily be full of purple people,&amp;nbsp; since the willingness to pay three times more for a meal than it would cost down the street has nothing to do with the color of your skin. &lt;/p&gt;
+
+&lt;p&gt;Second: intention. Is the comment malicious or intended to wound? Again, yes. The reviewer&#39;s remark about black men was a justification for a practise that targets and victimizes a specific racial group. How on earth can anyone defend a situation where well-dressed, educated, professional  black men are getting quoted prices almost a thousand dollars higher than well-dressed, educated, professinal white men, simply because the former happen to have darker skin and curly hair--except if they have a desire to wound? &lt;/p&gt;
+
+&lt;p&gt;Third: conviction. Does the comment represent the considered opinion of the person who said it? Absolutely. This wasn&#39;t a statement made in anger or in jest or while drunk. The reviewer thought about it, and wrote it, and never took it back. &lt;/p&gt;
+
+&lt;p&gt;(The same reviewer, incidentally, in response to Katrina, said that:&amp;nbsp; &amp;quot;The plain fact is that [blacks] tend to possess poorer native judgement&amp;nbsp; than members of better-educated groups. Thus they need stricter moral guidance from society.&amp;quot; Key word: &lt;em&gt;native&lt;/em&gt; judgement. I don&#39;t think I need to run that statement through the racism analyzer.)&lt;/p&gt;
+
+&lt;p&gt;I think we can all agree that comments like &amp;quot;black men enjoy being seen as big spenders&amp;quot; or black people &amp;quot;possess poorer native judgement&amp;quot; can be accurately described as examples of racism, and the kinds of people who say things like that can be accurately described as racists. Do those examples work better for you,  Steve Sailer?&amp;nbsp; Oh--wait. I forgot to say the name of the reviewer who wrote those two racist statements:&amp;nbsp; Steve Sailer.&amp;nbsp; &lt;/p&gt;
+
+&lt;p&gt;Is there anyone who would object, at this point, if I made this blog a Steve-Sailer-free zone? I suggest that we vote on it.&amp;nbsp; A simple &amp;quot;in&amp;quot; or &amp;quot;out&amp;quot; will suffice, although any accompanying commentary would, of course, be welcome. I promise to abide by the result. &lt;/p&gt;
+
+&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>&quot;Nigger&quot; Reconsidered</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/nigger_reconsid.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/nigger_reconsid.html" thr:count="44" thr:updated="2007-05-25T02:00:02-04:00" />
+        <id>tag:typepad.com,2003:post-14547224</id>
+        <published>2006-12-08T19:15:37-05:00</published>
+        <updated>2007-07-06T14:33:28-04:00</updated>
+        <summary>Of all the many (in large part intelligent) comments on my last post, the ones that struck me the most were those arguing that I neglected the idea of context in hateful speech: the power relationship between the parties, and...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;Of all the many (in large part intelligent) comments on my last post, the ones that struck me the most were those arguing that&amp;nbsp; I neglected the idea of context in hateful speech: the power relationship between the parties, and the situation&amp;nbsp; in which the words themselves are spoken. I said that the more specific an allegation, the worse it is--so saying that Jews started all the world wars is worse than calling someone a &amp;quot;kike.&amp;quot;&amp;nbsp; But, as some commenters pointed out, that neglects the emotional context of the speech: if the former statement is made dispassionately and the latter statement is made with venom or from a position of authority, then it&#39;s not so clear which is worse. &lt;/p&gt;
+
+&lt;p&gt;I know why I originally made that argument. I was trying to distinguish painfulness from harmfulness. But is there really a difference? &lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; I wish, in retrospect,&amp;nbsp; I had remembered the experience of my mother, when my parents were newly married and living in the England of the 1960&#39;s--not exactly the easiest of places for an inter-racial couple. My mother wrote a book some years ago called &lt;a href=&quot;http://www.amazon.com/gp/product/0333974301?ie=UTF8&amp;amp;tag=gladwellcom&amp;amp;linkCode=as2&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=0333974301&quot;&gt;Brown Face, Big Master&lt;/a&gt;&lt;img height=&quot;1&quot; src=&quot;http://www.assoc-amazon.com/e/ir?t=gladwellcom&amp;amp;l=as2&amp;amp;o=1&amp;amp;a=0333974301&quot; width=&quot;1&quot; border=&quot;0&quot; style=&quot;BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN: 0px; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none&quot; /&gt;, which is a moving (okay, I&#39;m her son) account of her attempt to come to terms with her God (Big Master) and her color (Brown Face).&lt;/p&gt;
+
+&lt;p&gt;Here is the relevant passage. It comes at the end of the book. My parents are living outside Southampton, settled--finally--after a tumultuous first few years of marriage. It hard to read this, I think, and not acknowledge the kind of strength and effort necessary to overcome the terrible power of name-calling.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Three months later, on a Sunday afternoon, I stood at my front door waving to Graham and the older children as they set off for a walk. I was staying behind with the baby to rest. At that moment a boy went by on a bicycle and shouted at me, &amp;quot;Nigger!&amp;quot; Quickly I glanced at Graham and the children, hoping they had not heard him, and then I turned indoors, my heart and mind in turmoil. A poisoned arrow had found its mark, a ghost from the past had visited me, and I was unprepared and vulnerable. The picture I had built up of an accepting community vanished. Once again I lived in an insecure world where thorns were waiting to wound in unexpected places.&amp;nbsp; Where was the mastery of myself I thought I had gained--the freedom from concern about color and race? I was hurt and I was angry and I had to find expression for my raging feelings. Aggressively, I came to God with more boldness than I had ever done before.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; I would teach that boy! I would show him that I was not to be belittled!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp; &amp;nbsp; &lt;strong&gt;&amp;quot;Lord, let me reprove him!&amp;quot; Silence.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;quot;Lord, let me speak to him firmly and kindly and show him that I am above being made angry by his taunt.&amp;quot; &lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;quot;Lord, let me teach him that he is mistaken in his attitude to colored people.&amp;quot;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; God remained silent at each suggestion. He had no more to say to me about race and color. He had said enough.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; My own heart said, &amp;quot;In all these things you only seek revenge.&amp;quot;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp; Then unaccountably I was at peace. I got up from my knees but continued listening. I used to think that when I was distressed, this was God&#39;s punishment or condemnation. I did not think so&amp;nbsp; now, but I still asked the question. &amp;quot;Lord what are you saying in this?&amp;quot; and the rejoinder came. &amp;quot;Will you trust Me more, walk with Me step by step?&amp;quot;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>Defining A Racist</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/defining_a_raci.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/12/defining_a_raci.html" thr:count="193" thr:updated="2007-07-01T05:25:37-04:00" />
+        <id>tag:typepad.com,2003:post-14427755</id>
+        <published>2006-12-03T12:53:51-05:00</published>
+        <updated>2007-07-06T14:33:28-04:00</updated>
+        <summary>Between Michael Richards&#39; outburst in a comedy nightclub, Mel Gibson&#39;s tirade of a few months back, and Michael Irvin&#39;s musings about Tony Romo&#39;s racial heritage, I&#39;m wondering if we need a clearer definition of what it means to be a...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;Between Michael Richards&#39; outburst in a comedy nightclub, Mel Gibson&#39;s tirade of a few months back, and Michael Irvin&#39;s musings about Tony Romo&#39;s racial heritage, I&#39;m wondering if we need a clearer definition of what it means to be a racist.&lt;/p&gt;
+
+&lt;p&gt;These three cases are clearly not equal: the context in which something is said, and the identity of the speaker obviously make a great deal of difference in how we react to the speech. But if there is in fact a hierarchy to hate speech, on what basis should comments be judged? I&#39;m curious to hear the thoughts of others on this. But here&#39;s a try. &lt;/p&gt;
+
+&lt;p&gt;I propose three criteria:&lt;/p&gt;
+
+&lt;p&gt;1. Content. What is said clearly makes a difference. I think, for example, that hate speech is more hateful the more specific it is. To call someone a nigger is not as a bad as arguing that black people have lower intelligence than whites. To make a targetted claim is worse than calling a name. Similarly, I think it matters how much a stereotype deviates from a legitimate generalization.&amp;nbsp; For instance, (and this is, admittedly, not a great example) I think it&#39;s worse for someone to say that Jews are money-grubbers than it is to make a joke about how Orthodox Jews have large families. The first statement is groundless, and the second is at least statistically defensible. All hate speech is hurtful. But racism crosses the line and becomes dangerous when it encourages false belief about a targetted group. This much, I think, is fairly straightforward. &lt;/p&gt;
+
+&lt;p&gt;2. Intention.&amp;nbsp; Was the remark intended to wound, or intended to perpetuate some social wrong? Was it malicious? I remember sitting in church, as a child, while our Presbyterian minister made jokes about how &amp;quot;cheap&amp;quot; Presbyterians were. If non-Presbyterians make that joke, it might be offensive. But a Presbyterian making jokes about Presbyterians with the intention of making Presbyterians laugh is fine, because there is a complete absence of malice in the comment. I think that Richard Pryor or Dave Chapelle&#39;s use of the word &amp;quot;nigger,&amp;quot; or the Jewish jokes told by Jewish comics fall into the same category.&lt;/p&gt;
+
+&lt;p&gt;3. Conviction. Does the statement represent the individual&#39;s considered opinion? This to me is the trickiest of the three criterion. In Blink, I wrote a great deal about unconscious racism--how powerful and how prevalent it is. All of us, in our unconscious, harbor prejudicial thoughts. (If you don&#39;t believe me, I urge you to take the tests at www. i-a-t.org.) What is of greatest concern, I think, are not instances where those kinds of buried feelings leak out, but cases where hate speech appears to have been the product of considered, conscious deliberation.&amp;nbsp; Comments made in writing, then, ought to be taken more seriously and judged more harshly than comments made in speech; comments made soberly are worse than those made in anger or jest. Comments made in the absence of emotional or chemical duress are worse than those made drunk, or in some stressful context. When a teenager yells at her mother, &amp;quot;I wish you were dead,&amp;quot; that&#39;s hate speech. It&#39;s malcious and its targetted (I wish YOU were dead, not all mothers.) But mothers forgive their children for shouting those words, because the speech fails the conviction test. When we are frustrated or angry, we say things we don&#39;t mean--and the world, properly, ought to make allowances for us when we do. &lt;/p&gt;
+
+&lt;p&gt;So: Mel Gibson. How we rate his outburst? One of the many things Gibson said was that Jews were responsible for starting all of the world&#39;s wars. On content grounds, that&#39;s serious: it&#39;s specific and it&#39;s inaccurate. It&#39;s dangerous.&amp;nbsp; He fails the intention test as well, because those words were clearly meant to harm. On conviction, I think we ought to cut him a little slack, since he was (mildly) drunk. On the other hand, Gibson&#39;s past associations and actions suggest that those words didn&#39;t come completely out of left field. I think the Gibson case is just about as serious as hate speech gets.&lt;/p&gt;
+
+&lt;p&gt;What of Michael Richards? His comments were clearly intended to harm, so I think according to the  intention criteria he ought to be chastised.&amp;nbsp; The other two categories are not so clear cut. On content grounds, he simply called a name--albeit a heinous one--but that&#39;s not like saying that Jews are responsible for starting all the world wars.&lt;/p&gt;
+
+&lt;p&gt;And on conviction, I think he gets a pass. First of all, no one has claimed that Richards harbors some secret racist worldview. He&#39;s the prototypical Hollywood liberal, and he&#39;s clearly devastated by the notion that he might be considered a racist. What&#39;s more, the circumstances were extenuating: he was angry and frustrated by hecklers. But more than that--and I think this is the critical issue--I think it matters that the remarks came in a comedy club. As far as I can tell, the practice of comedy, on the grass roots level, has recently become fixated on pushing the boundaries of taste, particuarly when it comes to the taboo subjects of race and ethnicity and group affiliation.  That&#39;s what Howard Stern or Sarah Silverman&#39;s comedy is about.  I thought the scene in Borat, similarly, where Sascha-Cohen attends a Pentecostal service, goes up for the altar call, and then mocks the religious esctasy of the other worshippers, was as deeply offensive as any movie scene I have witnessed in some time.&amp;nbsp; Since when is it okay to invade someone&#39;s house of worship, and make fun of their most sacred religious rituals? But that is what comedy consists of right now, and I suspect that&#39;s what Richards was up to as well. He was trying to be shocking and trangressive, in the way his peers are all trying to be shocking and trangressive--and it came out wrong. That doesn&#39;t make him a racist. That just makes him a bad comic. &lt;/p&gt;
+
+&lt;p&gt;Finally, Michael Irwin. The quarterback of the Dallas Cowboys, Irwin says, is so athletically gifted that some of his ancestors must have mixed it up with some black people. Please. I think we can fault him on content grounds, for perpetuating an simplistic and phony idea about the source of athletic ability. But there was no malice here, and there was no conviction either. He was making, on air, the kind of joke that players make every day in the locker room. &lt;/p&gt;
+
+&lt;p&gt;I&#39;m reminded, in all of this, of the work that the psychologists Bruce Rind, Robert Bauserman, and Philip Tromovitch did a few years ago on sex abuse. All sex abuse is wrong, they argued. But not all of the acts that we describe with that term are equally harmful. For example, the data suggests that an episode of inappropriate contact between adult men and teenage boys does not have nearly same long term consequences as, say, repeated incestuous encounters between a father and a pre-teen daughter. And to use the word &amp;quot;sex abuse&amp;quot; to cover both crimes is to erase the very real distinctions between those two cases, and to undermine the social and moral power of that term.&lt;/p&gt;
+
+&lt;p&gt;I don&#39;t racism is any different. I&#39;ve written as much on this subject, over the years, as I have because I think it is a profoundly serious problem in our society--much more profound than we generally acknowledge. But we debase that term when we apply it to comments or actions indiscriminately. There is a distinction between being a racist and simply saying something dumb. &lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>The Perfect and the Good</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/11/the_perfect_and.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/11/the_perfect_and.html" thr:count="28" thr:updated="2007-06-02T10:48:43-04:00" />
+        <id>tag:typepad.com,2003:post-14306758</id>
+        <published>2006-11-26T21:16:16-05:00</published>
+        <updated>2007-07-06T14:33:28-04:00</updated>
+        <summary>I wrote a piece for the The New Yorker a few weeks ago about a group of people who have created a neural network that predicts (or tries to predict) the box office of movies from their scripts. (It&#39;s not...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;I wrote a piece for the The New Yorker a few weeks ago about a group of people who have created a neural network that predicts (or tries to predict) the box office of movies from their scripts. (It&#39;s not up on my site yet, but will be soon).&lt;/p&gt;
+
+&lt;p&gt;The piece drew all kinds of interesting responses, a handful of which pointed out obvious imperfections in the system. Those criticisms were entirely accurate. But they were also, I think, in some way beside the point, because no decision rule or algorithm or prediction system is ever perfect. The test of these kinds of decision aids is simply whether--in most cases for most people--they improve the quality of decision-making. They can&#39;t be perfect. But they can be good.&lt;/p&gt;
+
+&lt;p&gt;In &amp;quot;Blink,&amp;quot; for instance, I wrote about the use of a decision tree at Cook County Hospital in Chicago to help diagnose chest pain. Lee Goldman, the physican who devised the chest pain decision rule, says very clearly that he thinks that there are individual doctors here and there who can make better decisions without it. But nonetheless Goldman&#39;s work has saved lots and lot of lives and millions and miillions of dollars because it improves the quality of the &lt;em&gt;average&lt;/em&gt; decision.&lt;/p&gt;
+
+&lt;p&gt;Is the average movie executive better off with a neural network for analyzing scripts than without it? My guess is yes. That&#39;s why I wrote the piece. I think that one of the most important changes we&#39;re going to see in lots of professions over the next few years is the emergence of tools that close the gap between the middle and the top--that allow the decision-making who is merely competent to avoid his errors to be reach the level of good.&lt;/p&gt;
+
+&lt;p&gt;I think the same perspective should be applied to the basketball algorithms I&#39;ve been writing about. It is easy to point out the ways in which either Hollinger&#39;s system or Berri&#39;s system fail to completely reflect the reality of what happens on the basketball court. But of course they are imperfect: neither Berri or Hollinger would ever claim that they are not. The issue is--are we better off using them to assist decision-making that we are making entirely judgements about basketball players using conventional metrics?  Here I think&amp;nbsp; the answer is a resounding yes. (Keep in mind that I live in New York City and have had to watch Mr. Thomas bungled his way toward disaster. I &lt;em&gt;would&lt;/em&gt; think that.) &lt;/p&gt;
+
+&lt;p&gt;And the reason that lots of smart people, like Berri and Hollinger and others, spend so much time arguing back and forth about different variations on these algorithms, is that every little tweak raises the quality of decision-making in the middle part of the curve just a little bit higher. That&#39;s a pretty noble goal. &lt;/p&gt;
+
+&lt;p&gt;That said, here are the latest updates on the Hollinger-Berri back and forth. And remember. I don&#39;t think this is a question of one of them being wrong and the other right. They are both right. It&#39;s just that one of them may be a little more right than the other. &lt;/p&gt;
+
+&lt;p&gt;Here we go. First Hollinger&#39;s response, courtesy of &lt;a href=&quot;http://www.truehoop.com/leaguewide-issues-55650-john-hollinger-responds-to-david-berri-and-malcolm-gladwell.html&quot;&gt;truehoop.com&lt;/a&gt;, (an excellent site by the way.) &lt;/p&gt;
+
+&lt;p&gt;And then. &lt;a href=&quot;http://dberri.wordpress.com/2006/11/26/answering-a-critic/&quot;&gt;Berri&#39;s response&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+    <entry>
+        <title>NBA Metrics Continued....</title>
+        <link rel="alternate" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/11/nba_metrics_con.html" />
+        <link rel="replies" type="text/html" href="http://gladwell.typepad.com/gladwellcom/2006/11/nba_metrics_con.html" thr:count="45" thr:updated="2007-06-26T09:53:53-04:00" />
+        <id>tag:typepad.com,2003:post-14236676</id>
+        <published>2006-11-21T19:34:52-05:00</published>
+        <updated>2007-07-06T14:33:28-04:00</updated>
+        <summary>I&#39;ve long been a fan of John Hollinger, who writes about basketball for espn.com, in large part because of Hollinger&#39;s statistical system for analyzing NBA players. Hollinger calls it PERs, and I like it chiefly because I&#39;m in favor of...</summary>
+        <author>
+            <name>malcolmgladwell</name>
+        </author>
+        
+        
+<content type="html" xml:lang="en-US" xml:base="http://gladwell.typepad.com/gladwellcom/">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;I&#39;ve long been a fan of John Hollinger, who writes about basketball for &lt;a href=&quot;http://www.espn.com&quot;&gt;espn.com&lt;/a&gt;, in large part because of Hollinger&#39;s statistical system for analyzing NBA players. Hollinger calls it PERs, and I like it chiefly because I&#39;m in favor of any system that tries to improve on what I think are&amp;nbsp; our woefully inadequate intuitive judgments of basketball ability.&lt;/p&gt;
+
+&lt;p&gt;Now David Berri--whose book, &lt;a href=&quot;http://dberri.wordpress.com/&quot;&gt;&quot;The Wages of Wins&quot;&lt;/a&gt;, I wrote about a few months back--has &lt;a href=&quot;http://dberri.wordpress.com/2006/11/17/a-comment-on-the-player-efficiency-rating/&quot;&gt;critiqued&lt;/a&gt;&amp;nbsp; Hollinger&#39;s methodology.&lt;/p&gt;
+
+&lt;p&gt;Berri&#39;s argument is quite simple. As those of you who have read &amp;quot;Wages of Wins&amp;quot; know, Berri&#39;s big problem with the way we judge pro basketball players is that we over-rate the importance of how many points a player scores, and vastly under-rate the importance of things like turnovers, rebounds, and shooting percentage. &lt;/p&gt;
+
+&lt;p&gt;Now comes Berri&#39;s critique of Hollinger: he says that Hollinger makes the same mistake. Here&#39;s the critical section:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; &lt;/strong&gt;&lt;a href=&quot;http://dberri.wordpress.com/2006/11/09/do-we-overvalue-rebounds&quot; modo=&quot;false&quot;&gt;&lt;span style=&quot;color: #0060ff;&quot;&gt;&lt;strong&gt;In discussing the NBA Efficiency metric&lt;/strong&gt;&lt;/span&gt;&lt;/a&gt;&lt;strong&gt; – which the &lt;/strong&gt;&lt;a href=&quot;http://www.nba.com/statistics/efficiency.html&quot; modo=&quot;false&quot;&gt;&lt;span style=&quot;color: #0060ff;&quot;&gt;&lt;strong&gt;NBA presents at its website&lt;/strong&gt;&lt;/span&gt;&lt;/a&gt;&lt;strong&gt; – I argued that this measure fails to penalize inefficient shooting. The regression of wins on offensive and defensive efficiency reveals that shooting efficiency impacts outcomes in basketball. The ball does indeed have to go through the hoop for a team to be successful. &lt;/strong&gt;&lt;/p&gt;
+
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span style=&quot;FONT-FAMILY: Georgia&quot;&gt;&lt;strong&gt;The same critique offered for NBA Efficiency also applies to Hollinger’s PERs, except the problem is even worse. Hollinger argues that each two point field goal made is worth about 1.65 points. A three point field goal made is worth 2.65 points. A missed field goal, though, costs a team 0.72 points. &lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;strong&gt;&lt;span style=&quot;FONT-FAMILY: Georgia&quot;&gt;Given these values, with a bit of math we can show that a player will break even on his two point field goal attempts if he hits on 30.4% of these shots. On three pointers the break-even point is 21.4%. If a player exceeds these thresholds, and virtually every NBA played does so with respect to two-point shots, the more he shoots the higher his value in PERs. So a player can be an inefficient scorer and simply inflate his value by taking a large number of shots. &lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I&#39;d be interested to see how Hollinger replies to this.&lt;/p&gt;
+
+&lt;p&gt;As I recall from the last time I posted on Berri, some readers have a problem with Berri&#39;s conclusions, mostly because his system ends up highly valuing players like Ben Wallace and Dennis Rodman and Kevin Garnett and dismissing the value of players like Allen Iverson.&amp;nbsp; But the more Berri&#39;s fleshes out in arguments, the more convinced I become.&lt;/p&gt;
+
+&lt;p&gt;If you&#39;re a skeptic, I urge you to start reading Berri&#39;s blog. &lt;/p&gt;
+
+&lt;p&gt;One more point: one of the fascinating things about this argument is how similar it is to the argument currently going on in medicine about &amp;quot;clinical&amp;quot; versus &amp;quot;acturial&amp;quot; decision-making.&amp;nbsp; One study after another has demonstrated that in a number of critical diagnostic situations, the unaided judgment of most doctors is substantially inferior to a diagnosis made with the assistance of some kind of algorithm or decision-rule. Doctors don&#39;t like to admit this. But it happens to be true. &lt;/p&gt;
+
+&lt;p&gt;A lot of the huffing and puffing about Berri&#39;s ideas, it strikes me, is just basketball&#39;s version of the same defensiveness and close-mindedness. &lt;/p&gt;&lt;/div&gt;
+</content>
+
+
+    </entry>
+ 
+</feed>

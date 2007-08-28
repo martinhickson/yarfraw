@@ -68,7 +68,7 @@ This makes building an object easier, for example, to build an item, you would w
 Building items and channels with additional elements
 	
 	Sometimes you may want to add extensibility elements to your feed that are not in the RSS specs.
-For example, the feed from {{{digg.xml}digg.com}} has some additional elements under all the item elements.
+For example, the RSS 2.0 feed from {{{digg.xml}digg.com}} has some additional elements under all the item elements.
 
 	The Channel and Item data models supports these additional elements, as well as any additional attributes.
 You can add more elements to a channel or an item using the 'otherElements' and 'otherAttributes' list:

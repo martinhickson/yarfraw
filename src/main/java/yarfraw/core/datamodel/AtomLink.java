@@ -123,6 +123,9 @@ public class AtomLink extends AtomAttributes{
   
   @Override
   public void validate(FeedFormat format) throws ValidationException {
+    if(format != FeedFormat.ATOM10){
+      return ;
+    }
     CommonUtils.validateNotNull("href is required", _href);
     try {
       @SuppressWarnings("unused")

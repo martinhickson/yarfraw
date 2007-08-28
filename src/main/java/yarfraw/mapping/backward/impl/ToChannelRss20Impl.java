@@ -12,6 +12,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 import static yarfraw.io.parser.ElementQName.RSS20_TTL;
 import static yarfraw.io.parser.ElementQName.RSS20_WEBMASTER;
 
+import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -57,98 +58,115 @@ public class ToChannelRss20Impl implements ToChannelRss20{
       return null;
     }
     Channel c = new Channel();
-    try {
-      if(ch.getItem() != null){
-        for(TRssItem item : ch.getItem()){
-          c.additem(Rss20MappingUtils.toItem(item));
-        }
+    
+    if(ch.getItem() != null){
+      for(TRssItem item : ch.getItem()){
+        c.additem(Rss20MappingUtils.toItem(item));
       }
-      if(ch.getOtherAttributes() != null){
-        for(Map.Entry<QName, String> e : ch.getOtherAttributes().entrySet()){
-          c.addOtherAttributes(e.getKey(), e.getValue());
-        }
+    }
+    if(ch.getOtherAttributes() != null){
+      for(Map.Entry<QName, String> e : ch.getOtherAttributes().entrySet()){
+        c.addOtherAttributes(e.getKey(), e.getValue());
       }
-      for(Object o : ch.getTitleOrLinkOrDescription()){
-        if(o == null){
-          continue;
-        }
-        if (o instanceof JAXBElement) {
-          JAXBElement jaxbElement = (JAXBElement) o;
-          Object val = jaxbElement.getValue();
-          if(CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)){
-            c.setTitle((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
+    }
+    for(Object o : ch.getTitleOrLinkOrDescription()){
+      if(o == null){
+        continue;
+      }
+      if (o instanceof JAXBElement) {
+        JAXBElement jaxbElement = (JAXBElement) o;
+        Object val = jaxbElement.getValue();
+        if(CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)){
+          c.setTitle((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
+          try {
             c.setLink((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
-            c.setDescription((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
-            c.setCopyright((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DOCS)) {
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
+          c.setDescription((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
+          c.setCopyright((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DOCS)) {
+          try {
             c.setDocs((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_GENERATOR)) {
-            c.setGenerator((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LANGUAGE)) {
-            c.setLanguage(new Locale((String)jaxbElement.getValue()));
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
-            try {
-              c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-            } catch (Exception e) {
-              c.setLastBuildDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-            }
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
-            c.setManagingEditor((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
-            try {
-              c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-            } catch (Exception e) {
-              c.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-            }
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TTL)) {
-            c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_WEBMASTER)) {
-            c.setWebMaster((String)jaxbElement.getValue());
-          }else if (val instanceof TCategory) {
-            TCategory cat = (TCategory) val;
-            c.addCategory(new Category(cat.getValue(), cat.getDomain()));
-          }else if (val instanceof TSkipDaysList) {
-            TSkipDaysList sdl = (TSkipDaysList)val;
-            for(TSkipDay day : sdl.getDay()){
-              c.addSkipDay(Day.valueOf(day.value()));
-            }
-            
-          }else if (val instanceof TSkipHoursList) {
-            TSkipHoursList shl = (TSkipHoursList)val;
-            for(Integer h : shl.getHour()){
-              c.addSkipHour(h);
-            }
-          }else if (val instanceof TCloud) {
-            TCloud cloud = (TCloud)val;
-            c.setCloud(new Cloud(cloud.getDomain(), 
-                cloud.getPort() == null? null : cloud.getPort().intValue(), 
-                    cloud.getPath(), cloud.getRegisterProcedure(), 
-                    cloud.getProtocol() == null ? null : cloud.getProtocol().value()));
-          }else if (val instanceof TImage) {
-            TImage image = (TImage)val;
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_GENERATOR)) {
+          c.setGenerator((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LANGUAGE)) {
+          c.setLanguage(new Locale((String)jaxbElement.getValue()));
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
+          try {
+            c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          } catch (Exception e) {
+            c.setLastBuildDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
+          c.setManagingEditor((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
+          try {
+            c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          } catch (Exception e) {
+            c.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TTL)) {
+          c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_WEBMASTER)) {
+          c.setWebMaster((String)jaxbElement.getValue());
+        }else if (val instanceof TCategory) {
+          TCategory cat = (TCategory) val;
+          c.addCategory(new Category(cat.getValue(), cat.getDomain()));
+        }else if (val instanceof TSkipDaysList) {
+          TSkipDaysList sdl = (TSkipDaysList)val;
+          for(TSkipDay day : sdl.getDay()){
+            c.addSkipDay(Day.valueOf(day.value()));
+          }
+          
+        }else if (val instanceof TSkipHoursList) {
+          TSkipHoursList shl = (TSkipHoursList)val;
+          for(Integer h : shl.getHour()){
+            c.addSkipHour(h);
+          }
+        }else if (val instanceof TCloud) {
+          TCloud cloud = (TCloud)val;
+          c.setCloud(new Cloud(cloud.getDomain(), 
+              cloud.getPort() == null? null : cloud.getPort().intValue(), 
+                  cloud.getPath(), cloud.getRegisterProcedure(), 
+                  cloud.getProtocol() == null ? null : cloud.getProtocol().value()));
+        }else if (val instanceof TImage) {
+          TImage image = (TImage)val;
+          try {
             c.setImage(new Image(image.getUrl(), image.getTitle(), image.getLink(), 
                 image.getWidth(), image.getHeight(), image.getDescription()));
-          }else if (val instanceof TTextInput) {
-            TTextInput in = (TTextInput)val;
-            c.setTextInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
-          }else{
-            LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
           }
-        }
-        else if (o instanceof Element) {
-          Element e = (Element) o;
-          c.getOtherElements().add(e);
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (val instanceof TTextInput) {
+          TTextInput in = (TTextInput)val;
+          try {
+            c.setTextInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
         }else{
-          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+          LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
         }
-      }                                           
-    }
-    catch (Exception e) {
-      throw new YarfrawException("Unable to convert input to Channel", e);
-    }
+      }
+      else if (o instanceof Element) {
+        Element e = (Element) o;
+        c.getOtherElements().add(e);
+      }else{
+        LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+      }
+    }                                           
+    
     return c;
   }
   

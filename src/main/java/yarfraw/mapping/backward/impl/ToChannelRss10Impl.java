@@ -2,8 +2,6 @@ package yarfraw.mapping.backward.impl;
 
 import static yarfraw.mapping.backward.impl.Rss10MappingUtils.toChannel;
 
-import java.net.URISyntaxException;
-
 import javax.xml.bind.JAXBElement;
 
 import org.apache.commons.logging.Log;
@@ -46,12 +44,7 @@ public class ToChannelRss10Impl implements ToChannelRss10{
     }
     Channel channel = toChannel(ch, rdf);
     if(ti != null){
-      try {
-        channel.setTextInput(Rss10MappingUtils.toTextInput(ti));
-      }
-      catch (URISyntaxException e) {
-        throw new YarfrawException("Unable to parse <textinpu>", e);
-      }
+      channel.setTextInput(Rss10MappingUtils.toTextInput(ti));
     }
     return channel;
   }

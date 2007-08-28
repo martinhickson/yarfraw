@@ -30,7 +30,13 @@
       <item name="Installation"    href="installation.html" />
       <item name="FAQ"    href="faq.html" />            
     </menu>    
-	<menu name="Usage">
+	<menu name="Quick Usage">
+      <item name="Builder Usage"    href="builder.html" />
+      <item name="Reader/Writer Usage"    href="io.html" />
+      <item name="Feed Format"    href="format.html" />
+      <item name="Other Examples"    href="other.html" />
+    </menu>
+    <menu name="Advanced Usage">
       <item name="Builder Usage"    href="builder.html" />
       <item name="Reader/Writer Usage"    href="io.html" />
       <item name="Feed Format"    href="format.html" />

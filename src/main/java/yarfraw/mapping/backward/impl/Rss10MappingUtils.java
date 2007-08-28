@@ -14,7 +14,6 @@ import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
 import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,7 +34,6 @@ import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.RdfAttributes;
 import yarfraw.core.datamodel.TextInput;
-import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
 import yarfraw.generated.rss10.elements.RDF;
@@ -58,7 +56,7 @@ class Rss10MappingUtils{
   }
   
   @SuppressWarnings("unchecked")
-  public static Channel toChannel(TRss10Channel ch, RDF rdf) throws YarfrawException{
+  public static Channel toChannel(TRss10Channel ch, RDF rdf){
     Channel ret = new Channel();
     if(ch.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
@@ -66,68 +64,71 @@ class Rss10MappingUtils{
     UpdatePeriodEnum updatePeriod = null;
     BigInteger updateFrequency = null;
     Map<String, Integer> ordering = new HashMap<String, Integer>();
-    try {
-      List<Item> items = toItems(rdf.getChannelOrItemOrTextinput());
-      for(Object o : ch.getTitleOrLinkOrDescription()){
-        if(o == null)
-          continue;
-        
-        if (o instanceof JAXBElement) {
-          JAXBElement jaxb = (JAXBElement) o;
-          Object val = jaxb.getValue();
-          if(same(jaxb.getName(), RSS10_TITLE)){
-            ret.setTitle((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
-            ret.setDescription((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_LINK)){
+    List<Item> items = toItems(rdf.getChannelOrItemOrTextinput());
+    
+    for(Object o : ch.getTitleOrLinkOrDescription()){
+      if(o == null)
+        continue;
+      
+      if (o instanceof JAXBElement) {
+        JAXBElement jaxb = (JAXBElement) o;
+        Object val = jaxb.getValue();
+        if(same(jaxb.getName(), RSS10_TITLE)){
+          ret.setTitle((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
+          ret.setDescription((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_LINK)){
+          try {
             ret.setLink((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_UPDATEFREQUENCY)){
-            updateFrequency = (BigInteger)jaxb.getValue();
-          }else if(same(jaxb.getName(), RSS10_SUBJECT)){
-            ret.addCategory((String)jaxb.getValue());
-            
-          }else if(same(jaxb.getName(), RSS10_PUBLISHER)){
-            ret.setWebMaster((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_CREATOR)){
-            ret.setManagingEditor((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_RIGHTS)){
-            ret.setCopyright((String)jaxb.getValue());
-          }else if(same(jaxb.getName(), RSS10_DATE)){
-            ret.setPubDate(CommonUtils.tryParseDate((String)jaxb.getValue()));
-          }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
-            ret.setLanguage(new Locale((String)jaxb.getValue()));
-          }else if(val instanceof UpdatePeriodEnum){
-            updatePeriod = (UpdatePeriodEnum)val;
-          }else if(val instanceof TRss10Image){
-            ret.setImage(toImage((TRss10Image)val));
-          }else if(val instanceof TRss10TextInput){
-            ret.setTextInput(toTextInput((TRss10TextInput)val));
-          }else if(same(jaxb.getName(), RSS10_UPDATEBASE)){
-            LOG.info("<updateBase> element is ignored.");
-          }else if(val instanceof Items){
-            Seq seq = ((Items)val).getSeq();
-            int i = 0;
-            for(Li li : seq.getLi()){
-              ordering.put(li.getResource(), i++);
-            }
-          }else{
-            LOG.warn("Unexpected JAXBElement: "+ToStringBuilder.reflectionToString(jaxb)+" this should not happen!");
           }
-        }else if (o instanceof Element) {
-          Element e = (Element) o;
-          ret.getOtherElements().add(e);
+          catch (URISyntaxException e) {
+            LOG.error("<link> element does not contain a valid URI, it is ignored", e);
+          }
+        }else if(same(jaxb.getName(), RSS10_UPDATEFREQUENCY)){
+          updateFrequency = (BigInteger)jaxb.getValue();
+        }else if(same(jaxb.getName(), RSS10_SUBJECT)){
+          ret.addCategory((String)jaxb.getValue());
+          
+        }else if(same(jaxb.getName(), RSS10_PUBLISHER)){
+          ret.setWebMaster((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_CREATOR)){
+          ret.setManagingEditor((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_RIGHTS)){
+          ret.setCopyright((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_DATE)){
+          ret.setPubDate(CommonUtils.tryParseDate((String)jaxb.getValue()));
+        }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
+          ret.setLanguage(new Locale((String)jaxb.getValue()));
+        }else if(val instanceof UpdatePeriodEnum){
+          updatePeriod = (UpdatePeriodEnum)val;
+        }else if(val instanceof TRss10Image){
+          ret.setImage(toImage((TRss10Image)val));
+        }else if(val instanceof TRss10TextInput){
+          ret.setTextInput(toTextInput((TRss10TextInput)val));
+        }else if(same(jaxb.getName(), RSS10_UPDATEBASE)){
+          LOG.info("<updateBase> element is ignored.");
+        }else if(val instanceof Items){
+          Seq seq = ((Items)val).getSeq();
+          int i = 0;
+          for(Li li : seq.getLi()){
+            ordering.put(li.getResource(), i++);
+          }
         }else{
-          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+          LOG.warn("Unexpected JAXBElement: "+ToStringBuilder.reflectionToString(jaxb)+" this should not happen!");
         }
-      }  
-      ret.setTtl(calculateTtl(updatePeriod, updateFrequency));
-      if(ordering.entrySet().size() != 0){
-        Collections.sort(items, new ItemComparacotr(ordering)); 
+      }else if (o instanceof Element) {
+        Element e = (Element) o;
+        ret.getOtherElements().add(e);
+      }else{
+        LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
       }
-      ret.setItems(items);
-    } catch (Exception e) {
-      throw new YarfrawException("Unable to map feed to channel", e);
+    }  
+    ret.setTtl(calculateTtl(updatePeriod, updateFrequency));
+    if(ordering.entrySet().size() != 0){
+      Collections.sort(items, new ItemComparacotr(ordering)); 
     }
+    ret.setItems(items);
+    
     return ret;
   }
   
@@ -144,7 +145,7 @@ class Rss10MappingUtils{
   }
   
   @SuppressWarnings("unchecked")
-  private static List<Item> toItems(List<Object> objs) throws URISyntaxException, ParseException, YarfrawException{
+  private static List<Item> toItems(List<Object> objs){
     List<Item> items = new ArrayList<Item>();
     for(Object o : objs){
       if (o instanceof JAXBElement) {
@@ -160,13 +161,23 @@ class Rss10MappingUtils{
               }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
                 item.setDescription((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_LINK)){
-                item.setLink((String)jaxb.getValue());
+                try {
+                  item.setLink((String)jaxb.getValue());
+                }
+                catch (URISyntaxException e) {
+                  LOG.error("invalid <link> element, it is ignored. ", e);
+                }
               }else if(same(jaxb.getName(), RSS10_CREATOR)){
                 item.setAuthor((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_RIGHTS)){
                 item.setRights((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_DATE)){
-                item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
+                try {
+                  item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
+                }
+                catch (Exception e) {
+                  LOG.error("Unable to parse date: "+(String)jaxb.getValue(), e);
+                }
               }else if(same(jaxb.getName(), RSS10_SUBJECT)){
                 item.addCategory((String)jaxb.getValue());
               }else if (o instanceof Element) {
@@ -178,8 +189,14 @@ class Rss10MappingUtils{
               }
             }
           }
-          item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? item.getLink().toString() : it.getResource(), 
-              it.getAbout()));
+          try {
+            item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? 
+                    item.getLink().toString() : it.getResource(), 
+                it.getAbout()));
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid resource attribute, it is ignored. ", e);
+          }
           items.add(item);
         }
       }
@@ -187,25 +204,50 @@ class Rss10MappingUtils{
     return items;
   }
   
-  public static TextInput toTextInput(TRss10TextInput input) throws URISyntaxException{
+  public static TextInput toTextInput(TRss10TextInput input){
     TextInput ret = new TextInput();
     ret.setDescription(input.getDescription());
-    ret.setLink(input.getLink());
+    try {
+      ret.setLink(input.getLink());
+    }
+    catch (URISyntaxException e) {
+      LOG.error("invalid URI, it is ignored", e);
+    }
     ret.setTitle(input.getTitle());
     ret.setName(input.getName());
     if(input.getAbout() != null || input.getResource() != null){
-      ret.setRdfAttributes(new RdfAttributes(input.getResource(), input.getAbout()));
+      try {
+        ret.setRdfAttributes(new RdfAttributes(input.getResource(), input.getAbout()));
+      }
+      catch (URISyntaxException e) {
+        LOG.error("invalid URI, it is ignored", e);
+      }
     }
     return ret;
   }
   
-  private static Image toImage(TRss10Image img) throws URISyntaxException{
+  private static Image toImage(TRss10Image img){
     Image ret = new Image();
-    ret.setLink(img.getLink());
+    try {
+      ret.setLink(img.getLink());
+    }
+    catch (URISyntaxException e) {
+      LOG.error("<link> element does not contain a valid URI, it is ignored", e);
+    }
     ret.setTitle(img.getTitle());
-    ret.setUrl(img.getUrl());
+    try {
+      ret.setUrl(img.getUrl());
+    }
+    catch (URISyntaxException e) {
+      LOG.error("<url> element does not contain a valid URI, it is ignored", e);
+    }
     if(img.getAbout() != null || img.getResource() != null){
-      ret.setRdfAttributes(new RdfAttributes(img.getResource(), img.getAbout()));
+      try {
+        ret.setRdfAttributes(new RdfAttributes(img.getResource(), img.getAbout()));
+      }
+      catch (URISyntaxException e) {
+        LOG.error("invalid URI, it is ignored", e);
+      }
     }
     return ret;
   }

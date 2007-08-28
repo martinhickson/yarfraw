@@ -76,6 +76,8 @@ public class BuilderTest extends TestCase{
     FeedWriter writer = new FeedWriter(File.createTempFile("atom10",".xml"));
     writer.setFormat(FeedFormat.ATOM10);
     writer.writeChannel(ch);
+    
+    ch.validate(FeedFormat.ATOM10);
                                                               
   }
   

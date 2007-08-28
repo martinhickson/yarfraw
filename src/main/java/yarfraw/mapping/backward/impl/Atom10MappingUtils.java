@@ -15,6 +15,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.AtomAttributes;
@@ -44,7 +47,7 @@ import yarfraw.utils.CommonUtils;
  */
 class Atom10MappingUtils{
   private static final String XHTML = "xhtml";
-
+  private static final Log LOG = LogFactory.getLog(Atom10MappingUtils.class);
   /**
    * Use this method with cautions, it checks the type of the input {@link TextType},
    * and automatically copy all the attributes from to input {@link AtomTextAttributes}.
@@ -103,7 +106,7 @@ class Atom10MappingUtils{
     return null;
   }
   
-  public static Item toItem(EntryType entry) throws URISyntaxException{
+  public static Item toItem(EntryType entry){
     AtomAttributes attr = new AtomTextAttributes();
     attr.setBase(entry.getBase());
     attr.setLang(entry.getLang() == null ? null : new Locale(entry.getLang()));
@@ -135,7 +138,7 @@ class Atom10MappingUtils{
             }else if(co instanceof String){
               content.addContentText((String)co);
             }else{
-              //not sure what to do with these
+              LOG.warn("Ignoring unexpected elements: "+ ToStringBuilder.reflectionToString(co));
             }
           }
           content.setSrc(c.getSrc());
@@ -147,7 +150,9 @@ class Atom10MappingUtils{
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_PUBLISHED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
-          ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+          if(dt.getValue() != null){
+            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+          }
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
           ret.setRights(convenientExtractText(ret, AtomTextElementEnum.rights, text));
@@ -159,19 +164,17 @@ class Atom10MappingUtils{
           TextType text = (TextType) val;
           ret.setTitle(convenientExtractText(ret, AtomTextElementEnum.title, text));
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
-          //partially supported
-          DateTimeType dt = (DateTimeType) val;
-          ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+          LOG.warn("<updated> element of <entry> element is not supported, it is ignored ");
         }else if(val instanceof IdType){
           ret.setAtomId(toAtomId((IdType)val));
         }else{
-          //FIXME: ignore?
+          LOG.warn("Unexpected JAXB Element: "+ ToStringBuilder.reflectionToString(val));
         }
       }else if (o instanceof Element) {
         Element e = (Element) o;
         ret.getOtherElements().add(e);
       }else{
-        //FIXME not sure what to do yet
+        LOG.warn("Unexpected Element: "+ ToStringBuilder.reflectionToString(o));
       }
     }
     return ret;
@@ -245,6 +248,7 @@ class Atom10MappingUtils{
     }
     catch (URISyntaxException e) {
       //it's not required to be a valid link, but generally it should be
+      LOG.warn("Link attribute is invalid, it is ignored");
     }
     
     return image;

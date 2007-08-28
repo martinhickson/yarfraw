@@ -25,7 +25,6 @@ import yarfraw.core.datamodel.AtomAttributes;
 import yarfraw.core.datamodel.AtomTextAttributes;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Channel;
-import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.atom10.elements.CategoryType;
 import yarfraw.generated.atom10.elements.DateTimeType;
 import yarfraw.generated.atom10.elements.EntryType;
@@ -64,76 +63,74 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
     return ret;
   }
   
-  public Channel execute(FeedType feed) throws YarfrawException {
+  public Channel execute(FeedType feed){
     if(feed == null){
       return null;
     }
     Channel c = new Channel();
-    try {
-      if(feed.getOtherAttributes() != null){
-        c.getOtherAttributes().putAll(feed.getOtherAttributes());
+    if(feed.getOtherAttributes() != null){
+      c.getOtherAttributes().putAll(feed.getOtherAttributes());
+    }
+    
+    if(feed.getLang() != null){
+      c.setAtomAttributes(new AtomAttributes(feed.getBase(), new Locale(feed.getLang())));
+      c.setLanguage(new Locale(feed.getLang()));
+    }
+    
+    for(Object o : feed.getAuthorOrCategoryOrContributor()){
+      if(o == null){
+        continue;
       }
-      
-      if(feed.getLang() != null){
-        c.setAtomAttributes(new AtomAttributes(feed.getBase(), new Locale(feed.getLang())));
-        c.setLanguage(new Locale(feed.getLang()));
-      }
-      
-      for(Object o : feed.getAuthorOrCategoryOrContributor()){
-        if(o == null){
-          continue;
-        }
-        if (o instanceof JAXBElement<?>) {
-          JAXBElement<?> jaxbElement = (JAXBElement<?>) o;
-          Object val = jaxbElement.getValue();
-          if (CommonUtils.same(jaxbElement.getName(), ATOM10_TITLE)) {
-            TextType text = (TextType) val;
-            c.setTitle(convenientExtractText(c, AtomTextElementEnum.title, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
-            TextType text = (TextType) val;
-            c.setDescription(convenientExtractText(c, AtomTextElementEnum.subtitle, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_AUTHOR)) {
-            c.setManagingEditor(extractEmail((PersonType)val));
-          }else if(val instanceof CategoryType){
-            c.addCategory(toCategory((CategoryType)val));
-          }else if (val instanceof GeneratorType) {
-            //partially supported
-            LOG.info("only the text content of the <generator> element is parsed, the attributes are ignored");
-            GeneratorType gen = (GeneratorType)val;
-            c.setGenerator(gen.getValue());
-          }else if(val instanceof IconType){
-            c.setImage(toImage((IconType)val));
-          }else if(val instanceof IdType){
-            c.setAtomId(toAtomId((IdType)val));
-          }else if(val instanceof LinkType){ 
-            c.addAtomLink(toAtomLink((LinkType)val));
-          }else if(val instanceof LogoType){ 
-            LOG.warn("The <logo> element is not supported, it will be ignored");
-          }//logo not supported
-          else if (CommonUtils.same(jaxbElement.getName(), ATOM10_RIGHTS)) {
-            TextType text = (TextType) val;
-            c.setCopyright(convenientExtractText(c, AtomTextElementEnum.rights, text));
-          }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_UPDATED)) {
-            //partially supported
-            DateTimeType dt = (DateTimeType) val;
+      if (o instanceof JAXBElement<?>) {
+        JAXBElement<?> jaxbElement = (JAXBElement<?>) o;
+        Object val = jaxbElement.getValue();
+        if (CommonUtils.same(jaxbElement.getName(), ATOM10_TITLE)) {
+          TextType text = (TextType) val;
+          c.setTitle(convenientExtractText(c, AtomTextElementEnum.title, text));
+        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
+          TextType text = (TextType) val;
+          c.setDescription(convenientExtractText(c, AtomTextElementEnum.subtitle, text));
+        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_AUTHOR)) {
+          c.setManagingEditor(extractEmail((PersonType)val));
+        }else if(val instanceof CategoryType){
+          c.addCategory(toCategory((CategoryType)val));
+        }else if (val instanceof GeneratorType) {
+          //partially supported
+          LOG.info("only the text content of the <generator> element is parsed, the attributes are ignored");
+          GeneratorType gen = (GeneratorType)val;
+          c.setGenerator(gen.getValue());
+        }else if(val instanceof IconType){
+          c.setImage(toImage((IconType)val));
+        }else if(val instanceof IdType){
+          c.setAtomId(toAtomId((IdType)val));
+        }else if(val instanceof LinkType){ 
+          c.addAtomLink(toAtomLink((LinkType)val));
+        }else if(val instanceof LogoType){ 
+          LOG.warn("The <logo> element is not supported, it will be ignored");
+        }//logo not supported
+        else if (CommonUtils.same(jaxbElement.getName(), ATOM10_RIGHTS)) {
+          TextType text = (TextType) val;
+          c.setCopyright(convenientExtractText(c, AtomTextElementEnum.rights, text));
+        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_UPDATED)) {
+          //partially supported
+          DateTimeType dt = (DateTimeType) val;
+          if(dt.getValue() != null){
             c.setPubDate(dt.getValue().toGregorianCalendar().getTime());
-          }else if(val instanceof EntryType){ 
-            c.additem(toItem((EntryType)val));
-          }else{
-            LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
           }
-        }
-        else if (o instanceof Element) {
-          Element e = (Element) o;
-          c.getOtherElements().add(e);
+        }else if(val instanceof EntryType){ 
+          c.additem(toItem((EntryType)val));
         }else{
-          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+          LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
         }
-      }                                           
-    }
-    catch (Exception e) {
-      throw new YarfrawException("Unable to convert input to Channel", e);
-    }
+      }
+      else if (o instanceof Element) {
+        Element e = (Element) o;
+        c.getOtherElements().add(e);
+      }else{
+        LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+      }
+    }                                           
+    
     return c;
   }
   

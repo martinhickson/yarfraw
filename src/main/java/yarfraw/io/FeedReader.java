@@ -28,14 +28,12 @@ import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
 import yarfraw.utils.CommonUtils;
 /**
  * Provides a set of function to facilitate reading of a RSS feed.
+ * 
  * @author jliang
  *
  */
 public class FeedReader  extends AbstractBaseFeedParser{
   
-  private static Unmarshaller _rss20Unmarshaller;
-  private static Unmarshaller _rss10Unmarshaller;
-  private static Unmarshaller _atom10Unmarshaller;
   public FeedReader(File file, FeedFormat format){
     super(file, format);
   }
@@ -74,7 +72,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
   public static Channel readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
     Unmarshaller u;
     try {
-      u = getUnMarshaller(format, true);
+      u = getUnMarshaller(format);
       return toChannel(format, u.unmarshal(inputStream));
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);
@@ -91,7 +89,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
     InputStream input = null;
     try {
       input = getStream();
-      u = getUnMarshaller(_format, validationEventHandler != null); //if handler is not null, then we need a new instance
+      u = getUnMarshaller(_format); //if handler is not null, then we need a new instance
       u.setEventHandler(validationEventHandler);
       return toChannel(_format, u.unmarshal(input));
     } catch (JAXBException e) {
@@ -130,36 +128,17 @@ public class FeedReader  extends AbstractBaseFeedParser{
   }
   
   
-  private static synchronized Unmarshaller getUnMarshaller(FeedFormat format, boolean createNewInstance) throws JAXBException{
-    Unmarshaller ret;
+  private static synchronized Unmarshaller getUnMarshaller(FeedFormat format) throws JAXBException{
     if(format == FeedFormat.RSS20){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
-      }
-      if(_rss20Unmarshaller==null){
-        _rss20Unmarshaller = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
-      }
-      ret = _rss20Unmarshaller;
+      return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
     }else if(format == FeedFormat.RSS10){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-      }
-      if(_rss10Unmarshaller==null){
-        _rss10Unmarshaller = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-      }
-      ret = _rss10Unmarshaller;
+    
+      return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
+    
     }else if(format == FeedFormat.ATOM10){
-      if(createNewInstance){
-        return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
-      }
-      if(_atom10Unmarshaller==null){
-        _atom10Unmarshaller = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
-      }
-      ret = _atom10Unmarshaller;
+      return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }
-    
-    return ret;
   }
 }

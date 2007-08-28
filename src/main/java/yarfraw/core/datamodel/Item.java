@@ -19,10 +19,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.ObjectUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -382,15 +382,7 @@ public class Item extends AbstractBaseObject{
    * the matching element otherwise.
    */
   public Element getElementByNS(String namespaceURI, String localName){
-    if(CollectionUtils.isEmpty(_otherElements)){
-      return null;
-    }
-    for(Element e : _otherElements){
-      if(ObjectUtils.equals(localName, e.getLocalName()) && ObjectUtils.equals(namespaceURI, e.getNamespaceURI())){
-        return e;
-      }
-    }
-    return null;
+    return CommonUtils.getElementByNS(_otherElements, namespaceURI, localName);
   }
   
   /**
@@ -565,6 +557,18 @@ public class Item extends AbstractBaseObject{
     if(_source != null){
       _source.validate(format);
     }
+    
+    if(_atomId != null){
+      _atomId.validate(format);
+    }
+    if(_atomLinks != null){
+      for(AtomLink link : _atomLinks){
+        if(link != null){
+          link.validate(format);
+        }
+      }
+    }
+    
   }
 
 }

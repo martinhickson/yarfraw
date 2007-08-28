@@ -1,7 +1,6 @@
 package yarfraw.core.datamodel;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
@@ -21,7 +20,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.ObjectUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -407,15 +405,7 @@ public class Channel extends AbstractBaseObject{
    * the matching element otherwise.
    */
   public Element getElementByNS(String namespaceURI, String localName){
-    if(CollectionUtils.isEmpty(_otherElements)){
-      return null;
-    }
-    for(Element e : _otherElements){
-      if(ObjectUtils.equals(localName, e.getLocalName()) && ObjectUtils.equals(namespaceURI, e.getNamespaceURI())){
-        return e;
-      }
-    }
-    return null;
+    return CommonUtils.getElementByNS(_otherElements, namespaceURI, localName);
   }
   
   /**
@@ -538,7 +528,7 @@ public class Channel extends AbstractBaseObject{
    * <br/> 
    * @throws URISyntaxException if the <code>link</code> is not a valid URL
    */
-  public Channel setDocs(String docs) throws MalformedURLException, URISyntaxException{
+  public Channel setDocs(String docs) throws URISyntaxException{
     if(docs == null){
       _docs = null;
     }else{
@@ -839,6 +829,18 @@ public class Channel extends AbstractBaseObject{
     if(_texInput != null){
       _texInput.validate(format);
     }    
+    
+    
+    if(_atomId != null){
+      _atomId.validate(format);
+    }
+    if(_atomLinks != null){
+      for(AtomLink link : _atomLinks){
+        if(link != null){
+          link.validate(format);
+        }
+      }
+    }
   }
   
 }

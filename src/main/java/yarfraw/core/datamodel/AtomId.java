@@ -57,6 +57,9 @@ public class AtomId extends AtomAttributes{
   }
   @Override
   public void validate(FeedFormat format) throws ValidationException {
+    if(format != FeedFormat.ATOM10){
+      return ;
+    }
     try {
       @SuppressWarnings("unused")
       URI uri = new URI(_atomUri);

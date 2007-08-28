@@ -9,16 +9,19 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.core.datamodel.YarfrawException;
@@ -76,6 +79,27 @@ public class CommonUtils{
     }
     return s.substring(0, idx)+ (idx==s.length()-1? StringUtils.EMPTY: s.substring(idx+1));
   }
+  /**
+   * Search through the input element list and return the first element that matches
+   * both input the namespaceURI and the localName.
+   * 
+   * @param namespaceURI - namespaceURI of the element to be search for
+   * @param localName - localName of the element
+   * @return - null if no matching element is found,
+   * the matching element otherwise.
+   */
+  public static Element getElementByNS(List<Element> elements, String namespaceURI, String localName){
+    if(CollectionUtils.isEmpty(elements)){
+      return null;
+    }
+    for(Element e : elements){
+      if(ObjectUtils.equals(localName, e.getLocalName()) && 
+              ObjectUtils.equals(namespaceURI, CommonUtils.emptyIfNull(e.getNamespaceURI()))){
+        return e;
+      }
+    }    
+    return null;
+  }
   
   /**
    * Simple date format does not support ISO0861 date, so i have to do some hacking
@@ -95,6 +119,12 @@ public class CommonUtils{
     return result;
   }
 
+  /**
+   * Parse a date string using both ISO and RFC formats.
+   * 
+   * @param dateString
+   * @return
+   */
   public static Date tryParseDate(String dateString){
     Date ret = null;
     try {
@@ -157,6 +187,13 @@ public class CommonUtils{
     }
   }
   
+  /**
+   * Validation methods for emails.
+   * 
+   * @param message - A custom message for the ValidationException
+   * @param emails 
+   * @throws ValidationException - if any of the input emails are not valid.
+   */
   public static void validateEmails(String message, String... emails) throws ValidationException{
     if(!ArrayUtils.isEmpty(emails)){
       for(String email : emails){
@@ -170,6 +207,11 @@ public class CommonUtils{
     }
   }
   
+  /**
+   * Return empty string if input is null.
+   * @param str
+   * @return
+   */
   public static String emptyIfNull(String str){
     return str == null?StringUtils.EMPTY:str;
   }

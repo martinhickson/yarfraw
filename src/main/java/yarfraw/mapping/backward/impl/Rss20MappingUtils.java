@@ -6,6 +6,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_LINK;
 import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
 import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
@@ -42,62 +43,80 @@ class Rss20MappingUtils{
       return null;
     }
     Item item = new Item();
-    try {
-      for(Object o : ti.getTitleOrDescriptionOrLink()){
-        if(o == null){
-          continue;
-        }
-        if(ti.getOtherAttributes() != null){
-          for(Map.Entry<QName, String> e : ti.getOtherAttributes().entrySet()){
-            item.addOtherAttributes(e.getKey(), e.getValue());
-          }
-        }
-        if (o instanceof JAXBElement) {
-          JAXBElement jaxbElement = (JAXBElement) o;
-          Object val = jaxbElement.getValue();
-          if(CommonUtils.same(jaxbElement.getName(), RSS20_AUTHOR)){
-            item.setAuthor((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COMMENTS)) {
-            item.setComments((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
-            item.setDescription((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
-            item.setLink((String)jaxbElement.getValue());
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
-            try {
-              item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-            } catch (Exception e) {
-              item.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-            }
-          }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
-            item.setTitle((String)jaxbElement.getValue());
-          }else if (val instanceof TCategory) {
-            TCategory cat = (TCategory) val;
-            item.addCategory(new Category(cat.getValue(), cat.getDomain()));
-          }else if (val instanceof TEnclosure) {
-            TEnclosure en = (TEnclosure)val;
-            item.setEnclosure(new Enclosure(en.getUrl(), en.getLength().longValue(), en.getType(), en.getValue()));
-          }else if (val instanceof TGuid) {
-            TGuid guid = (TGuid)val;
-            item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
-          }else if (val instanceof TSource) {
-            TSource source = (TSource)val;
-            item.setSource(new Source(source.getUrl(), source.getValue()));
-          }else{
-            LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
-          }
-        }else if (o instanceof Element) {
-          Element e = (Element) o;
-          if(ENCODED.equals(e.getLocalName())){
-            item.getContent().addContentText(e.getTextContent());
-          }
-          item.getOtherElements().add(e);
-        }else{
-          LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+    for(Object o : ti.getTitleOrDescriptionOrLink()){
+      if(o == null){
+        continue;
+      }
+      if(ti.getOtherAttributes() != null){
+        for(Map.Entry<QName, String> e : ti.getOtherAttributes().entrySet()){
+          item.addOtherAttributes(e.getKey(), e.getValue());
         }
       }
-    } catch (Exception e1) {
-      throw new YarfrawException("Unable to convert input to Item", e1);
+      if (o instanceof JAXBElement) {
+        JAXBElement jaxbElement = (JAXBElement) o;
+        Object val = jaxbElement.getValue();
+        if(CommonUtils.same(jaxbElement.getName(), RSS20_AUTHOR)){
+          item.setAuthor((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COMMENTS)) {
+          try {
+            item.setComments((String)jaxbElement.getValue());
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
+          item.setDescription((String)jaxbElement.getValue());
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
+          try {
+            item.setLink((String)jaxbElement.getValue());
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
+          try {
+            item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
+          } catch (Exception e) {
+            item.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
+          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
+          item.setTitle((String)jaxbElement.getValue());
+        }else if (val instanceof TCategory) {
+          TCategory cat = (TCategory) val;
+          item.addCategory(new Category(cat.getValue(), cat.getDomain()));
+        }else if (val instanceof TEnclosure) {
+          TEnclosure en = (TEnclosure)val;
+          try {
+            item.setEnclosure(new Enclosure(en.getUrl(), 
+                    en.getLength().longValue(), 
+                    en.getType(), en.getValue()));
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else if (val instanceof TGuid) {
+          TGuid guid = (TGuid)val;
+          item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
+        }else if (val instanceof TSource) {
+          TSource source = (TSource)val;
+          try {
+            item.setSource(new Source(source.getUrl(), source.getValue()));
+          }
+          catch (URISyntaxException e) {
+            LOG.error("invalid URI, it is ignored", e);
+          }
+        }else{
+          LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
+        }
+      }else if (o instanceof Element) {
+        Element e = (Element) o;
+        if(ENCODED.equals(e.getLocalName())){
+          item.getContent().addContentText(e.getTextContent());
+        }
+        item.getOtherElements().add(e);
+      }else{
+        LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+      }
     }
 
     return item;
