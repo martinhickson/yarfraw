@@ -33,7 +33,9 @@ import yarfraw.utils.XMLUtils;
  * (entity-encoded HTML is allowed; see examples), 
  * and the link and title may be omitted. 
  * All elements of an item are optional, however at least one of title or description must be present.
- * 
+ * <p/>
+ * for Atom 1.0 format, the field also mapps to &lt;entry> element. 
+ * <br/>
  * @author jliang
  *
  */

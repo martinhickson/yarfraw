@@ -164,7 +164,11 @@ class Atom10MappingUtils{
           TextType text = (TextType) val;
           ret.setTitle(convenientExtractText(ret, AtomTextElementEnum.title, text));
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
-          LOG.warn("<updated> element of <entry> element is not supported, it is ignored ");
+          //  partially supported
+          DateTimeType dt = (DateTimeType) val;
+          if(dt.getValue() != null){
+            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+          }
         }else if(val instanceof IdType){
           ret.setAtomId(toAtomId((IdType)val));
         }else{
@@ -219,7 +223,7 @@ class Atom10MappingUtils{
     Category ret = new Category();
     ret.setAtomAttributes(attr);
     ret.setCategory(cat.getTerm());
-    ret.setDomain(cat.getScheme());
+    ret.setDomainOrScheme(cat.getScheme());
     attr.getOtherAttributes().put(CAT_LABEL_QNAME, cat.getLabel());
     
     return ret;

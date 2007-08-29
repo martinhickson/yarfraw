@@ -66,7 +66,7 @@ class Rss20MappingUtils {
   
   public static JAXBElement<TCategory> toRss20Category(Category c){
     TCategory ret = new TCategory();
-    ret.setDomain(c.getDomain());
+    ret.setDomain(c.getDomainOrScheme());
     ret.setValue(c.getCategory());
     return FACTORY.createTRssChannelCategory(ret);
   }

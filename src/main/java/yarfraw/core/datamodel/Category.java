@@ -13,13 +13,18 @@ import yarfraw.utils.CommonUtils;
  * for Rss 1.0 format, the &lt;dc:subject> element of RDF's extension module is mapped to this field.
  * <br/>
  * see http://web.resource.org/rss/1.0/ - 'Dublin Core'
- * 
+ * <p/>
+ * for Atom 1.0 format, the field also mapps to &lt;category> element. However, the 'domain' field
+ * is mapped to the 'scheme' attribute. 
+ * <br/>
+ * see http://web.resource.org/rss/1.0/ - 'Dublin Core'
+ *  
  * @author jliang
  *
  */
 public class Category extends AbstractBaseObject{
   private String _category;
-  private String _domain;
+  private String _domainOrScheme;
   private AtomAttributes _atomAttributes;
   public Category() {}
   public static Category create(){
@@ -29,10 +34,10 @@ public class Category extends AbstractBaseObject{
     super();
     _category = category;
   }
-  public Category(String category, String domain) {
+  public Category(String category, String domainOrScheme) {
     super();
     _category = category;
-    _domain = domain;
+    _domainOrScheme = domainOrScheme;
   }
   public String getCategory() {
     return _category;
@@ -51,9 +56,13 @@ public class Category extends AbstractBaseObject{
    * &lt;category>Grateful Dead&lt;/category>
    * <br/>
    * &lt;category domain="http://www.fool.com/cusips">MSFT&lt;/category>
+   * <p/>
+   * for Atom 1.0 format, the field also mapps to &lt;category> element. However, the 'domain' field
+   * is mapped to the 'scheme' attribute. 
+   * <br/>
    */
-  public String getDomain() {
-    return _domain;
+  public String getDomainOrScheme() {
+    return _domainOrScheme;
   }
   /**
    * a string that identifies a categorization taxonomy. 
@@ -65,9 +74,13 @@ public class Category extends AbstractBaseObject{
    * &lt;category>Grateful Dead&lt;/category>
    * <br/>
    * &lt;category domain="http://www.fool.com/cusips">MSFT&lt;/category>
+   * <p/>
+   * for Atom 1.0 format, the field also mapps to &lt;category> element. However, the 'domain' field
+   * is mapped to the 'scheme' attribute. 
+   * <br/>
    */
-  public Category setDomain(String domain) {
-    _domain = domain;
+  public Category setDomainOrScheme(String domainOrScheme) {
+    _domainOrScheme = domainOrScheme;
     return this;
   }
   

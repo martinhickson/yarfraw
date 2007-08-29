@@ -9,6 +9,10 @@ import javax.xml.namespace.QName;
 
 /**
  * The "atom:id" element conveys a permanent, universally unique identifier for an entry or feed.
+ * <br/>
+ * This class is only used when reading/writing to Atom format, the other {@link FeedFormat} will
+ * ignore it.
+ * 
  * @author jliang
  *
  */

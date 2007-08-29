@@ -305,7 +305,7 @@ public class ToChannelDOMParserRss20Impl extends BaseToChannelDOMImpl{
 
   private static Category toCategory(Node node){
     return new Category().setCategory(node.getTextContent())
-                          .setDomain(XMLUtils.getAttributeValue(node, RSS20_CATEGORY_DOMAIN.getLocalPart()));
+                          .setDomainOrScheme(XMLUtils.getAttributeValue(node, RSS20_CATEGORY_DOMAIN.getLocalPart()));
   }
   
   @Override

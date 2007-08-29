@@ -17,7 +17,7 @@ This makes building an object easier, for example, to build an item, you would w
    		.setDescription("desc")
    		.setAuthor("oprah@oxygen.net")
    		.addCategory("cat1", "cat2")
-   		.addCategory(new Category("cat3").setDomain("http://somedomain"))
+   		.addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
    		.setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
    		.setGuid(new Guid("GUID")),
 
@@ -51,7 +51,7 @@ This makes building an object easier, for example, to build an item, you would w
                              .setDescription("desc")
                              .setAuthor("oprah@oxygen.net")
                              .addCategory("cat1", "cat2")
-                             .addCategory(new Category("cat3").setDomain("http://somedomain"))
+                             .addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
                              .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
                              .setGuid(new Guid("GUID")),
                    new Item().setTitle("Item2")
@@ -59,7 +59,7 @@ This makes building an object easier, for example, to build an item, you would w
                              .setDescription("desc")
                              .setAuthor("oprah@oxygen.net")
                              .addCategory("cat1", "cat2")
-                             .addCategory(new Category("cat3").setDomain("http://somedomain"))
+                             .addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
                              .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
                              .setGuid(new Guid("GUID")));
                              

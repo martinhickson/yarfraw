@@ -81,7 +81,7 @@ write it to a file using a different format setting. For example, to convert a R
 Rss 1.0 Mapping
 
 	Rss 1.0 mapping to Yarfraw core. Note that Yarfarw also supports two Rss 1.0 official extension modules: Dublin and Syndication.
-Form more information about the Rss 1.0 format, see http://web.resource.org/rss/1.0/
+Form more information about the Rss 1.0 format, see {{http://web.resource.org/rss/1.0/}}
 	
 	Note that only the special mapping are shown below, elements that are having same identities as elements in Rss 2.0 are 
 automatically mapped to those elements. For example, \<channel /\> element is mapped to Channel, \<image\>\<title /\>\</image\> 
@@ -92,13 +92,13 @@ the writer writes a Rss 1.0 format feed.
 *----------+--------------+----------------+
 | <<Elements>> | <<Yarfraw Data Model>>     | <<Comments>>       |
 *----------+--------------+----------------+
-| \<channel\>\<items /\>\</channel\> | nothing     | This is only used to sort the items, the items will be sorted according to this order if this element is present|
+| \<channel\>\<items /\>\</channel\> | nothing     | This is only used to sort the items, the items will be sorted according to this order if this element is present. Note that this is item<<s>>, the <<item>> element is mapped to Item|
 *----------+--------------+----------------+
 | \<dc:title /\> | Channel.title or Item.title     |  |
 *----------+--------------+----------------+
 | \<dc:date /\>\ | Channel.PubDate  or Item.PubDate   |  |
 *----------+--------------+----------------+
-| \<dc:subject /\> | Category   |  |
+| \<dc:subject /\> | Channel.Category or Item.Category   |  |
 *----------+--------------+----------------+
 | \<channel\>\<dc:creator /\>\</channel\> | Channel.ManagingEditor     |  |
 *----------+--------------+----------------+
@@ -106,65 +106,15 @@ the writer writes a Rss 1.0 format feed.
 *----------+--------------+----------------+
 | \<channel\>\<dc:rights /\>\</channel\> | Channel.CopyRights     |  |
 *----------+--------------+----------------+
-| \<item\>\<dc:description /\>\</item\> | nothing     | this is ignored, since \<item\> already has a description element |
+| \<item\>\<dc:description /\>\</item\> | nothing     | this is ignored, since \<item\> already has a description element. Note this is <<dc:>>description, the <<description>> element is mapped. (see the rss 1.0 specs) |
 *----------+--------------+----------------+
 | \<item\>\<dc:rights /\>\</item\> | Item.rights     |  |
 *----------+--------------+----------------+
 | \<rdf:RDF\>\<channel /\>\</rdf:RDF\> | Channel     |  |
 *----------+--------------+----------------+
-| \<rdf:RDF\>\<image /\>\</rdf:RDF\> | nothing     | This element is ignored |
-*----------+--------------+----------------+
-| \<rdf:RDF\>\<item /\>\</rdf:RDF\> | nothing     | This element is ignored |
-*----------+--------------+----------------+
-| \<rdf:RDF\>\<textinput /\>\</rdf:RDF\> | nothing     | This element is ignored |
-*----------+--------------+----------------+
 Rss 1.0 Format Mapping
 
-+----------------------------------------------------------------------------------------------------+
-
-    Channel ret = new Channel().addOtherAttributes(
-            new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about"), 
-            "http://meerkat.oreillynet.com/?_fl=rss1.0")
-            .setTitle("Meerkat")
-            .setLink("http://meerkat.oreillynet.com")
-            .setDescription("Meerkat: An Open Wire Service")
-            .setWebMaster("The O'Reilly Network")
-            .setManagingEditor("Rael Dornfest (mailto:rael@oreilly.com)")
-            .setCopyright("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
-            .setPubDate(CommonUtils.tryParseISODate("2000-01-01T12:00+00:00"))
-            //time to live is 30 minutes
-            .setTtl(30) //this will be converted to updatePeriod='hourly' & updateFrequency='2'
-            //update base is not supported, add it manually if you really have to 
-            .addOtherElement("<sy:updateBase xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\">2000-01-01T12:00+00:00</sy:updateBase>")
-            //model only supports 1 image and 1 textinput per channel, you can add them manually tho
-            .setTextInput(new TextInput().setLink("http://meerkat.oreillynet.com"))
-            .setImage(new Image().setTitle("Meerkat Powered!")
-                                 .setUrl("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")
-                                 .setLink("http://meerkat.oreillynet.com")
-                                 .setRdfAttributes(new RdfAttributes()
-                                       .setAbout("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")))
-            .additem(new Item().setRdfAttributes(new RdfAttributes().setAbout("http://c.moreover.com/click/here.pl?r123"))
-                               .setTitle("XML: A Disruptive Technology")
-                               .setLink("http://c.moreover.com/click/here.pl?r123")
-                               .setDescription("XML is placing increasingly heavy loads on the existing technical infrastructure of the Internet.")
-                               .setAuthor("Simon St.Laurent (mailto:simonstl@simonstl.com)")
-                               //item level publisher is not supported, you need to add it manually
-                               .addOtherElement("<dc:publisher xmlns:dc=\"http://purl.org/dc/elements/1.1/\">The O'Reilly Network</dc:publisher>")
-                               .setRights("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
-                               .addCategory("XML")
-                               //company module extension is not supported, add them manually then 
-                               .addOtherElement("<co:name xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML.com</co:name>")
-                               .addOtherElement("<co:market xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">NASDAQ</co:market>")
-                               .addOtherElement("<co:symbol xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML</co:symbol>")
-                               )
-            .setTextInput(new TextInput().setRdfAttributes(
-                    new RdfAttributes().setAbout("http://meerkat.oreillynet.com"))
-                    .setTitle("Search Meerkat")
-                    .setDescription("Search Meerkat's RSS Database...")
-                    .setName("s")
-                    .setLink("http://meerkat.oreillynet.com/"));
-                    
-+----------------------------------------------------------------------------------------------------+
+Rss 1.0 Builder Example
 
 +----------------------------------------------------------------------------------------------------+
 	<?xml version="1.0" encoding="utf-8"?> 
@@ -236,8 +186,110 @@ Rss 1.0 Format Mapping
 	</rdf:RDF>
 +----------------------------------------------------------------------------------------------------+
 
+	The following codes will build the above feed (when you set the writer's format to RSS10 of course).
+Observe the subtle differences in the mapping of elements to the core model fields such as dc:subject === category.
+Also note that in the case where some elements are not supported directly in the core mode, you can
+always add them as an 'OtherElement'.
+  
++----------------------------------------------------------------------------------------------------+
 
-Atom 1.0 
+    Channel ret = new Channel().addOtherAttributes(
+            new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about"), 
+            "http://meerkat.oreillynet.com/?_fl=rss1.0")
+            .setTitle("Meerkat")
+            .setLink("http://meerkat.oreillynet.com")
+            .setDescription("Meerkat: An Open Wire Service")
+            .setWebMaster("The O'Reilly Network")
+            .setManagingEditor("Rael Dornfest (mailto:rael@oreilly.com)")
+            .setCopyright("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
+            .setPubDate(CommonUtils.tryParseISODate("2000-01-01T12:00+00:00"))
+            //time to live is 30 minutes
+            .setTtl(30) //this will be converted to updatePeriod='hourly' & updateFrequency='2'
+            //update base is not supported, add it manually if you really have to 
+            .addOtherElement("<sy:updateBase xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\">2000-01-01T12:00+00:00</sy:updateBase>")
+            //model only supports 1 image and 1 textinput per channel, you can add them manually tho
+            .setTextInput(new TextInput().setLink("http://meerkat.oreillynet.com"))
+            .setImage(new Image().setTitle("Meerkat Powered!")
+                                 .setUrl("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")
+                                 .setLink("http://meerkat.oreillynet.com")
+                                 .setRdfAttributes(new RdfAttributes()
+                                       .setAbout("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")))
+            .additem(new Item().setRdfAttributes(new RdfAttributes().setAbout("http://c.moreover.com/click/here.pl?r123"))
+                               .setTitle("XML: A Disruptive Technology")
+                               .setLink("http://c.moreover.com/click/here.pl?r123")
+                               .setDescription("XML is placing increasingly heavy loads on the existing technical infrastructure of the Internet.")
+                               .setAuthor("Simon St.Laurent (mailto:simonstl@simonstl.com)")
+                               //item level publisher is not supported, you need to add it manually
+                               .addOtherElement("<dc:publisher xmlns:dc=\"http://purl.org/dc/elements/1.1/\">The O'Reilly Network</dc:publisher>")
+                               .setRights("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
+                               .addCategory("XML")
+                               //company module extension is not supported, add them manually then 
+                               .addOtherElement("<co:name xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML.com</co:name>")
+                               .addOtherElement("<co:market xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">NASDAQ</co:market>")
+                               .addOtherElement("<co:symbol xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML</co:symbol>")
+                               )
+            .setTextInput(new TextInput().setRdfAttributes(
+                    new RdfAttributes().setAbout("http://meerkat.oreillynet.com"))
+                    .setTitle("Search Meerkat")
+                    .setDescription("Search Meerkat's RSS Database...")
+                    .setName("s")
+                    .setLink("http://meerkat.oreillynet.com/"));
+                    
++----------------------------------------------------------------------------------------------------+
+
+Atom 1.0 Mapping
+
+	Form more information about the Atom 1.0 format, see {{http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html}}
+
+	Note that only the special mapping are shown below, elements that are having same identities as fields in the core model are 
+automatically mapped to those fields. 
+	
+*----------+--------------+----------------+
+| <<Elements>> | <<Yarfraw Data Model>>     | <<Comments>>       |
+*----------+--------------+----------------+
+| \<feed/\> | Channel     | |
+*----------+--------------+----------------+
+| \<feed\>\<author /\>\</feed\> | Channel.ManagingEditor     |  |
+*----------+--------------+----------------+
+| \<feed\>\<generator /\>\</feed\> | Channel.Generator     | Only the text content of this element is mapped, all the attributes are ignored. |
+*----------+--------------+----------------+
+| \<feed\>\<icon /\>\</feed\> | Channel.Image     | The text content is mapped to Image.Url |
+*----------+--------------+----------------+
+| \<feed\>\<id /\>\</feed\> | Channel.AtomId or Item.AtomId     |  |
+*----------+--------------+----------------+
+| \<feed\>\<link /\>\</feed\> | Channel.AtomLink or Item.AtomLink     | Note these links go to AtomLink, not Channel.link |
+*----------+--------------+----------------+
+| \<feed\>\<logo /\>\</feed\> | nothing     | This element is ignored |
+*----------+--------------+----------------+
+| \<feed\>\<rights /\>\</feed\> | Channel.copyRights     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<feed\>\<subtitle /\>\</feed\> | Channel.description     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<feed\>\<title /\>\</feed\> | Channel.title     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<feed\>\<updated /\>\</feed\> | Channel.PubDate     |  |
+*----------+--------------+----------------+
+| \<entry\>\<author /\>\</entry\> | Item.Author     |  |
+*----------+--------------+----------------+
+| \<entry\>\<category /\>\</entry\> | Item.Category     |  |
+*----------+--------------+----------------+
+| \<entry\>\<content /\>\</entry\> | Item.AtomContent     |  |
+*----------+--------------+----------------+
+| \<entry\>\<published /\>\</entry\> | Item.PubDate     |  |
+*----------+--------------+----------------+
+| \<entry\>\<rights /\>\</entry\> | Item.rights     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<entry\>\<source /\>\</entry\> | nothing     | This element is ignored. |
+*----------+--------------+----------------+
+| \<entry\>\<summary /\>\</entry\> | Item.description     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<entry\>\<title /\>\</entry\> | Item.title     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+| \<entry\>\<updated /\>\</entry\> | Item.PubDate     | Note the text content is mapped, the other attributes are added as extension to the atomTextAttributes map, see example below |
+*----------+--------------+----------------+
+Atom 1.0 Format Mapping
+
+Atom 1.0 Builder Example
  
 +----------------------------------------------------------------------------------------------------+
                                                    
@@ -288,13 +340,20 @@ Atom 1.0
 </feed>
 
 +----------------------------------------------------------------------------------------------------+
+
+	The following codes will build the above feed (when you set the writer's format to ATOM10 of course).
+Observe the differences in the mapping of elements to the core model fields. For example, the 'link' field
+is ignored, instead, you have to use AtomLink field.  
+
+	Also note that extension attributes of the text elements are added to the atomTextAttributes map.
+
 +----------------------------------------------------------------------------------------------------+
     Channel ch = Channel.create()
       .setTitle("dive into mark")
       .setDescription("A <em>lot</em> of effort went into making this effortless")
       .setPubDate("2005-07-10T12:29:29Z", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"))
       .setAtomId(new AtomId("tag:example.org,2003:3"))
-      .setLink("http://example.org/")
+      //.setLink("http://example.org/") this is ignored
       .addAtomLink(new AtomLink().setHref("http://example.org/")
                                  .setRel("alternate")
                                  .setType("text/html")
@@ -317,7 +376,8 @@ Atom 1.0
                                 .setLength(1337))
             .setAtomId(new AtomId("tag:example.org,2003:3.2397"))
             .setPubDate(CommonUtils.tryParseISODate("2003-12-13T08:29:29-04:00"))
-            //person's name, uri elements are not supported
+            //person's name, uri elements are not supported, if you really want them,
+            //add them manually using .addOtherElement("<author xmlns=\"http://www.w3.org/2005/Atom\">... </author>")
             .setAuthor("f8dy@example.com")
             //contributor element are not supported
             .setAtomContent(new AtomContent().setType(xhtml)

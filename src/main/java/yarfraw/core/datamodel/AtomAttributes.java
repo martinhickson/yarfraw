@@ -9,6 +9,12 @@ import javax.xml.namespace.QName;
 /**
  * Atom 1.0 additional attributes to the feed elements.<br/>
  * see http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.3
+ * <br/>
+ * Many elements in Atom 1.0 has these optional attributes, if you need to add these attributes
+ * to a class in the core model, you can use this class to add them. 
+ *  <br/>
+ * This class is only used when reading/writing to Atom format, the other {@link FeedFormat} will
+ * ignore it.
  * @author jliang
  *
  */

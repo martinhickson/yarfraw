@@ -11,6 +11,12 @@ import yarfraw.utils.CommonUtils;
 /**
  * The "atom:link" element defines a reference from an entry or feed to a Web resource. 
  * This specification assigns no meaning to the content (if any) of this element.
+ * <br/>
+ * Please note that in an Atom feed, there is no elements for 'enclosure' (@see {@link Enclosure}) objects.
+ * You can, however, add enclosure object to an Atom feed using this class. 
+ * <br/>
+ * This class is only used when reading/writing to Atom format, the other {@link FeedFormat} will
+ * ignore it.
  * 
  * @author jliang
  *

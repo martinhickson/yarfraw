@@ -183,7 +183,7 @@ public class Atom10MappingUtils{
   public static CategoryType toCategoryType(Category cat){
     CategoryType ret = FACTORY.createCategoryType();
     ret.setTerm(cat.getCategory());
-    ret.setScheme(cat.getDomain());
+    ret.setScheme(cat.getDomainOrScheme());
     AtomAttributes attr = cat.getAtomAttributes();
     if(attr != null){
       ret.setBase(attr.getBase()==null?null:attr.getBase().toString());

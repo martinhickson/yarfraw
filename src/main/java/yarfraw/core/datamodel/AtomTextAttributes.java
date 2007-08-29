@@ -16,6 +16,11 @@ import yarfraw.utils.XMLUtils;
  * Atom text common constructs.
  * 
  * see http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.3.1
+ * 
+ * <br/>
+ * This class is only used when reading/writing to Atom format, the other {@link FeedFormat} will
+ * ignore it.
+ * 
  * @author jliang
  *
  */

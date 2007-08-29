@@ -97,7 +97,7 @@ public class BuilderTest{
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
                          .addCategory(CAT1, CAT2)
-                         .addCategory(new Category(CAT3).setDomain(HTTP_SOMEDOMAIN))
+                         .addCategory(new Category(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
                          .setComments("    "+HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290)
                          .setGuid(new Guid(GUID)),
                new Item().setTitle(ITEM2)
@@ -105,7 +105,7 @@ public class BuilderTest{
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
                          .addCategory(CAT1, CAT2)
-                         .addCategory(new Category(CAT3).setDomain(HTTP_SOMEDOMAIN))
+                         .addCategory(new Category(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
                          .setComments(HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290+"\t\t")
                          .setGuid(new Guid(GUID)));
       return channel;

@@ -254,7 +254,7 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
   
   private static Category toCategory(Node node){
     return new Category().setCategory(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_TERM.getLocalPart()))
-                          .setDomain(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_SCHEME.getLocalPart()));
+                          .setDomainOrScheme(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_SCHEME.getLocalPart()));
   }
 }
 

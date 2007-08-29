@@ -32,7 +32,6 @@ public class UtilsTest extends TestCase{
             new HttpURL("http://feeds.feedburner.com/CoolTools"),
             new HttpURL("http://couponbar.coupons.com/rss.asp"),
             new HttpURL("http://www.gotapex.com/deals/daily/RSS2/"),
-            new HttpURL("http://couponbar.coupons.com/rss.asp"),
             new HttpURL("http://www.comedycentral.com/rss/tdsvideos.jhtml"),
             new HttpURL("http://rss.dealcatcher.com/rss.xml"),
             new HttpURL("http://content.dealnews.com/dealnews/rss/todays-edition.xml"),
@@ -74,5 +73,9 @@ public class UtilsTest extends TestCase{
         return true;
       }
     });
+    
+    FeedReader r = new FeedReader(new HttpURL("http://couponbar.coupons.com/rss.asp"));
+    
+    System.out.println(r.readChannel());;
   }
 }
