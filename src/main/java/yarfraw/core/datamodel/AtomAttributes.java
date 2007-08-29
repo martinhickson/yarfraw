@@ -1,7 +1,6 @@
 package yarfraw.core.datamodel;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -20,22 +19,18 @@ import javax.xml.namespace.QName;
  */
 public class AtomAttributes extends AbstractBaseObject{
   private String _base;
-  private Locale _lang;
+  private String _lang;
   private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
   
   
   public AtomAttributes() {}
 
-  public AtomAttributes(String base, Locale lang) {
+  public AtomAttributes(String base, String lang) {
     super();
     _base = base;
     _lang = lang;
   }
 
-  public static AtomAttributes create(){
-    return new AtomAttributes();
-  }
-  
   public String getBase() {
     return _base;
   }
@@ -43,12 +38,11 @@ public class AtomAttributes extends AbstractBaseObject{
     _base = base;
     return this;
   }
-  
 
-  public Locale getLang() {
+  public String getLang() {
     return _lang;
   }
-  public AtomAttributes setLang(Locale lang) {
+  public AtomAttributes setLang(String lang) {
     _lang = lang;
     return this;
   }

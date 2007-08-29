@@ -1,14 +1,125 @@
 package yarfraw.core.datamodel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.xml.namespace.QName;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.w3c.dom.Element;
+
+import yarfraw.utils.CommonUtils;
 
 /**
  * An abstract base object for the core data model
  */
 abstract class AbstractBaseObject{
+  private String _base;
+  private String _lang;
+  private String _resource;
+  private String _about;
+  private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
+  private List<Element> _otherElements = new ArrayList<Element>();
+  
+  /**
+   * This maps to the 'base' attribute that is common in all Atom 1.0 elements.
+   * Other {@link FeedFormat} will ignore this attribute.
+   * 
+   * @return - attribute value.
+   */
+  public String getBase() {
+    return _base;
+  }
+  /**
+   * This maps to the 'lang' attribute that is common in all Atom 1.0 elements.
+   * Other {@link FeedFormat} will ignore this attribute.
+   * 
+   * @return - attribute value.
+   */
+  public String getLang() {
+    return _lang;
+  }
+
+  /**
+   * This maps to the optional 'resource' attribute that present in some Rss 1.0 elements.
+   * Other {@link FeedFormat} will ignore this attribute.
+   * 
+   * @return - attribute value.
+   */
+  public String getResource() {
+    return _resource;
+  }
+
+  /**
+   * This maps to the required 'about' attribute that present of all second level elements
+   * (channel, image, item, and textinput).
+   * Other {@link FeedFormat} will ignore this attribute.
+   * 
+   * @return - attribute value.
+   */
+  public String getAbout() {
+    return _about;
+  }
+
+  /**
+   * Other additional elements that are not in the Rss specs.
+   */
+  public List<Element> getOtherElements() {
+    return _otherElements;
+  }
+
+  /**
+   * Search through the other element list and return the first element that matches
+   * both input the namespaceURI and the localName.
+   * 
+   * @param namespaceURI - namespaceURI of the element to be search for
+   * @param localName - localName of the element
+   * @return - null if no matching element is found,
+   * the matching element otherwise.
+   */
+  public Element getElementByNS(String namespaceURI, String localName){
+    return CommonUtils.getElementByNS(_otherElements, namespaceURI, localName);
+  }
+  
+  /**
+   * Any other attribute that is not in the RSS specs.
+   */
+  public Map<QName, String> getOtherAttributes() {
+    return _otherAttributes;
+  }
+  
+  /**
+   * Search for attributes that are not in the spec by its local name.
+   * @param localName localName of the attribute
+   * @return null if attribute is not found, the value of the attribute otherwise
+   */
+  public String getAttributeValueByLocalName(String localName){
+    if(_otherAttributes != null && localName != null){
+      for(Entry<QName, String> e : _otherAttributes.entrySet()){
+        if(localName.equals(e.getKey().getLocalPart())){
+          return e.getValue();
+        }
+      }
+    }
+    return null;
+  }
+  /**
+   * Search for attributes that are not in the spec by its {@link QName}.
+   * @param name {@link QName} of the attribute
+   * @return null if attribute is not found, the value of the attribute otherwise
+   */
+  public String getAttributeValueByQName(QName name){
+    if(_otherAttributes != null){
+      return _otherAttributes.get(name);
+    }
+    return null;
+  }
   
   @Override
   public String toString(){
