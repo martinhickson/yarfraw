@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomTextAttributes;
+import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.generated.atom10.elements.CategoryType;
@@ -54,7 +54,7 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
     return _instance;
   }
   private static String convenientExtractText(Channel ch, AtomTextElementEnum textEnum, TextType text){
-    AtomTextAttributes textAttr = new AtomTextAttributes();
+    Text textAttr = new Text();
     String ret = extractTextContent(textAttr, text);
     if(textAttr.getBase() != null || textAttr.getLang() != null || textAttr.getOtherAttributes() != null
             || textAttr.getXhtmlDiv() != null || textAttr.getType() != null ){

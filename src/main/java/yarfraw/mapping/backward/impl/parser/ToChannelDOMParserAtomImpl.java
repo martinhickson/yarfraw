@@ -45,8 +45,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
 import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.AtomLink;
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
@@ -239,8 +239,8 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
     
   }
   
-  private static AtomLink toAtomLink(Node node){
-    AtomLink link = new AtomLink().setHref(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF.getLocalPart()))
+  private static Link toAtomLink(Node node){
+    Link link = new Link().setHref(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF.getLocalPart()))
     .setHreflang(XMLUtils.getAttributeValue(node, ATOM10_LINK_HREF_LANG.getLocalPart()))
     .setRel(XMLUtils.getAttributeValue(node, ATOM10_LINK_REL.getLocalPart()))
     .setType(XMLUtils.getAttributeValue(node, ATOM10_LINK_TYPE.getLocalPart()))
@@ -252,8 +252,8 @@ public class ToChannelDOMParserAtomImpl extends BaseToChannelDOMImpl{
     return link;
   }
   
-  private static Category toCategory(Node node){
-    return new Category().setCategory(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_TERM.getLocalPart()))
+  private static CategorySubject toCategory(Node node){
+    return new CategorySubject().setCategoryOrSubjectOrTerm(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_TERM.getLocalPart()))
                           .setDomainOrScheme(XMLUtils.getAttributeValue(node, ATOM10_CATEGORY_SCHEME.getLocalPart()));
   }
 }

@@ -1,8 +1,8 @@
 package yarfraw.core.datamodel;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 /**
+ * <b>This is only used by Rss 2.0.</b>
+ * <br/>
  * {@link Source} is an optional sub-element of {@link Item}.
  * <p/>
  * Its value is the name of the RSS channel that the item came from, derived from its &lt;title>. 
@@ -16,36 +16,22 @@ import java.net.URISyntaxException;
  *
  */
 public class Source extends AbstractBaseObject{
-  private URI _url;
+  private String _url;
   private String _source;
   public Source(){}
-  public static Source create(){
-    return new Source();
-  }
-  public Source(URI url, String source) {
-    super();
-    _url = url;
-    _source = source;
-  }
-  public Source(String url, String source) throws URISyntaxException {
+  
+  public Source(String url, String source){
     super();
     setUrl(url);
-    _source = source;
-  }
-  public URI getUrl() {
-    return _url;
-  }
-  public Source setUrl(URI url) {
-    _url = url;
-    return this;
+    setSource(source);
   }
   
-  public Source setUrl(String url) throws URISyntaxException{
-    if(url == null){
-      _url = null;
-    }else{
-      _url = new URI(url.trim());
-    }
+  public String getUrl() {
+    return _url;
+  }
+  
+  public Source setUrl(String url){
+    _url = url;
     return this;
   }
   

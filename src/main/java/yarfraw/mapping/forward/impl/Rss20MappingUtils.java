@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Guid;
@@ -64,10 +64,10 @@ class Rss20MappingUtils {
     return FACTORY.createTRssChannelImage(ret);
   }
   
-  public static JAXBElement<TCategory> toRss20Category(Category c){
+  public static JAXBElement<TCategory> toRss20Category(CategorySubject c){
     TCategory ret = new TCategory();
     ret.setDomain(c.getDomainOrScheme());
-    ret.setValue(c.getCategory());
+    ret.setValue(c.getCategoryOrSubjectOrTerm());
     return FACTORY.createTRssChannelCategory(ret);
   }
   
@@ -114,7 +114,7 @@ class Rss20MappingUtils {
     }
     
     if(item.getCategory() != null){
-      for(Category c : item.getCategory()){
+      for(CategorySubject c : item.getCategory()){
         if(c != null){
           elementList.add(toRss20Category(c));
         }

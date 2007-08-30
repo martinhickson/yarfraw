@@ -1,8 +1,8 @@
 package yarfraw.atom10;
 
-import static yarfraw.core.datamodel.AtomTextAttributes.TextType.html;
-import static yarfraw.core.datamodel.AtomTextAttributes.TextType.text;
-import static yarfraw.core.datamodel.AtomTextAttributes.TextType.xhtml;
+import static yarfraw.core.datamodel.Text.TextType.html;
+import static yarfraw.core.datamodel.Text.TextType.text;
+import static yarfraw.core.datamodel.Text.TextType.xhtml;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -16,8 +16,8 @@ import org.junit.Test;
 
 import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.AtomLink;
-import yarfraw.core.datamodel.AtomTextAttributes;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
@@ -36,23 +36,23 @@ public class BuilderTest extends TestCase{
     .setPubDate("2005-07-10T12:29:29Z", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"))
     .setAtomId(new AtomId("tag:example.org,2003:3"))
     .setLink("http://example.org/")
-    .addAtomLink(new AtomLink().setHref("http://example.org/")
+    .addAtomLink(new Link().setHref("http://example.org/")
                                .setRel("alternate")
                                .setType("text/html")
                                .setHreflang("en"))
-    .addAtomLink(new AtomLink().setHref("http://example.org/feed.atom")
+    .addAtomLink(new Link().setHref("http://example.org/feed.atom")
                               .setRel("self")
                               .setType("application/atom+xml"))
     .setCopyright("Copyright (c) 2003, Mark Pilgrim")
     .setGenerator("Example Toolkit")
-    .putAtomTextAttribute(AtomTextElementEnum.title, new AtomTextAttributes(text))
-    .putAtomTextAttribute(AtomTextElementEnum.subtitle, new AtomTextAttributes(html))
+    .putAtomTextAttribute(AtomTextElementEnum.title, new Text(text))
+    .putAtomTextAttribute(AtomTextElementEnum.subtitle, new Text(html))
     .additem(Item.create()
           .setTitle("Atom draft-07 snapshot")
-          .addAtomLink(new AtomLink().setHref("http://example.org/2005/04/02/atom")
+          .addAtomLink(new Link().setHref("http://example.org/2005/04/02/atom")
                                .setRel("alternate")
                                .setType("text/html"))
-          .addAtomLink(new AtomLink().setHref("http://example.org/audio/ph34r_my_podcast.mp3")
+          .addAtomLink(new Link().setHref("http://example.org/audio/ph34r_my_podcast.mp3")
                               .setRel("enclosure")
                               .setType("audio/mpeg")
                               .setLength(1337))

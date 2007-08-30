@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
 
 import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Item;
-import yarfraw.core.datamodel.AtomTextAttributes.TextType;
+import yarfraw.core.datamodel.Text.TextType;
 import yarfraw.utils.DOMSerializer;
 import yarfraw.utils.XMLUtils;
 

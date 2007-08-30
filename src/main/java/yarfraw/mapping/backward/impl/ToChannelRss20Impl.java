@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
@@ -120,7 +120,7 @@ public class ToChannelRss20Impl implements ToChannelRss20{
           c.setWebMaster((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;
-          c.addCategory(new Category(cat.getValue(), cat.getDomain()));
+          c.addCategory(new CategorySubject(cat.getValue(), cat.getDomain()));
         }else if (val instanceof TSkipDaysList) {
           TSkipDaysList sdl = (TSkipDaysList)val;
           for(TSkipDay day : sdl.getDay()){

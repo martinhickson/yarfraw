@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBElement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.ObjectFactory;
@@ -49,9 +49,9 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
     }
     
     if(item.getCategory() != null){
-      for(Category c : item.getCategory()){
+      for(CategorySubject c : item.getCategory()){
         if(c != null){
-          elementList.add(FACTORY.createSubject(c.getCategory()));
+          elementList.add(FACTORY.createSubject(c.getCategoryOrSubjectOrTerm()));
         }
       }
     }

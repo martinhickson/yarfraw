@@ -49,7 +49,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.FeedFormat;
@@ -303,8 +303,8 @@ public class ToChannelDOMParserRss20Impl extends BaseToChannelDOMImpl{
     }
   }
 
-  private static Category toCategory(Node node){
-    return new Category().setCategory(node.getTextContent())
+  private static CategorySubject toCategory(Node node){
+    return new CategorySubject().setCategoryOrSubjectOrTerm(node.getTextContent())
                           .setDomainOrScheme(XMLUtils.getAttributeValue(node, RSS20_CATEGORY_DOMAIN.getLocalPart()));
   }
   

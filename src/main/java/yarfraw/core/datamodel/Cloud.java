@@ -3,6 +3,9 @@ package yarfraw.core.datamodel;
 import yarfraw.utils.CommonUtils;
 
 /**
+ * <b>This is only used by Rss 2.0.</b>
+ * 
+ * <p>
  * It specifies a web service that supports the rssCloud interface which can be implemented in HTTP-POST, XML-RPC or SOAP 1.1.
  * Its purpose is to allow processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
  * <cloud domain="rpc.sys.com" port="80" path="/RPC2" registerProcedure="myCloud.rssPleaseNotify" protocol="xml-rpc" />
@@ -18,7 +21,7 @@ import yarfraw.utils.CommonUtils;
  */
 public class Cloud extends AbstractBaseObject{
   private String _domain;
-  private Integer _port;
+  private String _port;
   private String _path;
   private String _registerProcedure;
   private String _protocol;
@@ -26,7 +29,7 @@ public class Cloud extends AbstractBaseObject{
   public static Cloud create(){
     return new Cloud();
   }
-  public Cloud(String domain, Integer port, String path,
+  public Cloud(String domain, String port, String path,
           String registerProcedure, String protocol) {
     super();
     _domain = domain;
@@ -42,12 +45,12 @@ public class Cloud extends AbstractBaseObject{
     _domain = domain;
     return this;
   }
-  public int getPort() {
+
+  public String getPort() {
     return _port;
   }
-  public Cloud setPort(int port) {
+  public void setPort(String port) {
     _port = port;
-    return this;
   }
   public String getPath() {
     return _path;
@@ -82,7 +85,7 @@ public class Cloud extends AbstractBaseObject{
     }
     
     try {
-      if(_port != null && (_port < 0 || _port > 65535)){
+      if(_port != null && (Integer.parseInt(_port) < 0 || Integer.parseInt(_port) > 65535)){
         throw new ValidationException("Cloud: Invalid port number");
       }
     }

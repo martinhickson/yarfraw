@@ -13,7 +13,7 @@ import javax.xml.bind.JAXBElement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
@@ -87,9 +87,9 @@ class Rss10MappingUtils {
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
     if(ch.getCategory() != null){
-      for(Category c : ch.getCategory()){
+      for(CategorySubject c : ch.getCategory()){
         if(c != null){
-          elementList.add(factory.createSubject(c.getCategory()));
+          elementList.add(factory.createSubject(c.getCategoryOrSubjectOrTerm()));
         }
       }
     }

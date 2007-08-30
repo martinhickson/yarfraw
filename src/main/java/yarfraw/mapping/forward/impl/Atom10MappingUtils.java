@@ -15,10 +15,10 @@ import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.AtomAttributes;
 import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.AtomLink;
-import yarfraw.core.datamodel.AtomTextAttributes;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.AtomTextElementEnum;
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
@@ -43,7 +43,7 @@ public class Atom10MappingUtils{
   private static final Log LOG = LogFactory.getLog(Atom10MappingUtils.class);
   private Atom10MappingUtils(){}
 
-  public static LinkType toLink(AtomLink link){
+  public static LinkType toLink(Link link){
     LinkType ret = FACTORY.createLinkType();
     ret.setBase(link.getBase() == null?null:link.getBase().toString());
     ret.setLang(link.getLang() == null?null:link.getLang().getLanguage());
@@ -90,7 +90,7 @@ public class Atom10MappingUtils{
     }
 
     if(item.getCategory() != null){
-      for(Category c : item.getCategory()){
+      for(CategorySubject c : item.getCategory()){
           if(c != null){
             elementList.add(factory.createEntryTypeCategory(toCategoryType(c)));
           }
@@ -127,7 +127,7 @@ public class Atom10MappingUtils{
       LOG.info("Item.Link field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add link elements to item");
     }
 
-    for(AtomLink atomLink : item.getAtomLinks()){
+    for(Link atomLink : item.getAtomLinks()){
       elementList.add(factory.createLink(toLink(atomLink)));
     }
     
@@ -180,9 +180,9 @@ public class Atom10MappingUtils{
     return ret;
   }
   
-  public static CategoryType toCategoryType(Category cat){
+  public static CategoryType toCategoryType(CategorySubject cat){
     CategoryType ret = FACTORY.createCategoryType();
-    ret.setTerm(cat.getCategory());
+    ret.setTerm(cat.getCategoryOrSubjectOrTerm());
     ret.setScheme(cat.getDomainOrScheme());
     AtomAttributes attr = cat.getAtomAttributes();
     if(attr != null){
@@ -196,7 +196,7 @@ public class Atom10MappingUtils{
     return ret;
   }
   
-  public static TextType toTextType(AtomTextAttributes attr, String content){
+  public static TextType toTextType(Text attr, String content){
     TextType text = FACTORY.createTextType();
     if(attr != null){
       text.setBase(attr.getBase() == null?null:attr.getBase().toString());

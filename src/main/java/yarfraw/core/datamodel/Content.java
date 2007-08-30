@@ -2,8 +2,8 @@ package yarfraw.core.datamodel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -12,25 +12,38 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 /**
+ * <li>Rss 2.0 -
+ * This is not officially supported, but if there's a &lt;content:encoded /> element under &lt;Item>,
+ * the content of the encoded element will be mapped to this class. The type will always be 'text' in this case.
+ * </li>
+ * <li>Rss 1.0 -
+ * This is not officially supported, but if there's a &lt;content:encoded /> element under &lt;Item>,
+ * the content of the encoded element will be mapped to this class. The type will always be 'text' in this case.
+ * </li>
+ * <li> Atom 1.0 - 
  * Data model of the 'atom:content' element in Atom 1.0 specs.<br/>
  * http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#atomContent
+ * <br/>
+ * If the content is XHTML, the xhtml elements can be found at the 'otherElements' list. <br/>
+ * </li>
  * @author jliang
  *
  */
-public class Content extends AtomAttributes{
-  private List<Element> _otherElements = new ArrayList<Element>();
-  private List<String> _contentText = new ArrayList<String>();
-  private AtomTextAttributes.TextType _type = AtomTextAttributes.TextType.text;
+public class Content extends AbstractBaseObject{
+  
+  private List<String> _contentText;
+  private String _type;
   private String _src;
   
   public Content() {}
-  public static Content create(){
-    return new Content();
-  }
 
+  public Content(String contentText) {
+    _contentText = new ArrayList<String>();
+    _contentText.add(contentText);
+    _type = "text";
+  }
   /**
    * Any text content.
    */
@@ -52,30 +65,10 @@ public class Content extends AtomAttributes{
     _contentText = contentText;
     return this;
   }
-  @Override
-  public Content setBase(String base) {
-    super.setBase(base);
-    return this;
-  }
-  @Override
-  public Content setLang(Locale lang) {
-    super.setLang(lang);
-    return this;
-  }
-  
-  @Override
-  public Content setOtherAttributes(Map<QName, String> otherAttributes) {
-    super.setOtherAttributes(otherAttributes);
-    return this;
-  }
-  
-  @Override
-  public Content addOtherAttributes(QName namespace, String attribute) {
-    super.addOtherAttributes(namespace, attribute);
-    return this;
-  }
   
   /**
+   * <b>Atom 1.0 only </b> 
+   * <br/>
    * atom:content MAY have a "src" attribute, whose value MUST be an IRI reference [RFC3987]. If the "src" attribute is present, atom:content MUST be empty. Atom Processors MAY use the IRI to retrieve the content, and MAY chose to ignore remote content or present it in a different manner than local content.
    * <p/>
    * If the "src" attribute is present, the "type" attribute SHOULD be provided and MUST be a MIME media type [MIMEREG], rather than "text", "html", or "xhtml". The value is advisory; that is to say, when the corresponding URI (mapped from an IRI, if necessary), is dereferenced, if the server providing that content also provides a media type, the server-provided media type is authoritative.
@@ -84,6 +77,8 @@ public class Content extends AtomAttributes{
     return _src;
   }
   /**
+   * <b>Atom 1.0 only </b> 
+   * <br/>
    * atom:content MAY have a "src" attribute, whose value MUST be an IRI reference [RFC3987]. If the "src" attribute is present, atom:content MUST be empty. Atom Processors MAY use the IRI to retrieve the content, and MAY chose to ignore remote content or present it in a different manner than local content.
    * <p/>
    * If the "src" attribute is present, the "type" attribute SHOULD be provided and MUST be a MIME media type [MIMEREG], rather than "text", "html", or "xhtml". The value is advisory; that is to say, when the corresponding URI (mapped from an IRI, if necessary), is dereferenced, if the server providing that content also provides a media type, the server-provided media type is authoritative.
@@ -93,26 +88,44 @@ public class Content extends AtomAttributes{
     return this;
   }
   /**
+   * <b>Atom 1.0 only </b> 
+   * <br/>
    * On the atom:content element, the value of the "type" attribute MAY be one of "text", "html", or "xhtml". Failing that, it MUST conform to the syntax of a MIME media type, but MUST NOT be a composite type (see Section 4.2.6 of [MIMEREG]). If the type attribute is not provided, Atom Processors MUST behave as though it were present with a value of "text".
+   * 
    */  
-  public AtomTextAttributes.TextType getType() {
+  public String getType() {
     return _type;
   }
   /**
+   * <b>Atom 1.0 only </b> 
+   * <br/>
    * On the atom:content element, the value of the "type" attribute MAY be one of "text", "html", or "xhtml". Failing that, it MUST conform to the syntax of a MIME media type, but MUST NOT be a composite type (see Section 4.2.6 of [MIMEREG]). If the type attribute is not provided, Atom Processors MUST behave as though it were present with a value of "text".
    */  
-  public Content setType(AtomTextAttributes.TextType type) {
+  public Content setType(String type) {
     _type = type;
     return this;
   }
+  ////////////////////////Common setters///////////////////////
   /**
-   * Other additional elements that are not in the specs.
+   * Any other attribute that is not in the RSS 2.0 specs.
    */
-  public List<Element> getOtherElements() {
-    return _otherElements;
+  public Content setOtherAttributes(Map<QName, String> otherAttributes) {
+    _otherAttributes = otherAttributes;
+    return this;
   }
   /**
-   * Other additional elements that are not in the specs.<br/>
+   * Add an attribute that is not in the RSS 2.0 specs.
+   */
+  public Content addOtherAttributes(QName namespace, String attribute) {
+    if(_otherAttributes == null){
+      _otherAttributes = new HashMap<QName, String>();
+    }
+    _otherAttributes.put(namespace, attribute);
+    return this;
+  }
+  
+  /**
+   * Other additional elements that are not in the Rss specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    */
   public Content setOtherElements(List<Element> otherElements) {
@@ -120,7 +133,7 @@ public class Content extends AtomAttributes{
     return this;
   }
   /**
-   * Add a element that is not specified in the specs.<br/>
+   * Add an element that is not specified in the Rss specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * @param element - any element
    */
@@ -133,9 +146,13 @@ public class Content extends AtomAttributes{
   }
   
   /**
-   * Add a element that is not specified in the specs.<br/>
+   * Add an element that is not specified in the Rss specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * 
+   * @param xmlString - any element
+   * @throws ParserConfigurationException 
+   * @throws IOException 
+   * @throws SAXException 
    */
   public Content addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
     if(_otherElements == null){
@@ -144,18 +161,12 @@ public class Content extends AtomAttributes{
     _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
     return this;
   }
+  ////////////////////////Common setters///////////////////////
   
-  /**
-   * Search through the other element list and return the first element that matches
-   * both input the namespaceURI and the localName.
-   * 
-   * @param namespaceURI - namespaceURI of the element to be search for
-   * @param localName - localName of the element
-   * @return - null if no matching element is found,
-   * the matching element otherwise.
-   */
-  public Element getElementByNS(String namespaceURI, String localName){
-    return CommonUtils.getElementByNS(_otherElements, namespaceURI, localName);
+  @Override
+  public void validate(FeedFormat format) throws ValidationException {
+    // TODO Auto-generated method stub
+    
   }
   
 }

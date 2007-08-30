@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Item;
@@ -83,7 +83,7 @@ class Rss20MappingUtils{
           item.setTitle((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;
-          item.addCategory(new Category(cat.getValue(), cat.getDomain()));
+          item.addCategory(new CategorySubject(cat.getValue(), cat.getDomain()));
         }else if (val instanceof TEnclosure) {
           TEnclosure en = (TEnclosure)val;
           try {

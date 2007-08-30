@@ -13,9 +13,9 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomLink;
+import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.AtomTextElementEnum;
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.YarfrawException;
@@ -64,7 +64,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
     }
     
     if(ch.getCategory() != null){
-      for(Category c : ch.getCategory()){
+      for(CategorySubject c : ch.getCategory()){
         if(c != null){
           elementList.add(factory.createFeedTypeCategory(toCategoryType(c)));
         }
@@ -116,7 +116,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
 //      link.setHref(ch.getLink().toString());
 //      elementList.add(factory.createFeedTypeLink(link));
 //    }
-    for(AtomLink atomLink : ch.getAtomLinks()){
+    for(Link atomLink : ch.getAtomLinks()){
       elementList.add(factory.createLink(toLink(atomLink)));
     }
     

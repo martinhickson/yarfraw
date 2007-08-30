@@ -1,24 +1,15 @@
 package yarfraw.core.datamodel;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Locale;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import yarfraw.utils.CommonUtils;
 
 /**
  * This maps to both &lt;guid> in Rss and &lt;id> in Atom.
  * Note: it is not supported by Rss 1.0 format.
- * <p/>
- * When mapping to Rss, the attributes that are not in the Rss specs will be ignored:
- * 'lang', 'base'
- * <p/>
- * When mapping to Atom, the attributes that are not in the Atom specs will be ignored:
- * 'isPremalink'
  * 
  * <p/>
  * Rss 2.0 description:
@@ -47,9 +38,8 @@ import org.apache.commons.logging.LogFactory;
  * @author jliang
  *
  */
-public class Id extends AtomAttributes{
+public class Id extends AbstractBaseObject{
   
-  private static final Log LOG = LogFactory.getLog(Id.class);
   private String _idValue;
   private Boolean _isPermaLink = true;
 
@@ -61,8 +51,6 @@ public class Id extends AtomAttributes{
   }
   
   /**
-   * This field is only used by Atom 1.0.
-   * 
    * @return A value that uniquely identify a {@link Channel} or a {@link Item}. 
    */
   public String getIdValue() {
@@ -70,8 +58,6 @@ public class Id extends AtomAttributes{
   }
 
   /**
-   * This field is only used by Atom 1.0.
-   * 
    * @param idValue - A value that uniquely identify a {@link Channel} or a {@link Item}.
    * @return - this
    */
@@ -103,36 +89,31 @@ public class Id extends AtomAttributes{
       return this;
   }
   
-  @Override
-  public Id setBase(String base) {
-    super.setBase(base);
+  ////////////////////////Common setters///////////////////////
+  /**
+   * Any other attribute that is not in the RSS 2.0 specs.
+   */
+  public Id setOtherAttributes(Map<QName, String> otherAttributes) {
+    _otherAttributes = otherAttributes;
     return this;
   }
-  @Override
-  public Id setLang(Locale lang) {
-    super.setLang(lang);
+  /**
+   * Add an attribute that is not in the RSS 2.0 specs.
+   */
+  public Id addOtherAttributes(QName namespace, String attribute) {
+    if(_otherAttributes == null){
+      _otherAttributes = new HashMap<QName, String>();
+    }
+    _otherAttributes.put(namespace, attribute);
     return this;
   }
   
-  @Override
-  public Id setOtherAttributes(Map<QName, String> otherAttributes) {
-    super.setOtherAttributes(otherAttributes);
-    return this;
-  }
-  @Override
-  public Id addOtherAttributes(QName namespace, String attribute) {
-    super.addOtherAttributes(namespace, attribute);
-    return this;
-  }
-
+  ////////////////////////Common setters///////////////////////
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    try {
-      @SuppressWarnings("unused")
-      URI uri = new URI(_idValue);
+    if(format == FeedFormat.RSS10){
+      return;
     }
-    catch (URISyntaxException e) {
-      LOG.warn("idValue should be a valid uri");
-    }
+    CommonUtils.validateNotNull("Id Value should not be null", _idValue);
   }
 }

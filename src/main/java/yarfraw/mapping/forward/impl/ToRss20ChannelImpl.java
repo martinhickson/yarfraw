@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Day;
 import yarfraw.core.datamodel.Item;
@@ -48,7 +48,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
     if(ch.getCategory() != null){
-      for(Category c : ch.getCategory()){
+      for(CategorySubject c : ch.getCategory()){
         if(c != null){
           elementList.add(Rss20MappingUtils.toRss20Category(c));
         }

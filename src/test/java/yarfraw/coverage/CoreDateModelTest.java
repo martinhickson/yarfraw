@@ -14,15 +14,15 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomLink;
-import yarfraw.core.datamodel.AtomTextAttributes;
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Text;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
 import yarfraw.core.datamodel.Source;
-import yarfraw.core.datamodel.AtomTextAttributes.TextType;
+import yarfraw.core.datamodel.Text.TextType;
 
 /**
  * Random tests to invoke code that was reported no covered in cobertura' coverage report
@@ -38,10 +38,10 @@ public class CoreDateModelTest extends TestCase{
     assertTrue("expect 2 categories", item.getCategoryString().size()==2 && item.getCategoryString().contains("cat1"));
     
     item = new Item("title", "www.link.com", "desc", "author", 
-            new HashSet<Category>(Arrays.asList(new Category("cat"))), "www.comments.com", 
+            new HashSet<CategorySubject>(Arrays.asList(new CategorySubject("cat"))), "www.comments.com", 
             null, null, new Date(System.currentTimeMillis()), new Source("www.url.com", "source"));
     item = new Item("title", new URI("www.link.com"), "desc", "author", 
-            new HashSet<Category>(Arrays.asList(new Category("cat"))), new URI("www.comments.com"), 
+            new HashSet<CategorySubject>(Arrays.asList(new CategorySubject("cat"))), new URI("www.comments.com"), 
             null, null, new Date(System.currentTimeMillis()), new Source(new URI("www.url.com"), "source"));
     
   }
@@ -83,7 +83,7 @@ public class CoreDateModelTest extends TestCase{
     assertTrue("attribute was not built correctly", attr.getBase().equals("base"));
     assertTrue("attribute was not built correctly", attr.getLang().equals(Locale.ENGLISH));
     
-    AtomLink link = new AtomLink("href", "rel", "type", "hreflang", "title", 100);
+    Link link = new Link("href", "rel", "type", "hreflang", "title", 100);
     assertTrue("link was not built correctly", link.getHref() != null);
     assertTrue("link was not built correctly", link.getRel() != null);
     assertTrue("link was not built correctly", link.getType() != null);
@@ -91,7 +91,7 @@ public class CoreDateModelTest extends TestCase{
     assertTrue("link was not built correctly", link.getTitle() != null);
     assertTrue("link was not built correctly", link.getLength() != null);
     
-    AtomTextAttributes text = new AtomTextAttributes("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+    Text text = new Text("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
             "<p><i>[Update: The Atom draft is finished.]</i></p>"+
             "</div>");
     assertTrue("text was not built correctly", text.getXhtmlDiv() != null);

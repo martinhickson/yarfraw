@@ -45,7 +45,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
@@ -185,7 +185,7 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){
         if(_elementsOfInterest.contains(Item_category)){
-          _item.addCategory(new Category(node.getTextContent()));
+          _item.addCategory(new CategorySubject(node.getTextContent()));
         }
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_pubdate || element == Item_pubdate){
@@ -257,7 +257,7 @@ public class ToChannelDOMParserRss10Impl extends BaseToChannelDOMImpl{
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_category || element == Item_category){
         if(_elementsOfInterest.contains(Channel_category)){
-          _channel.addCategory(new Category(node.getTextContent()));
+          _channel.addCategory(new CategorySubject(node.getTextContent()));
         }        
         return NodeFilter.FILTER_REJECT;
       }else if(element == Channel_pubdate || element == Item_pubdate){

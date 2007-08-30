@@ -1,11 +1,15 @@
 package yarfraw.core.datamodel;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.namespace.QName;
 
 import yarfraw.utils.CommonUtils;
 
 /**
+ * 
+ * <li>Rss 2.0 - 
  * {@link Image} is an optional sub-element of {@link Image}, 
  * which contains three required and three optional sub-elements.
  * <p>
@@ -27,41 +31,34 @@ import yarfraw.utils.CommonUtils;
  * <p>
  * Maximum value for width is 144, default value is 88.
  * Maximum value for height is 400, default value is 31.
+ * </li>
  * 
+ * <li> Rss 1.0 -
+ * An image to be associated with an HTML rendering of the channel. 
+ * This image should be of a format supported by the majority of Web browsers. 
+ * While the later 0.91 specification allowed for a width of 1-144 and height of 1-400, 
+ * convention (and the 0.9 specification) dictate 88x31.
+ * </li>
+ * <li>Atom 1.0 - 
+ * The "atom:icon" element's content is an IRI reference [RFC3987] 
+ * which identifies an image which provides iconic visual identification for a feed.
+ * <br/>
+ * The "atom:logo" element's content is an IRI reference [RFC3987] which identifies an image which provides visual identification for a feed.
+ * </li>
  * @author jliang
  *
  */
 public class Image extends AbstractBaseObject{
-  private URI _url;
+  private String _url;
   private String _title;
-  private URI _link;
+  private String _link;
   private Integer _width =88;
   private Integer _height = 31;
-  private String _description;
-  private RdfAttributes _rdfAttributes;
-  private AtomAttributes _atomAttributes;
-  
+  private String _description;  
   public Image(){}
-  
-  /**
-   * Creates an empty {@link Image} where width is set to 88 and height is set to 31
-   */
-  public static Image create(){
-    return new Image();
-  }
-  public Image(URI url, String title, URI link, int width, int height,
-      String description) {
-    super();
-    _url = url;
-    _title = title;
-    _link = link;
-    _width = width;
-    _height = height;
-    _description = description;
-  }
 
   public Image(String url, String title, String link, Integer width, Integer height,
-      String description) throws URISyntaxException {
+      String description){
     super();
     setUrl(url);
     _title = title;
@@ -72,133 +69,118 @@ public class Image extends AbstractBaseObject{
   }
 
   /**
- * {@link Image} is an optional sub-element of {@link Image}, 
- * which contains three required and three optional sub-elements.
- * <p>
- * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel.
- * <p>
- * <code>title</code> describes the image, it's used in the ALT attribute of the HTML 
- * &lt;img> tag when the channel is rendered in HTML.
- * <p>
- * <code>link</code> is the URI of the site, when the channel is rendered, 
- * the image is a link to the site. 
- * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
- * &lt;title> and &lt;link>.
- * <p>
-   * @throws URISyntaxException  if <code>link</code> or <code>url</code> is an invalid URI
-   */
-  public Image(String url, String title, String link) throws URISyntaxException {
-    _title = title;
-    setUrl(url);
-    setLink(link);
-  }
-  
-  /**
-   * {@link Image} is an optional sub-element of {@link Image}, 
-   * which contains three required and three optional sub-elements.
-   * <p>
-   * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel.
-   * <p>
-   * <code>title</code> describes the image, it's used in the ALT attribute of the HTML 
-   * &lt;img> tag when the channel is rendered in HTML.
-   * <p>
-   * <code>link</code> is the URI of the site, when the channel is rendered, 
-   * the image is a link to the site. 
-   * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
-   * &lt;title> and &lt;link>.
-   * <p>
-     */
-    public Image(URI url, String title, URI link) {
-      super();
-      _url = url;
-      _title = title;
-      _link = link;
-    }
-  /**
-   * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel.
-   */
-  public URI getUrl() {
-    return _url;
-  }
-  /**
-   * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel.
-   * @throws URISyntaxException  
-   * if url is not an valid url 
-   * 
-   */  
-  public Image setUrl(String url) throws URISyntaxException{
-    if(url == null){
-      _url = null;
-    }else{
-      _url = new URI(url.trim());
-    }
-    return this;
-  }
-  /**
+   * <li>Rss 2.0 -
    * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel. 
-   */  
-  public Image setUrl(URI url){
+   * if url is not an valid url
+   * </li>
+   * <li>Rss 1.0 -
+   * The URL of the image to used in the "src" attribute of the channel's image tag when rendered as HTML. 
+   * </li> 
+   * <li>
+   * Atom 1.0 -
+   * url of the image
+   * </li>
+   * @param url - any valid url
+   * @return this
+   */
+  public Image setUrl(String url){
     _url = url;
     return this;
   }
   
-  
-  
   /**
+   * <li>Rss 2.0 - 
    * <code>title</code> describes the image, it's used in the ALT attribute of the HTML 
    * &lt;img> tag when the channel is rendered in HTML.
+   * </li>
+   * <li>Rss 1.0 -
+   * The alternative text ("alt" attribute) associated with the channel's image tag when rendered as HTML.
+   * </li>
+   * <li>
+   * Atom 1.0 - not supported, this field is ignored.
+   * </li>
    */
   public String getTitle() {
     return _title;
   }
+
   /**
+   * <li>Rss 2.0 - 
    * <code>title</code> describes the image, it's used in the ALT attribute of the HTML 
    * &lt;img> tag when the channel is rendered in HTML.
-   */  
+   * </li>
+   * <li>Rss 1.0 -
+   * The alternative text ("alt" attribute) associated with the channel's image tag when rendered as HTML.
+   * </li>
+   * <li>
+   * Atom 1.0 - not supported, this field is ignored.
+   * </li>
+   * @param title - string value of the title
+   * @return this
+   */
   public Image setTitle(String title) {
     _title = title;
     return this;
   }
+  
   /**
-    * <code>link</code> is the URI of the site, when the channel is rendered, 
-     * the image is a link to the site. 
-     * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
-     * &lt;title> and &lt;link>.
-   */
-  public URI getLink() {
-    return _link;
-  }
-  /**
+   * <li> Rss 2.0 -
    * <code>link</code> is the URI of the site, when the channel is rendered, 
     * the image is a link to the site. 
     * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
     * &lt;title> and &lt;link>.
-    * 
-   * @throws URISyntaxException 
-   * if link is an invalid url  
-   * 
+    *</li>   
+    *<li> Rss 1.0 - 
+    *The URL to which an HTML rendering of the channel image will link. This, as with the channel's title link, is commonly the parent site's home or news page.
+    *</li>
+    *<li>
+   * Atom 1.0 - not supported, this field is ignored.
+   * </li> 
   */  
-  public Image setLink(String link) throws URISyntaxException  {
-    if(link == null){
-      _link = null;
-    }else{
-      _link = new URI(link.trim());
-    }
-    return this;
-  }
-  
-  /**
-   * <code>link</code> is the URI of the site, when the channel is rendered, 
-    * the image is a link to the site. 
-    * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
-    * &lt;title> and &lt;link>.  
-  */  
-  public Image setLink(URI link) {
+  public Image setLink(String link){
     _link = link;
     return this;
   }
   
+  
   /**
+   * <li>Rss 2.0 -
+   * <code>url</code> is the URI of a GIF, JPEG or PNG image that represents the channel. 
+   * if url is not an valid url
+   * </li>
+   * <li>Rss 1.0 -
+   * The URL of the image to used in the "src" attribute of the channel's image tag when rendered as HTML. 
+   * </li> 
+   * <li>
+   * Atom 1.0 - url of the image
+   * </li>
+   * @return url of the image
+   */
+  public String getUrl() {
+    return _url;
+  }
+
+  /**
+   * <li> Rss 2.0 -
+   * <code>link</code> is the URI of the site, when the channel is rendered, 
+    * the image is a link to the site. 
+    * (Note, in practice the image &lt;title> and &lt;link> should have the same value as the channel's 
+    * &lt;title> and &lt;link>.
+    *</li>   
+    *<li> Rss 1.0 - 
+    *The URL to which an HTML rendering of the channel image will link. This, as with the channel's title link, is commonly the parent site's home or news page.
+    *</li>
+    *<li>
+   * Atom 1.0 - not supported, this field is ignored.
+   * </li> 
+   * @return
+   */
+  public String getLink() {
+    return _link;
+  }
+
+  /**
+   * This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}<br/>
    * Optional elements include <code>width</code> and <code>height</code>, indicating the width and height of 
    * the image in pixels.
    */
@@ -206,6 +188,7 @@ public class Image extends AbstractBaseObject{
     return _width;
   }
   /**
+   * <b>This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}</b><br/>
    * Optional elements include <code>width</code> and <code>height</code>, indicating the width and height of 
    * the image in pixels.
  * Maximum value for width is 144, default value is 88. 
@@ -222,6 +205,7 @@ public class Image extends AbstractBaseObject{
     return this;
   }
   /**
+   * <b>This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}</b><br/>
    * Optional elements include <code>width</code> and <code>height</code>, indicating the width and height of 
    * the image in pixels.
    */  
@@ -229,6 +213,7 @@ public class Image extends AbstractBaseObject{
     return _height;
   }
   /**
+   * <b>This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}</b><br/>
    * Optional elements include <code>width</code> and <code>height</code>, indicating the width and height of 
    * the image in pixels.
    * 
@@ -246,6 +231,7 @@ public class Image extends AbstractBaseObject{
     return this;
   }
   /**
+   * <b>This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}</b><br/>
    * <code>description</code> contains text that is included in the TITLE attribute 
    * of the link formed around the image in the HTML rendering.
    */  
@@ -253,6 +239,7 @@ public class Image extends AbstractBaseObject{
     return _description;
   }
   /**
+   * <b>This field is only used by Rss 2.0, it is ignored by other {@link FeedFormat}</b><br/>
    * <code>description</code> contains text that is included in the TITLE attribute 
    * of the link formed around the image in the HTML rendering.
    */    
@@ -260,39 +247,39 @@ public class Image extends AbstractBaseObject{
     _description = description;
     return this;
   }
-
+  
+  ////////////////////////Common setters///////////////////////
   /**
-   * Attributes that is only supported by RSS 1.0/RDF format
-   * @return
+   * Any other attribute that is not in the RSS 2.0 specs.
    */
-  public RdfAttributes getRdfAttributes() {
-    return _rdfAttributes;
-  }
-  /**
-   * Attributes that is only supported by RSS 1.0/RDF format
-   * @return
-   */
-  public Image setRdfAttributes(RdfAttributes rdfAttributes) {
-    _rdfAttributes = rdfAttributes;
+  public Image setOtherAttributes(Map<QName, String> otherAttributes) {
+    _otherAttributes = otherAttributes;
     return this;
   }
-  
-  public AtomAttributes getAtomAttributes() {
-    return _atomAttributes;
-  }
-  public Image setAtomAttributes(AtomAttributes atomAttributes) {
-    _atomAttributes = atomAttributes;
+  /**
+   * Add an attribute that is not in the RSS 2.0 specs.
+   */
+  public Image addOtherAttributes(QName namespace, String attribute) {
+    if(_otherAttributes == null){
+      _otherAttributes = new HashMap<QName, String>();
+    }
+    _otherAttributes.put(namespace, attribute);
     return this;
   }
-  
-  
+  ////////////////////////Common setters///////////////////////
   @Override
   public void validate(FeedFormat format) throws ValidationException {
     if(format == FeedFormat.RSS20){
       CommonUtils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
+      CommonUtils.validateUri("Url or link is not a valid URI", _url, _link);
+      
     }else{
       CommonUtils.validateNotNull("Image: url should not be null", _url);
+      CommonUtils.validateUri("Url is not a valid URI", _url);
     }
     
+    if(format == FeedFormat.RSS10){
+      CommonUtils.validateNotNull("attribute 'about' is required", getAbout());
+    }
   }
 }

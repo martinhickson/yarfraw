@@ -17,7 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Channel;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
@@ -97,7 +97,7 @@ public class BuilderTest{
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
                          .addCategory(CAT1, CAT2)
-                         .addCategory(new Category(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
+                         .addCategory(new CategorySubject(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
                          .setComments("    "+HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290)
                          .setGuid(new Guid(GUID)),
                new Item().setTitle(ITEM2)
@@ -105,7 +105,7 @@ public class BuilderTest{
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
                          .addCategory(CAT1, CAT2)
-                         .addCategory(new Category(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
+                         .addCategory(new CategorySubject(CAT3).setDomainOrScheme(HTTP_SOMEDOMAIN))
                          .setComments(HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290+"\t\t")
                          .setGuid(new Guid(GUID)));
       return channel;
@@ -116,7 +116,7 @@ public class BuilderTest{
     Channel c = buildChannel();
     assertEquals(c.getTitle(), TEST_TITLE);
     assertTrue("Category did not build correctly", 
-            c.getCategory().containsAll(Arrays.asList(new Category(CAT1), new Category(CAT2))));
+            c.getCategory().containsAll(Arrays.asList(new CategorySubject(CAT1), new CategorySubject(CAT2))));
     
     //FIXME: switch expected with actual 
     assertEquals(c.getCloud().getDomain(), RPC_SYS_COM);
@@ -145,7 +145,7 @@ public class BuilderTest{
     assertEquals(DESC, item.getDescription());
     assertEquals(OPRAH_OXYGEN_NET, item.getAuthor());
     assertTrue("Category did not build correctly", 
-        item.getCategory().containsAll(Arrays.asList(new Category(CAT1), new Category(CAT2), new Category(CAT3, HTTP_SOMEDOMAIN))));
+        item.getCategory().containsAll(Arrays.asList(new CategorySubject(CAT1), new CategorySubject(CAT2), new CategorySubject(CAT3, HTTP_SOMEDOMAIN))));
     assertEquals(new URI(HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290), item.getComments());
     assertEquals(new Guid(GUID), item.getGuid());
 
@@ -202,7 +202,7 @@ public class BuilderTest{
     assertEquals(DESC, item.getDescription());
     assertEquals(OPRAH_OXYGEN_NET, item.getAuthor());
     assertTrue("Category did not build correctly", 
-        item.getCategory().containsAll(Arrays.asList(new Category(CAT1), new Category(CAT2), new Category(CAT3))));
+        item.getCategory().containsAll(Arrays.asList(new CategorySubject(CAT1), new CategorySubject(CAT2), new CategorySubject(CAT3))));
     
   }
   

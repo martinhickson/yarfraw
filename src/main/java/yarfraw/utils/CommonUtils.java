@@ -6,6 +6,8 @@ import static yarfraw.utils.CommonConstants.MIN_PER_WEEK;
 import static yarfraw.utils.CommonConstants.MIN_PER_YEAR;
 
 import java.math.BigInteger;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -187,6 +189,18 @@ public class CommonUtils{
     }
   }
   
+  public static void validateUri(String message, String... uri) throws ValidationException{
+    if(!ArrayUtils.isEmpty(uri)){
+      for(String s : uri){
+        try {
+          @SuppressWarnings("unused")
+          URI u  = new URI(s);
+        } catch (URISyntaxException e) {
+          throw new ValidationException(message, e);
+        }
+      }
+    }
+  }
   /**
    * Validation methods for emails.
    * 

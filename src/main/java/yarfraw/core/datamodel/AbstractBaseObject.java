@@ -1,8 +1,7 @@
 package yarfraw.core.datamodel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -24,8 +23,8 @@ abstract class AbstractBaseObject{
   private String _lang;
   private String _resource;
   private String _about;
-  private Map<QName, String> _otherAttributes = new HashMap<QName, String>();
-  private List<Element> _otherElements = new ArrayList<Element>();
+  protected Map<QName, String> _otherAttributes;
+  protected List<Element> _otherElements;
   
   /**
    * This maps to the 'base' attribute that is common in all Atom 1.0 elements.
@@ -37,8 +36,8 @@ abstract class AbstractBaseObject{
     return _base;
   }
   /**
-   * This maps to the 'lang' attribute that is common in all Atom 1.0 elements.
-   * Other {@link FeedFormat} will ignore this attribute.
+   * The language attribute indicates the language that is used by the enclosed
+   * element. 
    * 
    * @return - attribute value.
    */
@@ -46,6 +45,19 @@ abstract class AbstractBaseObject{
     return _lang;
   }
 
+  /**
+   * The language attribute indicates the language that is used by the enclosed
+   * element. 
+   * 
+   * @return - a new Locale Object by parsing the lang attribute.
+   */
+  public Locale getLangAsLocale() {
+    if(_lang == null)
+      return null;
+    
+    return new Locale(_lang);
+  }
+  
   /**
    * This maps to the optional 'resource' attribute that present in some Rss 1.0 elements.
    * Other {@link FeedFormat} will ignore this attribute.

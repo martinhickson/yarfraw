@@ -22,10 +22,10 @@ import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.AtomAttributes;
 import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.AtomLink;
-import yarfraw.core.datamodel.AtomTextAttributes;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.AtomTextElementEnum;
-import yarfraw.core.datamodel.Category;
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.Item;
@@ -50,10 +50,10 @@ class Atom10MappingUtils{
   private static final Log LOG = LogFactory.getLog(Atom10MappingUtils.class);
   /**
    * Use this method with cautions, it checks the type of the input {@link TextType},
-   * and automatically copy all the attributes from to input {@link AtomTextAttributes}.
+   * and automatically copy all the attributes from to input {@link Text}.
    * <br /> 
    * if it's NOT of type xhtml, it assumes that there is only one element under the input  
-   * {@link TextType} and put this single element to the input {@link AtomTextAttributes}.
+   * {@link TextType} and put this single element to the input {@link Text}.
    * Method returns null in this case.
    * <br/>
    * Otherwise (type = text or html), it extracts the content as string and returns it.
@@ -63,7 +63,7 @@ class Atom10MappingUtils{
    * @return null or the content of the input {@link TextType} depending on the type. 
    * 
    */
-  public static String extractTextContent(AtomTextAttributes textAttr, TextType text){
+  public static String extractTextContent(Text textAttr, TextType text){
     if(text == null){
       return null;
     }
@@ -71,7 +71,7 @@ class Atom10MappingUtils{
       throw new IllegalArgumentException("textAttr cannot be null");
     }
     textAttr.setType(text.getType() == null ? null :
-      yarfraw.core.datamodel.AtomTextAttributes.TextType.valueOf(text.getType()));
+      yarfraw.core.datamodel.Text.TextType.valueOf(text.getType()));
     textAttr.setBase(text.getBase());
     textAttr.setLang(text.getLang() == null ? null : new Locale(text.getLang()));
     if(text.getOtherAttributes() != null){
@@ -107,7 +107,7 @@ class Atom10MappingUtils{
   }
   
   public static Item toItem(EntryType entry){
-    AtomAttributes attr = new AtomTextAttributes();
+    AtomAttributes attr = new Text();
     attr.setBase(entry.getBase());
     attr.setLang(entry.getLang() == null ? null : new Locale(entry.getLang()));
     if(entry.getOtherAttributes() != null){
@@ -142,7 +142,7 @@ class Atom10MappingUtils{
             }
           }
           content.setSrc(c.getSrc());
-          content.setType(c.getType() == null? null : yarfraw.core.datamodel.AtomTextAttributes.TextType.valueOf(c.getType()));
+          content.setType(c.getType() == null? null : yarfraw.core.datamodel.Text.TextType.valueOf(c.getType()));
           ret.setContent(content);
         }//contributor are ignored
         else if(val instanceof LinkType){ 
@@ -184,8 +184,8 @@ class Atom10MappingUtils{
     return ret;
   }
   
-  public static AtomLink toAtomLink(LinkType link){
-    AtomLink ret = new AtomLink();
+  public static Link toAtomLink(LinkType link){
+    Link ret = new Link();
     ret.setBase(link.getBase());
     ret.setLang(link.getLang() == null ? null : new Locale(link.getLang()));
     if(link.getOtherAttributes() != null){
@@ -203,7 +203,7 @@ class Atom10MappingUtils{
   }
   
   private static String convenientExtractText(Item item, AtomTextElementEnum textEnum, TextType text){
-    AtomTextAttributes textAttr = new AtomTextAttributes();
+    Text textAttr = new Text();
     String ret = extractTextContent(textAttr, text);
     if(textAttr.getBase() != null || textAttr.getLang() != null || textAttr.getOtherAttributes() != null
             || textAttr.getXhtmlDiv() != null || textAttr.getType() != null ){
@@ -213,16 +213,16 @@ class Atom10MappingUtils{
   }
   
   private final static QName CAT_LABEL_QNAME = new QName("http://www.w3.org/2005/Atom", "label");
-  public static Category toCategory(CategoryType cat){
-    AtomAttributes attr = new AtomTextAttributes();
+  public static CategorySubject toCategory(CategoryType cat){
+    AtomAttributes attr = new Text();
     attr.setBase(cat.getBase());
     attr.setLang(cat.getLang() == null ? null : new Locale(cat.getLang()));
     if(cat.getOtherAttributes() != null){
       attr.getOtherAttributes().putAll(cat.getOtherAttributes());
     }
-    Category ret = new Category();
+    CategorySubject ret = new CategorySubject();
     ret.setAtomAttributes(attr);
-    ret.setCategory(cat.getTerm());
+    ret.setCategoryOrSubjectOrTerm(cat.getTerm());
     ret.setDomainOrScheme(cat.getScheme());
     attr.getOtherAttributes().put(CAT_LABEL_QNAME, cat.getLabel());
     
@@ -240,7 +240,7 @@ class Atom10MappingUtils{
   }
   public static Image toImage(IconType icon){
     Image image = new Image();
-    AtomAttributes attr = new AtomTextAttributes();
+    AtomAttributes attr = new Text();
     attr.setBase(icon.getBase());
     attr.setLang(icon.getLang() == null ? null : new Locale(icon.getLang()));
     if(icon.getOtherAttributes() != null){
