@@ -23,11 +23,10 @@ public class Enclosure extends AbstractBaseObject{
   private String _length;
   private String _mimeType;
   private String _value;
-  public static Enclosure create(){
-    return new Enclosure();
-  }
+  
   public Enclosure(){}
 
+  
   /**
    * It has three required attributes. url says where the enclosure is located, length says how big it is in bytes, and type says what its type is, a standard MIME type.
    * @throws URISyntaxException 

@@ -10,13 +10,14 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
@@ -26,7 +27,6 @@ import yarfraw.generated.rss10.elements.TRss10Channel;
 import yarfraw.generated.rss10.elements.TRss10Image;
 import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
-import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss10 Jaxb model
@@ -37,57 +37,65 @@ class Rss10MappingUtils {
   private Rss10MappingUtils(){}
   private static final ObjectFactory FACTORY = new ObjectFactory ();
   private static final Log LOG = LogFactory.getLog(Rss10MappingUtils.class);
-  public static JAXBElement<TRss10Image> toRss10Image(Image image){
+  public static JAXBElement<TRss10Image> toRss10Image(Image in){
     TRss10Image ret = FACTORY.createTRss10Image();
     //not supported
-    if(image.getDescription() != null
-        || image.getHeight() != null
-        || image.getWidth() != null){
+    if(in.getDescription() != null
+        || in.getHeight() != null
+        || in.getWidth() != null){
       LOG.info("description, height, width are not supported in Rss 1.0's image element. They will be ignored");
     }
     
-    if(image.getRdfAttributes() != null){
-      ret.setAbout(image.getRdfAttributes().getAbout() == null ? null : image.getRdfAttributes().getAbout().toString());
-      ret.setResource(image.getRdfAttributes().getResource() == null ? null : image.getRdfAttributes().getResource().toString());
-    }
-    if(image.getLink() != null){
-      ret.setLink(image.getLink().toString());      
-    }
-    ret.setTitle(image.getTitle());
-    if(image.getUrl() != null){
-      ret.setUrl(image.getUrl().toString());
-    }
+    ret.setTitle(in.getTitle());
+    ret.setUrl(in.getUrl());
+    ret.setLink(in.getLink());
+    
+    ret.setAbout(in.getAbout());
+    ret.setResource(in.getResource());
+    
     return FACTORY.createTRss10ChannelImage(ret);
   }
 
-  public static JAXBElement<TRss10TextInput> toRss10TextInput(TextInput texInput) {
+  public static JAXBElement<TRss10TextInput> toRss10TextInput(TextInput in) {
     TRss10TextInput ret = FACTORY.createTRss10TextInput();
-
-    if(texInput.getRdfAttributes() != null){
-      ret.setAbout(texInput.getRdfAttributes().getAbout() == null ? null : texInput.getRdfAttributes().getAbout().toString());
-      ret.setResource(texInput.getRdfAttributes().getResource() == null ? null : texInput.getRdfAttributes().getResource().toString());
-    }
-    ret.setDescription(texInput.getDescription());
-    if(texInput.getLink() != null){
-      ret.setLink(texInput.getLink().toString());
-    }
-    ret.setName(texInput.getName());
-    ret.setTitle(texInput.getTitle());
+    
+    ret.setTitle(in.getTitle());
+    ret.setDescription(in.getDescription());
+    ret.setName(in.getName());
+    ret.setLink(in.getLink());
+    ret.setAbout(in.getAbout());
+    ret.setResource(in.getResource());
     return FACTORY.createTextinput(ret);
   }
-  
-  public static JAXBElement<TRss10Channel> toChannel(Channel ch){
+  /*
+   *  (title, link, description, image?, items, textinput?)
+   */
+  public static JAXBElement<TRss10Channel> toChannel(ChannelFeed ch){
     ObjectFactory factory = FACTORY;
     TRss10Channel ret = factory.createTRss10Channel();
     List<Object> elementList = ret.getTitleOrLinkOrDescription();
-    if(ch.getOtherElements() != null){
-      elementList.addAll(ch.getOtherElements());
+    
+    if(ch.getTitleText() != null){
+      elementList.add(factory.createTRss10ChannelTitle(ch.getTitleText()));
     }
-    if(ch.getOtherAttributes() != null){
-      ret.getOtherAttributes().putAll(ch.getOtherAttributes());
+    
+    String link = Utils.getHrefLink(ch.getLinks());
+    if(link != null){
+      elementList.add(factory.createTRss10ChannelLink(link));
     }
-    if(ch.getCategory() != null){
-      for(CategorySubject c : ch.getCategory()){
+    
+    if(ch.getDescriptionOrSubtitleText() != null){
+      elementList.add(factory.createTRss10ChannelDescription(ch.getDescriptionOrSubtitleText()));
+    }
+    
+    if(ch.getImageOrIcon() != null){
+      TRss10Image img = factory.createTRss10Image();
+      img.setResource(ch.getImageOrIcon().getAbout());
+      elementList.add(factory.createTRss10ChannelImage(img));
+    }
+    
+    if(ch.getCategorySubjects() != null){
+      for(CategorySubject c : ch.getCategorySubjects()){
         if(c != null){
           elementList.add(factory.createSubject(c.getCategoryOrSubjectOrTerm()));
         }
@@ -99,13 +107,10 @@ class Rss10MappingUtils {
       LOG.info("Channel.Cloud is not supported in Rss 1.0 feed. It will be ignored.");
     }
     
-    if(ch.getCopyright() != null){
-      elementList.add(factory.createRights(ch.getCopyright()));
+    if(ch.getRightsText() != null){
+      elementList.add(factory.createRights(ch.getRightsText()));
     }
-    if(ch.getDescription() != null){
-      elementList.add(factory.createTRss10ChannelDescription(ch.getDescription()));
-    }
-
+    
   //NOT SUPPORTED
     if(ch.getDocs() != null){
       LOG.info("Channel.Docs is not supported in Rss 1.0 feed. It will be ignored.");
@@ -115,19 +120,18 @@ class Rss10MappingUtils {
       LOG.info("Channel.Generator is not supported in Rss 1.0 feed. It will be ignored.");
     }
 
-    if(ch.getImage() != null){
-      elementList.add(toRss10Image(ch.getImage()));
-    }
 
     Seq seq = factory.createSeq();
     if(ch.getItems() != null){
-      for(Item t : ch.getItems()){
+      for(ItemEntry t : ch.getItems()){
         if(t != null){
           Li li = factory.createLi();
-          if(t.getRdfAttributes() != null){
-            li.setResource(t.getRdfAttributes().getAbout().toString());
+          if(t.getResource() != null){
+            li.setResource(t.getResource());
+          }else if(CollectionUtils.isNotEmpty(t.getLinks())){
+            li.setResource(t.getLinks().get(0).getHref()); //use the link if no resource was specified
           }else{
-            li.setResource(t.getLink().toString()); //use the link if no resource was specified
+            LOG.warn("no <link> found under Item, unable to create <li> element under <items>");
           }
           seq.getLi().add(li);
         }
@@ -138,26 +142,24 @@ class Rss10MappingUtils {
     items.setSeq(seq);
     elementList.add(factory.createItems(items));
     
-    if(ch.getLanguage() != null){
-      elementList.add(factory.createLanguage(ch.getLanguage().getLanguage()));
+    if(ch.getLang() != null){
+      elementList.add(factory.createLanguage(ch.getLang()));
     }
 
-    if(ch.getLink() != null){
-      elementList.add(factory.createTRss10ChannelLink(ch.getLink().toString()));
-    }
     //not supported
-    
-    if(ch.getLastBuildDate() != null){
+    if(ch.getLastBuildOrUpdatedDate() != null){
       LOG.info("Channel.LastBuildDate is not supported in Rss 1.0 feed. It will be ignored.");
     }
     
-    if(ch.getManagingEditor() != null){
-      elementList.add(factory.createCreator(ch.getManagingEditor()));
+    String creator = Utils.getEmailOrText(ch.getWebMasterOrCreator());
+    if(creator != null){
+      elementList.add(factory.createCreator(creator));
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createDate(CommonUtils.getDateAsISO8601String(ch.getPubDate())));
+      elementList.add(factory.createDate(ch.getPubDate()));
     }
+    
 //  not supported
     if(ch.getSkipDays() != null){
       LOG.info("Channel.SkipDays is not supported in Rss 1.0 feed. It will be ignored.");
@@ -167,11 +169,7 @@ class Rss10MappingUtils {
       LOG.info("Channel.SkipHours is not supported in Rss 1.0 feed. It will be ignored.");
     }
 
-    if(ch.getTitle() != null){
-      elementList.add(factory.createTRss10ChannelTitle(ch.getTitle()));
-    }
 
-    
     if(ch.getTtl() != null){
       int ttl = ch.getTtl().intValue();
       UpdatePeriodEnum updatedPeriod = UpdatePeriodEnum.DAILY;
@@ -196,8 +194,23 @@ class Rss10MappingUtils {
       elementList.add(factory.createUpdateFrequency(new BigInteger(String.valueOf(frequency))));
     }
 
-    if(ch.getWebMaster() != null){
-      elementList.add(factory.createPublisher(ch.getWebMaster()));
+    String publisher = Utils.getEmailOrText(ch.getManagingEditorOrAuthorOrPublisher());
+    if(publisher != null){
+      elementList.add(factory.createPublisher(publisher));
+    } 
+    
+    String contributor = Utils.getEmailOrText(ch.getContributors());
+    if(contributor != null){
+      elementList.add(factory.createContributor(contributor));
+    }
+    
+    ret.setAbout(ch.getAbout());
+    ret.setResource(ch.getResource());
+    if(ch.getOtherElements() != null){
+      elementList.addAll(ch.getOtherElements());
+    }
+    if(ch.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
     return factory.createChannel(ret);
   }

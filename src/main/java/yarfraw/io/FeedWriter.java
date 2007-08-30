@@ -13,7 +13,7 @@ import javax.xml.bind.ValidationEventHandler;
 
 import org.apache.commons.io.IOUtils;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.ObjectFactory;
@@ -62,7 +62,7 @@ public class FeedWriter extends AbstractBaseIO{
    * 
    * @throws YarfrawException if write operation failed.
    */
-  public void writeChannel(Channel channel) throws YarfrawException{
+  public void writeChannel(ChannelFeed channel) throws YarfrawException{
     writeChannel(channel, null);
   }
   
@@ -71,7 +71,7 @@ public class FeedWriter extends AbstractBaseIO{
    * 
    * @throws YarfrawException if write operation failed.
    */
-  public static void writeChannel(FeedFormat format, Channel channel, OutputStream outputStream) throws YarfrawException{
+  public static void writeChannel(FeedFormat format, ChannelFeed channel, OutputStream outputStream) throws YarfrawException{
     if(format == null || channel == null ||outputStream==null){
       throw new YarfrawException("format, channel, or outputStream is null");
     }
@@ -88,7 +88,7 @@ public class FeedWriter extends AbstractBaseIO{
    * 
    * @throws YarfrawException if write operation failed.
    */
-  public void writeChannel(Channel channel, ValidationEventHandler validationEventHandler) throws YarfrawException{
+  public void writeChannel(ChannelFeed channel, ValidationEventHandler validationEventHandler) throws YarfrawException{
     FileOutputStream out = null;
     try {
       Marshaller m = getMarshaller(_format);
@@ -105,7 +105,7 @@ public class FeedWriter extends AbstractBaseIO{
     }
   }
   
-  private static Object getJaxbElementFromFormat(FeedFormat format, Channel channel) throws YarfrawException{
+  private static Object getJaxbElementFromFormat(FeedFormat format, ChannelFeed channel) throws YarfrawException{
     if(format == FeedFormat.RSS20){
       TRss rss = RSS20_FACTORY.createTRss();
       rss.setVersion(2.0d);

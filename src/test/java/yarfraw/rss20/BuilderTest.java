@@ -19,14 +19,14 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Guid;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.Source;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.core.datamodel.ValidationException;
@@ -73,8 +73,8 @@ public class BuilderTest{
   private static final String TEST_TITLE = "Test Title";
 
 
-  public static Channel buildChannel() throws MalformedURLException, URISyntaxException{
-      Channel channel = new Channel().setTitle(TEST_TITLE)
+  public static ChannelFeed buildChannel() throws MalformedURLException, URISyntaxException{
+      ChannelFeed channel = new ChannelFeed().setTitle(TEST_TITLE)
       .setLink("    "+HTTP_WWW_TEST_COM)
       .setDescription(DESCRIPTION)
       .setCopyright(COPYRIGHT_2002_SPARTANBURG_HERALD_JOURNAL)
@@ -94,7 +94,7 @@ public class BuilderTest{
       .addSkipDay(Day.Saturday, Day.Sunday)
       .addSkipHour(12, 0, 1, 2, 3, 4, 5)
       
-      .additem(new Item().setTitle(ITEM_1)
+      .additem(new ItemEntry().setTitle(ITEM_1)
                          .setLink("    "+HTTP_SOMELINK_COM)
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
@@ -103,7 +103,7 @@ public class BuilderTest{
                          .setComments("    "+HTTP_WWW_MYBLOG_ORG_CGI_LOCAL_MT_MT_COMMENTS_CGI_ENTRY_ID_290)
                          .setGuid(new Guid(GUID))
                          .setSource(new Source("http://someurl", "a string of source")),
-               new Item().setTitle(ITEM2)
+               new ItemEntry().setTitle(ITEM2)
                          .setLink(HTTP_SOMELINK_COM)
                          .setDescription(DESC)
                          .setAuthor(OPRAH_OXYGEN_NET)
@@ -122,7 +122,7 @@ public class BuilderTest{
 
   @Test
   public void testBuild() throws Exception{
-    Channel c = buildChannel();
+    ChannelFeed c = buildChannel();
     assertEquals(c.getTitle(), TEST_TITLE);
     assertTrue("Category did not build correctly", 
             c.getCategory().containsAll(Arrays.asList(new CategorySubject(CAT1), new CategorySubject(CAT2))));
@@ -149,7 +149,7 @@ public class BuilderTest{
     assertEquals(c.getTtl(), new Integer(_60));
     assertEquals(c.getWebMaster(), BETTY_HERALD_COM_BETTY_GUERNSEY);
     assertEquals(2, c.getItems().size());
-    Item item = c.getItems().get(0);
+    ItemEntry item = c.getItems().get(0);
     assertEquals(ITEM_1, item.getTitle());
     assertEquals(DESC, item.getDescription());
     assertEquals(OPRAH_OXYGEN_NET, item.getAuthor());
@@ -161,7 +161,7 @@ public class BuilderTest{
   }  
   @Test
   public void testValidation() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
+    ChannelFeed c = buildChannel();
     c.setItems(null);
     try {
       c.validate(FeedFormat.RSS20);
@@ -173,7 +173,7 @@ public class BuilderTest{
   
   @Test
   public void testValidation2() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
+    ChannelFeed c = buildChannel();
     c.setLink((String)null);
     try {
       c.validate(FeedFormat.RSS20);
@@ -184,7 +184,7 @@ public class BuilderTest{
   }
   @Test
   public void testValidation3() throws MalformedURLException, URISyntaxException{
-    Channel c = buildChannel();
+    ChannelFeed c = buildChannel();
     c.setLink((String)null);
     try {
       c.validate(FeedFormat.RSS20);
@@ -196,7 +196,7 @@ public class BuilderTest{
     
   @Test
   public void testOtherElements() throws Exception {
-    Channel c = buildChannel();
+    ChannelFeed c = buildChannel();
     
     c.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
     c.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
@@ -207,7 +207,7 @@ public class BuilderTest{
     Document doc = factory.newDocumentBuilder().newDocument();
     c.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
     
-    Item item = new Item().setTitle("title")
+    ItemEntry item = new ItemEntry().setTitle("title")
                           .setDescription("desc")
                           .setLink("http://my.company.com");
     item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");

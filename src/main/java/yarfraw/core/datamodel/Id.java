@@ -1,6 +1,7 @@
 package yarfraw.core.datamodel;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -14,7 +15,7 @@ import yarfraw.utils.CommonUtils;
  * <p/>
  * Rss 2.0 description:
  * <br/>
- * {@link Guid} is an optional sub-element of {@link Item}.<br/>
+ * {@link Guid} is an optional sub-element of {@link ItemEntry}.<br/>
  * guid stands for globally unique identifier. It's a string that uniquely identifies the item. When present, an aggregator may choose to use this string to determine if an item is new.
  * &lt;guid>http://some.server.com/weblogItem3207&lt;/guid>
  * <p/>
@@ -23,7 +24,7 @@ import yarfraw.utils.CommonUtils;
  * If the guid element has an attribute named "isPermaLink" with a value of true, 
  * the reader may assume that it is a permalink to the item, that is, 
  * a url that can be opened in a Web browser, that points to the full item described by the 
- * {@link Item} element.
+ * {@link ItemEntry} element.
  * <br/> 
  * An example:
  * &lt;guid isPermaLink="true">http://inessential.com/2002/09/01.php#a2&lt;/guid>
@@ -51,14 +52,14 @@ public class Id extends AbstractBaseObject{
   }
   
   /**
-   * @return A value that uniquely identify a {@link Channel} or a {@link Item}. 
+   * @return A value that uniquely identify a {@link ChannelFeed} or a {@link ItemEntry}. 
    */
   public String getIdValue() {
     return _idValue;
   }
 
   /**
-   * @param idValue - A value that uniquely identify a {@link Channel} or a {@link Item}.
+   * @param idValue - A value that uniquely identify a {@link ChannelFeed} or a {@link ItemEntry}.
    * @return - this
    */
   public Id setIdValue(String idValue) {
@@ -71,7 +72,7 @@ public class Id extends AbstractBaseObject{
    * 
    * @return - If true, the reader may assume that it is a permalink to the item, that is, 
    * a url that can be opened in a Web browser, that points to the full item described by the
-   * {@link Item} element.
+   * {@link ItemEntry} element.
    */
   public Boolean isPermaLink() {
     return _isPermaLink;
@@ -81,7 +82,7 @@ public class Id extends AbstractBaseObject{
    * 
    * @param isPermaLink If true, the reader may assume that it is a permalink to the item, that is, 
    * a url that can be opened in a Web browser, that points to the full item described by the
-   * {@link Item} element.
+   * {@link ItemEntry} element.
    * @return this
    */
   public Id setPermaLink(Boolean isPermaLink) {
@@ -108,6 +109,59 @@ public class Id extends AbstractBaseObject{
     return this;
   }
   
+
+  /**
+   * <b>Atom 1.0 only</b><br/>
+   * Any element defined by this specification MAY have an xml:base attribute 
+   * [W3C.REC-xmlbase-20010627]. When xml:base is used in an Atom Document, 
+   * it serves the function described in section 5.1.1 of [RFC3986], establishing 
+   * the base URI (or IRI) for resolving any relative references found within the 
+   * effective scope of the xml:base attribute.
+   * @param base
+   * @return
+   */
+  public Id setBase(String base) {
+    _base = base;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public Id setLang(String lang) {
+    _lang = lang;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public Id setLang(Locale lang) {
+    _lang = lang.getLanguage();
+    return this;
+  }
   ////////////////////////Common setters///////////////////////
   @Override
   public void validate(FeedFormat format) throws ValidationException {

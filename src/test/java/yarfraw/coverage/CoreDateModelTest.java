@@ -17,10 +17,10 @@ import yarfraw.core.datamodel.AtomAttributes;
 import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Enclosure;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.Source;
 import yarfraw.core.datamodel.Text.TextType;
 
@@ -32,15 +32,15 @@ import yarfraw.core.datamodel.Text.TextType;
 public class CoreDateModelTest extends TestCase{
   @Test
   public void testItem() throws Exception{
-    Item item = Item.create();
+    ItemEntry item = ItemEntry.create();
     item.setCategoryString(new HashSet<String>(Arrays.asList("cat1", "cat2")));
     assertTrue("expect 2 categories", item.getCategory().size()==2);
     assertTrue("expect 2 categories", item.getCategoryString().size()==2 && item.getCategoryString().contains("cat1"));
     
-    item = new Item("title", "www.link.com", "desc", "author", 
+    item = new ItemEntry("title", "www.link.com", "desc", "author", 
             new HashSet<CategorySubject>(Arrays.asList(new CategorySubject("cat"))), "www.comments.com", 
             null, null, new Date(System.currentTimeMillis()), new Source("www.url.com", "source"));
-    item = new Item("title", new URI("www.link.com"), "desc", "author", 
+    item = new ItemEntry("title", new URI("www.link.com"), "desc", "author", 
             new HashSet<CategorySubject>(Arrays.asList(new CategorySubject("cat"))), new URI("www.comments.com"), 
             null, null, new Date(System.currentTimeMillis()), new Source(new URI("www.url.com"), "source"));
     
@@ -67,10 +67,10 @@ public class CoreDateModelTest extends TestCase{
   
   @Test 
   public void testEnclosure() throws Exception{
-    Channel c = Channel.create().additem(new Item().setEnclosure(
+    ChannelFeed c = ChannelFeed.create().additem(new ItemEntry().setEnclosure(
             new Enclosure("http://someurl.com/file", 100, "mineType", "optional value")));
     assertTrue("enclosure is expected",c.getItems().get(0).getEnclosure() != null);
-    c = Channel.create().additem(new Item().setEnclosure(
+    c = ChannelFeed.create().additem(new ItemEntry().setEnclosure(
             new Enclosure(new URI("http://someurl.com/file"), 100, "mineType", "value")));
     assertTrue("enclosure is expected",c.getItems().get(0).getEnclosure() != null);
   }
@@ -104,15 +104,15 @@ public class CoreDateModelTest extends TestCase{
   
   @Test
   public void testChannel() throws Exception{
-    Channel c = Channel.create();
+    ChannelFeed c = ChannelFeed.create();
     assertTrue("no locale", c.getLanguage()!=null);
     assertTrue("no pubDate", c.getPubDate()!=null);
-    c = new Channel("title", "http://link.com", "desc");
+    c = new ChannelFeed("title", "http://link.com", "desc");
     assertTrue("no title", c.getTitle()!=null);
     assertTrue("no link", c.getLink()!=null);
     assertTrue("no description", c.getDescription()!=null);
     
-    c = new Channel("title", new URI("http://link.com"), "desc");
+    c = new ChannelFeed("title", new URI("http://link.com"), "desc");
     assertTrue("no title", c.getTitle()!=null);
     assertTrue("no link", c.getLink()!=null);
     assertTrue("no description", c.getDescription()!=null);

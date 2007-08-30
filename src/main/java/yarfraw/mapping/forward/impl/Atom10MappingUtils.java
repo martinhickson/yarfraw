@@ -13,15 +13,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomId;
+import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Person;
 import yarfraw.core.datamodel.Text;
-import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.atom10.elements.CategoryType;
 import yarfraw.generated.atom10.elements.ContentType;
@@ -33,6 +32,8 @@ import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
+import yarfraw.generated.atom10.elements.UriType;
+import yarfraw.utils.CommonUtils;
 /**
  * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
  * @author jliang
@@ -45,8 +46,8 @@ public class Atom10MappingUtils{
 
   public static LinkType toLink(Link link){
     LinkType ret = FACTORY.createLinkType();
-    ret.setBase(link.getBase() == null?null:link.getBase().toString());
-    ret.setLang(link.getLang() == null?null:link.getLang().getLanguage());
+    ret.setBase(link.getBase());
+    ret.setLang(link.getLang());
     if(link.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(link.getOtherAttributes());
     }
@@ -59,10 +60,133 @@ public class Atom10MappingUtils{
     return ret;
   }
   
-  public  static EntryType toEntry(Item item) throws YarfrawException{
+  public static PersonType toPersonType(Person p){
+    PersonType ret = new PersonType();
+    ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeEmail(p.getEmailOrText()));
+    ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeName(p.getName()));
+    if(p.getUri() != null){
+      UriType uri = FACTORY.createUriType();
+      uri.setValue(p.getUri());
+      ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeUri(uri));
+    }
+    
+    if(p.getOtherElements() != null){
+      ret.getNameOrUriOrEmail().addAll(p.getOtherElements());
+    }
+    if(p.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(p.getOtherAttributes());
+    }
+
+    ret.setBase(p.getBase());
+    ret.setLang(p.getLang());
+    return ret;
+  }
+  
+  /*
+   * atomEntry =
+   element atom:entry {
+      atomCommonAttributes,
+      (atomAuthor*
+       & atomCategory*
+       & atomContent?
+       & atomContributor*
+       & atomId
+       & atomLink*
+       & atomPublished?
+       & atomRights?
+       & atomSource?
+       & atomSummary?
+       & atomTitle
+       & atomUpdated
+       & extensionElement*)
+   }
+   */
+  public  static EntryType toEntry(ItemEntry item) throws YarfrawException{
     EntryType ret = FACTORY.createEntryType();
     List<Object> elementList = ret.getAuthorOrCategoryOrContent();
     ObjectFactory factory = FACTORY;
+    
+    
+    if(item.getAuthorOrCreator() != null){
+      for(Person author : item.getAuthorOrCreator()){
+        elementList.add(factory.createEntryTypeAuthor(toPersonType(author)));
+      }
+    }
+
+    if(item.getCategorySubjects() != null){
+      for(CategorySubject c : item.getCategorySubjects()){
+          if(c != null){
+            elementList.add(factory.createEntryTypeCategory(toCategoryType(c)));
+          }
+        }
+    }
+
+    if(item.getContent() !=  null){
+      elementList.add(factory.createEntryTypeContent(toContent(item.getContent())));
+    }
+    
+    if(item.getContributors() != null){
+      for(Person c : item.getContributors()){
+        elementList.add(factory.createEntryTypeContributor(toPersonType(c)));
+      }
+    }
+    
+    if(item.getUid() != null){
+      elementList.add(factory.createEntryTypeId(toAtomId(item.getUid())));
+    }
+    
+    
+    if(item.getLinks() != null ){
+      for(Link link : item.getLinks()){
+        elementList.add(factory.createEntryTypeLink(toLink(link)));
+      }
+    }
+    
+    //partially supported
+    if(item.getPubDate() != null){
+      DateTimeType date = factory.createDateTimeType();
+      date.setValue(toGCal(CommonUtils.tryParseDate(item.getPubDate())));
+      elementList.add(factory.createEntryTypePublished(date));
+    }
+    
+    if(item.getRights() != null){
+      elementList.add(factory.createEntryTypeRights(
+              Atom10MappingUtils.toTextType(item.getRights())));
+    }
+    
+    //FIXME: atomSource is not supported
+    
+    if(item.getDescriptionOrSummary() != null ){
+      elementList.add(factory.createEntryTypeSummary(
+              toTextType(item.getDescriptionOrSummary())));
+    }
+    
+//    not supported
+    if(item.getComments() != null){
+      LOG.info("Item.Comments field is not supported by Atom 1.0. It will be ignored");      
+    }
+    
+    if(item.getTitle() != null){
+      elementList.add(factory.createEntryTypeTitle(
+              Atom10MappingUtils.toTextType(item.getTitle())));
+    }
+    
+    //partially supported
+    if(item.getUpdatedDate() != null){
+      DateTimeType date = factory.createDateTimeType();
+      date.setValue(toGCal(CommonUtils.tryParseDate(item.getUpdatedDate())));
+      elementList.add(factory.createEntryTypeUpdated(date));
+    }
+    
+//  not supported
+    if(item.getEnclosure() != null){
+      LOG.info("Item.Enclosure field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add enclosure element to item");
+    }
+    
+    if(item.getSource() != null){
+      LOG.info("Item.Source field is not supported by Atom 1.0. It will be ignored");
+    }
+    
     if(item.getOtherElements() != null){
       ret.getAuthorOrCategoryOrContent().addAll(item.getOtherElements());
     }
@@ -70,161 +194,93 @@ public class Atom10MappingUtils{
       ret.getOtherAttributes().putAll(item.getOtherAttributes());
     }
 
-    AtomAttributes attr = item.getAtomAttributes();
-    if(attr != null){
-      ret.setBase(attr.getBase()==null?null:attr.getBase().toString());
-      ret.setLang(attr.getLang() == null? null:attr.getLang().getLanguage());
-      if(attr.getOtherAttributes() != null){
-        ret.getOtherAttributes().putAll(attr.getOtherAttributes());
-      }
+    ret.setBase(item.getBase());
+    ret.setLang(item.getLang());
+          
+    if(item.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(item.getOtherAttributes());
     }
-    
-    if(item.getAtomId() != null){
-      elementList.add(factory.createEntryTypeId(toAtomId(item.getAtomId())));
-    }
-    
-    if(item.getAuthor() != null){
-      PersonType person = factory.createPersonType();
-      person.getNameOrUriOrEmail().add(factory.createPersonTypeEmail(item.getAuthor()));
-      elementList.add(factory.createEntryTypeAuthor(person));
-    }
-
-    if(item.getCategory() != null){
-      for(CategorySubject c : item.getCategory()){
-          if(c != null){
-            elementList.add(factory.createEntryTypeCategory(toCategoryType(c)));
-          }
-        }
-    }
-//    not supported
-    if(item.getComments() != null){
-      LOG.info("Item.Comments field is not supported by Atom 1.0. It will be ignored");      
-    }
-    if(item.getDescription() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.summary) != null){
-      elementList.add(factory.createEntryTypeSummary(
-              Atom10MappingUtils.toTextType(
-                      item.getAtomTextAttributeByElement(AtomTextElementEnum.summary),
-              item.getDescription())));
-    }
-    
-    if(item.getRights() != null || item.getAtomTextAttributeByElement(AtomTextElementEnum.rights) != null){
-      elementList.add(factory.createEntryTypeRights(
-              Atom10MappingUtils.toTextType(
-                      item.getAtomTextAttributeByElement(AtomTextElementEnum.rights),
-              item.getRights())));
-    }
-//  not supported
-    if(item.getEnclosure() != null){
-      LOG.info("Item.Enclosure field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add enclosure element to item");
-    }
-//  not supported
-    if(item.getGuid() != null){
-      LOG.info("Item.Guid field is not supported by Atom 1.0. It will be ignored. Use Item.AtomId to add unique id to item");
-    }
-    
-    //ignore, use atom link
-    if(item.getLink() != null ){
-      LOG.info("Item.Link field is not supported by Atom 1.0. It will be ignored. Use Item.AtomLink to add link elements to item");
-    }
-
-    for(Link atomLink : item.getAtomLinks()){
-      elementList.add(factory.createLink(toLink(atomLink)));
-    }
-    
-    //partially supported
-    if(item.getPubDate() != null){
-      DateTimeType date = factory.createDateTimeType();
-      date.setValue(toGCal(item.getPubDate()));
-      elementList.add(factory.createEntryTypePublished(date));
-    }
-//not supported
-    if(item.getSource() != null){
-      LOG.info("Item.Source field is not supported by Atom 1.0. It will be ignored");
-    }
-    
-    if(item.getTitle() != null  || item.getAtomTextAttributeByElement(AtomTextElementEnum.title) != null){
-      elementList.add(factory.createEntryTypeTitle(
-              Atom10MappingUtils.toTextType(
-                      item.getAtomTextAttributeByElement(AtomTextElementEnum.title),
-              item.getTitle())));
-    }
-
-    if(item.getContent() !=  null){
-      elementList.add(factory.createEntryTypeContent(toContent(item.getContent())));
-    }
-    
     return ret;
   }
   
-  public static ContentType toContent(Content content){
+  public static ContentType toContent(Content in){
     ContentType ret = FACTORY.createContentType();
-    ret.setBase(content.getBase() == null?null:content.getBase().toString());
-    ret.setLang(content.getLang() == null?null:content.getLang().getLanguage());
-    if(content.getOtherAttributes() != null){
-      ret.getOtherAttributes().putAll(content.getOtherAttributes());
+    ret.setSrc(in.getSrc());
+    ret.getContent().addAll(in.getContentText());
+    
+    if(in.getOtherElements() != null){
+      ret.getContent().addAll(in.getOtherElements());
     }
-    ret.setSrc(content.getSrc() == null? null: content.getSrc().toString());
-    ret.getContent().addAll(content.getOtherElements());
-    ret.getContent().addAll(content.getContentText());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    }
+
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
     return ret;
   }
   
-  public static IdType toAtomId(AtomId atomId){
+  public static IdType toAtomId(Id in){
     IdType ret = FACTORY.createIdType();
-    ret.setBase(atomId.getBase() == null?null:atomId.getBase().toString());
-    ret.setLang(atomId.getLang() == null?null:atomId.getLang().getLanguage());
-    if(atomId.getOtherAttributes() != null){
-      ret.getOtherAttributes().putAll(atomId.getOtherAttributes());
+    ret.setValue(in.getIdValue());
+    
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
-    ret.setValue(atomId.getAtomUri());
+
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
     return ret;
   }
   
-  public static CategoryType toCategoryType(CategorySubject cat){
+  public static CategoryType toCategoryType(CategorySubject in){
     CategoryType ret = FACTORY.createCategoryType();
-    ret.setTerm(cat.getCategoryOrSubjectOrTerm());
-    ret.setScheme(cat.getDomainOrScheme());
-    AtomAttributes attr = cat.getAtomAttributes();
-    if(attr != null){
-      ret.setBase(attr.getBase()==null?null:attr.getBase().toString());
-      ret.setLang(attr.getLang() == null? null:attr.getLang().getLanguage());
-      if(attr.getOtherAttributes() != null){
-        ret.getOtherAttributes().putAll(attr.getOtherAttributes());
-      }
+    ret.setTerm(in.getCategoryOrSubjectOrTerm());
+    ret.setScheme(in.getDomainOrScheme());
+    ret.setLabel(in.getLabel());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
     
     return ret;
   }
   
-  public static TextType toTextType(Text attr, String content){
-    TextType text = FACTORY.createTextType();
-    if(attr != null){
-      text.setBase(attr.getBase() == null?null:attr.getBase().toString());
-      text.setLang(attr.getLang() == null?null:attr.getLang().getLanguage());
-      text.setType(attr.getType() == null?null:attr.getType().name());
-      if(attr.getXhtmlDiv() != null){
-        text.getContent().add(attr.getXhtmlDiv());
-      }
+  public static TextType toTextType(Text in){
+    TextType ret = FACTORY.createTextType();
+    
+    if(in.getType() != null){
+      ret.setType(in.getType().toString());
     }
-    if(content != null){
-      text.getContent().add(content);
+    if(in.getText() != null){
+      ret.getContent().add(in.getText());
+    }
+    if(in.getXhtmlDiv() != null){
+      ret.getContent().add(in.getXhtmlDiv());
+    }
+    if(in.getOtherElements() != null){
+      ret.getContent().addAll(in.getOtherElements());
+    }
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
 
-    return text;
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
+    
+    return ret;
   }
 
-  public static IconType toIcon(Image image) {
-    IconType icon = FACTORY.createIconType();
-    icon.setValue(image.getUrl() == null?null: image.getUrl().toString());
-    AtomAttributes attr = image.getAtomAttributes();
-    if(attr != null){
-      icon.setBase(attr.getBase()==null?null:attr.getBase().toString());
-      icon.setLang(attr.getLang() == null? null:attr.getLang().getLanguage());
-      if(attr.getOtherAttributes() != null){
-        icon.getOtherAttributes().putAll(attr.getOtherAttributes());
-      }
+  public static IconType toIcon(Image in) {
+    IconType ret = FACTORY.createIconType();
+    ret.setValue(in.getUrl());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
-    return icon;
+
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
+    
+    return ret;
   }
   
   public static XMLGregorianCalendar toGCal(Date date) throws YarfrawException{

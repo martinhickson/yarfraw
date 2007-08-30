@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.io.FeedWriter;
 import yarfraw.mapping.backward.ToChannelRss20;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
@@ -24,10 +24,10 @@ public class MappingTest extends TestCase{
   @Test
   public void testMapping() throws Exception{
     
-    Channel c = BuilderTest.buildChannel();
+    ChannelFeed c = BuilderTest.buildChannel();
     
     ToChannelRss20 mapper = ToChannelRss20Impl.getInstance();
-    Channel c2 =  mapper.execute(ToRss20ChannelImpl.getInstance().execute(c).getValue());
+    ChannelFeed c2 =  mapper.execute(ToRss20ChannelImpl.getInstance().execute(c).getValue());
 
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
     assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));

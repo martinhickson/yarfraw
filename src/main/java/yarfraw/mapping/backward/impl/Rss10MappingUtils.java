@@ -1,4 +1,5 @@
 package yarfraw.mapping.backward.impl;
+import static yarfraw.io.parser.ElementQName.RSS10_CONTRIBUTOR;
 import static yarfraw.io.parser.ElementQName.RSS10_CREATOR;
 import static yarfraw.io.parser.ElementQName.RSS10_DATE;
 import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
@@ -13,13 +14,11 @@ import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
 import static yarfraw.utils.CommonUtils.same;
 
 import java.math.BigInteger;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
@@ -29,10 +28,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
-import yarfraw.core.datamodel.RdfAttributes;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.TextInput;
 import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
@@ -56,16 +54,18 @@ class Rss10MappingUtils{
   }
   
   @SuppressWarnings("unchecked")
-  public static Channel toChannel(TRss10Channel ch, RDF rdf){
-    Channel ret = new Channel();
+  public static ChannelFeed toChannel(TRss10Channel ch, RDF rdf){
+    ChannelFeed ret = new ChannelFeed();
     if(ch.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
     UpdatePeriodEnum updatePeriod = null;
     BigInteger updateFrequency = null;
     Map<String, Integer> ordering = new HashMap<String, Integer>();
-    List<Item> items = toItems(rdf.getChannelOrItemOrTextinput());
-    
+    List<ItemEntry> items = toItems(rdf.getChannelOrItemOrTextinput());
+    ret.setAbout(ch.getAbout());
+    ret.setResource(ch.getResource());
+    ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     for(Object o : ch.getTitleOrLinkOrDescription()){
       if(o == null)
         continue;
@@ -76,35 +76,37 @@ class Rss10MappingUtils{
         if(same(jaxb.getName(), RSS10_TITLE)){
           ret.setTitle((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
-          ret.setDescription((String)jaxb.getValue());
+          ret.setDescriptionOrSubtitle((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_LINK)){
-          try {
-            ret.setLink((String)jaxb.getValue());
-          }
-          catch (URISyntaxException e) {
-            LOG.error("<link> element does not contain a valid URI, it is ignored", e);
-          }
+          ret.addLink((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_UPDATEFREQUENCY)){
           updateFrequency = (BigInteger)jaxb.getValue();
         }else if(same(jaxb.getName(), RSS10_SUBJECT)){
-          ret.addCategory((String)jaxb.getValue());
-          
+          ret.addCategorySubject((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_PUBLISHER)){
-          ret.setWebMaster((String)jaxb.getValue());
+          ret.addManagingEditorOrAuthorOrPublisher((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_CREATOR)){
-          ret.setManagingEditor((String)jaxb.getValue());
+          ret.addWebMasterOrCreator((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_RIGHTS)){
-          ret.setCopyright((String)jaxb.getValue());
+          ret.setRights((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_DATE)){
-          ret.setPubDate(CommonUtils.tryParseDate((String)jaxb.getValue()));
+          ret.setPubDate((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
-          ret.setLanguage(new Locale((String)jaxb.getValue()));
+          ret.setLang((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_CONTRIBUTOR)){
+          ret.addContributor((String)jaxb.getValue());
         }else if(val instanceof UpdatePeriodEnum){
           updatePeriod = (UpdatePeriodEnum)val;
         }else if(val instanceof TRss10Image){
-          ret.setImage(toImage((TRss10Image)val));
+          //this only put resources
+          Image image = new Image();
+          image.setResource(((TRss10Image)val).getResource());
+          ret.setImageOrIcon(image);
         }else if(val instanceof TRss10TextInput){
-          ret.setTextInput(toTextInput((TRss10TextInput)val));
+          //this only put resources
+          TextInput in = new TextInput();
+          in.setResource(((TRss10TextInput)val).getResource());
+          ret.setTexInput(in);
         }else if(same(jaxb.getName(), RSS10_UPDATEBASE)){
           LOG.info("<updateBase> element is ignored.");
         }else if(val instanceof Items){
@@ -132,54 +134,44 @@ class Rss10MappingUtils{
     return ret;
   }
   
-  private static class ItemComparacotr implements Comparator<Item>{
+  private static class ItemComparacotr implements Comparator<ItemEntry>{
     Map<String, Integer> _ordering = null;
     public ItemComparacotr(Map<String, Integer> ordering){
       _ordering = ordering;
     }
-    public int compare(Item o1, Item o2) {
-      Integer ord1 = _ordering.get(o1.getRdfAttributes().getAbout());
-      Integer ord2 = _ordering.get(o2.getRdfAttributes().getAbout());
+    public int compare(ItemEntry o1, ItemEntry o2) {
+      Integer ord1 = _ordering.get(o1.getAbout());
+      Integer ord2 = _ordering.get(o2.getAbout());
       return (ord1 != null && ord2 != null) ? ord1.compareTo(ord2) : 0;
     }
   }
   
   @SuppressWarnings("unchecked")
-  private static List<Item> toItems(List<Object> objs){
-    List<Item> items = new ArrayList<Item>();
+  private static List<ItemEntry> toItems(List<Object> objs){
+    List<ItemEntry> items = new ArrayList<ItemEntry>();
     for(Object o : objs){
       if (o instanceof JAXBElement) {
         Object value = ((JAXBElement)o).getValue();
         if(value instanceof TRss10Item){
           TRss10Item it = (TRss10Item)value;
-          Item item = new Item();
+          ItemEntry item = new ItemEntry();
           for(Object io : it.getTitleOrDescriptionOrLink()){
             if (io instanceof JAXBElement) {
               JAXBElement jaxb = (JAXBElement) io;
               if(same(jaxb.getName(), RSS10_TITLE)){
                 item.setTitle((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
-                item.setDescription((String)jaxb.getValue());
+                item.setDescriptionOrSummary((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_LINK)){
-                try {
-                  item.setLink((String)jaxb.getValue());
-                }
-                catch (URISyntaxException e) {
-                  LOG.error("invalid <link> element, it is ignored. ", e);
-                }
+                item.addLink((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_CREATOR)){
-                item.setAuthor((String)jaxb.getValue());
+                item.addAuthorOrCreator((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_RIGHTS)){
                 item.setRights((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_DATE)){
-                try {
-                  item.setPubDate(CommonUtils.tryParseISODate((String)jaxb.getValue()));
-                }
-                catch (Exception e) {
-                  LOG.error("Unable to parse date: "+(String)jaxb.getValue(), e);
-                }
+                item.setPubDate((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_SUBJECT)){
-                item.addCategory((String)jaxb.getValue());
+                item.addCategorySubject((String)jaxb.getValue());
               }else if (o instanceof Element) {
                 Element e = (Element) o;
                 if(ENCODED.equals(e.getLocalName())){
@@ -189,14 +181,11 @@ class Rss10MappingUtils{
               }
             }
           }
-          try {
-            item.setRdfAttributes(new RdfAttributes(it.getResource() == null ? 
-                    item.getLink().toString() : it.getResource(), 
-                it.getAbout()));
+          
+          if(it.getResource() == null){
+            it.setResource(Utils.getHrefLink(item.getLinks()));
           }
-          catch (URISyntaxException e) {
-            LOG.error("invalid resource attribute, it is ignored. ", e);
-          }
+          
           items.add(item);
         }
       }
@@ -204,51 +193,35 @@ class Rss10MappingUtils{
     return items;
   }
   
-  public static TextInput toTextInput(TRss10TextInput input){
-    TextInput ret = new TextInput();
+  /**
+   * Copies everything except 'resource' over to <code>ret</code>.
+   * @param ret
+   * @param input
+   * @return
+   */
+  public static TextInput populateTextinput(TextInput ret, TRss10TextInput input){
     ret.setDescription(input.getDescription());
-    try {
-      ret.setLink(input.getLink());
-    }
-    catch (URISyntaxException e) {
-      LOG.error("invalid URI, it is ignored", e);
-    }
+    ret.setLink(input.getLink());
     ret.setTitle(input.getTitle());
     ret.setName(input.getName());
-    if(input.getAbout() != null || input.getResource() != null){
-      try {
-        ret.setRdfAttributes(new RdfAttributes(input.getResource(), input.getAbout()));
-      }
-      catch (URISyntaxException e) {
-        LOG.error("invalid URI, it is ignored", e);
-      }
-    }
+    
+    ret.setAbout(input.getAbout());
+    
     return ret;
   }
   
-  private static Image toImage(TRss10Image img){
-    Image ret = new Image();
-    try {
-      ret.setLink(img.getLink());
-    }
-    catch (URISyntaxException e) {
-      LOG.error("<link> element does not contain a valid URI, it is ignored", e);
-    }
+  /**
+   * Copies everything except 'resource' over to <code>ret</code>.
+   * @param ret
+   * @param img
+   * @return
+   */
+  public static Image populateImage(Image ret, TRss10Image img){
+    ret.setLink(img.getLink());
     ret.setTitle(img.getTitle());
-    try {
-      ret.setUrl(img.getUrl());
-    }
-    catch (URISyntaxException e) {
-      LOG.error("<url> element does not contain a valid URI, it is ignored", e);
-    }
-    if(img.getAbout() != null || img.getResource() != null){
-      try {
-        ret.setRdfAttributes(new RdfAttributes(img.getResource(), img.getAbout()));
-      }
-      catch (URISyntaxException e) {
-        LOG.error("invalid URI, it is ignored", e);
-      }
-    }
+    ret.setUrl(img.getUrl());
+    ret.setAbout(img.getAbout());
+    
     return ret;
   }
 }

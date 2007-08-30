@@ -6,31 +6,36 @@ import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toEntry;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toGCal;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toIcon;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toLink;
+import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toPersonType;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toTextType;
 
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
-import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.Link;
-import yarfraw.core.datamodel.AtomTextElementEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.Generator;
+import yarfraw.core.datamodel.ItemEntry;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Person;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.atom10.elements.DateTimeType;
 import yarfraw.generated.atom10.elements.FeedType;
 import yarfraw.generated.atom10.elements.GeneratorType;
 import yarfraw.generated.atom10.elements.ObjectFactory;
-import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.mapping.forward.ToAtom10Channel;
+import yarfraw.utils.CommonUtils;
 /**
  * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
  * @author jliang
  *
  */
 public class ToAtom10ChannelImpl implements ToAtom10Channel{
+  private static final Log LOG = LogFactory.getLog(ToAtom10ChannelImpl.class);
   private static ToAtom10Channel _instance = new ToAtom10ChannelImpl();
   private static final ObjectFactory FACTORY = new ObjectFactory();
 
@@ -39,146 +44,130 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
   }
   private ToAtom10ChannelImpl(){}
   
-  public JAXBElement<FeedType> execute(Channel ch) throws YarfrawException {
+  /**
+   * atomEntry =
+   element atom:entry {
+      atomCommonAttributes,
+      (atomAuthor*
+       & atomCategory*
+       & atomContent?
+       & atomContributor*
+       & atomId
+       & atomLink*
+       & atomPublished?
+       & atomRights?
+       & atomSource?
+       & atomSummary?
+       & atomTitle
+       & atomUpdated
+       & extensionElement*)
+   }
+   */
+  public JAXBElement<FeedType> execute(ChannelFeed ch) throws YarfrawException {
     ObjectFactory factory = FACTORY;
     FeedType ret = factory.createFeedType();
     List<Object> elementList = ret.getAuthorOrCategoryOrContributor();
+    
+    if(ch.getUid() != null){
+      elementList.add(factory.createEntryTypeId(toAtomId(ch.getUid())));
+    }
+    
+    if(ch.getManagingEditorOrAuthorOrPublisher() != null){
+      for(Person author : ch.getManagingEditorOrAuthorOrPublisher()){
+        elementList.add(factory.createFeedTypeAuthor(toPersonType(author)));
+      }
+    }
+    
+
+    if(ch.getCategorySubjects() != null){
+      for(CategorySubject c : ch.getCategorySubjects()){
+          if(c != null){
+            elementList.add(factory.createFeedTypeCategory(toCategoryType(c)));
+          }
+        }
+    }
+    
+    if(ch.getContributors() != null){
+      for(Person c : ch.getContributors()){
+        elementList.add(factory.createFeedTypeContributor(toPersonType(c)));
+      }
+    }
+    
+    if(ch.getGenerator() != null){
+      GeneratorType g = factory.createGeneratorType();
+      Generator in = ch.getGenerator();
+      g.setUri(in.getUri());
+      g.setValue(in.getValue());
+      g.setVersion(in.getVersion());
+      
+      if(in.getOtherAttributes() != null){
+        g.getOtherAttributes().putAll(in.getOtherAttributes());
+      }
+
+      g.setBase(in.getBase());
+      g.setLang(in.getLang());
+      elementList.add(factory.createFeedTypeGenerator(g));
+    }
+    
+    if(ch.getImageOrIcon() != null){
+      elementList.add(factory.createFeedTypeIcon(toIcon(ch.getImageOrIcon())));
+    }
+    
+    if(ch.getUid() != null){
+      elementList.add(factory.createFeedTypeId(toAtomId(ch.getUid())));
+    }
+    
+    if(ch.getLinks() != null ){
+      for(Link link : ch.getLinks()){
+        elementList.add(factory.createFeedTypeLink(toLink(link)));
+      }
+    }
+    
+    if(ch.getLogo() != null){
+      elementList.add(factory.createFeedTypeIcon(toIcon(ch.getLogo())));
+    }
+    
+    if(ch.getRights() != null){
+      elementList.add(factory.createFeedTypeRights(
+              toTextType(ch.getRights())));
+    }
+    
+    if(ch.getDescriptionOrSubtitle() != null){
+      elementList.add(factory.createFeedTypeSubtitle(
+              toTextType(ch.getDescriptionOrSubtitle())));
+    }
+    
+    if(ch.getTitle() != null){
+      elementList.add(factory.createFeedTypeTitle(
+              toTextType(ch.getTitle())));
+    }
+    
+    if(ch.getLastBuildOrUpdatedDate() != null){
+      DateTimeType date = factory.createDateTimeType();
+      date.setValue(toGCal(CommonUtils.tryParseDate(ch.getLastBuildOrUpdatedDate())));
+      elementList.add(factory.createFeedTypeUpdated(date));
+    }
+    
+    //partially supported
+    if(ch.getPubDate() != null){
+      LOG.info("PubDate under <feed> level is not supported, it will be ignored");
+    }
+    
+    if(ch.getItems() != null){
+      for(ItemEntry item : ch.getItems()){
+        elementList.add(factory.createFeedTypeEntry(toEntry(item)));
+      }
+    }
+
+    ret.setBase(ch.getBase());
+    ret.setLang(ch.getLang());
+    
     if(ch.getOtherElements() != null){
       elementList.addAll(ch.getOtherElements());
     }
     if(ch.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
-
-    if(ch.getAtomId() != null){
-      elementList.add(factory.createEntryTypeId(toAtomId(ch.getAtomId())));
-    }
-    
-    AtomAttributes attr = ch.getAtomAttributes();
-    if(attr != null){
-      ret.setBase(attr.getBase()==null?null: attr.getBase());
-      ret.setLang(attr.getLang() == null? null:attr.getLang().getLanguage());
-      if(attr.getOtherAttributes() != null){
-        ret.getOtherAttributes().putAll(attr.getOtherAttributes());
-      }
-    }
-    
-    if(ch.getCategory() != null){
-      for(CategorySubject c : ch.getCategory()){
-        if(c != null){
-          elementList.add(factory.createFeedTypeCategory(toCategoryType(c)));
-        }
-      }
-    }
-    
-    //NOT SUPPORTED
-//  if(ch.getCloud() != null){
-//    elementList.add(Rss20MappingUtils.toRss20Cloud(ch.getCloud()));
-//  }
-  
-    if(ch.getCopyright() != null || ch.getAtomTextAttributeByElement(AtomTextElementEnum.rights) != null){
-      elementList.add(factory.createFeedTypeRights(
-              toTextType(
-                      ch.getAtomTextAttributeByElement(AtomTextElementEnum.rights),
-              ch.getCopyright())));
-    }
-    
-    if(ch.getDescription() != null  || ch.getAtomTextAttributeByElement(AtomTextElementEnum.subtitle) != null){
-      elementList.add(factory.createFeedTypeSubtitle(
-              toTextType(
-                      ch.getAtomTextAttributeByElement(AtomTextElementEnum.subtitle),
-              ch.getDescription())));
-    }
-
-    //NOT SUPPORTED
-//      if(ch.getDocs() != null){
-//        elementList.add(factory.createTRssChannelDocs(ch.getDocs().toString()));
-//      }
-    //Partially SUPPORTED
-    if(ch.getGenerator() != null ){
-      GeneratorType gen = factory.createGeneratorType();
-      gen.setValue(ch.getGenerator());
-      elementList.add(factory.createFeedTypeGenerator(gen));
-    }
-
-    if(ch.getImage() != null){
-      elementList.add(factory.createFeedTypeIcon(toIcon(ch.getImage())));
-    }
-
-    //already cover by atom attribute
-    if(ch.getLanguage() != null){ //this will override it
-      ret.setLang(ch.getLanguage().getLanguage());
-    }
-
-    //ignore link, use atom link list
-//    if(ch.getLink() != null){
-//      LinkType link = factory.createLinkType();
-//      link.setHref(ch.getLink().toString());
-//      elementList.add(factory.createFeedTypeLink(link));
-//    }
-    for(Link atomLink : ch.getAtomLinks()){
-      elementList.add(factory.createLink(toLink(atomLink)));
-    }
-    
-    //not supported
-    
-//  if(ch.getLastBuildDate() != null){
-//    elementList.add(factory.createDate(format.format(ch.getLastBuildDate())));
-//  }
-  
-    //partially supported
-    if(ch.getManagingEditor() != null){
-      PersonType person = factory.createPersonType();
-      person.getNameOrUriOrEmail().add(factory.createPersonTypeEmail(ch.getManagingEditor()));
-      elementList.add(factory.createFeedTypeAuthor(person));
-    }
-    
-    //partially supported
-    if(ch.getPubDate() != null){
-      DateTimeType date = factory.createDateTimeType();
-      date.setValue(toGCal(ch.getPubDate()));
-      elementList.add(factory.createFeedTypeUpdated(date));
-    }
-//  not supported
-//  if(ch.getSkipDays() != null){
-//    TSkipDaysList tdl = new TSkipDaysList();
-//    for(Day day : ch.getSkipDays()){
-//      tdl.getDay().add(TSkipDay.fromValue(day.toString()));
-//    }
-//    elementList.add(new ObjectFactory().createSkipDays( tdl));
-//  }
-//
-//  if(ch.getSkipHours() != null){
-//    TSkipHoursList thl = new TSkipHoursList();
-//    thl.getHour().addAll(ch.getSkipHours());
-//    elementList.add(new ObjectFactory().createSkipHours( thl));
-//  }
-//not supported
-//    if(ch.getTexInput() != null){
-//      elementList.add(Rss10MappingUtils.toRss10TextInput(ch.getTexInput()));      
-//    }
-
-    if(ch.getTitle() != null  || ch.getAtomTextAttributeByElement(AtomTextElementEnum.title) != null){
-      elementList.add(factory.createFeedTypeTitle(
-              toTextType(
-                      ch.getAtomTextAttributeByElement(AtomTextElementEnum.title),
-              ch.getTitle())));
-    }
-
-    if(ch.getItems() != null){
-      for(Item item : ch.getItems()){
-        elementList.add(factory.createFeedTypeEntry(toEntry(item)));
-      }
-    }
-    
-    //not supported
-//    if(ch.getTtl() != null){
-//      
-//    }
-//    if(ch.getWebMaster() != null){
-//      
-//    }
-
     return factory.createFeed(ret);
   }
 

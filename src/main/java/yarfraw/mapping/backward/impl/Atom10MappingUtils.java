@@ -1,34 +1,30 @@
 package yarfraw.mapping.backward.impl;
 
 import static yarfraw.io.parser.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.io.parser.ElementQName.ATOM10_CONTRIBUTOR;
 import static yarfraw.io.parser.ElementQName.ATOM10_EMAIL;
+import static yarfraw.io.parser.ElementQName.ATOM10_NAME;
 import static yarfraw.io.parser.ElementQName.ATOM10_PUBLISHED;
 import static yarfraw.io.parser.ElementQName.ATOM10_RIGHTS;
 import static yarfraw.io.parser.ElementQName.ATOM10_SUMMARY;
 import static yarfraw.io.parser.ElementQName.ATOM10_TITLE;
 import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
 
-import java.net.URISyntaxException;
-import java.util.Locale;
-
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.Link;
-import yarfraw.core.datamodel.Text;
-import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Content;
+import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Person;
+import yarfraw.core.datamodel.Text;
 import yarfraw.generated.atom10.elements.CategoryType;
 import yarfraw.generated.atom10.elements.ContentType;
 import yarfraw.generated.atom10.elements.DateTimeType;
@@ -38,6 +34,7 @@ import yarfraw.generated.atom10.elements.IdType;
 import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
+import yarfraw.generated.atom10.elements.UriType;
 import yarfraw.utils.CommonUtils;
 
 /**
@@ -46,131 +43,176 @@ import yarfraw.utils.CommonUtils;
  *
  */
 class Atom10MappingUtils{
-  private static final String XHTML = "xhtml";
+
   private static final Log LOG = LogFactory.getLog(Atom10MappingUtils.class);
-  /**
-   * Use this method with cautions, it checks the type of the input {@link TextType},
-   * and automatically copy all the attributes from to input {@link Text}.
-   * <br /> 
-   * if it's NOT of type xhtml, it assumes that there is only one element under the input  
-   * {@link TextType} and put this single element to the input {@link Text}.
-   * Method returns null in this case.
-   * <br/>
-   * Otherwise (type = text or html), it extracts the content as string and returns it.
-   *  
-   * @param textAttr
-   * @param text
-   * @return null or the content of the input {@link TextType} depending on the type. 
-   * 
-   */
-  public static String extractTextContent(Text textAttr, TextType text){
-    if(text == null){
-      return null;
-    }
-    if(textAttr == null){
-      throw new IllegalArgumentException("textAttr cannot be null");
-    }
-    textAttr.setType(text.getType() == null ? null :
-      yarfraw.core.datamodel.Text.TextType.valueOf(text.getType()));
-    textAttr.setBase(text.getBase());
-    textAttr.setLang(text.getLang() == null ? null : new Locale(text.getLang()));
-    if(text.getOtherAttributes() != null){
-      textAttr.getOtherAttributes().putAll(text.getOtherAttributes());
-    }
-    if(CollectionUtils.isEmpty(text.getContent())){
-      return null;
-    }
-    if(text.getType() == null || !XHTML.equals(text.getType())){
-      return String.valueOf(text.getContent().get(0));
-    }else{
-      if(text.getContent().get(0) instanceof Element){
-        textAttr.setXhtmlDiv((Element)text.getContent().get(0));
+  
+  public static Text toText(TextType in){
+    Text ret = new Text();
+    for(Object o : in.getContent()){
+      if(o == null){
+        continue;
       }
-      return null;
+      if (o instanceof JAXBElement<?>) {
+        JAXBElement<?> jaxb = (JAXBElement<?>) o;
+        Object val = jaxb.getValue();
+        ret.setText(String.valueOf(val));
+      }else if(o instanceof Element){
+        ret.setXhtmlDiv((Element)o);
+      }else{
+        ret.setText(String.valueOf(o));
+      }
     }
+    
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    
+    return ret;
   }
   
-  @SuppressWarnings("unchecked")
-  public static String extractEmail(PersonType person){
-    if(person == null || CollectionUtils.isEmpty(person.getNameOrUriOrEmail())){
-      return null;
-    }
-    for(Object o : person.getNameOrUriOrEmail()){
-      if (o instanceof JAXBElement) {
-        JAXBElement jaxb = (JAXBElement) o;
-        if(CommonUtils.same(ATOM10_EMAIL, jaxb.getName())){
-          return (String)jaxb.getValue();
+  public static CategorySubject toCategorySubject(CategoryType in) {
+    CategorySubject ret = new CategorySubject();
+    ret.setLabel(in.getLabel());
+    ret.setCategoryOrSubjectOrTerm(in.getTerm());
+    ret.setDomainOrScheme(in.getScheme());
+    
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    return ret;
+  }
+  
+  public static Person toPersonType(PersonType in){
+    Person ret = new Person();
+    
+    for(Object o : in.getNameOrUriOrEmail()){
+      if(o == null){
+        continue;
+      }
+      if (o instanceof JAXBElement<?>) {
+        JAXBElement<?> jaxb = (JAXBElement<?>) o;
+        Object val = jaxb.getValue();
+        if(CommonUtils.same(jaxb.getName(), ATOM10_EMAIL)){
+          ret.setEmailOrText((String)val);
+        }else if(CommonUtils.same(jaxb.getName(), ATOM10_NAME)){
+          ret.setName((String)val);
+        }else if(val instanceof UriType){
+          ret.setUri(((UriType)val).getValue());
+        }else{
+          LOG.warn("Unexpected JAXB Element: "+ ToStringBuilder.reflectionToString(val));
         }
+      }else if(o instanceof Element){
+        ret.getOtherElements().add((Element)o);
+      }else{
+        LOG.warn("Unexpected Element: "+ ToStringBuilder.reflectionToString(o));
       }
     }
-    return null;
+    
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    
+    return ret;
   }
   
-  public static Item toItem(EntryType entry){
-    AtomAttributes attr = new Text();
-    attr.setBase(entry.getBase());
-    attr.setLang(entry.getLang() == null ? null : new Locale(entry.getLang()));
-    if(entry.getOtherAttributes() != null){
-      attr.getOtherAttributes().putAll(entry.getOtherAttributes());
+  private static Content toContent(ContentType in){
+    Content ret = new Content();
+    for(Object o : in.getContent()){
+      if(o == null){
+        continue;
+      }
+      if (o instanceof JAXBElement<?>) {
+        JAXBElement<?> jaxb = (JAXBElement<?>) o;
+        Object val = jaxb.getValue();
+        ret.addContentText(String.valueOf(val));
+      }else if(o instanceof Element){
+        ret.getOtherElements().add((Element)o);
+      }else{
+        ret.addContentText(String.valueOf(o));
+      }
     }
-    Item ret = new Item();
-    ret.setAtomAttributes(attr);
-    for(Object o : entry.getAuthorOrCategoryOrContent()){
+    
+    ret.setSrc(in.getSrc());
+    ret.setType(in.getType());
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    return ret;
+  }
+  
+  /**
+   * atomEntry =
+   element atom:entry {
+      atomCommonAttributes,
+      (atomAuthor*
+       & atomCategory*
+       & atomContent?
+       & atomContributor*
+       & atomId
+       & atomLink*
+       & atomPublished?
+       & atomRights?
+       & atomSource?
+       & atomSummary?
+       & atomTitle
+       & atomUpdated
+       & extensionElement*)
+   }
+   * @param in
+   * @return
+   */
+  public static ItemEntry toItem(EntryType in){
+    
+    ItemEntry ret = new ItemEntry();
+
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    
+    for(Object o : in.getAuthorOrCategoryOrContent()){
+      if(o == null){
+        continue;
+      }
       if (o instanceof JAXBElement<?>) {
         JAXBElement<?> jaxb = (JAXBElement<?>) o;
         Object val = jaxb.getValue();
         
         if (CommonUtils.same(jaxb.getName(), ATOM10_AUTHOR)) {
-          ret.setAuthor(extractEmail((PersonType)val));
+          ret.addAuthorOrCreator(toPersonType((PersonType)val));
         }else if(val instanceof CategoryType){
-          ret.addCategory(toCategory((CategoryType)val));
+          ret.addCategorySubject(toCategorySubject((CategoryType)val));
         }else if(val instanceof ContentType){
-          ContentType c = (ContentType)val;
-          Content content = new Content();
-          attr.setBase(c.getBase());
-          attr.setLang(c.getLang() == null ? null : new Locale(c.getLang()));
-          if(c.getOtherAttributes() != null){
-            attr.getOtherAttributes().putAll(c.getOtherAttributes());
-          }
-          for(Object co : c.getContent()){
-            if (co instanceof Element) {
-              content.addOtherElement((Element)co);
-            }else if(co instanceof String){
-              content.addContentText((String)co);
-            }else{
-              LOG.warn("Ignoring unexpected elements: "+ ToStringBuilder.reflectionToString(co));
-            }
-          }
-          content.setSrc(c.getSrc());
-          content.setType(c.getType() == null? null : yarfraw.core.datamodel.Text.TextType.valueOf(c.getType()));
-          ret.setContent(content);
-        }//contributor are ignored
+          ret.setContent(toContent((ContentType)val));
+        }else if(CommonUtils.same(jaxb.getName(), ATOM10_CONTRIBUTOR)){
+          ret.addContributor(toPersonType((PersonType)val));
+        }
+        //contributor are ignored
         else if(val instanceof LinkType){ 
-          ret.addAtomLink(toAtomLink((LinkType)val));
+          ret.addLink(toAtomLink((LinkType)val));
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_PUBLISHED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime(), CommonUtils.LVL5);
           }
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
-          ret.setRights(convenientExtractText(ret, AtomTextElementEnum.rights, text));
-        }//source not supported
+          ret.setRights(toText(text));
+        }//FIXME: source not supported
         else if (CommonUtils.same(jaxb.getName(), ATOM10_SUMMARY)) {
           TextType text = (TextType) val;
-          ret.setDescription(convenientExtractText(ret, AtomTextElementEnum.summary, text));
+          ret.setDescriptionOrSummary(toText(text));
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_TITLE)) {
           TextType text = (TextType) val;
-          ret.setTitle(convenientExtractText(ret, AtomTextElementEnum.title, text));
+          ret.setTitle(toText(text));
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
           //  partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+            ret.setUpdatedDate(dt.getValue().toGregorianCalendar().getTime(), CommonUtils.LVL5);
           }
         }else if(val instanceof IdType){
-          ret.setAtomId(toAtomId((IdType)val));
+          ret.setUid(toId((IdType)val));
         }else{
           LOG.warn("Unexpected JAXB Element: "+ ToStringBuilder.reflectionToString(val));
         }
@@ -187,7 +229,7 @@ class Atom10MappingUtils{
   public static Link toAtomLink(LinkType link){
     Link ret = new Link();
     ret.setBase(link.getBase());
-    ret.setLang(link.getLang() == null ? null : new Locale(link.getLang()));
+    ret.setLang(link.getLang());
     if(link.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(link.getOtherAttributes());
     }
@@ -202,60 +244,27 @@ class Atom10MappingUtils{
     return ret;
   }
   
-  private static String convenientExtractText(Item item, AtomTextElementEnum textEnum, TextType text){
-    Text textAttr = new Text();
-    String ret = extractTextContent(textAttr, text);
-    if(textAttr.getBase() != null || textAttr.getLang() != null || textAttr.getOtherAttributes() != null
-            || textAttr.getXhtmlDiv() != null || textAttr.getType() != null ){
-      item.putAtomTextAttribute(textEnum, textAttr);
+  public static Id toId(IdType in){
+    Id ret = new Id();
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
+    ret.setIdValue(in.getValue());
     return ret;
   }
   
-  private final static QName CAT_LABEL_QNAME = new QName("http://www.w3.org/2005/Atom", "label");
-  public static CategorySubject toCategory(CategoryType cat){
-    AtomAttributes attr = new Text();
-    attr.setBase(cat.getBase());
-    attr.setLang(cat.getLang() == null ? null : new Locale(cat.getLang()));
-    if(cat.getOtherAttributes() != null){
-      attr.getOtherAttributes().putAll(cat.getOtherAttributes());
-    }
-    CategorySubject ret = new CategorySubject();
-    ret.setAtomAttributes(attr);
-    ret.setCategoryOrSubjectOrTerm(cat.getTerm());
-    ret.setDomainOrScheme(cat.getScheme());
-    attr.getOtherAttributes().put(CAT_LABEL_QNAME, cat.getLabel());
-    
-    return ret;
-  }
-  public static AtomId toAtomId(IdType id){
-    AtomId ret = new AtomId();
-    ret.setBase(id.getBase());
-    ret.setLang(id.getLang() == null ? null : new Locale(id.getLang()));
-    if(id.getOtherAttributes() != null){
-      ret.getOtherAttributes().putAll(id.getOtherAttributes());
-    }
-    ret.setAtomUri(id.getValue());
-    return ret;
-  }
-  public static Image toImage(IconType icon){
-    Image image = new Image();
-    AtomAttributes attr = new Text();
-    attr.setBase(icon.getBase());
-    attr.setLang(icon.getLang() == null ? null : new Locale(icon.getLang()));
-    if(icon.getOtherAttributes() != null){
-      attr.getOtherAttributes().putAll(icon.getOtherAttributes());
-    }
-    image.setAtomAttributes(attr);
-    try {
-      image.setUrl(icon.getValue());
-    }
-    catch (URISyntaxException e) {
-      //it's not required to be a valid link, but generally it should be
-      LOG.warn("Link attribute is invalid, it is ignored");
+  public static Image toImage(IconType in){
+    Image ret= new Image();
+    ret.setUrl(in.getValue());
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
     }
     
-    return image;
+    return ret;
   }
 
 }

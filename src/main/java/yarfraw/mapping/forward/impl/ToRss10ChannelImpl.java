@@ -2,8 +2,8 @@ package yarfraw.mapping.forward.impl;
 
 import java.util.List;
 
-import yarfraw.core.datamodel.Channel;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.RDF;
@@ -22,21 +22,30 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
   }
   private ToRss10ChannelImpl(){}
   
-  public RDF execute(Channel ch)
+  /**
+   * Model: (channel, image?, item+, textinput?)
+   */
+  public RDF execute(ChannelFeed ch)
       throws YarfrawException {
     RDF rdf = FACTORY.createRDF();
     List<Object> elementList = rdf.getChannelOrItemOrTextinput();
     elementList.add(Rss10MappingUtils.toChannel(ch));
-    if(ch.getTexInput() != null){
-      elementList.add(Rss10MappingUtils.toRss10TextInput(ch.getTexInput()));
+    if(ch.getImageOrIcon() != null){
+      elementList.add(Rss10MappingUtils.toRss10Image(ch.getImageOrIcon()));
     }
+        
     if(ch.getItems() != null){
-      for(Item item : ch.getItems()){
+      for(ItemEntry item : ch.getItems()){
         if(item != null){
           elementList.add(ToRss10ChannelItemImpl.getInstance().execute(item));
         }
       }
     }
+    
+    if(ch.getTexInput() != null){
+      elementList.add(Rss10MappingUtils.toRss10TextInput(ch.getTexInput()));
+    }
+
     return rdf;
   }
   

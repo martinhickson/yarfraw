@@ -47,7 +47,7 @@ public class TextInput extends AbstractBaseObject{
    * if <code>link</code> is an invalid URI 
    * 
    */
-  public TextInput(String title, String description, String name, String link) throws URISyntaxException {
+  public TextInput(String title, String description, String name, String link){
     _title = title;
     _description = description;
     _name = name;
@@ -105,7 +105,26 @@ public class TextInput extends AbstractBaseObject{
     _link = link;
     return this;
   }
-    
+  
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param resource
+   * @return
+   */
+  public TextInput setResource(String resource) {
+    _resource = resource;
+    return this;
+  }
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param about
+   * @return
+   */
+  public TextInput setAbout(String about) {
+    _about = about;
+    return this;
+  }
+  
   @Override
   public void validate(FeedFormat format) throws ValidationException {
     if(format == FeedFormat.ATOM10)
@@ -117,7 +136,7 @@ public class TextInput extends AbstractBaseObject{
     }
     
     if(format == FeedFormat.RSS10){
-      CommonUtils.validateNotNull("attribute 'about' is required", getAbout());
+      CommonUtils.validateNotNull("[Textinput] about is required", getAbout());
     }
   }
 }

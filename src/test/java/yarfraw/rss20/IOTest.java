@@ -14,9 +14,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -31,7 +31,7 @@ public class IOTest extends TestCase{
 
   @Test
   public void testBuilder() throws Exception{
-    Channel c = BuilderTest.buildChannel();
+    ChannelFeed c = BuilderTest.buildChannel();
     FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
     c.setTitle("<test>test</test>");
     w.writeChannel(c);
@@ -46,7 +46,7 @@ public class IOTest extends TestCase{
   
   @Test
   public void testBuilder2() throws Exception{
-    Channel c = BuilderTest.buildChannel();
+    ChannelFeed c = BuilderTest.buildChannel();
     FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
@@ -55,7 +55,7 @@ public class IOTest extends TestCase{
   @Test
   public void testRead() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
-    Channel c = r.readChannel();
+    ChannelFeed c = r.readChannel();
     r.readChannel(new ValidationEventHandler(){
 
       public boolean handleEvent(ValidationEvent event) {
@@ -74,8 +74,8 @@ public class IOTest extends TestCase{
   public void testRead2() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
     assertTrue(!r.isRemoteRead());
-    Channel c = r.readChannel();
-    Channel c2 = BuilderTest.buildChannel();
+    ChannelFeed c = r.readChannel();
+    ChannelFeed c2 = BuilderTest.buildChannel();
     assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
     assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));
     assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategoryString(), c2.getCategoryString()));
@@ -104,7 +104,7 @@ public class IOTest extends TestCase{
     File f1 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     File f2 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/reddit.xml").toURI());
     File f3 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/theserverside-rss2.xml").toURI());
-    List<Channel> channels = Rss20Utils.readAll(f1, f2, f3);
+    List<ChannelFeed> channels = Rss20Utils.readAll(f1, f2, f3);
     assertEquals(3, channels.size());
   }
   
@@ -114,7 +114,7 @@ public class IOTest extends TestCase{
     try{
       FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
       assertTrue(reader.isRemoteRead());
-      Channel c = reader.readChannel();
+      ChannelFeed c = reader.readChannel();
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
@@ -133,7 +133,7 @@ public class IOTest extends TestCase{
       HttpClientParams params = new HttpClientParams();
       params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
       reader.setHttpClientParams(params);
-      Channel c = reader.readChannel();
+      ChannelFeed c = reader.readChannel();
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
@@ -149,7 +149,7 @@ public class IOTest extends TestCase{
       HttpClientParams params = new HttpClientParams();
       params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
       reader.setHttpClientParams(params);
-      Channel c = reader.readChannel();
+      ChannelFeed c = reader.readChannel();
       //this test can be indeterministic because it requires a network connection 
       //if there no exception thrown, then we should have the channel read
       assertTrue("Remote read failed", c.getTitle() != null);
@@ -174,9 +174,9 @@ public class IOTest extends TestCase{
   public void testAppend() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     FeedAppender a = new FeedAppender(f);
-    Item item = BuilderTest.buildChannel().getItems().get(0);
+    ItemEntry item = BuilderTest.buildChannel().getItems().get(0);
     a.addItem(item);
-    Channel c = Rss20Utils.read(f);
+    ChannelFeed c = Rss20Utils.read(f);
     assertEquals(item, c.getItems().get(c.getItems().size()-1));
     int oldSize = c.getItems().size();
     a.removeItem(oldSize-1);

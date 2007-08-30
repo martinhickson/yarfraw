@@ -16,7 +16,7 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.io.IOUtils;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.atom10.elements.FeedType;
@@ -69,7 +69,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
    * 
    * @throws YarfrawException if read operation failed.
    */
-  public static Channel readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
+  public static ChannelFeed readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
     Unmarshaller u;
     try {
       u = getUnMarshaller(format);
@@ -84,7 +84,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
    * 
    * @throws YarfrawException if read operation failed.
    */
-  public Channel readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
+  public ChannelFeed readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
     Unmarshaller u;
     InputStream input = null;
     try {
@@ -106,7 +106,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
   }
   
   @SuppressWarnings("unchecked")
-  private static Channel toChannel(FeedFormat format, Object o) throws YarfrawException{
+  private static ChannelFeed toChannel(FeedFormat format, Object o) throws YarfrawException{
     if(format == FeedFormat.RSS20){
       return ToChannelRss20Impl.getInstance().execute(((JAXBElement<TRss>)o).getValue().getChannel());
     }else if(format == FeedFormat.RSS10){
@@ -123,7 +123,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
    * 
    * @throws YarfrawException if read operation failed.
    */
-  public Channel readChannel() throws YarfrawException{
+  public ChannelFeed readChannel() throws YarfrawException{
     return readChannel(null);
   }
   

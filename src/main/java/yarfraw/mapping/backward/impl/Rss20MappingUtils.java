@@ -6,7 +6,6 @@ import static yarfraw.io.parser.ElementQName.RSS20_LINK;
 import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
 import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 
-import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
@@ -19,8 +18,8 @@ import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Enclosure;
-import yarfraw.core.datamodel.Guid;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.Id;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.Source;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.TCategory;
@@ -38,11 +37,11 @@ class Rss20MappingUtils{
   private Rss20MappingUtils(){}
   
   @SuppressWarnings("unchecked")
-  public static Item toItem(TRssItem ti) throws YarfrawException {
+  public static ItemEntry toItem(TRssItem ti) throws YarfrawException {
     if(ti == null){
       return null;
     }
-    Item item = new Item();
+    ItemEntry item = new ItemEntry();
     for(Object o : ti.getTitleOrDescriptionOrLink()){
       if(o == null){
         continue;
@@ -56,55 +55,32 @@ class Rss20MappingUtils{
         JAXBElement jaxbElement = (JAXBElement) o;
         Object val = jaxbElement.getValue();
         if(CommonUtils.same(jaxbElement.getName(), RSS20_AUTHOR)){
-          item.setAuthor((String)jaxbElement.getValue());
+          item.addAuthorOrCreator((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COMMENTS)) {
-          try {
-            item.setComments((String)jaxbElement.getValue());
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+          item.setComments((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
-          item.setDescription((String)jaxbElement.getValue());
+          item.setDescriptionOrSummary((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
-          try {
-            item.setLink((String)jaxbElement.getValue());
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+          item.addLink((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
-          try {
-            item.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          } catch (Exception e) {
-            item.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-          }
+          item.setPubDate((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
           item.setTitle((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;
-          item.addCategory(new CategorySubject(cat.getValue(), cat.getDomain()));
+          item.addCategorySubject(new CategorySubject().setCategoryOrSubjectOrTerm(cat.getValue())
+                  .setDomainOrScheme(cat.getDomain()));
         }else if (val instanceof TEnclosure) {
           TEnclosure en = (TEnclosure)val;
-          try {
-            item.setEnclosure(new Enclosure(en.getUrl(), 
-                    en.getLength().longValue(), 
+          item.setEnclosure(new Enclosure(en.getUrl(), 
+                    en.getLength() == null ? null : en.getLength().toString(), 
                     en.getType(), en.getValue()));
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
         }else if (val instanceof TGuid) {
           TGuid guid = (TGuid)val;
-          item.setGuid(new Guid(guid.getValue(), guid.isIsPermaLink()));
+          item.setUid(new Id(guid.getValue()).setPermaLink(guid.isIsPermaLink()));
         }else if (val instanceof TSource) {
           TSource source = (TSource)val;
-          try {
-            item.setSource(new Source(source.getUrl(), source.getValue()));
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+          item.setSource(new Source(source.getUrl(), source.getValue()));
         }else{
           LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
         }

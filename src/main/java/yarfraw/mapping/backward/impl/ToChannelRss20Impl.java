@@ -12,12 +12,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 import static yarfraw.io.parser.ElementQName.RSS20_TTL;
 import static yarfraw.io.parser.ElementQName.RSS20_WEBMASTER;
 
-import java.net.URISyntaxException;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
@@ -25,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Day;
 import yarfraw.core.datamodel.Image;
@@ -53,22 +48,19 @@ public class ToChannelRss20Impl implements ToChannelRss20{
   }
   
   @SuppressWarnings("unchecked")
-  public Channel execute(TRssChannel ch) throws YarfrawException {
+  public ChannelFeed execute(TRssChannel ch) throws YarfrawException {
     if(ch == null){
       return null;
     }
-    Channel c = new Channel();
+    ChannelFeed c = new ChannelFeed();
     
     if(ch.getItem() != null){
       for(TRssItem item : ch.getItem()){
-        c.additem(Rss20MappingUtils.toItem(item));
+        c.addItem(Rss20MappingUtils.toItem(item));
       }
     }
-    if(ch.getOtherAttributes() != null){
-      for(Map.Entry<QName, String> e : ch.getOtherAttributes().entrySet()){
-        c.addOtherAttributes(e.getKey(), e.getValue());
-      }
-    }
+    c.getOtherAttributes().putAll(ch.getOtherAttributes());
+    
     for(Object o : ch.getTitleOrLinkOrDescription()){
       if(o == null){
         continue;
@@ -78,49 +70,32 @@ public class ToChannelRss20Impl implements ToChannelRss20{
         Object val = jaxbElement.getValue();
         if(CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)){
           c.setTitle((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
-          try {
-            c.setLink((String)jaxbElement.getValue());
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {  
+          c.addLink((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
-          c.setDescription((String)jaxbElement.getValue());
+          c.setDescriptionOrSubtitle((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
-          c.setCopyright((String)jaxbElement.getValue());
+          c.setRights((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DOCS)) {
-          try {
-            c.setDocs((String)jaxbElement.getValue());
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+          c.setDocs((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_GENERATOR)) {
           c.setGenerator((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LANGUAGE)) {
-          c.setLanguage(new Locale((String)jaxbElement.getValue()));
+          c.setLang((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
-          try {
-            c.setLastBuildDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          } catch (Exception e) {
-            c.setLastBuildDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-          }
+          c.setLastBuildOrUpdatedDate((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
-          c.setManagingEditor((String)jaxbElement.getValue());
+          c.addManagingEditorOrAuthorOrPublisher((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
-          try {
-            c.setPubDate((String)jaxbElement.getValue(), CommonUtils.RFC_FORMAT);
-          } catch (Exception e) {
-            c.setPubDate(CommonUtils.tryParseDate((String)jaxbElement.getValue()));
-          }
+          c.setPubDate((String)jaxbElement.getValue());
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TTL)) {
           c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
         }else if (CommonUtils.same(jaxbElement.getName(), RSS20_WEBMASTER)) {
-          c.setWebMaster((String)jaxbElement.getValue());
+          c.addWebMasterOrCreator((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;
-          c.addCategory(new CategorySubject(cat.getValue(), cat.getDomain()));
+          c.addCategorySubject(new CategorySubject(cat.getValue())
+                                    .setDomainOrScheme(cat.getDomain()));
         }else if (val instanceof TSkipDaysList) {
           TSkipDaysList sdl = (TSkipDaysList)val;
           for(TSkipDay day : sdl.getDay()){
@@ -135,26 +110,16 @@ public class ToChannelRss20Impl implements ToChannelRss20{
         }else if (val instanceof TCloud) {
           TCloud cloud = (TCloud)val;
           c.setCloud(new Cloud(cloud.getDomain(), 
-              cloud.getPort() == null? null : cloud.getPort().intValue(), 
+              cloud.getPort() == null ? null : cloud.getPort().toString(), 
                   cloud.getPath(), cloud.getRegisterProcedure(), 
-                  cloud.getProtocol() == null ? null : cloud.getProtocol().value()));
+                  cloud.getProtocol()==null?null:cloud.getProtocol().value()));
         }else if (val instanceof TImage) {
           TImage image = (TImage)val;
-          try {
-            c.setImage(new Image(image.getUrl(), image.getTitle(), image.getLink(), 
+          c.setImageOrIcon(new Image(image.getUrl(), image.getTitle(), image.getLink(), 
                 image.getWidth(), image.getHeight(), image.getDescription()));
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
         }else if (val instanceof TTextInput) {
           TTextInput in = (TTextInput)val;
-          try {
-            c.setTextInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
-          }
-          catch (URISyntaxException e) {
-            LOG.error("invalid URI, it is ignored", e);
-          }
+          c.setTexInput(new TextInput(in.getTitle(), in.getDescription(), in.getName(), in.getLink()));
         }else{
           LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
         }

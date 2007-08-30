@@ -14,7 +14,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.io.FeedReader;
@@ -22,12 +22,12 @@ import yarfraw.io.FeedReader;
 public class FeedReaderUtils{
   private FeedReaderUtils(){}
   private static final Log LOG = LogFactory.getLog(FeedReaderUtils.class);
-  private static class FeedReaderCaller implements Callable<Channel>{
+  private static class FeedReaderCaller implements Callable<ChannelFeed>{
     private HttpURL _url;
     public FeedReaderCaller(HttpURL url){
       _url = url;
     }
-    public Channel call() throws YarfrawException, IOException {
+    public ChannelFeed call() throws YarfrawException, IOException {
       return new FeedReader(_url).readChannel();
     }
   }
@@ -37,19 +37,19 @@ public class FeedReaderUtils{
    * @param files - {@link File}s pointing to Rss feed files. 
    * @param executorService - @see {@link ExecutorService}
    * @param urls - @see {@link HttpURL}
-   * @return - a list of {@link Channel}
+   * @return - a list of {@link ChannelFeed}
    * @throws YarfrawException - If there is a failure reading any of the feeds.
    */
-  public static List<Channel> readAll(ExecutorService executorService, HttpURL... urls) 
+  public static List<ChannelFeed> readAll(ExecutorService executorService, HttpURL... urls) 
   throws YarfrawException{
-    List<Channel> ret = new ArrayList<Channel>();
-    List<Future<Channel>> futures = new ArrayList<Future<Channel>>(); 
+    List<ChannelFeed> ret = new ArrayList<ChannelFeed>();
+    List<Future<ChannelFeed>> futures = new ArrayList<Future<ChannelFeed>>(); 
     if(!ArrayUtils.isEmpty(urls)){
       for(final HttpURL url : urls){
         futures.add(executorService.submit(new FeedReaderCaller(url)));
       }
     }
-    for(Future<Channel> f : futures){
+    for(Future<ChannelFeed> f : futures){
       try {
         ret.add(f.get());
       }
@@ -70,11 +70,11 @@ public class FeedReaderUtils{
    * 
    * @param files - {@link File}s pointing to Rss feed files.
    * @param format - {@link FeedFormat}
-   * @return - a list of {@link Channel} 
+   * @return - a list of {@link ChannelFeed} 
    * @throws YarfrawException - If there is a failure reading any of the feeds.
    */
-  public static List<Channel> readAll(FeedFormat format, File... files) throws YarfrawException{
-    List<Channel> ret = new ArrayList<Channel>();
+  public static List<ChannelFeed> readAll(FeedFormat format, File... files) throws YarfrawException{
+    List<ChannelFeed> ret = new ArrayList<ChannelFeed>();
     if(!ArrayUtils.isEmpty(files)){
       for(File f : files){
         FeedReader reader = new FeedReader(f, format);
@@ -85,15 +85,15 @@ public class FeedReaderUtils{
   }
   
   /**
-   * Read a Rss feed in to a {@link Channel} data object.
+   * Read a Rss feed in to a {@link ChannelFeed} data object.
    * 
    * @param file - {@link File} pointing to a Rss feed file.
    * @param format - {@link FeedFormat}
-   * @return - A {@link Channel} data object representation of the feed.
+   * @return - A {@link ChannelFeed} data object representation of the feed.
    * @throws YarfrawException - If there is a failure reading the feeds.
    */
-  public static Channel read(FeedFormat format, File file) throws YarfrawException{
-    List<Channel> ret = readAll(format, file);
+  public static ChannelFeed read(FeedFormat format, File file) throws YarfrawException{
+    List<ChannelFeed> ret = readAll(format, file);
     return ret.size() == 0 ? null : ret.get(0);
   }
 }

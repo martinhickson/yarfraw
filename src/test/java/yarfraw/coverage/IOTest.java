@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import yarfraw.atom10.BuilderTest;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
@@ -36,11 +36,11 @@ public class IOTest extends TestCase{
   
   @Test
   public void testInputStream() throws Exception{
-    Channel rss20  = FeedReader.readChannel(FeedFormat.RSS20, 
+    ChannelFeed rss20  = FeedReader.readChannel(FeedFormat.RSS20, 
             Thread.currentThread().getContextClassLoader().getResourceAsStream("yarfraw/digg.xml"));
-    Channel rss10  = FeedReader.readChannel(FeedFormat.RSS10, 
+    ChannelFeed rss10  = FeedReader.readChannel(FeedFormat.RSS10, 
             Thread.currentThread().getContextClassLoader().getResourceAsStream("yarfraw/rss10/rdfModule.xml"));
-    Channel atom10  = FeedReader.readChannel(FeedFormat.ATOM10, 
+    ChannelFeed atom10  = FeedReader.readChannel(FeedFormat.ATOM10, 
             Thread.currentThread().getContextClassLoader().getResourceAsStream("yarfraw/atom10/atom10b.xml"));
     assertTrue(rss20.getTitle() != null);
     assertTrue(rss10.getTitle() != null);

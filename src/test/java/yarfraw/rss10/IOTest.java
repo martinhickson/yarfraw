@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -22,7 +22,7 @@ public class IOTest extends TestCase{
   @Test
   public void testRead() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
-    Channel c = r.readChannel();
+    ChannelFeed c = r.readChannel();
     
     File f = File.createTempFile("rss10test", ".xml");
     FeedWriter w = new FeedWriter(f);
@@ -31,7 +31,7 @@ public class IOTest extends TestCase{
     
     r.setFormat(FeedFormat.RSS10);
     r.setFile(f);
-    Channel c2 = r.readChannel();
+    ChannelFeed c2 = r.readChannel();
     assertEquals("digg", c2.getTitle());
     assertEquals("digg", c2.getDescription());
     

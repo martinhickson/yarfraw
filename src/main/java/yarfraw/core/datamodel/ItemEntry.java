@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ import yarfraw.utils.XMLUtils;
 
 /**
  * 
- * A channel may contain any number of {@link Item}s. 
+ * A channel may contain any number of {@link ItemEntry}s. 
  * An item may represent a "story" -- much like a story in a newspaper or magazine; 
  * if so its description is a synopsis of the story, and the link points to the full story. 
  * An item may also be complete in itself, if so, the description contains the text 
@@ -36,8 +37,8 @@ import yarfraw.utils.XMLUtils;
  * @author jliang
  *
  */
-public class Item extends AbstractBaseObject{
-  private static final Log LOG = LogFactory.getLog(Item.class);
+public class ItemEntry extends AbstractBaseObject{
+  private static final Log LOG = LogFactory.getLog(ItemEntry.class);
   private Text _title;
   private List<Link> _links;
   private Text _descriptionOrSummary;
@@ -53,7 +54,7 @@ public class Item extends AbstractBaseObject{
   private Text _rights;
   private Content _content;
   
-  public Item(){}
+  public ItemEntry(){}
   
   /**
    * <li>Rss 1.0 - The item's title.
@@ -80,7 +81,7 @@ public class Item extends AbstractBaseObject{
    * @param title
    * @return
    */
-  public Item setTitle(Text title) {
+  public ItemEntry setTitle(Text title) {
     _title = title;
     return this;
   }
@@ -98,7 +99,7 @@ public class Item extends AbstractBaseObject{
    * @param title 
    * @return
    */
-  public Item setTitle(String title) {
+  public ItemEntry setTitle(String title) {
     _title = new Text(title);
     return this;
   }
@@ -151,7 +152,7 @@ public class Item extends AbstractBaseObject{
    * @param links
    * @return
    */
-  public Item setLinks(List<Link> links) {
+  public ItemEntry setLinks(List<Link> links) {
     _links = links;
     return this;
   }
@@ -173,7 +174,7 @@ public class Item extends AbstractBaseObject{
    * @param href
    * @return
    */
-  public Item addLink(String... href) {
+  public ItemEntry addLink(String... href) {
     if(ArrayUtils.isEmpty(href)){
       LOG.warn("Empty href array is ignored");
       return this;
@@ -204,7 +205,7 @@ public class Item extends AbstractBaseObject{
    * @param link
    * @return
    */
-  public Item addLink(Link... link) {
+  public ItemEntry addLink(Link... link) {
     if(ArrayUtils.isEmpty(link)){
       LOG.warn("Empty link array is ignored");
       return this;
@@ -244,7 +245,7 @@ public class Item extends AbstractBaseObject{
    * @param descriptionOrSummary
    * @return
    */
-  public Item setDescriptionOrSummary(Text descriptionOrSummary) {
+  public ItemEntry setDescriptionOrSummary(Text descriptionOrSummary) {
     _descriptionOrSummary = descriptionOrSummary;
     return this;
   }
@@ -262,7 +263,7 @@ public class Item extends AbstractBaseObject{
    * @param descriptionOrSummary
    * @return
    */
-  public Item setDescriptionOrSummary(String descriptionOrSummary) {
+  public ItemEntry setDescriptionOrSummary(String descriptionOrSummary) {
     if(descriptionOrSummary == null){
       _descriptionOrSummary = null;
       return this;
@@ -317,7 +318,7 @@ public class Item extends AbstractBaseObject{
    * @param author
    * @return
    */
-  public Item setAuthorOrCreator(List<Person> authorOrCreator) {
+  public ItemEntry setAuthorOrCreator(List<Person> authorOrCreator) {
     _authorOrCreator = authorOrCreator;
     return this;
   }
@@ -338,7 +339,7 @@ public class Item extends AbstractBaseObject{
    * @param email
    * @return
    */
-  public Item addAuthorOrCreator(String... email) {
+  public ItemEntry addAuthorOrCreator(String... email) {
     if(ArrayUtils.isEmpty(email)){
       LOG.warn("Empty email array is ignored");
       return this;
@@ -368,7 +369,7 @@ public class Item extends AbstractBaseObject{
    * @param authorOrCreator
    * @return
    */
-  public Item addAuthorOrCreator(Person... authorOrCreator) {
+  public ItemEntry addAuthorOrCreator(Person... authorOrCreator) {
     if(ArrayUtils.isEmpty(authorOrCreator)){
       LOG.warn("Empty author array is ignored");
       return this;
@@ -409,7 +410,7 @@ public class Item extends AbstractBaseObject{
    * @param contributors
    * @return
    */
-  public Item setContributors(List<Person> contributors) {
+  public ItemEntry setContributors(List<Person> contributors) {
     _contributors = contributors;
     return this;
   }
@@ -428,7 +429,7 @@ public class Item extends AbstractBaseObject{
    * @param contributor
    * @return
    */
-  public Item addContributor(Person... contributor){
+  public ItemEntry addContributor(Person... contributor){
     if(ArrayUtils.isEmpty(contributor)){
       LOG.warn("Empty contributor array is ignored");
       return this;
@@ -469,7 +470,7 @@ public class Item extends AbstractBaseObject{
    * @param categorySubjects
    * @return
    */
-  public Item setCategorySubjects(Set<CategorySubject> categorySubjects) {
+  public ItemEntry setCategorySubjects(Set<CategorySubject> categorySubjects) {
     _categorySubjects = categorySubjects;
     return this;
   }
@@ -488,7 +489,7 @@ public class Item extends AbstractBaseObject{
    * @param categorySubjectOrTerm
    * @return
    */
-  public Item addCategorySubject(String... categorySubjectOrTerm) {
+  public ItemEntry addCategorySubject(String... categorySubjectOrTerm) {
     if(ArrayUtils.isEmpty(categorySubjectOrTerm)){
       LOG.warn("Empty category array is ignored");
       return this;
@@ -517,7 +518,7 @@ public class Item extends AbstractBaseObject{
    * @param categorySubject
    * @return
    */
-  public Item addCategorySubject(CategorySubject... categorySubject) {
+  public ItemEntry addCategorySubject(CategorySubject... categorySubject) {
     if(ArrayUtils.isEmpty(categorySubject)){
       LOG.warn("Empty category array is ignored");
       return this;
@@ -555,7 +556,7 @@ public class Item extends AbstractBaseObject{
    * @param comments
    * @return
    */
-  public Item setComments(String comments) {
+  public ItemEntry setComments(String comments) {
     _comments = comments;
     return this;
   }
@@ -583,7 +584,7 @@ public class Item extends AbstractBaseObject{
    * @param enclosure
    * @return
    */
-  public Item setEnclosure(Enclosure enclosure) {
+  public ItemEntry setEnclosure(Enclosure enclosure) {
     _enclosure = enclosure;
     return this;
   }
@@ -611,7 +612,7 @@ public class Item extends AbstractBaseObject{
    * @param uid
    * @return
    */
-  public Item setUid(Id uid) {
+  public ItemEntry setUid(Id uid) {
     _uid = uid;
     return this;
   }
@@ -628,7 +629,7 @@ public class Item extends AbstractBaseObject{
    * @param uid
    * @return
    */
-  public Item setUid(String uid){
+  public ItemEntry setUid(String uid){
     if(_uid == null){
       _uid = null;
       return this;
@@ -664,7 +665,7 @@ public class Item extends AbstractBaseObject{
    * @param pubDate
    * @return
    */
-  public Item setPubDate(String pubDate) {
+  public ItemEntry setPubDate(String pubDate) {
     _pubDate = pubDate;
     return this;
   }
@@ -684,7 +685,7 @@ public class Item extends AbstractBaseObject{
    * @param format
    * @return
    */
-  public Item setPubDate(Date pubDate, SimpleDateFormat format){
+  public ItemEntry setPubDate(Date pubDate, SimpleDateFormat format){
     _pubDate = format.format(pubDate);
     return this;
   }
@@ -716,7 +717,7 @@ public class Item extends AbstractBaseObject{
    * @param updatedDate
    * @return
    */
-  public Item setUpdatedDate(String updatedDate) {
+  public ItemEntry setUpdatedDate(String updatedDate) {
     _updatedDate = updatedDate;
     return this;
   }
@@ -738,7 +739,7 @@ public class Item extends AbstractBaseObject{
    * @param format
    * @return
    */
-  public Item setUpdateDate(Date date, SimpleDateFormat format) {
+  public ItemEntry setUpdatedDate(Date date, SimpleDateFormat format) {
     _updatedDate = format.format(date);
     return this;
   }
@@ -767,7 +768,7 @@ public class Item extends AbstractBaseObject{
    * @param source
    * @return
    */
-  public Item setSource(Source source) {
+  public ItemEntry setSource(Source source) {
     _source = source;
     return this;
   }
@@ -809,7 +810,7 @@ public class Item extends AbstractBaseObject{
    * @param rights
    * @return
    */
-  public Item setRights(Text rights) {
+  public ItemEntry setRights(Text rights) {
     _rights = rights;
     return this;
   }
@@ -826,7 +827,7 @@ public class Item extends AbstractBaseObject{
    * @param rights
    * @return
    */
-  public Item setRights(String rights) {
+  public ItemEntry setRights(String rights) {
     if(rights == null){
       _rights = null;
       return this;
@@ -868,7 +869,7 @@ public class Item extends AbstractBaseObject{
    * @param content
    * @return
    */
-  public Item setContent(Content content) {
+  public ItemEntry setContent(Content content) {
     _content = content;
     return this;
   }
@@ -891,7 +892,7 @@ public class Item extends AbstractBaseObject{
    * @param contentText
    * @return
    */
-  public Item setContent(String contentText) {
+  public ItemEntry setContent(String contentText) {
     if(_content == null){
       _content = null;
       return this;
@@ -904,14 +905,14 @@ public class Item extends AbstractBaseObject{
   /**
    * Any other attribute that is not in the RSS 2.0 specs.
    */
-  public Item setOtherAttributes(Map<QName, String> otherAttributes) {
+  public ItemEntry setOtherAttributes(Map<QName, String> otherAttributes) {
     _otherAttributes = otherAttributes;
     return this;
   }
   /**
    * Add an attribute that is not in the RSS 2.0 specs.
    */
-  public Item addOtherAttributes(QName namespace, String attribute) {
+  public ItemEntry addOtherAttributes(QName namespace, String attribute) {
     if(_otherAttributes == null){
       _otherAttributes = new HashMap<QName, String>();
     }
@@ -923,7 +924,7 @@ public class Item extends AbstractBaseObject{
    * Other additional elements that are not in the Rss specs.<br/>
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    */
-  public Item setOtherElements(List<Element> otherElements) {
+  public ItemEntry setOtherElements(List<Element> otherElements) {
     _otherElements = otherElements;
     return this;
   }
@@ -932,7 +933,7 @@ public class Item extends AbstractBaseObject{
    * **Note** The element should not have an empty namespace to avoid collision with the specs elements.
    * @param element - any element
    */
-  public Item addOtherElement(Element element){
+  public ItemEntry addOtherElement(Element element){
     if(_otherElements == null){
       _otherElements = new ArrayList<Element>();
     }
@@ -949,11 +950,83 @@ public class Item extends AbstractBaseObject{
    * @throws IOException 
    * @throws SAXException 
    */
-  public Item addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
+  public ItemEntry addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
     if(_otherElements == null){
       _otherElements = new ArrayList<Element>();
     }
     _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
+    return this;
+  }
+  
+
+  /**
+   * <b>Atom 1.0 only</b><br/>
+   * Any element defined by this specification MAY have an xml:base attribute 
+   * [W3C.REC-xmlbase-20010627]. When xml:base is used in an Atom Document, 
+   * it serves the function described in section 5.1.1 of [RFC3986], establishing 
+   * the base URI (or IRI) for resolving any relative references found within the 
+   * effective scope of the xml:base attribute.
+   * @param base
+   * @return
+   */
+  public ItemEntry setBase(String base) {
+    _base = base;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public ItemEntry setLang(String lang) {
+    _lang = lang;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public ItemEntry setLang(Locale lang) {
+    _lang = lang.getLanguage();
+    return this;
+  }
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param resource
+   * @return
+   */
+  public ItemEntry setResource(String resource) {
+    _resource = resource;
+    return this;
+  }
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param about
+   * @return
+   */
+  public ItemEntry setAbout(String about) {
+    _about = about;
     return this;
   }
   ////////////////////////Common setters///////////////////////

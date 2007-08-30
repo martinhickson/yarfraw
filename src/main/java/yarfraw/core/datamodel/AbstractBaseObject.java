@@ -1,5 +1,7 @@
 package yarfraw.core.datamodel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -19,10 +21,10 @@ import yarfraw.utils.CommonUtils;
  * An abstract base object for the core data model
  */
 abstract class AbstractBaseObject{
-  private String _base;
-  private String _lang;
-  private String _resource;
-  private String _about;
+  protected String _base;
+  protected String _lang;
+  protected String _resource;
+  protected String _about;
   protected Map<QName, String> _otherAttributes;
   protected List<Element> _otherElements;
   
@@ -83,6 +85,9 @@ abstract class AbstractBaseObject{
    * Other additional elements that are not in the Rss specs.
    */
   public List<Element> getOtherElements() {
+    if(_otherElements == null){
+      _otherElements = new ArrayList<Element>();
+    }
     return _otherElements;
   }
 
@@ -103,6 +108,9 @@ abstract class AbstractBaseObject{
    * Any other attribute that is not in the RSS specs.
    */
   public Map<QName, String> getOtherAttributes() {
+    if(_otherAttributes == null){
+      _otherAttributes = new HashMap<QName, String>();
+    }
     return _otherAttributes;
   }
   

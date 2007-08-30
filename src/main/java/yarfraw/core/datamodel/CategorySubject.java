@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -33,7 +34,7 @@ public class CategorySubject extends AbstractBaseObject{
   private String _domainOrScheme;
   private String _label;
   public CategorySubject() {}
-    
+  
   /**
    * This value is only used by Atom 1.0, it is ignored by other {@link FeedFormat}.
    * <br/>
@@ -202,6 +203,78 @@ public class CategorySubject extends AbstractBaseObject{
       _otherElements = new ArrayList<Element>();
     }
     _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
+    return this;
+  }
+  
+  /**
+   * <b>Atom 1.0 only</b><br/>
+   * Any element defined by this specification MAY have an xml:base attribute 
+   * [W3C.REC-xmlbase-20010627]. When xml:base is used in an Atom Document, 
+   * it serves the function described in section 5.1.1 of [RFC3986], establishing 
+   * the base URI (or IRI) for resolving any relative references found within the 
+   * effective scope of the xml:base attribute.
+   * @param base
+   * @return
+   */
+  public CategorySubject setBase(String base) {
+    _base = base;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public CategorySubject setLang(String lang) {
+    _lang = lang;
+    return this;
+  }
+  
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public CategorySubject setLang(Locale lang) {
+    _lang = lang.getLanguage();
+    return this;
+  }
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param resource
+   * @return
+   */
+  public CategorySubject setResource(String resource) {
+    _resource = resource;
+    return this;
+  }
+  /**
+   * <b>Rss 1.0 only</b><br/>
+   * @param about
+   * @return
+   */
+  public CategorySubject setAbout(String about) {
+    _about = about;
     return this;
   }
   ////////////////////////Common setters///////////////////////

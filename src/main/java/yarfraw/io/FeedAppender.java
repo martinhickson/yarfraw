@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 /**
  * Provides a set of function to facilitate modifications to an RSS 2.0 feed.
@@ -99,11 +99,11 @@ public class FeedAppender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public FeedAppender addItem(Item item)  throws YarfrawException{
+  public FeedAppender addItem(ItemEntry item)  throws YarfrawException{
     return addAllItems(Arrays.asList(item));
   }
   
-  private List<Item> trimItemsList(List<Item> items){
+  private List<ItemEntry> trimItemsList(List<ItemEntry> items){
     if(_numItemToKeep != -1 && CollectionUtils.isNotEmpty(items)
             && items.size() > _numItemToKeep){
       return items.subList(items.size() - _numItemToKeep, items.size());
@@ -116,8 +116,8 @@ public class FeedAppender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public FeedAppender addAllItems(List<Item> items) throws YarfrawException{
-    Channel ch = readChannel();
+  public FeedAppender addAllItems(List<ItemEntry> items) throws YarfrawException{
+    ChannelFeed ch = readChannel();
     ch.getItems().addAll(items);
     ch.setItems(trimItemsList(ch.getItems()));
     _writer = new FeedWriter(_reader._file);
@@ -130,7 +130,7 @@ public class FeedAppender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public FeedAppender addAllItems(Item...items) throws YarfrawException{
+  public FeedAppender addAllItems(ItemEntry...items) throws YarfrawException{
     return addAllItems(Arrays.asList(items));
   }
   
@@ -140,7 +140,7 @@ public class FeedAppender{
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender removeItem(int index) throws YarfrawException{
-    Channel ch = readChannel();
+    ChannelFeed ch = readChannel();
     ch.getItems().remove(index);
     ch.setItems(trimItemsList(ch.getItems()));
     _writer.writeChannel(ch);
@@ -152,17 +152,17 @@ public class FeedAppender{
    * 
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
-  public FeedAppender setItem(int index, Item item) throws YarfrawException{
-    Channel ch = readChannel();
+  public FeedAppender setItem(int index, ItemEntry item) throws YarfrawException{
+    ChannelFeed ch = readChannel();
     ch.getItems().set(index, item);
     _writer.writeChannel(ch);
     return this;
   }
   
-  private Channel readChannel() throws YarfrawException{
-    Channel ch = _reader.readChannel(); 
+  private ChannelFeed readChannel() throws YarfrawException{
+    ChannelFeed ch = _reader.readChannel(); 
     if(ch.getItems() == null){
-      ch.setItems(new ArrayList<Item>());
+      ch.setItems(new ArrayList<ItemEntry>());
     }
     return ch;
   }

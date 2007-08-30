@@ -19,17 +19,17 @@ import yarfraw.core.datamodel.AtomId;
 import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.Text;
 import yarfraw.core.datamodel.AtomTextElementEnum;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.io.FeedWriter;
 import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 
 public class BuilderTest extends TestCase{
   
-  public static Channel buildChannel() throws Exception{
-    return  Channel.create()
+  public static ChannelFeed buildChannel() throws Exception{
+    return  ChannelFeed.create()
     .setLanguage(Locale.ENGLISH)
     .setTitle("dive into mark")
     .setDescription("A <em>lot</em> of effort went into making this effortless")
@@ -47,7 +47,7 @@ public class BuilderTest extends TestCase{
     .setGenerator("Example Toolkit")
     .putAtomTextAttribute(AtomTextElementEnum.title, new Text(text))
     .putAtomTextAttribute(AtomTextElementEnum.subtitle, new Text(html))
-    .additem(Item.create()
+    .additem(ItemEntry.create()
           .setTitle("Atom draft-07 snapshot")
           .addAtomLink(new Link().setHref("http://example.org/2005/04/02/atom")
                                .setRel("alternate")
@@ -72,7 +72,7 @@ public class BuilderTest extends TestCase{
   @Test
   public void testBuild() throws Exception{
 
-    Channel ch = buildChannel();
+    ChannelFeed ch = buildChannel();
     FeedWriter writer = new FeedWriter(File.createTempFile("atom10",".xml"));
     writer.setFormat(FeedFormat.ATOM10);
     writer.writeChannel(ch);

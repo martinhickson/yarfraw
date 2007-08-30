@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedReader;
 import yarfraw.utils.reader.FeedReaderUtils;
@@ -22,7 +22,7 @@ public class UtilsTest extends TestCase{
   private static final Log LOG = LogFactory.getLog(UtilsTest.class);
   @Test
   public void testConcurrentRead() throws Exception{
-    List<Channel> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(5), 
+    List<ChannelFeed> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(5), 
             new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"),
             new HttpURL("http://bensbargains.net/rss.xml/0"),
             new HttpURL("http://rss.cnn.com/rss/money_topstories.rss"),
@@ -52,7 +52,7 @@ public class UtilsTest extends TestCase{
             new HttpURL("http://gladwell.typepad.com/gladwellcom/atom.xml"),
             new HttpURL("http://news.google.com/?output=rss"));
     
-    for(Channel c : channels){
+    for(ChannelFeed c : channels){
       if(c != null){
         LOG.info(c.getTitle());
         assertNotNull(c.getTitle());

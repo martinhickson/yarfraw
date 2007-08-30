@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 /**
  * <b>This is only used by Rss 2.0.</b>
  * <br/>
- * {@link Source} is an optional sub-element of {@link Item}.
+ * {@link Source} is an optional sub-element of {@link ItemEntry}.
  * <p/>
  * Its value is the name of the RSS channel that the item came from, derived from its &lt;title>. 
  * It has one required attribute, url, which links to the XMLization of the source.

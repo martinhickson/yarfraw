@@ -8,7 +8,7 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -23,7 +23,7 @@ public class IOTest extends TestCase{
   public void testRead() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/atom10b.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
-    Channel c = r.readChannel();
+    ChannelFeed c = r.readChannel();
     File f = File.createTempFile("atom10", ".xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
@@ -31,7 +31,7 @@ public class IOTest extends TestCase{
     
     r.setFile(f);
     
-    Channel c2 = r.readChannel();
+    ChannelFeed c2 = r.readChannel();
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomAttributes(), c2.getAtomAttributes()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomId(), c2.getAtomId()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomLinks(), c2.getAtomLinks()));
@@ -63,7 +63,7 @@ public class IOTest extends TestCase{
   public void testRead2() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/xmlDotComAtom10.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
-    Channel c = r.readChannel();
+    ChannelFeed c = r.readChannel();
     File f = File.createTempFile("atom10", ".xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
@@ -71,7 +71,7 @@ public class IOTest extends TestCase{
     
     r.setFile(f);
     
-    Channel c2 = r.readChannel();
+    ChannelFeed c2 = r.readChannel();
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomAttributes(), c2.getAtomAttributes()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomId(), c2.getAtomId()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomLinks(), c2.getAtomLinks()));
@@ -104,7 +104,7 @@ public class IOTest extends TestCase{
   public void testRead3() throws Exception{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/atom10.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
-    Channel c = r.readChannel();
+    ChannelFeed c = r.readChannel();
     File f = File.createTempFile("atom10", ".xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
@@ -112,7 +112,7 @@ public class IOTest extends TestCase{
     
     r.setFile(f);
     
-    Channel c2 = r.readChannel();
+    ChannelFeed c2 = r.readChannel();
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomAttributes(), c2.getAtomAttributes()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomId(), c2.getAtomId()));
     assertTrue("Channel not equal!", EqualsBuilder.reflectionEquals(c.getAtomLinks(), c2.getAtomLinks()));

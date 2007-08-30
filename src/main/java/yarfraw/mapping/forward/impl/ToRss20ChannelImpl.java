@@ -1,15 +1,14 @@
 package yarfraw.mapping.forward.impl;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
 import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Day;
-import yarfraw.core.datamodel.Item;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.ObjectFactory;
 import yarfraw.generated.rss20.elements.TRssChannel;
@@ -17,7 +16,6 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.mapping.forward.ToRss20Channel;
-import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss20 Jaxb model
@@ -33,11 +31,11 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
    }
   
    private ToRss20ChannelImpl(){}
-  public JAXBElement<TRssChannel> execute(Channel channel) throws YarfrawException {
+  public JAXBElement<TRssChannel> execute(ChannelFeed channel) throws YarfrawException {
     return new ObjectFactory().createChannel(toChannel(channel));
   }
   
-  private TRssChannel toChannel(Channel ch){
+  private TRssChannel toChannel(ChannelFeed ch){
     ObjectFactory factory = new ObjectFactory();
     TRssChannel ret = factory.createTRssChannel();
     List<Object> elementList = ret.getTitleOrLinkOrDescription();
@@ -47,8 +45,8 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(ch.getOtherAttributes());
     }
-    if(ch.getCategory() != null){
-      for(CategorySubject c : ch.getCategory()){
+    if(ch.getCategorySubjects() != null){
+      for(CategorySubject c : ch.getCategorySubjects()){
         if(c != null){
           elementList.add(Rss20MappingUtils.toRss20Category(c));
         }
@@ -58,11 +56,13 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getCloud() != null){
       elementList.add(Rss20MappingUtils.toRss20Cloud(ch.getCloud()));
     }
-    if(ch.getCopyright() != null){
-      elementList.add(factory.createTRssChannelCopyright(ch.getCopyright()));
+
+    if(ch.getRightsText() != null){
+      elementList.add(factory.createTRssChannelCopyright(ch.getRightsText()));
     }
-    if(ch.getDescription() != null){
-      elementList.add(factory.createTRssChannelDescription(ch.getDescription()));
+    
+    if(ch.getDescriptionOrSubtitleText() != null){
+      elementList.add(factory.createTRssChannelDescription(ch.getDescriptionOrSubtitleText()));
     }
 
     if(ch.getDocs() != null){
@@ -70,38 +70,41 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     }
     
     if(ch.getGenerator() != null){
-      elementList.add(factory.createTRssChannelGenerator(ch.getGenerator()));
+      String generator = ch.getGenerator().getValue();
+      elementList.add(factory.createTRssChannelGenerator(generator));
     }
 
-    if(ch.getImage() != null){
-      elementList.add(Rss20MappingUtils.toRss20Image(ch.getImage()));
+    if(ch.getImageOrIcon() != null){
+      elementList.add(Rss20MappingUtils.toRss20Image(ch.getImageOrIcon()));
     }
     
     if(ch.getItems() != null){
-      for(Item t : ch.getItems()){
+      for(ItemEntry t : ch.getItems()){
         if(t != null){
           ret.getItem().add(Rss20MappingUtils.ToRss20Item(t).getValue());
         }
       }
     }
     
-    if(ch.getLanguage() != null){
-      elementList.add(factory.createTRssChannelLanguage(ch.getLanguage().getLanguage()));
+    if(ch.getLang() != null){
+      elementList.add(factory.createTRssChannelLanguage(ch.getLang()));
     }
-    if(ch.getLink() != null){
-      elementList.add(factory.createTRssChannelLink(ch.getLink().toString()));
-    }
-    SimpleDateFormat format = new SimpleDateFormat(CommonUtils.RFC822DATE_PATTERN);
-    if(ch.getLastBuildDate() != null){
-      elementList.add(factory.createTRssChannelLastBuildDate(format.format(ch.getLastBuildDate())));
+    String link = Utils.getHrefLink(ch.getLinks());
+    if(link != null){
+      elementList.add(factory.createTRssChannelLink(link));
     }
     
-    if(ch.getManagingEditor() != null){
-      elementList.add(factory.createTRssChannelManagingEditor(ch.getManagingEditor()));
+    if(ch.getLastBuildOrUpdatedDate() != null){
+      elementList.add(factory.createTRssChannelLastBuildDate(ch.getLastBuildOrUpdatedDate()));
+    }
+    
+    String editor = Utils.getEmailOrText(ch.getManagingEditorOrAuthorOrPublisher());
+    if(editor != null){
+      elementList.add(factory.createTRssChannelManagingEditor(editor));
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createTRssChannelPubDate(format.format(ch.getPubDate())));
+      elementList.add(factory.createTRssChannelPubDate(ch.getPubDate()));
     }
 
     if(ch.getSkipDays() != null){
@@ -122,16 +125,17 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
       elementList.add(Rss20MappingUtils.toRss20TextInput(ch.getTexInput()));      
     }
 
-    if(ch.getTitle() != null){
-      elementList.add(factory.createTRssChannelTitle(ch.getTitle()));
+    if(ch.getTitleText() != null){
+      elementList.add(factory.createTRssChannelTitle(ch.getTitleText()));
     }
 
     if(ch.getTtl() != null){
       elementList.add(factory.createTRssChannelTtl(new BigInteger(String.valueOf(ch.getTtl()))));
     }
 
-    if(ch.getWebMaster() != null){
-      elementList.add(factory.createTRssChannelWebMaster(ch.getWebMaster()));
+    String webmaster = Utils.getEmailOrText(ch.getWebMasterOrCreator());
+    if(webmaster != null){
+      elementList.add(factory.createTRssChannelWebMaster(webmaster));
     }
     
     return ret;

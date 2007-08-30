@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -12,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -25,32 +27,49 @@ import yarfraw.utils.XMLUtils;
  */
 public class Person extends AbstractBaseObject{
 
-  private String _email;
+  private String _emailOrText;
   private String _uri;
   private String _name;
   
   public Person(){}
   
-  public Person(String email){  
-    _email = email;
+  /**
+   * Constructs a new Person object with the input string as its email or text content.
+   * @param emailOrText <li>Rss 1.0 - email address or text content of the corresponding person element.
+   * </li>
+   * <li>Rss 2.0 - should be an email address of the corresponding person element.
+   * </li>
+   * <li>Atom 1.0 - should be an email address of the corresponding person element.
+   * </li>
+   */
+  public Person(String emailOrText){  
+    _emailOrText = emailOrText;
   }
   
   /**
-   * Email address of the person
+   * <li>Rss 1.0 - email address or text content of the corresponding person element.
+   * </li>
+   * <li>Rss 2.0 - should be an email address of the corresponding person element.
+   * </li>
+   * <li>Atom 1.0 - should be an email address of the corresponding person element.
+   * </li>
    * @return
    */
-  public String getEmail() {
-    return _email;
+  public String getEmailOrText() {
+    return _emailOrText;
   }
 
   /**
-   * Email address of the person
-   * @param email and valid email address
-   * @return
+   * <li>Rss 1.0 - email address or text content of the corresponding person element.
+   * </li>
+   * <li>Rss 2.0 - should be an email address of the corresponding person element.
+   * </li>
+   * <li>Atom 1.0 - should be an email address of the corresponding person element.
+   * </li>
+   * @param emailOrText
    */
-  public Person setEmail(String email) {
-    _email = email;
-    return this;
+  public void setEmailOrText(String emailOrText) {
+    _emailOrText = emailOrText;
   }
 
   /**
@@ -148,13 +167,66 @@ public class Person extends AbstractBaseObject{
     _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
     return this;
   }
+  
+  /**
+   * <b>Atom 1.0 only</b><br/>
+   * Any element defined by this specification MAY have an xml:base attribute 
+   * [W3C.REC-xmlbase-20010627]. When xml:base is used in an Atom Document, 
+   * it serves the function described in section 5.1.1 of [RFC3986], establishing 
+   * the base URI (or IRI) for resolving any relative references found within the 
+   * effective scope of the xml:base attribute.
+   * @param base
+   * @return
+   */
+  public Person setBase(String base) {
+    _base = base;
+    return this;
+  }
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public Person setLang(String lang) {
+    _lang = lang;
+    return this;
+  }
+  
+  /**
+   * <li>Rss 2.0 - &lt;language> element. 
+   * The language the channel is written in. This allows aggregators to group 
+   * all Italian language sites, for example, on a single page. A list of allowable 
+   * values for this element, as provided by Netscape, is here. You may also use values 
+   * defined by the W3C.
+   * Only &lt;channel> support this element.</li>
+   * <li>Rss 1.0 - &lt;dc:language> element. A language of the intellectual content of the resource.
+   * Only &lt;channel> and &lt;item> support this element. </li>
+   * <li>Atom 1.0 - 'lang' attribute</li>
+   * <br/>
+   * Note: for Rss 2.0 and Rss 1.0, only &lt;channel> and &lt;item>
+   * @param lang
+   * @return
+   */
+  public Person setLang(Locale lang) {
+    _lang = lang.getLanguage();
+    return this;
+  }
   ////////////////////////Common setters///////////////////////
   
   
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    // TODO Auto-generated method stub
-    
+    CommonUtils.validateNotNull("EmailOrText should not be null", _emailOrText);
   }
   
 }

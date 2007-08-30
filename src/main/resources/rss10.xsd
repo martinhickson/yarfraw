@@ -69,12 +69,12 @@
 								<xs:documentation>The URL of the item.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element ref="dc:description" minOccurs="0" maxOccurs="1" />
-						<xs:element ref="dc:publisher"  minOccurs="0" maxOccurs="1" />
-						<xs:element ref="dc:creator" minOccurs="0" maxOccurs="1" />
-						<xs:element ref="dc:rights" minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:publisher"  minOccurs="0" />
+						<xs:element ref="dc:creator" minOccurs="0" />
+						<xs:element ref="dc:rights" minOccurs="0" />
 						<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
-						<xs:element ref="dc:date" minOccurs="0" maxOccurs="1" />
+						<xs:element ref="dc:date" minOccurs="0" />
+						<xs:element ref="dc:contributor" minOccurs="0" />
 						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Extensibility element.</xs:documentation>
@@ -121,15 +121,16 @@
 				</xs:element>
 				<xs:element ref="rss10:textinput" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="rss10:items" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="sy:updatePeriod"  minOccurs="0" maxOccurs="1" />
-				<xs:element ref="sy:updateFrequency" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="sy:updateBase" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="sy:updatePeriod"  minOccurs="0" />
+				<xs:element ref="sy:updateFrequency" minOccurs="0" />
+				<xs:element ref="sy:updateBase" minOccurs="0" />
 				<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
-				<xs:element ref="dc:publisher" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="dc:creator" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="dc:rights" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="dc:date" minOccurs="0" maxOccurs="1" />
-				<xs:element ref="dc:language" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="dc:publisher" minOccurs="0" />
+				<xs:element ref="dc:creator" minOccurs="0" />
+				<xs:element ref="dc:rights" minOccurs="0" />
+				<xs:element ref="dc:date" minOccurs="0"  />
+				<xs:element ref="dc:language" minOccurs="0" />
+				<xs:element ref="dc:contributor" minOccurs="0" />
 				<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Extensibility element.</xs:documentation>

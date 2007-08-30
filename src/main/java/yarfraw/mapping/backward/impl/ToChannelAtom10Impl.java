@@ -1,18 +1,17 @@
 package yarfraw.mapping.backward.impl;
 import static yarfraw.io.parser.ElementQName.ATOM10_AUTHOR;
+import static yarfraw.io.parser.ElementQName.ATOM10_CONTRIBUTOR;
 import static yarfraw.io.parser.ElementQName.ATOM10_RIGHTS;
 import static yarfraw.io.parser.ElementQName.ATOM10_SUBTITLE;
 import static yarfraw.io.parser.ElementQName.ATOM10_TITLE;
 import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
-import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractEmail;
-import static yarfraw.mapping.backward.impl.Atom10MappingUtils.extractTextContent;
-import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomId;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toAtomLink;
-import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toCategory;
+import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toCategorySubject;
+import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toId;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toImage;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toItem;
-
-import java.util.Locale;
+import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toPersonType;
+import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toText;
 
 import javax.xml.bind.JAXBElement;
 
@@ -21,10 +20,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 
-import yarfraw.core.datamodel.AtomAttributes;
-import yarfraw.core.datamodel.Text;
-import yarfraw.core.datamodel.AtomTextElementEnum;
-import yarfraw.core.datamodel.Channel;
+import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.Generator;
+import yarfraw.core.datamodel.Image;
 import yarfraw.generated.atom10.elements.CategoryType;
 import yarfraw.generated.atom10.elements.DateTimeType;
 import yarfraw.generated.atom10.elements.EntryType;
@@ -53,30 +51,35 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
   public static ToChannelAtom10 getInstance(){
     return _instance;
   }
-  private static String convenientExtractText(Channel ch, AtomTextElementEnum textEnum, TextType text){
-    Text textAttr = new Text();
-    String ret = extractTextContent(textAttr, text);
-    if(textAttr.getBase() != null || textAttr.getLang() != null || textAttr.getOtherAttributes() != null
-            || textAttr.getXhtmlDiv() != null || textAttr.getType() != null ){
-      ch.putAtomTextAttribute(textEnum, textAttr);
-    }
-    return ret;
-  }
-  
-  public Channel execute(FeedType feed){
+  /**
+   * atomFeed =
+   element atom:feed {
+      atomCommonAttributes,
+      (atomAuthor*
+       & atomCategory*
+       & atomContributor*
+       & atomGenerator?
+       & atomIcon?
+       & atomId
+       & atomLink*
+       & atomLogo?
+       & atomRights?
+       & atomSubtitle?
+       & atomTitle
+       & atomUpdated
+       & extensionElement*),
+      atomEntry*
+   }
+   */
+  public ChannelFeed execute(FeedType feed){
     if(feed == null){
       return null;
     }
-    Channel c = new Channel();
-    if(feed.getOtherAttributes() != null){
-      c.getOtherAttributes().putAll(feed.getOtherAttributes());
-    }
-    
-    if(feed.getLang() != null){
-      c.setAtomAttributes(new AtomAttributes(feed.getBase(), new Locale(feed.getLang())));
-      c.setLanguage(new Locale(feed.getLang()));
-    }
-    
+    ChannelFeed c = new ChannelFeed();
+
+    c.setLang(feed.getLang());
+    c.setBase(feed.getBase());
+    c.getOtherAttributes().putAll(feed.getOtherAttributes());
     for(Object o : feed.getAuthorOrCategoryOrContributor()){
       if(o == null){
         continue;
@@ -86,39 +89,41 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
         Object val = jaxbElement.getValue();
         if (CommonUtils.same(jaxbElement.getName(), ATOM10_TITLE)) {
           TextType text = (TextType) val;
-          c.setTitle(convenientExtractText(c, AtomTextElementEnum.title, text));
+          c.setTitle(toText(text));
         }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
           TextType text = (TextType) val;
-          c.setDescription(convenientExtractText(c, AtomTextElementEnum.subtitle, text));
+          c.setDescriptionOrSubtitle(toText(text));
         }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_AUTHOR)) {
-          c.setManagingEditor(extractEmail((PersonType)val));
+          c.addManagingEditorOrAuthorOrPublisher(toPersonType((PersonType)val));
+        }else if(CommonUtils.same(jaxbElement.getName(), ATOM10_CONTRIBUTOR)){
+          c.addContributor(toPersonType((PersonType)val));
         }else if(val instanceof CategoryType){
-          c.addCategory(toCategory((CategoryType)val));
+          c.addCategorySubject(toCategorySubject((CategoryType)val));
         }else if (val instanceof GeneratorType) {
-          //partially supported
-          LOG.info("only the text content of the <generator> element is parsed, the attributes are ignored");
           GeneratorType gen = (GeneratorType)val;
-          c.setGenerator(gen.getValue());
+          c.setGenerator(toGenerator(gen));
         }else if(val instanceof IconType){
-          c.setImage(toImage((IconType)val));
+          c.setImageOrIcon(toImage((IconType)val));
         }else if(val instanceof IdType){
-          c.setAtomId(toAtomId((IdType)val));
+          c.setUid(toId((IdType)val));
         }else if(val instanceof LinkType){ 
-          c.addAtomLink(toAtomLink((LinkType)val));
+          c.addLink(toAtomLink((LinkType)val));
         }else if(val instanceof LogoType){ 
-          LOG.warn("The <logo> element is not supported, it will be ignored");
-        }//logo not supported
+          LogoType logo = (LogoType)val;
+          c.setLogo(toLogo(logo));
+        }
         else if (CommonUtils.same(jaxbElement.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
-          c.setCopyright(convenientExtractText(c, AtomTextElementEnum.rights, text));
+          c.setRights(toText(text));
         }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_UPDATED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            c.setPubDate(dt.getValue().toGregorianCalendar().getTime());
+            c.setLastBuildOrUpdatedDate(dt.getValue().toGregorianCalendar().getTime(), 
+                    CommonUtils.LVL5);
           }
         }else if(val instanceof EntryType){ 
-          c.additem(toItem((EntryType)val));
+          c.addItem(toItem((EntryType)val));
         }else{
           LOG.warn("Unexpected jaxbElement: "+ToStringBuilder.reflectionToString(jaxbElement)+" this should not happen!");
         }
@@ -134,4 +139,26 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
     return c;
   }
   
+  private static Generator toGenerator(GeneratorType in){
+    Generator ret = new Generator(in.getValue());
+    ret.setUri(in.getUri());
+    ret.setVersion(in.getVersion());
+    ret.setLang(in.getLang());
+    ret.setBase(in.getBase());
+    ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    return ret;
+    
+  }
+  public static Image toLogo(LogoType in){
+    Image ret= new Image();
+    ret.setUrl(in.getValue());
+    ret.setBase(in.getBase());
+    ret.setLang(in.getLang());
+    if(in.getOtherAttributes() != null){
+      ret.getOtherAttributes().putAll(in.getOtherAttributes());
+    }
+    
+    return ret;
+  }
+
 }
