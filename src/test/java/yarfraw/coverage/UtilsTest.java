@@ -1,5 +1,6 @@
 package yarfraw.coverage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -16,13 +17,14 @@ import org.junit.Test;
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedReader;
+import yarfraw.utils.CommonUtils;
 import yarfraw.utils.reader.FeedReaderUtils;
 
 public class UtilsTest extends TestCase{
   private static final Log LOG = LogFactory.getLog(UtilsTest.class);
   @Test
   public void testConcurrentRead() throws Exception{
-    List<ChannelFeed> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(5), 
+    HttpURL[] urls = new HttpURL[]{
             new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"),
             new HttpURL("http://bensbargains.net/rss.xml/0"),
             new HttpURL("http://rss.cnn.com/rss/money_topstories.rss"),
@@ -34,7 +36,7 @@ public class UtilsTest extends TestCase{
             new HttpURL("http://www.gotapex.com/deals/daily/RSS2/"),
             new HttpURL("http://www.comedycentral.com/rss/tdsvideos.jhtml"),
             new HttpURL("http://rss.dealcatcher.com/rss.xml"),
-            new HttpURL("http://content.dealnews.com/dealnews/rss/todays-edition.xml"),
+//            new HttpURL("http://content.dealnews.com/dealnews/rss/todays-edition.xml"), Rss 0.9
             new HttpURL("http://www.defamer.com/index.xml"),
             new HttpURL("http://digg.com/rss/index.xml"),
             new HttpURL("http://digg.com/rss/containervideos.xml"),
@@ -50,17 +52,30 @@ public class UtilsTest extends TestCase{
             new HttpURL("http://www.gametrailers.com/rss/newest.xml"),
             new HttpURL("http://www.gawker.com/index.xml"),
             new HttpURL("http://gladwell.typepad.com/gladwellcom/atom.xml"),
-            new HttpURL("http://news.google.com/?output=rss"));
+            new HttpURL("http://news.google.com/?output=rss")
+    };
+    List<ChannelFeed> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(5), urls );
     
-    for(ChannelFeed c : channels){
+    int i =0;
+    for(HttpURL url : urls){
+      ChannelFeed c = channels.get(i);
       if(c != null){
         LOG.info(c.getTitle());
         assertNotNull(c.getTitle());
       }else{
-        LOG.error("Yarfraw failed to parse one of the channels");
+        LOG.error("Yarfraw failed to parse one of the channels: "+url);
+        System.out.println("Yarfraw failed to parse one of the channels: "+url);
       }
-      
+      i++;
     }
+    
+  }
+  @Test
+  public void testDateParsing() throws Exception{
+    long time = System.currentTimeMillis();
+    String d1 = CommonUtils.getDateAsISO8601String(new Date(time));
+    String d2 = CommonUtils.getDateAsISO8601String(CommonUtils.tryParseDate(d1));
+    assertEquals(d1, d2);
   }
   @Test
   public void testNewAtom() throws Exception{

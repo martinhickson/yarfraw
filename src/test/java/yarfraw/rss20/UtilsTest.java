@@ -15,7 +15,7 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.ValidationException;
 import yarfraw.io.FeedReader;
 import yarfraw.utils.FeedFormatDetector;
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * Util class tests.
@@ -59,7 +59,7 @@ public class UtilsTest extends TestCase{
   @Test
   public void testValidation() throws MalformedURLException, URISyntaxException{
     try {
-      CommonUtils.validateEmails("bad", "bad");
+      ValidationUtils.validateEmails("bad", "bad");
       fail("Expecting validation error");
     } catch (ValidationException e) {
       //success

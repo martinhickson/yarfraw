@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * This maps to both &lt;guid> in Rss and &lt;id> in Atom.
@@ -168,9 +168,9 @@ public class Id extends AbstractBaseObject{
     if(format == FeedFormat.RSS10){
       return;
     }
-    CommonUtils.validateNotNull("Id Value should not be null", _idValue);
+    ValidationUtils.validateNotNull("Id Value should not be null", _idValue);
     if(format == FeedFormat.ATOM10){
-      CommonUtils.validateUri("Id value should be an valid url", _idValue);
+      ValidationUtils.validateUri("Id value should be an valid url", _idValue);
     }
   }
 }

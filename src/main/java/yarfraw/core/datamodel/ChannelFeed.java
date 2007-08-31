@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 /**
  * 
@@ -162,8 +162,8 @@ public class ChannelFeed extends AbstractBaseObject{
     if(_items == null){
       _items = new ArrayList<ItemEntry>();
     }
-    for(ItemEntry i : items){
-      _items.add(i);
+    for(ItemEntry item : items){
+      _items.add(item);
     }
     return this;
   }
@@ -246,9 +246,7 @@ public class ChannelFeed extends AbstractBaseObject{
       _title = null;
       return this;
     }
-    _title = new Text(title);
-    return this;
-    
+    return setTitle(new Text(title));
   }
 
   /**
@@ -363,7 +361,7 @@ public class ChannelFeed extends AbstractBaseObject{
     if(_links == null){
       _links = new ArrayList<Link>();
     }
-    for (Link l:link){
+    for(Link l : link){
       _links.add(l);
     }
     return this;
@@ -502,8 +500,7 @@ public class ChannelFeed extends AbstractBaseObject{
       _rights = null;
       return this;
     }
-    _rights = new Text(rights);
-    return this;
+    return setRights(new Text(rights));
   }
 
   /**
@@ -600,39 +597,8 @@ public class ChannelFeed extends AbstractBaseObject{
     if(_managingEditorOrAuthorOrPublisher == null){
       _managingEditorOrAuthorOrPublisher = new ArrayList<Person>();
     }
-    for(Person p :persons){
+    for(Person p : persons){
       _managingEditorOrAuthorOrPublisher.add(p);
-    }
-    return this;
-  }
-  /**
-   * <li>Rss 1.0 - &lt;dc:publisher> An entity responsible for making the resource available
-   * </li>
-   * <li>Rss 2.0 - &lt;managingEditor> Email address for person responsible for editorial content.
-   * </li>
-   * <li>Atom 1.0 - &lt;author> 
-   * The "atom:author" element is a Person construct that indicates the author of the entry or feed.
-   * </li>
-   * <br/>
-   * Note: This is a list because Atom 1.0 allows multiple &lt;author>. For Rss 1.0 and Rss 2.0,
-   * only the first {@link Person} is interpreted, the rest are ignored.
-   * <br/>
-   * This method adds all input {@link Person} to the END of the list.
-   * @param persons
-   * @return
-   */
-  public ChannelFeed setManagingEditorOrAuthorOrPublisher(
-          Person... persons) {
-    if(ArrayUtils.isEmpty(persons)){
-      LOG.warn("Empty author array is ignored");
-      return this;
-    }
-    
-    if(_managingEditorOrAuthorOrPublisher == null){
-      _managingEditorOrAuthorOrPublisher = new ArrayList<Person>();
-    }
-    for(Person e : persons){
-      _managingEditorOrAuthorOrPublisher.add(e);      
     }
     return this;
   }
@@ -1011,8 +977,7 @@ public class ChannelFeed extends AbstractBaseObject{
    * @return
    */
   public ChannelFeed setLastBuildOrUpdatedDate(Date lastBuildOrUpdatedDate, SimpleDateFormat format) {
-    _lastBuildOrUpdatedDate = format.format(lastBuildOrUpdatedDate);
-    return this;
+    return setLastBuildOrUpdatedDate(format.format(lastBuildOrUpdatedDate));
   }
   
   
@@ -1403,11 +1368,7 @@ public class ChannelFeed extends AbstractBaseObject{
     * @throws SAXException 
     */
    public ChannelFeed addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-     if(_otherElements == null){
-       _otherElements = new ArrayList<Element>();
-     }
-     _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-     return this;
+     return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
    }
    
 
@@ -1491,11 +1452,11 @@ public class ChannelFeed extends AbstractBaseObject{
     }
     
     for(ItemEntry item : _items){
-      CommonUtils.validateNotNull("Channel: All item should not be null", item);
+      ValidationUtils.validateNotNull("Channel: All item should not be null", item);
       item.validate(format);
     }
     
-    CommonUtils.validateNotNull("Channel: Title, Link and Description should not be null", _title, _links, _descriptionOrSubtitle);
+    ValidationUtils.validateNotNull("Channel: Title, Link and Description should not be null", _title, _links, _descriptionOrSubtitle);
   
     _title.validate(format);
     _descriptionOrSubtitle.validate(format);

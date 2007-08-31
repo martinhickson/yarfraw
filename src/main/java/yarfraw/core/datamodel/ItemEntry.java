@@ -100,8 +100,7 @@ public class ItemEntry extends AbstractBaseObject{
    * @return
    */
   public ItemEntry setTitle(String title) {
-    _title = new Text(title);
-    return this;
+    return setTitle(new Text(title));
   }
 
   /**
@@ -213,7 +212,7 @@ public class ItemEntry extends AbstractBaseObject{
     if(_links == null){
       _links = new ArrayList<Link>();
     }
-    for (Link l:link){
+    for(Link l : link){
       _links.add(l);
     }
     return this;
@@ -268,8 +267,7 @@ public class ItemEntry extends AbstractBaseObject{
       _descriptionOrSummary = null;
       return this;
     }
-    _descriptionOrSummary = new Text(descriptionOrSummary);
-    return this;
+    return setDescriptionOrSummary(new Text(descriptionOrSummary));
   }
   
   /**
@@ -378,8 +376,8 @@ public class ItemEntry extends AbstractBaseObject{
     if(_authorOrCreator == null){
       _authorOrCreator = new ArrayList<Person>();
     }
-    for(Person e : authorOrCreator){
-      _authorOrCreator.add(e);      
+    for(Person p : authorOrCreator){
+      _authorOrCreator.add(p);
     }
     return this;
   }
@@ -439,11 +437,39 @@ public class ItemEntry extends AbstractBaseObject{
       _contributors = new ArrayList<Person>();
     }
     for(Person p : contributor){
-      _contributors.add(p);      
+      _contributors.add(p);
     }
     return this;
   }
 
+  /**
+   * <li>Rss 1.0 - &lt;dc:contributor> An entity responsible for making contributions to the content of the resource.
+   * <br/><b>When this element is map to contributor in Rss 1.0, only the email address is used, other fields are ignored.</b>
+   * </li>
+   * <li>Rss 2.0 - Not supported, this list is ignored.
+   * </li>
+   * <li>Atom 1.0 - The "atom:contributor" element is a Person construct that indicates a person or other entity who contributed to the entry or feed.
+   * </li>
+   * 
+   * <br/>
+   * This method adds the input contributor to the END of the contributors list.
+   * @param contributor
+   * @return
+   */
+  public ItemEntry addContributor(String... contributor){
+    if(ArrayUtils.isEmpty(contributor)){
+      LOG.warn("Empty contributor array is ignored");
+      return this;
+    }
+    
+    if(_contributors == null){
+      _contributors = new ArrayList<Person>();
+    }
+    for(String c : contributor){
+      _contributors.add(new Person(c));      
+    }
+    return this;
+  }
   /**
    * <li>Rss 1.0 - &lt;dc:subject> The topic of the content of the resource.
    * </li>
@@ -634,8 +660,7 @@ public class ItemEntry extends AbstractBaseObject{
       _uid = null;
       return this;
     }
-    _uid = new Id(uid);
-    return this;
+    return setUid(new Id(uid));
   }
 
 
@@ -686,8 +711,7 @@ public class ItemEntry extends AbstractBaseObject{
    * @return
    */
   public ItemEntry setPubDate(Date pubDate, SimpleDateFormat format){
-    _pubDate = format.format(pubDate);
-    return this;
+    return setPubDate(format.format(pubDate));
   }
 
   /**
@@ -740,8 +764,7 @@ public class ItemEntry extends AbstractBaseObject{
    * @return
    */
   public ItemEntry setUpdatedDate(Date date, SimpleDateFormat format) {
-    _updatedDate = format.format(date);
-    return this;
+    return setUpdatedDate(format.format(date));
   }
 
 
@@ -832,8 +855,7 @@ public class ItemEntry extends AbstractBaseObject{
       _rights = null;
       return this;
     }
-    _rights = new Text(rights);
-    return this;
+    return setRights(new Text(rights));
   }
   
   /**
@@ -897,7 +919,7 @@ public class ItemEntry extends AbstractBaseObject{
       _content = null;
       return this;
     }
-    _content = new Content(contentText);
+    setContent(new Content(contentText));
     return this;
   }
 
@@ -951,11 +973,7 @@ public class ItemEntry extends AbstractBaseObject{
    * @throws SAXException 
    */
   public ItemEntry addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
-    _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-    return this;
+    return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
   }
   
 

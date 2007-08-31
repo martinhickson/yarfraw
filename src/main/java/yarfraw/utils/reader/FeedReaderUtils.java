@@ -55,10 +55,12 @@ public class FeedReaderUtils{
       }
       catch (InterruptedException e) {
         LOG.error("Interrupted exception received", e);
+        e.printStackTrace();
         ret.add(null);
       }
       catch (ExecutionException e) {
         LOG.error("Execution exception received", e);
+        e.printStackTrace();
         ret.add(null);
       }
     }

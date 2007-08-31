@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss version="2.0">
+<channel>
+<category>cat2</category>
+<category>cat1</category>
+<cloud protocol="soap" registerProcedure="pingMe" path="/RPC2" port="80" domain="rpc.sys.com"/>
+<copyright>Copyright 2002, Spartanburg Herald-Journal</copyright>
+<description>Descritpion ......... </description>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+<generator>MightyInHouse Content System v2.3</generator>
+<image><url>http://my.image.com/image.jpg</url>
+<title>Test Image</title><link>http://my.image.com/image.jpg</link>
+<width>88</width><height>31</height></image>
+<language>en</language><link>http://www.test.com</link>
+<lastBuildDate>Tue, 14 Aug 2007 15:32:11 EDT</lastBuildDate>
+<managingEditor>geo@herald.com</managingEditor>
+<pubDate>Tue, 14 Aug 2007 15:32:11 EDT</pubDate><skipDays>
+<day>Saturday</day><day>Sunday</day></skipDays>
+<skipHours><hour>0</hour><hour>1</hour><hour>2</hour><hour>3</hour>
+<hour>4</hour><hour>5</hour><hour>12</hour></skipHours>
+<textInput><title>Title</title><description>Descritpion</description>
+<name>name</name><link>http://link.com/link</link></textInput>
+<title>Test Title</title><ttl>60</ttl>
+<webMaster>betty@herald.com (Betty Guernsey)</webMaster><item>
+<enclosure url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" length="12216320" type="audio/mpeg" />
+<source url="http://www.tomalak.org/links2.xml">Tomalak's Realm</source>
+<author>oprah@oxygen.net</author><category>cat2</category>
+<category>cat1</category><category domain="http://somedomain">cat3</category>
+<comments>http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290</comments>
+<description>desc</description><guid>GUID</guid>
+<link>http://somelink.com/</link><title>Item 1</title></item>
+<item><author>oprah@oxygen.net</author>
+<category>cat2</category><category>cat1</category>
+<category domain="http://somedomain">cat3</category>
+<comments>http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290</comments>
+<description>desc</description><guid isPermaLink="true">GUID</guid>
+<link>http://somelink.com/</link><title>Item2</title></item></channel></rss>

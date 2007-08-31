@@ -13,7 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 /**
  * <b>&ltTextInput> element of Rss 1.0 and Rss 2.0. This is ignored by Atom 1.0</b>
@@ -187,11 +187,7 @@ public class TextInput extends AbstractBaseObject{
    * @throws SAXException 
    */
   public TextInput addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
-    _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-    return this;
+    return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
   }
   
 
@@ -203,12 +199,12 @@ public class TextInput extends AbstractBaseObject{
        return;
     
     if(format == FeedFormat.RSS20){
-      CommonUtils.validateNotNull("Image: All required fields in the Image object should be not null", _title, _link, _description, _name);
-      CommonUtils.validateUri("link is not a valid URI",  _link);
+      ValidationUtils.validateNotNull("Image: All required fields in the Image object should be not null", _title, _link, _description, _name);
+      ValidationUtils.validateUri("link is not a valid URI",  _link);
     }
     
     if(format == FeedFormat.RSS10){
-      CommonUtils.validateNotNull("[Textinput] about is required", getAbout());
+      ValidationUtils.validateNotNull("[Textinput] about is required", getAbout());
     }
   }
 }

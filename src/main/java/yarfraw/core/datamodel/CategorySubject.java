@@ -13,7 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -199,11 +199,7 @@ public class CategorySubject extends AbstractBaseObject{
    * @throws SAXException 
    */
   public CategorySubject addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
-    _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-    return this;
+    return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
   }
   
   /**
@@ -256,7 +252,7 @@ public class CategorySubject extends AbstractBaseObject{
    * @return
    */
   public CategorySubject setLang(Locale lang) {
-    _lang = lang.getLanguage();
+    setLang(lang.getLanguage());
     return this;
   }
   /**
@@ -281,6 +277,6 @@ public class CategorySubject extends AbstractBaseObject{
   
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    CommonUtils.validateNotNull(_categoryOrSubjectOrTerm, "Category: Category value should not be null");
+    ValidationUtils.validateNotNull(_categoryOrSubjectOrTerm, "Category: Category value should not be null");
   }
 }

@@ -16,7 +16,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.w3c.dom.Element;
 
 import yarfraw.utils.CommonUtils;
-
 /**
  * An abstract base object for the core data model
  */
@@ -87,9 +86,6 @@ abstract class AbstractBaseObject{
    * Other additional elements that are not in the Rss specs.
    */
   public List<Element> getOtherElements() {
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
     return _otherElements;
   }
 
@@ -110,9 +106,6 @@ abstract class AbstractBaseObject{
    * Any other attribute that is not in the RSS specs.
    */
   public Map<QName, String> getOtherAttributes() {
-    if(_otherAttributes == null){
-      _otherAttributes = new HashMap<QName, String>();
-    }
     return _otherAttributes;
   }
   

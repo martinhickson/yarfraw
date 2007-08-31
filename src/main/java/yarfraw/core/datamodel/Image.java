@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * 
@@ -199,9 +199,7 @@ public class Image extends AbstractBaseObject{
       _width = 88;
       return this;
     }
-    if(width > 144 || width < 0){
-      throw new IllegalArgumentException("Maximum value for width is 144, according to RSS20 specs");
-    }    
+    
     _width = width;
     return this;
   }
@@ -224,9 +222,6 @@ public class Image extends AbstractBaseObject{
     if(height == null){
       _width = 31;
       return this;
-    }
-    if(height > 400 || height < 0){
-      throw new IllegalArgumentException("Maximum value for height is 400, according to RSS20 specs");
     }
     _height = height;
     return this;
@@ -343,16 +338,21 @@ public class Image extends AbstractBaseObject{
   @Override
   public void validate(FeedFormat format) throws ValidationException {
     if(format == FeedFormat.RSS20){
-      CommonUtils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
-      CommonUtils.validateUri("Url or link is not a valid URI", _url, _link);
-      
+      ValidationUtils.validateNotNull("Image: All required fields in the Image object should be not null", _url, _title, _link);
+      ValidationUtils.validateUri("Url or link is not a valid URI", _url, _link);
+      if(_width > 144 || _width < 0){
+        throw new ValidationException("[Image] Maximum value for width is 144, according to RSS20 specs");
+      }
+      if(_height > 400 ||_height < 0){
+        throw new ValidationException("[Image] Maximum value for height is 400, according to RSS20 specs");
+      }
     }else{
-      CommonUtils.validateNotNull("Image: url should not be null", _url);
-      CommonUtils.validateUri("Url is not a valid URI", _url);
+      ValidationUtils.validateNotNull("Image: url should not be null", _url);
+      ValidationUtils.validateUri("Url is not a valid URI", _url);
     }
     
     if(format == FeedFormat.RSS10){
-      CommonUtils.validateNotNull("attribute 'about' is required", getAbout());
+      ValidationUtils.validateNotNull("attribute 'about' is required", getAbout());
     }
   }
 }

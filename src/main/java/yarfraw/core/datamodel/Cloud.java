@@ -1,6 +1,6 @@
 package yarfraw.core.datamodel;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * <b>This is only used by Rss 2.0.</b>
@@ -32,11 +32,11 @@ public class Cloud extends AbstractBaseObject{
   public Cloud(String domain, String port, String path,
           String registerProcedure, String protocol) {
     super();
-    _domain = domain;
-    _port = port;
-    _path = path;
-    _registerProcedure = registerProcedure;
-    _protocol = protocol;
+    setDomain(domain);
+    setPath(path);
+    setPort(port);
+    setRegisterProcedure(registerProcedure);
+    setProtocol(protocol);
   }
   public String getDomain() {
     return _domain;
@@ -79,7 +79,7 @@ public class Cloud extends AbstractBaseObject{
       return; //no support
     }
     
-    CommonUtils.validateNotNull("Cloud: All fields in the cloud object should be not null", _domain, _path, _port, _protocol, _registerProcedure);
+    ValidationUtils.validateNotNull("Cloud: All fields in the cloud object should be not null", _domain, _path, _port, _protocol, _registerProcedure);
     if(!_protocol.equals("xml-rpc") && !_protocol.equals("http-post") && !_protocol.equals("soap")){
       throw new ValidationException("Cloud: Protocol should be one of the following: xml-rpc, soap, http-post");
     }

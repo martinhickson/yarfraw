@@ -13,7 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -161,11 +161,7 @@ public class Person extends AbstractBaseObject{
    * @throws SAXException 
    */
   public Person addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
-    _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-    return this;
+    return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
   }
   
   /**
@@ -226,7 +222,7 @@ public class Person extends AbstractBaseObject{
   
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    CommonUtils.validateNotNull("EmailOrText should not be null", _emailOrText);
+    ValidationUtils.validateNotNull("EmailOrText should not be null", _emailOrText);
   }
   
 }

@@ -128,7 +128,7 @@ public class FeedWriter extends AbstractBaseIO{
     }else if(format == FeedFormat.ATOM10){
       return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
     }else{
-      throw new UnsupportedOperationException("Unknown Feed Format");
+      throw new UnsupportedOperationException("UnSupported Feed Format");
     }
 
   }

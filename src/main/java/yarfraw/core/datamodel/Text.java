@@ -8,7 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
@@ -89,8 +89,7 @@ public class Text extends AbstractBaseObject{
    * @throws ParserConfigurationException
    */
   public Text setXhtmlDiv(String xhtmlDiv) throws SAXException, IOException, ParserConfigurationException {
-    setXhtmlDiv(XMLUtils.parseXml(xhtmlDiv, false, false).getDocumentElement());
-    return this;
+    return setXhtmlDiv(XMLUtils.parseXml(xhtmlDiv, false, false).getDocumentElement());
   }
 
   /**
@@ -173,6 +172,6 @@ public class Text extends AbstractBaseObject{
   }
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    CommonUtils.validateNotNull("Text value should not be null", _text);
+    ValidationUtils.validateNotNull("Text value should not be null", _text);
   }
 }

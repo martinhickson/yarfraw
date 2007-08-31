@@ -87,7 +87,7 @@ class Rss20MappingUtils{
       }else if (o instanceof Element) {
         Element e = (Element) o;
         if(ENCODED.equals(e.getLocalName())){
-          item.getContent().addContentText(e.getTextContent());
+          item.setContent(e.getTextContent());
         }
         item.getOtherElements().add(e);
       }else{

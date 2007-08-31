@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * <li>Rss 1.0 - Not supported, this is ignored.</li>
@@ -196,8 +196,8 @@ public class Generator extends AbstractBaseObject{
     if(format == FeedFormat.RSS10){
       return;
     }
-    CommonUtils.validateNotNull("[Generator] Value should not be null", _value);
-    CommonUtils.validateUri("[Generator] uri should be an valid uri", _uri);
+    ValidationUtils.validateNotNull("[Generator] Value should not be null", _value);
+    ValidationUtils.validateUri("[Generator] uri should be an valid uri", _uri);
   }
   
 }

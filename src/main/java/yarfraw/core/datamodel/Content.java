@@ -156,11 +156,7 @@ public class Content extends AbstractBaseObject{
    * @throws SAXException 
    */
   public Content addOtherElement(String xmlString) throws SAXException, IOException, ParserConfigurationException{
-    if(_otherElements == null){
-      _otherElements = new ArrayList<Element>();
-    }
-    _otherElements.add(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
-    return this;
+    return addOtherElement(XMLUtils.parseXml(xmlString, false, false).getDocumentElement());
   }
   
 

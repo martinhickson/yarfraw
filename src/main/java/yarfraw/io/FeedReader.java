@@ -138,7 +138,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
     }else if(format == FeedFormat.ATOM10){
       return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
     }else{
-      throw new UnsupportedOperationException("Unknown Feed Format");
+      throw new UnsupportedOperationException("UnSupported Feed Format");
     }
   }
 }

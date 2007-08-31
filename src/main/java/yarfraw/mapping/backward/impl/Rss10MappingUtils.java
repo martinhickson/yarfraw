@@ -164,6 +164,8 @@ class Rss10MappingUtils{
                 item.setDescriptionOrSummary((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_LINK)){
                 item.addLink((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), RSS10_CONTRIBUTOR)){
+                item.addContributor((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_CREATOR)){
                 item.addAuthorOrCreator((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_RIGHTS)){
@@ -178,7 +180,7 @@ class Rss10MappingUtils{
             }else if (io instanceof Element) {
               Element e = (Element) io;
               if(ENCODED.equals(e.getLocalName())){
-                item.getContent().addContentText(e.getTextContent());
+                item.setContent(e.getTextContent());
               }
               item.getOtherElements().add(e);
             }else{

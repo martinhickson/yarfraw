@@ -3,7 +3,7 @@ package yarfraw.core.datamodel;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 /**
  * <b>This is only used by Rss 2.0.</b>
@@ -94,6 +94,6 @@ public class Enclosure extends AbstractBaseObject{
     if(format == FeedFormat.ATOM10){
       return;//no support
     }
-    CommonUtils.validateNotNull("Encloure: All fields in the enclosure object should be not null", _length, _mimeType, _url, _value);
+    ValidationUtils.validateNotNull("Encloure: All fields in the enclosure object should be not null", _length, _mimeType, _url, _value);
   }
 }

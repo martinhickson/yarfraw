@@ -73,6 +73,10 @@ public class FeedFormatDetector{
     public void startElement(String uri, String localName,
             String qName, Attributes attributes) throws EarlyTerminationException{
 
+//       for(int i =0; i< attributes.getLength(); i++){
+//         System.out.println(attributes.getValue(i));
+//         System.out.println(attributes.getLocalName(i));
+//       }
     //just check the root element is enough
       if(RSS.equals(localName)
               && VERSION_20.equals(attributes.getValue(StringUtils.EMPTY, VERSION))){

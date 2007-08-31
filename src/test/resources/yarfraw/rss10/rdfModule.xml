@@ -19,7 +19,8 @@
     <dc:creator>Rael Dornfest (mailto:rael@oreilly.com)</dc:creator>
     <dc:rights>Copyright © 2000 O'Reilly &amp; Associates, Inc.</dc:rights>
     <dc:date>2000-01-01T12:00+00:00</dc:date>
-
+    <dc:contributor>a</dc:contributor>
+    <dc:contributor>b</dc:contributor>
     <image rdf:resource="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg" />
 
     <items>
@@ -41,6 +42,8 @@
   <item rdf:about="http://c.moreover.com/click/here.pl?r123">
     <title>XML: A Disruptive Technology</title> 
     <link>http://c.moreover.com/click/here.pl?r123</link>
+    <dc:contributor>a</dc:contributor>
+    <dc:contributor>b</dc:contributor>
     <dc:description>
       XML is placing increasingly heavy loads on the existing technical
       infrastructure of the Internet.

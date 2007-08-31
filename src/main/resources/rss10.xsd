@@ -69,7 +69,6 @@
 								<xs:documentation>The URL of the item.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element ref="dc:publisher"  minOccurs="0" />
 						<xs:element ref="dc:creator" minOccurs="0" />
 						<xs:element ref="dc:rights" minOccurs="0" />
 						<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />

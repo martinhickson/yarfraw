@@ -2,7 +2,7 @@ package yarfraw.core.datamodel;
 
 import java.util.Locale;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.ValidationUtils;
 
 
 /**
@@ -204,7 +204,7 @@ public class Link extends AbstractBaseObject{
   
   @Override
   public void validate(FeedFormat format) throws ValidationException {
-    CommonUtils.validateNotNull("href is required", _href);
-    CommonUtils.validateUri("href should be an valid uri", _href);
+    ValidationUtils.validateNotNull("href is required", _href);
+    ValidationUtils.validateUri("href should be an valid uri", _href);
   }
 }
