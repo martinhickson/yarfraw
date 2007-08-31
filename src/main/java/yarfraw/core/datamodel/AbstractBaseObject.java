@@ -25,8 +25,10 @@ abstract class AbstractBaseObject{
   protected String _lang;
   protected String _resource;
   protected String _about;
-  protected Map<QName, String> _otherAttributes;
-  protected List<Element> _otherElements;
+  //this is initial to 0 in the interest of saving space since most of the time
+  //these elements are expectted to be empty
+  protected Map<QName, String> _otherAttributes = new HashMap<QName, String>(0);
+  protected List<Element> _otherElements = new ArrayList<Element>(0);
   
   /**
    * This maps to the 'base' attribute that is common in all Atom 1.0 elements.

@@ -169,5 +169,8 @@ public class Id extends AbstractBaseObject{
       return;
     }
     CommonUtils.validateNotNull("Id Value should not be null", _idValue);
+    if(format == FeedFormat.ATOM10){
+      CommonUtils.validateUri("Id value should be an valid url", _idValue);
+    }
   }
 }

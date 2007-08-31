@@ -114,8 +114,9 @@ public class Generator extends AbstractBaseObject{
    * </li>
    * @param version
    */
-  public void setVersion(String version) {
+  public Generator setVersion(String version) {
     _version = version;
+    return this;
   }
   ////////////////////////Common setters///////////////////////
   /**

@@ -267,7 +267,6 @@ public class Image extends AbstractBaseObject{
     _otherAttributes.put(namespace, attribute);
     return this;
   }
-  
 
   /**
    * <b>Atom 1.0 only</b><br/>

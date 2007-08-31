@@ -53,18 +53,40 @@ class Rss10MappingUtils {
     ret.setAbout(in.getAbout());
     ret.setResource(in.getResource());
     
+    if(ret.getAbout() == null){
+      ret.setAbout(in.getUrl());
+    }
+    
     return FACTORY.createTRss10ChannelImage(ret);
   }
 
   public static JAXBElement<TRss10TextInput> toRss10TextInput(TextInput in) {
     TRss10TextInput ret = FACTORY.createTRss10TextInput();
+    List<Object> elementList = ret.getTitleOrDescriptionOrName();
     
-    ret.setTitle(in.getTitle());
-    ret.setDescription(in.getDescription());
-    ret.setName(in.getName());
-    ret.setLink(in.getLink());
+    if(in.getTitle() != null){
+      elementList.add(FACTORY.createTRss10TextInputTitle(in.getTitle()));
+    }
+    
+    if(in.getDescription() != null){
+      elementList.add(FACTORY.createTRss10TextInputDescription(in.getDescription()));
+    }
+    if(in.getName() != null){
+      elementList.add(FACTORY.createTRss10TextInputName(in.getName()));
+    }
+    if(in.getLink() != null){
+      elementList.add(FACTORY.createTRss10TextInputLink(in.getLink()));
+    }
+    
+    if(in.getOtherElements() != null){
+      elementList.addAll(in.getOtherElements());
+    }
     ret.setAbout(in.getAbout());
     ret.setResource(in.getResource());
+    
+    if(ret.getAbout() == null){
+      ret.setAbout(in.getLink());
+    }
     return FACTORY.createTextinput(ret);
   }
   /*
@@ -91,7 +113,19 @@ class Rss10MappingUtils {
     if(ch.getImageOrIcon() != null){
       TRss10Image img = factory.createTRss10Image();
       img.setResource(ch.getImageOrIcon().getAbout());
+      if(img.getResource() == null){
+        img.setAbout(img.getUrl());
+      }
       elementList.add(factory.createTRss10ChannelImage(img));
+    }
+    
+    if(ch.getTexInput() != null){
+      TRss10TextInput ti = factory.createTRss10TextInput();
+      ti.setResource(ch.getTexInput().getAbout());
+      if(ti.getResource() == null){
+        ti.setResource(ch.getTexInput().getLink());
+      }
+      elementList.add(factory.createTextinput(ti));
     }
     
     if(ch.getCategorySubjects() != null){
@@ -206,6 +240,11 @@ class Rss10MappingUtils {
     
     ret.setAbout(ch.getAbout());
     ret.setResource(ch.getResource());
+    
+    if(ret.getAbout() == null){
+      ret.setAbout(Utils.getHrefLink(ch.getLinks()));
+    }
+    
     if(ch.getOtherElements() != null){
       elementList.addAll(ch.getOtherElements());
     }

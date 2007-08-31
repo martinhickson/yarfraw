@@ -107,6 +107,15 @@ public class Link extends AbstractBaseObject{
     _hreflang = hreflang;
     return this;
   }
+  
+  /**
+   * <b>Atom 1.0 only </b> <br/>
+   * The "hreflang" attribute's content describes the language of the resource pointed to by the href attribute. When used together with the rel="alternate", it implies a translated version of the entry. Link elements MAY have an hreflang attribute, whose value MUST be a language tag [RFC3066].
+   */
+  public Link setHreflang(Locale hreflang) {
+    _hreflang = hreflang.getLanguage();
+    return this;
+  }
   /**
    * <b>Atom 1.0 only </b> <br/>
    * The "title" attribute conveys human-readable information about the link. The content of the "title" attribute is Language-Sensitive. Link elements MAY have a title attribute. 

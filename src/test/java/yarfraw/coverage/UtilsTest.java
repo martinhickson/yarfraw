@@ -73,9 +73,5 @@ public class UtilsTest extends TestCase{
         return true;
       }
     });
-    
-    FeedReader r = new FeedReader(new HttpURL("http://couponbar.coupons.com/rss.asp"));
-    
-    System.out.println(r.readChannel());;
   }
 }

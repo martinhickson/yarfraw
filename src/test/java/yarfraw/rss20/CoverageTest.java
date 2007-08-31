@@ -20,7 +20,7 @@ public class CoverageTest extends TestCase{
       //success
     }
     
-    c = new Cloud("domain", 123, "abc", "blah", "soap");
+    c = new Cloud("domain", "123", "abc", "blah", "soap");
     
     try {
       c.setProtocol("blah");

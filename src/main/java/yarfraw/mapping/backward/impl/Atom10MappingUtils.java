@@ -12,6 +12,7 @@ import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -128,7 +129,10 @@ class Atom10MappingUtils{
       }else if(o instanceof Element){
         ret.getOtherElements().add((Element)o);
       }else{
-        ret.addContentText(String.valueOf(o));
+        String s = String.valueOf(o);
+        if(StringUtils.isNotBlank(s)){
+          ret.addContentText(s);
+        }
       }
     }
     
@@ -193,7 +197,7 @@ class Atom10MappingUtils{
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            ret.setPubDate(dt.getValue().toGregorianCalendar().getTime(), CommonUtils.LVL5);
+            ret.setPubDate(dt.getValue());
           }
         }else if (CommonUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
@@ -209,7 +213,7 @@ class Atom10MappingUtils{
           //  partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            ret.setUpdatedDate(dt.getValue().toGregorianCalendar().getTime(), CommonUtils.LVL5);
+            ret.setUpdatedDate(dt.getValue());
           }
         }else if(val instanceof IdType){
           ret.setUid(toId((IdType)val));

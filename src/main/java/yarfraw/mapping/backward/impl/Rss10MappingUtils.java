@@ -1,5 +1,5 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.io.parser.ElementQName.RSS10_CONTRIBUTOR;
+import static yarfraw.io.parser.ElementQName.*;
 import static yarfraw.io.parser.ElementQName.RSS10_CREATOR;
 import static yarfraw.io.parser.ElementQName.RSS10_DATE;
 import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
@@ -62,7 +62,7 @@ class Rss10MappingUtils{
     UpdatePeriodEnum updatePeriod = null;
     BigInteger updateFrequency = null;
     Map<String, Integer> ordering = new HashMap<String, Integer>();
-    List<ItemEntry> items = toItems(rdf.getChannelOrItemOrTextinput());
+    List<ItemEntry> items = toItems(rdf.getChannelOrImageOrItem());
     ret.setAbout(ch.getAbout());
     ret.setResource(ch.getResource());
     ret.getOtherAttributes().putAll(ch.getOtherAttributes());
@@ -172,13 +172,17 @@ class Rss10MappingUtils{
                 item.setPubDate((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_SUBJECT)){
                 item.addCategorySubject((String)jaxb.getValue());
-              }else if (o instanceof Element) {
-                Element e = (Element) o;
-                if(ENCODED.equals(e.getLocalName())){
-                  item.getContent().addContentText(e.getTextContent());
-                }
-                item.getOtherElements().add(e);
+              }else{
+                LOG.warn("Unexpected jaxbElement under <item>: "+ ToStringBuilder.reflectionToString(jaxb));
               }
+            }else if (io instanceof Element) {
+              Element e = (Element) io;
+              if(ENCODED.equals(e.getLocalName())){
+                item.getContent().addContentText(e.getTextContent());
+              }
+              item.getOtherElements().add(e);
+            }else{
+              LOG.warn("Unexpected object under <item>: "+ToStringBuilder.reflectionToString(io));
             }
           }
           
@@ -200,10 +204,30 @@ class Rss10MappingUtils{
    * @return
    */
   public static TextInput populateTextinput(TextInput ret, TRss10TextInput input){
-    ret.setDescription(input.getDescription());
-    ret.setLink(input.getLink());
-    ret.setTitle(input.getTitle());
-    ret.setName(input.getName());
+    for(Object o : input.getTitleOrDescriptionOrName()){
+      if(o == null)
+        continue;
+      
+      if (o instanceof JAXBElement) {
+        JAXBElement<?> jaxb = (JAXBElement<?>) o;
+        if(same(jaxb.getName(), RSS10_TITLE)){
+          ret.setTitle((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_DESCRIPTION)){
+          ret.setDescription((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_LINK)){
+          ret.setLink((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_NAME)){
+          ret.setName((String)jaxb.getValue());
+        }else{
+          LOG.warn("Unexpected JAXBElement: "+ToStringBuilder.reflectionToString(jaxb)+" this should not happen!");
+        }
+      }else if (o instanceof Element) {
+        Element e = (Element) o;
+        ret.getOtherElements().add(e);
+      }else{
+        LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");
+      }
+    }
     
     ret.setAbout(input.getAbout());
     

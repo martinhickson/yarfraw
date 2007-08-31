@@ -45,6 +45,10 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
       elementList.add(FACTORY.createCreator(author));
     }
     
+    if(item.getRightsText() != null){
+      elementList.add(FACTORY.createRights(item.getRightsText()));
+    }
+    
     if(item.getCategorySubjects() != null){
       for(CategorySubject c : item.getCategorySubjects()){
         if(c != null){

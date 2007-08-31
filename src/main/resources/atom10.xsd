@@ -254,9 +254,8 @@
 	</xs:complexType>
 	<xs:complexType name="dateTimeType">
 		<xs:simpleContent>
-			<xs:extension base="xs:dateTime">
+			<xs:extension base="xs:string">
 				<xs:attributeGroup ref="atom:commonAttributes"/>
-
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>

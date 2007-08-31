@@ -13,14 +13,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import yarfraw.core.datamodel.CategorySubject;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.Id;
+import yarfraw.core.datamodel.Image;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.Person;
 import yarfraw.core.datamodel.Text;
-import yarfraw.core.datamodel.CategorySubject;
-import yarfraw.core.datamodel.Content;
-import yarfraw.core.datamodel.Image;
-import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.atom10.elements.CategoryType;
 import yarfraw.generated.atom10.elements.ContentType;
@@ -33,7 +33,6 @@ import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
 import yarfraw.generated.atom10.elements.UriType;
-import yarfraw.utils.CommonUtils;
 /**
  * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
  * @author jliang
@@ -145,7 +144,7 @@ public class Atom10MappingUtils{
     //partially supported
     if(item.getPubDate() != null){
       DateTimeType date = factory.createDateTimeType();
-      date.setValue(toGCal(CommonUtils.tryParseDate(item.getPubDate())));
+      date.setValue(item.getPubDate());
       elementList.add(factory.createEntryTypePublished(date));
     }
     
@@ -174,7 +173,7 @@ public class Atom10MappingUtils{
     //partially supported
     if(item.getUpdatedDate() != null){
       DateTimeType date = factory.createDateTimeType();
-      date.setValue(toGCal(CommonUtils.tryParseDate(item.getUpdatedDate())));
+      date.setValue(item.getUpdatedDate());
       elementList.add(factory.createEntryTypeUpdated(date));
     }
     
@@ -206,8 +205,11 @@ public class Atom10MappingUtils{
   public static ContentType toContent(Content in){
     ContentType ret = FACTORY.createContentType();
     ret.setSrc(in.getSrc());
-    ret.getContent().addAll(in.getContentText());
-    
+    ret.setType(in.getType());
+    if(in.getContentText()!= null){
+      ret.getContent().addAll(in.getContentText());
+    }
+
     if(in.getOtherElements() != null){
       ret.getContent().addAll(in.getOtherElements());
     }

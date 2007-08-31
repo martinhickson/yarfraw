@@ -10,13 +10,18 @@ import junit.framework.TestCase;
 
 import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.params.HttpClientParams;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
+import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.Cloud;
+import yarfraw.core.datamodel.Day;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.Id;
+import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.ItemEntry;
+import yarfraw.core.datamodel.TextInput;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -64,9 +69,9 @@ public class IOTest extends TestCase{
       }
       
     });
-    assertTrue("Title is not the same", "digg".equals(c.getTitle()));
-    assertTrue("language is not the same", "en-us".equals(c.getLanguage().getLanguage().toLowerCase()));
-    assertTrue("Link is not the same", "http://digg.com/".equals(c.getLink().toString()));
+    assertTrue("Title is not the same", "digg".equals(c.getTitleText()));
+    assertTrue("language is not the same", "en-us".equals(c.getLang()));
+    assertTrue("Link is not the same", "http://digg.com/".equals(c.getLinks().get(0).getHref()));
     //TODO: put more asserts
   }
   
@@ -75,27 +80,52 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/yarfraw.xml").toURI());
     assertTrue(!r.isRemoteRead());
     ChannelFeed c = r.readChannel();
-    ChannelFeed c2 = BuilderTest.buildChannel();
-    assertTrue("Copyright not equal!", EqualsBuilder.reflectionEquals(c.getCopyright(), c2.getCopyright()));
-    assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategory(), c2.getCategory()));
-    assertTrue("Category not equal!", EqualsBuilder.reflectionEquals(c.getCategoryString(), c2.getCategoryString()));
-    assertTrue("Cloud not equal!", EqualsBuilder.reflectionEquals(c.getCloud(), c2.getCloud()));
-    assertTrue("Description not equal!", EqualsBuilder.reflectionEquals(c.getDescription(), c2.getDescription()));
-    assertTrue("Docs not equal!", EqualsBuilder.reflectionEquals(c.getDocs(), c2.getDocs()));
-    assertTrue("Generator not equal!", EqualsBuilder.reflectionEquals(c.getGenerator(), c2.getGenerator()));
-    assertTrue("Image not equal!", EqualsBuilder.reflectionEquals(c.getImage(), c2.getImage()));
-    assertTrue("Items list not equal!", EqualsBuilder.reflectionEquals(c.getItems(), c2.getItems()));
-    assertTrue("Language not equal!", EqualsBuilder.reflectionEquals(c.getLanguage(), c2.getLanguage()));
-    assertTrue("LastBuildDate not equal!", EqualsBuilder.reflectionEquals(c.getLastBuildDate(), c2.getLastBuildDate()));
-    assertTrue("Link not equal!", EqualsBuilder.reflectionEquals(c.getLink(), c2.getLink()));
-    assertTrue("ManagingEditor not equal!", EqualsBuilder.reflectionEquals(c.getManagingEditor(), c2.getManagingEditor()));
-    assertTrue("PubDate not equal!", EqualsBuilder.reflectionEquals(c.getPubDate(), c2.getPubDate()));
-    assertTrue("SkipDays not equal!", EqualsBuilder.reflectionEquals(c.getSkipDays(), c2.getSkipDays()));
-    assertTrue("SkipHours not equal!", EqualsBuilder.reflectionEquals(c.getSkipHours(), c2.getSkipHours()));
-    assertTrue("TextInput not equal!", EqualsBuilder.reflectionEquals(c.getTexInput(), c2.getTexInput()));
-    assertTrue("Title not equal!", EqualsBuilder.reflectionEquals(c.getTitle(), c2.getTitle()));
-    assertTrue("TTL not equal!", EqualsBuilder.reflectionEquals(c.getTtl(), c2.getTtl()));
-    assertTrue("WebMaster not equal!", EqualsBuilder.reflectionEquals(c.getWebMaster(), c2.getWebMaster()));
+    ChannelFeed c2 = 
+      new ChannelFeed().setTitle("Test Title")
+      .addLink("http://www.test.com")
+      .setDescriptionOrSubtitle("Descritpion ......... ")
+      .setRights("Copyright 2002, Spartanburg Herald-Journal")
+      .addManagingEditorOrAuthorOrPublisher("geo@herald.com")
+      .addWebMasterOrCreator("betty@herald.com (Betty Guernsey)")
+      .setLang("en")
+      .setPubDate("Tue, 14 Aug 2007 15:32:11 EDT")
+      .setLastBuildOrUpdatedDate("Tue, 14 Aug 2007 15:32:11 EDT")
+      .addCategorySubject("cat1")
+      .addCategorySubject("cat2")
+      .setGenerator("MightyInHouse Content System v2.3")
+      .setDocs("http://blogs.law.harvard.edu/tech/rss")
+      .setCloud(new Cloud("rpc.sys.com", "80", "/RPC2", "pingMe", "soap"))
+      .setTtl(60)
+      .setImageOrIcon(new Image().setUrl("http://my.image.com/image.jpg")
+                                 .setTitle("Test Image")
+                                 .setLink("http://my.image.com/image.jpg"))
+      .setTexInput(new TextInput("Title", "Descritpion", "name", "http://link.com/link"))
+      
+      .addSkipDay(Day.Saturday, Day.Sunday)
+      .addSkipHour(12, 0, 1, 2, 3, 4, 5)
+      
+      .addItem(new ItemEntry().setTitle("Item 1")
+                         .addLink("http://somelink.com/")
+                         .setDescriptionOrSummary("desc")
+                         .addAuthorOrCreator("oprah@oxygen.net")
+                         .addCategorySubject("cat1", "cat2")
+                         .addCategorySubject(new CategorySubject("cat3")
+                                             .setDomainOrScheme("http://somedomain"))
+                         .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
+                         .setUid(new Id("GUID").setPermaLink(true)),
+               new ItemEntry().setTitle("Item2")
+                         .addLink("http://somelink.com/")
+                         .setDescriptionOrSummary("desc")
+                         .addAuthorOrCreator("oprah@oxygen.net")
+                         .addCategorySubject("cat1", "cat2")
+                         .addCategorySubject(new CategorySubject("cat3")
+                                             .setDomainOrScheme("http://somedomain"))
+                         .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
+                         .setUid(new Id("GUID").setPermaLink(true)));
+       
+    
+    assertEquals(c, c2);
+    
   }
   
 

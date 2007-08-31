@@ -119,8 +119,7 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
-            c.setLastBuildOrUpdatedDate(dt.getValue().toGregorianCalendar().getTime(), 
-                    CommonUtils.LVL5);
+            c.setLastBuildOrUpdatedDate(dt.getValue());
           }
         }else if(val instanceof EntryType){ 
           c.addItem(toItem((EntryType)val));

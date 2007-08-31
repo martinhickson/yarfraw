@@ -18,7 +18,7 @@
 			<xs:sequence>
 				<xs:choice maxOccurs="unbounded">
 					<xs:element ref="rss10:channel"  minOccurs="1" />
-					<!--  <xs:element ref="rss10:image" minOccurs="0" />  this is ignored, so remove to avoid confusion -->
+					<xs:element ref="rss10:image" minOccurs="0" />
 					<xs:element ref="rss10:item" minOccurs="1" maxOccurs="unbounded" />
 					<xs:element ref="rss10:textinput"  minOccurs="0" />
 					<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded">

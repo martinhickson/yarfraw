@@ -35,7 +35,7 @@ public class ToChannelRss10Impl implements ToChannelRss10{
     
     TRss10TextInput ti = null;
     TRss10Image img = null;
-    for(Object o : rdf.getChannelOrItemOrTextinput()){
+    for(Object o : rdf.getChannelOrImageOrItem()){
       if (o instanceof JAXBElement) {
         Object val = ((JAXBElement)o).getValue();
         if (val instanceof TRss10Channel) {

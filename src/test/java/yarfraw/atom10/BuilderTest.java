@@ -1,11 +1,6 @@
 package yarfraw.atom10;
 
-import static yarfraw.core.datamodel.Text.TextType.html;
-import static yarfraw.core.datamodel.Text.TextType.text;
-import static yarfraw.core.datamodel.Text.TextType.xhtml;
-
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import javax.xml.namespace.QName;
@@ -14,59 +9,62 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import yarfraw.core.datamodel.Content;
-import yarfraw.core.datamodel.AtomId;
-import yarfraw.core.datamodel.Link;
-import yarfraw.core.datamodel.Text;
-import yarfraw.core.datamodel.AtomTextElementEnum;
 import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.Content;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.Generator;
+import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.ItemEntry;
+import yarfraw.core.datamodel.Link;
+import yarfraw.core.datamodel.Person;
 import yarfraw.io.FeedWriter;
-import yarfraw.utils.CommonUtils;
 import yarfraw.utils.XMLUtils;
 
 public class BuilderTest extends TestCase{
   
   public static ChannelFeed buildChannel() throws Exception{
-    return  ChannelFeed.create()
-    .setLanguage(Locale.ENGLISH)
+    return  new ChannelFeed()
+    .setLang(Locale.ENGLISH)
     .setTitle("dive into mark")
-    .setDescription("A <em>lot</em> of effort went into making this effortless")
-    .setPubDate("2005-07-10T12:29:29Z", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"))
-    .setAtomId(new AtomId("tag:example.org,2003:3"))
-    .setLink("http://example.org/")
-    .addAtomLink(new Link().setHref("http://example.org/")
-                               .setRel("alternate")
-                               .setType("text/html")
-                               .setHreflang("en"))
-    .addAtomLink(new Link().setHref("http://example.org/feed.atom")
-                              .setRel("self")
-                              .setType("application/atom+xml"))
-    .setCopyright("Copyright (c) 2003, Mark Pilgrim")
-    .setGenerator("Example Toolkit")
-    .putAtomTextAttribute(AtomTextElementEnum.title, new Text(text))
-    .putAtomTextAttribute(AtomTextElementEnum.subtitle, new Text(html))
-    .additem(ItemEntry.create()
+    .setDescriptionOrSubtitle("A <em>lot</em> of effort went into making this effortless")
+    .setPubDate("2005-07-10T12:29:29Z")
+    .setUid("tag:example.org,2003:3")
+    .addLink(new Link("http://example.org/")
+                      .setHreflang(Locale.ENGLISH)
+                      .setRel("alternate")
+                      .setType("text/html"))
+    .addLink(new Link("http://example.org/feed.atom")
+                      .setRel("self")
+                      .setType("application/atom+xml"))
+    .setRights("Copyright (c) 2003, Mark Pilgrim")
+    .setGenerator(new Generator("Example Toolkit")
+                              .setVersion("1.0")
+                              .setUri("http://www.example.com/"))
+    
+    .addItem(new ItemEntry()
           .setTitle("Atom draft-07 snapshot")
-          .addAtomLink(new Link().setHref("http://example.org/2005/04/02/atom")
-                               .setRel("alternate")
-                               .setType("text/html"))
-          .addAtomLink(new Link().setHref("http://example.org/audio/ph34r_my_podcast.mp3")
-                              .setRel("enclosure")
-                              .setType("audio/mpeg")
-                              .setLength(1337))
-          .setAtomId(new AtomId("tag:example.org,2003:3.2397"))
-          .setPubDate(CommonUtils.tryParseISODate("2003-12-13T08:29:29-04:00"))
-          //person's name, uri elements are not supported
-          .setAuthor("f8dy@example.com")
-          //contributor element are not supported
-          .setContent(new Content().setType(xhtml)
-                                           .setBase("http://diveintomark.org/")
-                                           .setLang(Locale.US)
-                                           .addOtherElement("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
-                                                   "<p><i>[Update: The Atom draft is finished.]</i></p>"+
-                                                 "</div>")));
+          .addLink(new Link("http://example.org/2005/04/02/atom")
+                      .setRel("alternate")
+                      .setType("text/html"))
+          .addLink(new Link("http://example.org/audio/ph34r_my_podcast.mp3")
+                          .setRel("enclosure")
+                          .setType("audio/mpeg")
+                          .setLength(1337))                      
+          
+          .setUid("tag:example.org,2003:3.2397")
+          .setUpdatedDate("2003-12-13T08:29:29-04:00")
+          .setPubDate("2003-12-13T08:29:29-04:00")
+          .addAuthorOrCreator(new Person("f8dy@example.com")
+                                  .setName("Mark Pilgrim")
+                                  .setUri("http://example.org/"))
+          .addContributor(new Person().setName("Sam Ruby"))
+          .addContributor(new Person().setName("Joe Gregorio"))
+          .setContent(new Content().setType("xhtml")
+                                   .setBase("http://diveintomark.org/")
+                                   .setLang(Locale.US)
+                                   .addOtherElement("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+                                           "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+                                         "</div>")));
   }
   
   @Test
@@ -83,12 +81,12 @@ public class BuilderTest extends TestCase{
   
   @Test
   public void testAtomContent() throws Exception{
-    Content content = Content.create()
-                                     .addContentText("text content")
-                                     .addOtherAttributes(new QName("http://ns", "myattr"), "value")
-                                     .addOtherElement(XMLUtils.parseXml("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
-                                                     "<p><i>[Update: The Atom draft is finished.]</i></p>"+
-                                                   "</div>", false, false).getDocumentElement());
+    Content content = new Content()
+                         .addContentText("text content")
+                         .addOtherAttributes(new QName("http://ns", "myattr"), "value")
+                         .addOtherElement(XMLUtils.parseXml("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+                                         "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+                                       "</div>", false, false).getDocumentElement());
     assertTrue("content not correctly built", content.getContentText().size()==1);
     assertTrue("content not correctly built", content.getOtherAttributes().containsValue("value"));
     assertTrue("content not correctly built", content.getOtherElements().size() ==1);
@@ -96,11 +94,11 @@ public class BuilderTest extends TestCase{
   
   @Test
   public void testAtomId() throws Exception{
-    AtomId id = AtomId.create()
-                                     .addOtherAttributes(new QName("http://ns", "myattr"), "value")
-                                     .setBase("base")
-                                     .setLang(Locale.ENGLISH);
-    assertTrue("content not correctly built", id.getLang()==Locale.ENGLISH);
+    Id id = new Id()
+               .addOtherAttributes(new QName("http://ns", "myattr"), "value")
+               .setBase("base")
+               .setLang(Locale.ENGLISH);
+    assertTrue("content not correctly built", id.getLang().equals(Locale.ENGLISH.getLanguage()));
     assertTrue("content not correctly built", id.getOtherAttributes().containsValue("value"));
     assertTrue("content not correctly built", id.getBase().equals("base"));
   }

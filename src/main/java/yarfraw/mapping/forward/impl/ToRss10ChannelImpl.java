@@ -28,7 +28,7 @@ public class ToRss10ChannelImpl implements ToRss10Channel{
   public RDF execute(ChannelFeed ch)
       throws YarfrawException {
     RDF rdf = FACTORY.createRDF();
-    List<Object> elementList = rdf.getChannelOrItemOrTextinput();
+    List<Object> elementList = rdf.getChannelOrImageOrItem();
     elementList.add(Rss10MappingUtils.toChannel(ch));
     if(ch.getImageOrIcon() != null){
       elementList.add(Rss10MappingUtils.toRss10Image(ch.getImageOrIcon()));

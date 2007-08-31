@@ -3,7 +3,6 @@ package yarfraw.mapping.forward.impl;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toAtomId;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toCategoryType;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toEntry;
-import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toGCal;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toIcon;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toLink;
 import static yarfraw.mapping.forward.impl.Atom10MappingUtils.toPersonType;
@@ -28,7 +27,6 @@ import yarfraw.generated.atom10.elements.FeedType;
 import yarfraw.generated.atom10.elements.GeneratorType;
 import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.mapping.forward.ToAtom10Channel;
-import yarfraw.utils.CommonUtils;
 /**
  * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
  * @author jliang
@@ -144,7 +142,7 @@ public class ToAtom10ChannelImpl implements ToAtom10Channel{
     
     if(ch.getLastBuildOrUpdatedDate() != null){
       DateTimeType date = factory.createDateTimeType();
-      date.setValue(toGCal(CommonUtils.tryParseDate(ch.getLastBuildOrUpdatedDate())));
+      date.setValue(ch.getLastBuildOrUpdatedDate());
       elementList.add(factory.createFeedTypeUpdated(date));
     }
     
