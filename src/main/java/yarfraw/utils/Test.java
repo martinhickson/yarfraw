@@ -12,7 +12,7 @@ public class Test{
     FeedReader r = new FeedReader(new HttpURL("http://news.google.com/?output=atom"));
     ChannelFeed c =  r.readChannel();
     System.out.println(c);
-    
+    System.out.println(System.getProperty("java.io.tmpdir"));
   }
 
 }

@@ -1,6 +1,7 @@
 package yarfraw.rss20;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
@@ -134,8 +135,9 @@ public class IOTest extends TestCase{
   public void testAppend() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     FeedAppender a = new FeedAppender(f);
-    ItemEntry item = BuilderTest.buildChannel().getItems().get(0);
-    a.addItem(item);
+    List<ItemEntry> items = BuilderTest.buildChannel().getItems();
+    ItemEntry item = items.get(0);
+    a.appendAllItemsToEnd(item);
     ChannelFeed c = FeedReaderUtils.read(FeedFormat.RSS20, f);
     assertEquals(item, c.getItems().get(c.getItems().size()-1));
     int oldSize = c.getItems().size();
@@ -148,29 +150,29 @@ public class IOTest extends TestCase{
   public void testAppend2() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     File copy = File.createTempFile("YarfrawDiggCopy", ".xml");
-    
+    List<ItemEntry> items = BuilderTest.buildChannel().getItems();
     FeedWriter w = new FeedWriter(copy);
     w.writeChannel(new FeedReader(f).readChannel());
     
     FeedAppender a = new FeedAppender(copy);
     a.setNumItemToKeep(10);
     
-    a.addItem(BuilderTest.buildChannel().getItems().get(0));
+    a.appendAllItemsToBeginning(items.get(0));
     
     FeedReader r = new FeedReader(copy);
     assertEquals(10, r.readChannel().getItems().size());
     
-    a.addAllItems(BuilderTest.buildChannel().getItems());
+    a.appendAllItemsToBeginning(items);
     
     assertEquals(10, r.readChannel().getItems().size());
     
     a.setItem(0, BuilderTest.buildChannel().getItems().get(1));
     
-    assertEquals("item not set correctly", r.readChannel().getItems().get(0), BuilderTest.buildChannel().getItems().get(1));
+    assertEquals("item not set correctly", r.readChannel().getItems().get(0), items.get(1));
     
-    a.addAllItems(BuilderTest.buildChannel().getItems().get(1));
+    a.appendAllItemsToBeginning(BuilderTest.buildChannel().getItems().get(1));
     
-    assertEquals("item not added correctly", r.readChannel().getItems().get(9), BuilderTest.buildChannel().getItems().get(1));
+    assertEquals("item not added correctly", r.readChannel().getItems().get(0), items.get(1));
   }
   
   

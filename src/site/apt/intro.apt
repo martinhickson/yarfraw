@@ -1,0 +1,144 @@
+                                    ------
+                                    Core Data Model
+                                    ------
+                                    Jay Liang
+                                    ------
+                                    2007/09/01
+                                    
+RSS, RDF and ATOM
+
+	If you have worked with RSS feed, you are probably aware that there are several versions of RSS formats and there
+is also the Atom format (see {{http://en.wikipedia.org/wiki/RSS_(file_format)}}). While RSS 2.0 seems to be the most
+popular one, all of these formats are being actively used by some websites somewhere. There are some similarities in element
+naming among the RSS revisions (if you ignore the namespaces), but Atom and RSS are totally incompatible. 
+These incompatibilities make it very difficult to support multiple formats, especially for programs that need to parse
+and display them. The diagram below illustrates this issue:  
+
+[images/site/before.png] RSS/Atom formats
+
+Yarfraw Core Model
+
+	Even thought these formats are incompatible, it's obvious that all of them contain the same set of information. They include:
+	
+	[[1]] some meta data about the 'Channel' or 'Feed' such as name, description, copyrights, published date.
+ 
+	[[2]] A list of 'Item' or 'Entry', each of these 'Item' also includes some more meta data and also a content section that
+contains the main content of the particular item.
+
+   Since they are the same information that are in different format, clearly we can just write in one unified model and 
+convert them to the other formats. Yarfraw's core data classes offers a unified model that is big enough to cover all of these
+different formats. With that, you only need to work with one data model and at the same time have the benefits of supporting multiple formats. 
+The diagram below illustrates the idea: 
+ 
+[images/site/after.png] Yarfraw Core Model
+	
+Feed Format To Yarfraw Mapping
+	
+	Yarfraw's core model is capable of holding information from all supported format. When the API reads a feed into the core model, 
+all the data that are common in all formats will be mapped to a common field, the format specific elements and attributes
+are then mapped to the corresponding format specific fields.
+
+	For example, all formats have a \<channel\> (or \<feed\> in Atom format) element that contains meta data about the feed. This element 
+will be mapped to a data class called 'ChannelFeed' in Yarfraw. As you would expect, \<item\> in RSS and \<entry\> in Atom are both
+mapped to a data class called 'ItemEntry'. 
+
+	Sub-elements, such as \<title\> element of a \<channel\> or \<feed\>, are also mapped. In both 'ChannelFeed' and 'ItemEntry', there is
+a field call 'title' that holds this information. Some of the common elements, while contain the same information, are named differently
+in different formats. For example, there is \<category\> elements in both RSS 2.0 and Atom 1.0 format, but in RSS 1.0, this element is called
+\<dc:subject\>. Since they are the same data, they are mapped to a field under 'ChannelFeed' called 'CategorySubject'. The following 
+table lists all the special mapping among formats:
+
+	Note the following table is not necessary complete, for more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+The model also supports extensibility elements, see {{{builder.html}Builder Example}} and other documentations on the site.
+	
+*----------+--------------+----------------+----------------+----------------+
+|| <<Yarfraw Data Model>> || <<RSS 2.0 >>    || <<RSS 1.0>> || <<Atom 1.0>> || <<Comments>> ||       
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed | \<channe\> | \<channel\> | \<feed\> | Note that in RSS 1.0 second level elements such as \<item\> elements under \<rdf:RDF\> are also mapped here |
+*----------+--------------+----------------+----------------+----------------+
+| CategorySubject |  \<category\> | \<dc:subject\> | \<category\> | \<dc:subject\> is an element in RSS 1.0's dc extension module |
+*----------+--------------+----------------+----------------+----------------+
+| Cloud | \<cloud\> | ignored | ignored|  This is only used by Rss 2.0. |
+*----------+--------------+----------------+----------------+----------------+
+| Content | \<encoded\> | \<encoded\> | \<content\>   | This is not officially supported in RSS 2.0 and RSS 1.0, but if there's a \<content:encoded\> element under \<Item\>, the content of the encoded element will be mapped to this class. The type will always be 'text' in this case.  |
+*----------+--------------+----------------+----------------+----------------+
+| Enclosure | \<enclosure\> | ignored | ignored   |This is only used by Rss 2.0. |
+*----------+--------------+----------------+----------------+----------------+
+| Generator | \<generator\> | ignored | \<generator\>  |RSS 1.0 does not support this element |
+*----------+--------------+----------------+----------------+----------------+
+| Id | \<guid\> | ignored | \<id\>  |RSS 1.0 does not support this element |
+*----------+--------------+----------------+----------------+----------------+
+| Image | \<image\> | \<image\> | \<logo\> and \<icon\>   | |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry | \<item\> | \<item\> | \<entry\>   | |
+*----------+--------------+----------------+----------------+----------------+
+| Link | \<link\> | \<link\> | \<link\>   | |
+*----------+--------------+----------------+----------------+----------------+
+| Person | Use as a type for 'person' type info,  such as \<webMaster\> \<author\> etc | Use as a type for 'person' type info,  such as \<dc:publisher\> \<dc:creator\> etc | 'Person Construct' | Note that RSS 1.0 and 2.0, only 'EmailOrText' field is used, as the text content of the corresponding element |
+*----------+--------------+----------------+----------------+----------------+	
+| Source | \<link\> | ignored | ignored  | This is only used by Rss 2.0.  Note that this element is not the same as the \<source\> in Atom. |
+*----------+--------------+----------------+----------------+----------------+
+| Text | string elements such as \<title\> | string elements such \<title\> | 'Text Construct' |  Note that RSS 1.0 and 2.0, only 'Text' field is used, as the text content of the corresponding element |
+*----------+--------------+----------------+----------------+----------------+
+| TextInput | \<textInput\> | \<textinput\> | ignored  | \<TextInput\> element of Rss 1.0 and Rss 2.0. This is ignored by Atom 1.0   |
+*----------+--------------+----------------+----------------+----------------+
+*----------+--------------+----------------+----------------+----------------+
+|| <<Yarfraw Data Model>> || <<RSS 2.0 >>    || <<RSS 1.0>> || <<Atom 1.0>> || <<Comments>> ||
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.title ItemEntry.title | \<title\> | \<title\> | \<title\> | a rare element that every format happens to use the same name |       
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.managingEditorOrAuthorOrPublisher | \<managingEditor\> | \<dc:publisher\> | \<author\> | This is a list, but for RSS 1.0 and RSS 2.0, only the first 'Person' in the list is used. |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.links ItemEntry.links | \<link\> | \<link\> | \<link\> | This is a list, but for RSS 1.0 and RSS 2.0, only the first 'Link' in the list is interpreted. |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.descriptionOrSubtitle | \<description\> | \<description\> | \<subtitle\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.docs | \<docs\> | ignored | ignored | Rss 2.0 only |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.lang | \<language\> | ignored | 'lang' attribute |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.webMasterOrCreator | \<webMaster\> | \<dc:creator\> | ignored |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.pubDate | \<pubDate\> | \<dc:date\> | ignored |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.uid | ignored | ignored | \<id\> | {{{apidocs/index.html}Javadoc}} |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.ttl | \<guid\> | \<sy:updatePeriod\> and \<sy:updateFrequency\> | ignored | Rss 1.0 - This value is parsed from both the \<sy:updatePeriod\> and \<sy:updateFrequency\> for example: updatePeriod:hourly and updateFrequency:2 = ttl: 30 minutes |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.cloud | \<cloud\> | ignored | ignored  | RSS 2.0 only |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.rights | \<copyright\> | \<dc:rights\> | \<rights\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.imageOrIcon | \<image\> | \<image\> | \<icon\>  | |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.logo | ignored | ignored | \<icon\>  | Atom 1.0 only |
+*----------+--------------+----------------+----------------+----------------+	
+| ChannelFeed.textInput | \<textInput\> | \<textinput\> | ignored  |  |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.skipHours | \<skipHours\> | ignored | ignored  | RSS 2.0 only |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.skipDays | \<skipDays\> | ignored | ignored  | RSS 2.0 only |
+*----------+--------------+----------------+----------------+----------------+
+*----------+--------------+----------------+----------------+----------------+
+|| <<Yarfraw Data Model>> || <<RSS 2.0 >>    || <<RSS 1.0>> || <<Atom 1.0>> || <<Comments>> ||       
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.descriptionOrSummary | \<description\> | \<description\> | \<summary\> |  {{{apidocs/index.html}Javadoc}} |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.authorOrCreator | \<author\> | \<dc:creator\> | \<author\> | This is a list, but for RSS 1.0 and RSS 2.0, only the first 'Link' in the list is interpreted. |
+*----------+--------------+----------------+----------------+----------------+
+| ChannelFeed.contributors and ItemEntry.contributors | ignored | \<dc:contributor\> | \<contributor\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.comments | \<comments\> | ignored | ignored |  RSS 2.0 only |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.enclosure | \<enclosure\> | ignored | ignored |  RSS 2.0 only. To add an enclosure to Atom, use the link element. See {{{http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#rfc.section.4.2.7}Atom 1.0}} specs |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.uid | \<guid\> | ignored | \<id\> | {{{apidocs/index.html}Javadoc}} |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.pubDate | \<pubDate\> | \<dc:date\> | \<published\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.updatedDate | ignored | ignored | \<updated\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.rights | ignored | \<dc:rights\> | \<rights\> |  |
+*----------+--------------+----------------+----------------+----------------+
+| ItemEntry.content | \<encoded\> | \<encoded\> | \<content\> | {{{apidocs/index.html}Javadoc}} |
+*----------+--------------+----------------+----------------+----------------+

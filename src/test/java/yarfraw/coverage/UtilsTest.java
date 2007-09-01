@@ -34,8 +34,8 @@ public class UtilsTest extends TestCase{
   @Test
   public void testDateParsing() throws Exception{
     long time = System.currentTimeMillis();
-    String d1 = CommonUtils.getDateAsISO8601String(new Date(time));
-    String d2 = CommonUtils.getDateAsISO8601String(CommonUtils.tryParseDate(d1));
+    String d1 = CommonUtils.formatDate(new Date(time), FeedFormat.ATOM10);
+    String d2 = CommonUtils.formatDate(CommonUtils.tryParseDate(d1), FeedFormat.ATOM10);
     assertEquals(d1, d2);
   }
   @Test

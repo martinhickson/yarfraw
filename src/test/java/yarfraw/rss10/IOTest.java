@@ -27,7 +27,7 @@ public class IOTest extends TestCase{
     ChannelFeed c = r.readChannel();
     
     File f = File.createTempFile("rss10test", ".xml");
-    FeedWriter w = new FeedWriter(f);
+    FeedWriter w = new FeedWriter(f, FeedFormat.RSS10);
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
     

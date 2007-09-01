@@ -8,6 +8,92 @@
       Before reading page, you should have read {{{builder.html}Builder Quick Usage}}. If not, please
 read that first.
       
+Building items and channels with additional elements
+	
+	Sometimes you may want to add extensibility elements to your feed that are not in the RSS specs.
+For example, the RSS 2.0 feed from {{{digg.xml}digg.com}} has some additional elements under all the item elements.
+
+	The Channel and Item data models supports these additional elements, as well as any additional attributes.
+You can add more elements to a channel or an item using the 'otherElements' and 'otherAttributes' list:
+
++----------------------------------------------------------------------------------------------------+
+   
+   new Channel().addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+
++----------------------------------------------------------------------------------------------------+
+   
+  That will add the following attribute to the channel element
+  
++----------------------------------------------------------------------------------------------------+
+        
+   <channel xmlns:my="http://my.company.com/" my:testAttribute="test">
+   
++----------------------------------------------------------------------------------------------------+
+
+	Adding elements:
+	 
++----------------------------------------------------------------------------------------------------+
+   
+   c.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
+   c.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
+
++----------------------------------------------------------------------------------------------------+
+    
+   That will add the following two elements to the channel element
+
++----------------------------------------------------------------------------------------------------+
+        
+   <channel>
+   		<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
+		<my:otherNewElement xmlns:my="http://my.company.com/">new element 2</my:otherNewElement>
+   </channel>
+   
++----------------------------------------------------------------------------------------------------+
+
+	Of course, you can also add an element object:
+
++----------------------------------------------------------------------------------------------------+
+   
+   new Channel().addOtherElement(new Element(){...});
+  	
+   
+   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+   Document doc = factory.newDocumentBuilder().newDocument();
+   new Channel().addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
+   
++----------------------------------------------------------------------------------------------------+
+
+	Item works the same way:
+
++----------------------------------------------------------------------------------------------------+
+
+	Item item = new Item().setTitle("title")
+                          .setDescription("desc")
+                          .setLink("http://my.company.com");
+    item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+    item.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
+    item.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");    
+    
+    item.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
+    
+    c.additem(item);
+
++----------------------------------------------------------------------------------------------------+
+    
+    resulting item:
+
++----------------------------------------------------------------------------------------------------+
+    
+	<item my:testAttribute="test">
+		<my:newElement>new element</my:newElement>
+		<my:otherNewElement>new element 2</my:otherNewElement>
+		<my:oneMoreElement />
+		<description>desc</description>
+		<link>http://my.company.com</link>
+		<title>title</title>
+	</item>
+		
++----------------------------------------------------------------------------------------------------+ 
       
 Data object validation
       

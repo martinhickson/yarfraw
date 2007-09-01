@@ -4,6 +4,12 @@
   </properties>
   <body>
   	<release version="0.8" date="TBD">
+  	  <action dev="jliang" type="TODO">
+        Added support for Custom parsing 
+      </action>
+	  <action dev="jliang" type="TODO">
+        Added support for quick parsing 
+      </action>                     
   	</release>
     <release version="0.7-RC" date="TBD" description="Release candidate of first major mile stone">
       <action dev="jliang" type="add">
@@ -21,7 +27,7 @@
       <action dev="jliang" type="add">
         Added a lot more unit tests.
       </action>
-	  <action dev="jliang" type="TODO">
+	  <action dev="jliang" type="add">
         Added missing Javadoc. 
       </action>
 
@@ -33,13 +39,7 @@
       </action>              
 	  <action dev="jliang" type="add">
         Added support for Atom 1.0 
-      </action>
-	  <action dev="jliang" type="add">
-        Added support for Custom parsing 
-      </action>
-	  <action dev="jliang" type="add">
-        Added support for quick parsing 
-      </action>                                                                       
+      </action>                                                  
     </release>
   </body>
 </document>

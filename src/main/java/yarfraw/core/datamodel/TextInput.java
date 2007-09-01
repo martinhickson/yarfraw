@@ -16,7 +16,7 @@ import org.xml.sax.SAXException;
 import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 /**
- * <b>&ltTextInput> element of Rss 1.0 and Rss 2.0. This is ignored by Atom 1.0</b>
+ * <b>&lt;TextInput> element of Rss 1.0 and Rss 2.0. This is ignored by Atom 1.0</b>
  * <br/>
  * <li> Rss 2.0 -
  *A channel may optionally contain a <textInput> sub-element, which contains four required sub-elements.<br/>

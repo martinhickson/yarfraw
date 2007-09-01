@@ -1,0 +1,31 @@
+	
++----------------------------------------------------------------------------------------------------+	
+  w.writeChannel(c, new ValidationEventHandler(){
+	public boolean handleEvent(ValidationEvent event) {
+	//Process the event
+		return false;
+	}  
+  });
+
++----------------------------------------------------------------------------------------------------+
+
+
+Reading a RSS 2.0 feed
+
+	You can use the reader class to read any RSS 2.0 feed.
+	
+	
+	
+		
+	Similar to FeedWriter, you can add your own event handler:
+	
++----------------------------------------------------------------------------------------------------+
+   
+  r.readChannel(new ValidationEventHandler(){
+      public boolean handleEvent(ValidationEvent event) {
+      	//Process the event
+        return false;
+      }
+  });
+   
++----------------------------------------------------------------------------------------------------+
