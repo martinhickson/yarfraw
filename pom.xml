@@ -48,6 +48,31 @@
     <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
     <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</url>
   </scm>
+
+  <profiles>
+  	<profile>
+  	  <id>dev</id>
+  	  <build>
+  	  	<plugins>
+		  	  <plugin>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <configuration>
+		          <forkMode>always</forkMode>
+		          <includes>
+		            <list>**/*Test.java</list>
+		          </includes>
+        		</configuration>
+      		</plugin>
+    	</plugins>
+  	</build>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>dev</value>
+        </property>
+      </activation>
+  	</profile>
+  </profiles>
   <build>
     <extensions>
       <extension>
@@ -61,7 +86,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <tagBase>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags</tagBase>
+          <tagBase>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags</tagBase>
         </configuration>
       </plugin>
       <plugin>
@@ -162,6 +187,7 @@
           <forkMode>always</forkMode>
           <includes>
             <list>**/*Test.java</list>
+            <list>**/*TestSlow.java</list>
           </includes>
         </configuration>
       </plugin>
@@ -195,7 +221,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.3</version>
+      <version>4.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>

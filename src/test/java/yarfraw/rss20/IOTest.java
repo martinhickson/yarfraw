@@ -1,16 +1,15 @@
 package yarfraw.rss20;
 
 import java.io.File;
-import java.util.List;
 
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.httpclient.HttpURL;
-import org.apache.commons.httpclient.params.HttpClientParams;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.CategorySubject;
@@ -34,6 +33,8 @@ import yarfraw.utils.Rss20Utils;
  */
 public class IOTest extends TestCase{
 
+  private static final Log LOG = LogFactory.getLog(IOTest.class);
+  
   @Test
   public void testBuilder() throws Exception{
     ChannelFeed c = BuilderTest.buildChannel();
@@ -64,7 +65,7 @@ public class IOTest extends TestCase{
     r.readChannel(new ValidationEventHandler(){
 
       public boolean handleEvent(ValidationEvent event) {
-        // TODO Auto-generated method stub
+        LOG.error(ToStringBuilder.reflectionToString(event));
         return false;
       }
       
@@ -129,77 +130,6 @@ public class IOTest extends TestCase{
   }
   
 
-  @Test
-  public void testRead3() throws Exception{  
-    File f1 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
-    File f2 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/reddit.xml").toURI());
-    File f3 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/theserverside-rss2.xml").toURI());
-    List<ChannelFeed> channels = Rss20Utils.readAll(f1, f2, f3);
-    assertEquals(3, channels.size());
-  }
-  
-  @Test
-  public void testRemoteRead() throws Exception{  
-    
-    try{
-      FeedReader reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
-      assertTrue(reader.isRemoteRead());
-      ChannelFeed c = reader.readChannel();
-      //this test can be indeterministic because it requires a network connection 
-      //if there no exception thrown, then we should have the channel read
-      assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (Exception e) {
-      System.out.println("Failed to read from a remote url, this test requires a network connection");
-      e.printStackTrace();
-    }
-  }
-  
-  @Test
-  public void testRemoteRead2() throws Exception{
-    FeedReader reader = null;
-    try{
-      reader = new FeedReader(new HttpURL("http://digg.com/rss/index.xml"));
-      assertTrue(reader.isRemoteRead());
-      HttpClientParams params = new HttpClientParams();
-      params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
-      reader.setHttpClientParams(params);
-      ChannelFeed c = reader.readChannel();
-      //this test can be indeterministic because it requires a network connection 
-      //if there no exception thrown, then we should have the channel read
-      assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (Exception e) {
-      System.out.println("Failed to read from a remote url, this test requires a network connection");
-      e.printStackTrace();
-    }
-    
-    
-    try{
-      reader = new FeedReader(new HttpURL("http://www.twit.tv/node/feed"));
-      assertTrue(reader.isRemoteRead());
-      HttpClientParams params = new HttpClientParams();
-      params.setSoTimeout((int)DateUtils.MILLIS_PER_MINUTE);
-      reader.setHttpClientParams(params);
-      ChannelFeed c = reader.readChannel();
-      //this test can be indeterministic because it requires a network connection 
-      //if there no exception thrown, then we should have the channel read
-      assertTrue("Remote read failed", c.getTitle() != null);
-    }catch (Exception e) {
-      System.out.println("Failed to read from a remote url, this test requires a network connection");
-      e.printStackTrace();
-    }
-    
-    try {
-      HttpClientParams params = new HttpClientParams();
-      params.setSoTimeout(20);
-      reader = new FeedReader(new HttpURL("http://nowhere.com"));
-      reader.readChannel();
-      fail("should failed");
-    }
-    catch (Exception e) {
-      // success;
-    }
-  }
-  
   @Test
   public void testAppend() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());

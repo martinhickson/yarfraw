@@ -4,7 +4,6 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.httpclient.HttpURL;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.ChannelFeed;
@@ -79,18 +78,5 @@ public class IOTest extends TestCase{
     assertEquals(c, c2);
   }
 
-  @Test
-  public void testRemoteRead() throws Exception{
-    try {
-      FeedReader reader = new FeedReader(new HttpURL("http://www.google.com/news?output%5Cx3datom=&output=atom"));
-      assertTrue("isRemoteRead", reader.isRemoteRead());
-      if(reader.getFormat() != FeedFormat.UNKNOWN){
-        System.out.println("Google news' atom feed should be an unsupported atom 0.3 format");
-      }
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
 }

@@ -8,6 +8,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
@@ -24,7 +26,7 @@ import yarfraw.core.datamodel.YarfrawException;
  *
  */
 public class FeedFormatDetector{
-
+  private static final Log LOG = LogFactory.getLog(FeedFormatDetector.class);
   private static final String RSS = "rss";
   private static final String VERSION = "version";
   private static final String VERSION_20 = "2.0";
@@ -73,13 +75,12 @@ public class FeedFormatDetector{
     public void startElement(String uri, String localName,
             String qName, Attributes attributes) throws EarlyTerminationException{
 
-//       for(int i =0; i< attributes.getLength(); i++){
-//         System.out.println(attributes.getValue(i));
-//         System.out.println(attributes.getLocalName(i));
-//       }
-    //just check the root element is enough
-      if(RSS.equals(localName)
-              && VERSION_20.equals(attributes.getValue(StringUtils.EMPTY, VERSION))){
+    //just check the root element is enough 
+      if(RSS.equals(localName)){
+        String version = attributes.getValue(StringUtils.EMPTY, VERSION);
+        if(!VERSION_20.equals(version)){
+          LOG.warn("Input RSS feed is of version "+version+", reading it as version 2.0. Version 2.0 should be backward compatibile");
+        }
         throw new EarlyTerminationException(FeedFormat.RSS20);
       }else if (RDF.equals(localName) && RDF_NS_URI.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.RSS10);

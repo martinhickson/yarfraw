@@ -28,15 +28,15 @@ import yarfraw.core.datamodel.Text.TextType;
 public class CoreModelTest extends TestCase{
   
   
-  private static final Map<QName, String> AttrMap = new HashMap<QName, String>();
-  private static final QName NAME1 = new QName("http://my.com", "name1");
-  private static final QName NAME2 = new QName("http://my.com", "name2");
-  private static final QName NAME3 = new QName("http://my.com", "name3");
-  private static final QName NAME4 = new QName("http://my.com", "name4");
-  private static final List<Element> ELEMENTS = new ArrayList<Element> ();
-  private static DocumentBuilder BUILDER = null;
+  private final Map<QName, String> AttrMap = new HashMap<QName, String>();
+  private final QName NAME1 = new QName("http://my.com", "name1");
+  private final QName NAME2 = new QName("http://my.com", "name2");
+  private final QName NAME3 = new QName("http://my.com", "name3");
+  private final QName NAME4 = new QName("http://my.com", "name4");
+  private final List<Element> ELEMENTS = new ArrayList<Element> ();
+  private DocumentBuilder BUILDER = null;
   
-  private static void init() throws Exception{
+  private void init() throws Exception{
     BUILDER = DocumentBuilderFactory.newInstance().newDocumentBuilder();  
     AttrMap.clear();
     AttrMap.put(NAME1, "jay");
