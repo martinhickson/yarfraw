@@ -84,7 +84,7 @@ public class FeedFormatDetector{
         throw new EarlyTerminationException(FeedFormat.RSS20);
       }else if (RDF.equals(localName) && RDF_NS_URI.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.RSS10);
-      }else if (FEED.equals(localName) && ATOM10_XMLNS.equals(uri)) {
+      }else if (FEED.equals(localName)&& ATOM10_XMLNS.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.ATOM10);
       }
       else{

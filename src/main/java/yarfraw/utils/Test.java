@@ -9,7 +9,7 @@ import yarfraw.io.FeedReader;
 public class Test{
 
   public static void main(String[] args) throws Exception {
-    FeedReader r = new FeedReader(new HttpURL("http://www.pvrblog.com/pvr/index.rdf"));
+    FeedReader r = new FeedReader(new HttpURL("http://news.google.com/?output=atom"));
     ChannelFeed c =  r.readChannel();
     System.out.println(c);
     
