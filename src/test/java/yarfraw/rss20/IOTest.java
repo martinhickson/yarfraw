@@ -24,7 +24,7 @@ import yarfraw.core.datamodel.TextInput;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
-import yarfraw.utils.Rss20Utils;
+import yarfraw.utils.reader.FeedReaderUtils;
 /**
  * Some unit tests for Reader/Writer/Appender
  * 
@@ -136,11 +136,11 @@ public class IOTest extends TestCase{
     FeedAppender a = new FeedAppender(f);
     ItemEntry item = BuilderTest.buildChannel().getItems().get(0);
     a.addItem(item);
-    ChannelFeed c = Rss20Utils.read(f);
+    ChannelFeed c = FeedReaderUtils.read(FeedFormat.RSS20, f);
     assertEquals(item, c.getItems().get(c.getItems().size()-1));
     int oldSize = c.getItems().size();
     a.removeItem(oldSize-1);
-    c = Rss20Utils.read(f);
+    c = FeedReaderUtils.read(FeedFormat.RSS20, f);
     assertEquals(oldSize-1, c.getItems().size());
   }
   

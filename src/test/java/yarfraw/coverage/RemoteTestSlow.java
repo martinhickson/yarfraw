@@ -16,7 +16,6 @@ import org.junit.Test;
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.io.FeedReader;
-import yarfraw.utils.Rss20Utils;
 import yarfraw.utils.reader.FeedReaderUtils;
 
 public class RemoteTestSlow extends TestCase{
@@ -28,7 +27,7 @@ public class RemoteTestSlow extends TestCase{
     File f1 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
     File f2 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/reddit.xml").toURI());
     File f3 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/theserverside-rss2.xml").toURI());
-    List<ChannelFeed> channels = Rss20Utils.readAll(f1, f2, f3);
+    List<ChannelFeed> channels = FeedReaderUtils.readAll(FeedFormat.RSS20, f1, f2, f3);
     assertEquals(3, channels.size());
   }
   @Test
