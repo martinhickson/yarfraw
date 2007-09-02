@@ -9,7 +9,7 @@ DOMSerializer Utilities Methods Examples:
   	
   	In {{{advanced/io.html}Advanced IO Examples}}, you saw a glimpse of the DOMSerializer method. This class
 can serialize any DOM object to a writer or an outputStream. This class is not used at all in Yarfraw's main
-code base, I downloaded it from the Internet to use in the unit tests. You may find it useful when you need
+code base, I downloaded it from the Internet to use for unit tests. You may find it useful when you need
 to display the elements that are mapped to the 'otherElements' list.   
 
 +----------------------------------------------------------------------------------------------------+

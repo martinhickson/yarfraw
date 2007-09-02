@@ -7,10 +7,10 @@
 
 XSD Schemas and JAXB
 	
-	Currently, Yarfraw's writer and reader implementation use {{{https://jaxb.dev.java.net/}JAXB}} read from and
-write to xml files. Most of these JAXB codes are generated automatically from a few xsd schemas. Although you
-don't have to, it's a good idea to take a look at these schema files, you will find a lot of insights on how
-things work internally in Yarfraw. 
+	Currently, Yarfraw's writer and reader implementation uses {{{https://jaxb.dev.java.net/}JAXB}} to read from and
+write to xml files. Most of these JAXB codes are generated automatically from a few xsd schemas. 
+It's a good idea to take a look at these schema files, you will find a lot of insights on how
+things work internally in Yarfraw.
 
 	*	RSS 2.0 
 		
@@ -34,8 +34,10 @@ things work internally in Yarfraw.
 JAXB ValidationEventHandler
 
 	The default implementation of ValidationEventHandler in JAXB will fail as soon as the first error or fatal error is encountered.
-The FeedReader class overrides this default implementation to make the validation only fail when a 'fatal error' is encountered to 
-make the FeedReader able to read as many different feeds as possible.    
+The FeedReader class overrides this default implementation to make the validation only fail when a 'fatal error' is encountered.
+This lets FeedReader to be able to read as many different feeds as possible. The DefaultValidationEventHandler
+will output some error messages when it encounters an event, so this handler in Yarfraw will also output these
+messages.    
 
 +----------------------------------------------------------------------------------------------------+
 
@@ -183,8 +185,8 @@ parse it into an DOM element object. For example, for the following feed:
 
 Encoded Content
 
-	Content will be automatically encoded, so you can put string you want in the \<description\> element and
-the \<content\> element. For example: 
+	Content will be automatically encoded, so you can put any strings you want in the \<description\> element and
+the \<content\> element (and all other text elements). For example: 
 
 +----------------------------------------------------------------------------------------------------+
     ChannelFeed c = new ChannelFeed()
@@ -207,6 +209,13 @@ the \<content\> element. For example:
 </rss>
 +----------------------------------------------------------------------------------------------------+
 
+	use org.apache.common.lang.StringEscapeUtils if you want decode it:
+	
++----------------------------------------------------------------------------------------------------+	
+	System.out.println(StringEscapeUtils.unescapeXml(
+	"&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;&lt;i&gt;"+
+    "[Update: The Atom draft is finished.]&lt;/i&gt;&lt;/p&gt;&lt;/div&gt;"));
++----------------------------------------------------------------------------------------------------+
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
   Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
   

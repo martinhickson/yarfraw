@@ -38,13 +38,13 @@ write in. The following codes demostrate how to write in Atom 1.0 and RSS 1.0/RD
 
 Append, Set and Remove items 
 	
-	Sometimes you may want simply add a couple of items to an existing feed without modifying the 
-top level channel. You can use the 'Appender' to do that. These appender methods work very much like
+	Sometimes you may want to simply add a couple of items to an existing feed without modifying the 
+top level channel. You can use the FeedAppender class to do that. The appender methods work very much like
 the insert methods in java.util.List. You can either specify a specific location to append new items
 to, or you can simply append to the beginning or to the end.   
 
-	Internally, the appender reads in the feed, modifies it, and then write it back to the file. So if 
-performance is a concern, instead of doing a read/write operation for every operation, 
+	Internally, the appender reads in the feed, modifies it, and then writes it back to the file. So if 
+performance is a concern, instead of doing a read/write operation for every modification, 
 you might want to write your own appender that only writes the channel to file when it needs to.  
 
 +----------------------------------------------------------------------------------------------------+
@@ -64,7 +64,7 @@ you might want to write your own appender that only writes the channel to file w
 number of items in the feed at a certain number (according to the specs, you are recommended to have
 only 15 items in a feed). You can tell the appender how many items you would like to keep in your
 feed. If the actual number of items (after appends) in the feed 
-is greater than the number you specify, the appender will remove items from the END
+is greater than the number you specified, the appender will remove items from the END
 of the feed to ensure there is at most numItemToKeep items in the feed.   
  
 	<<Note>>: the items in the input channel are assumed to be in descending order from new to old 
@@ -75,7 +75,10 @@ it always remove items from the end of the items list (the items that are at the
 
 	FeedAppender a = new FeedAppender(new File("yarfraw.xml"));
 	a.setNumItemToKeep(15); //this operation does NOT trim the list, trimming only occurs after append
-	a.appendAllItemsAt(0, moreThan3Items);
+	a.appendAllItemsAt(0, bigItemList);
+	...
+	a.appendAllItemsAt(0, moreItems);
+	a.appendAllItemsToBeginning(item1, item2, item3);
 	//"yarfraw.xml" have at most 15 items no matter how many items were appended using the appender
 	
 +----------------------------------------------------------------------------------------------------+
@@ -95,8 +98,8 @@ so you need to set the appropriate format if the input is not in RSS 2.0 format.
     
 +----------------------------------------------------------------------------------------------------+
 
-	The reader is capable of reading a feed from a remote http url. In the case, the format of the 
-remote feed is automatically detected. 
+	The reader is capable of reading a feed from a remote http url. In this case, the format of the 
+remote feed is automatically detected. Format detection will be executed only once at object construction time.
 	
 +----------------------------------------------------------------------------------------------------+
     
@@ -121,7 +124,7 @@ remote feed is automatically detected.
 	If the feed contains extensibility elements that are not in the official specs, those elements will be read
 into the Channel(or Item)'s otherElements list. You can get all these elements by calling Channel.getElements
 or there is a convenient method you can use to quickly get an specific element from the list. For example, the feed
-from {{digg.com}} has an element call \<digg:diggCount\>, you can get this element by using the following code:
+from digg.com has an element call \<digg:diggCount\>, you can get this element by using the following code:
 
 +----------------------------------------------------------------------------------------------------+
 

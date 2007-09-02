@@ -57,8 +57,8 @@ In case it didn't work, add the following third party dependencies to your proje
 +----------------------------------------------------------------------------------------------------+
 
   	<dependency>
-  		<groupId>geoGoogle</groupId>
-  		<artifactId>geoGoogle</artifactId>
+  		<groupId>yarfraw</groupId>
+  		<artifactId>yarfraw</artifactId>
   		<version><!-- the version you want --></version>
   	</dependency>
   	   

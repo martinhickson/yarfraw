@@ -7,7 +7,7 @@
                                     
 RSS, RDF and ATOM
 
-	If you have worked with RSS feed, you are probably aware that there are several versions of RSS formats and there
+	If you have worked with RSS feeds, you are probably aware that there are several versions of RSS formats and there
 is also the Atom format (see {{http://en.wikipedia.org/wiki/RSS_(file_format)}}). While RSS 2.0 seems to be the most
 popular one, all of these formats are being actively used by some websites somewhere. There are some similarities in element
 naming among the RSS revisions (if you ignore the namespaces), but Atom and RSS are totally incompatible. 
@@ -20,12 +20,12 @@ Yarfraw Core Model
 
 	Even thought these formats are incompatible, it's obvious that all of them contain the same set of information. They include:
 	
-	[[1]] some meta data about the 'Channel' or 'Feed' such as name, description, copyrights, published date.
+	[[1]] Some meta data about the 'Channel' or 'Feed' such as name, description, copyrights, published date, etc.
  
-	[[2]] A list of 'Item' or 'Entry', each of these 'Item' also includes some more meta data and also a content section that
+	[[2]] A list of 'Item' or 'Entry', each of these items also includes some more meta data and also a content section that
 contains the main content of the particular item.
 
-   Since they are the same information that are in different format, clearly we can just write in one unified model and 
+   Since they are the same information that are just in different format, clearly we can just write in one unified model and 
 convert them to the other formats. Yarfraw's core data classes offers a unified model that is big enough to cover all of these
 different formats. With that, you only need to work with one data model and at the same time have the benefits of supporting multiple formats. 
 The diagram below illustrates the idea: 

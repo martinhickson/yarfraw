@@ -89,7 +89,7 @@ You can add more elements to a channel or an item using the 'otherElements' and 
 		
 +----------------------------------------------------------------------------------------------------+ 
 
-	the resulting item if writing Atom 1.0 format:
+	the resulting item if writing in Atom 1.0 format:
 
 +----------------------------------------------------------------------------------------------------+
     
@@ -109,7 +109,7 @@ Data object validation
       
 	Yarfraw offers some primitive validation for all its core data models. The validation logics will 
 check to make sure the object you build conforms to the RSS specs by checking things such as there is at 
-least one item element, required elements are not null, etc. If the validation failed, it will raise an
+least one item element, required elements are not null, etc. If the validation failed, it will raise a
 ValidationException:
 
 +----------------------------------------------------------------------------------------------------+
@@ -129,13 +129,14 @@ ValidationException:
 toString, equals, hashCode
 
 	All data model classes override toString, equals and hasCode methods. Please note that the equals method
-delegates to the Apache commons's reflectionEquals method, in which the comparison is done by doing deep 
+delegates to Apache commons's reflectionEquals method, in which the comparison is done by doing deep 
 reflection inspection. If you have objects that seem to be having the same content but they are not
 equaled, it can be a number of things: maybe some field is null in one and is an empty collection in the
 other; maybe the same date is formatted differently so the date string is different; etc.
 
-	Also note that the toString dump the entire object to a string, which can be very noisy. You might
-want to consider implement a simplified toString() method that can output based on a specified format
+	Also note that the toString method dump the entire object to a string in multiple lines, 
+which can be very noisy. You might
+want to consider implementing a simplified toString() method that is format aware. 
 (i.e. skip the Atom 1.0 only fields when outputting a RSS 2.0 ChannelFeed). 
 
 +----------------------------------------------------------------------------------------------------+

@@ -71,7 +71,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     }
 
     if(ch.getDocs() != null){
-      elementList.add(factory.createTRssChannelDocs(ch.getDocs().toString()));
+      elementList.add(factory.createTRssChannelDocs(ch.getDocs()));
     }
     
     if(ch.getGenerator() != null){
@@ -86,7 +86,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getItems() != null){
       for(ItemEntry t : ch.getItems()){
         if(t != null){
-          ret.getItem().add(Rss20MappingUtils.ToRss20Item(t).getValue());
+          ret.getItem().add(Rss20MappingUtils.toRss20Item(t).getValue());
         }
       }
     }

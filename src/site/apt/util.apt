@@ -8,7 +8,7 @@
 Date Parsing/Formatting Utilities Methods Examples:
   
 	The FeedReader class does not attempt to parse the dates when it reads in feeds, this is by design
-because I don't want read to fail or throw an exception when it fail to parse a date. There are, however,
+because I don't want the reader to fail or throw an exception when it fails to parse a date. There are, however,
 a utility method you can use to parse date string you receive from a feed, it should be able to parse 
 most of the date formats: 
 	
@@ -20,7 +20,6 @@ most of the date formats:
 	Date date = CommonUtils.tryParseDate("2003-12-13T08:29:29-04:00");
 	Date date = CommonUtils.tryParseDate("2003-12-13T08:29:29");
 	Date date = CommonUtils.tryParseDate("2003-12-13");
-	//and a whole lot more other formats
 	
 +----------------------------------------------------------------------------------------------------+
 	
@@ -30,14 +29,14 @@ date strings to determine whether it is in a valid format according to the forma
 If the string is not valid, it will try to convert it to a standardize format 
 to ensure the resulting feed is readable by as many feed reader as possible. 
 It does that by first parsing the input date string and convert it to a string based on its feed format. For example,
-if the FeedWriter is writing in Atom 1.0 and the input date is "Tue, 27 May 2003 08:37:32 GMT", the writer will use
+if the FeedWriter is writing in Atom 1.0 format and the input date string is "Tue, 27 May 2003 08:37:32 GMT", the writer will use
 the method above to parse the string into a date and then format it to a ISO date string "2003-05-27T08:37:32".
 
 	If the date string is already in the expected format (Atom 1.0 and RSS 1.0 should use ISO format, RSS 2.0 should use
 RFC format), or it's not in the expected format but the writer is not able to parse the date string, the writer will
-leave the date string as is and write it to the feed xml file.
+leave the date string as is and write it to the feed xml file without any modifications.
 
-	The following methods is used by Yarfraw to format dates into different formats:
+	Use the following method to parse your date before using it as a date string in your feed:
 
 +----------------------------------------------------------------------------------------------------+
 
@@ -46,8 +45,8 @@ leave the date string as is and write it to the feed xml file.
     String rfcDateString = CommonUtils.formatDate(new Date(), FeedFormat.RSS20);
    
 +----------------------------------------------------------------------------------------------------+
-	Specs for RFC date format can be found here {{{http://www.faqs.org/rfcs/rfc822.html}RFC 822}}.
-	Specs for ISO date format can be found here {{{http://www.w3.org/TR/NOTE-datetime}ISO 8601}}.
+	Specs for RFC date format can be found here: {{{http://www.faqs.org/rfcs/rfc822.html}RFC 822}}.
+	Specs for ISO date format can be found here: {{{http://www.w3.org/TR/NOTE-datetime}ISO 8601}}.
 
 
 FeedReader Utilities Methods Examples:                                     
@@ -64,18 +63,23 @@ FeedReader Utilities Methods Examples:
     
 +----------------------------------------------------------------------------------------------------+
 	
-	Static method for reading feed(s) remotely. This method will submit a Callable object to the input
+	Static method for reading feed(s) remotely. 
+	
+	This method will submit a Callable function to the input
 ExecutorService for every input url and will only return when it finishes reading all requested feeds.
-The ChannelFeeds in the returned list will in the exact same order as the input url. For the example
-below, the first ChannelFeed in the returned is from "http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml",
-the second is from "http://bensbargains.net/rss.xml/0" and so on. If for whatever reasons the method fails
+The ChannelFeed objects in the returned list will in the exact same order as they were in the input url. For the example
+below, the first ChannelFeed in the returned list will be from 
+"http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml",
+the second ChannelFeed will be from "http://bensbargains.net/rss.xml/0" and so on. 
+If for whatever reasons the method fails
 to read a feed, the corresponding ChannelFeed in the list will be null. For example, if it fails to read from
 "http://rss.cnn.com/rss/money_topstories.rss", then the object at index 2 in the returned list will be null.
 	
 	This method will detect the formats automatically, but since it does not remember any states, 
-it has to performance format detection every time it is called.
-It is recommended that you keep an instance of the reader in memory so the reader can re-use the detected
-formats.
+it has to perform format detection every time it is called.
+If performance is an issue, it is recommended that 
+you keep an instance of the reader in memory so the reader can re-use the detected formats as opposed to only 
+holding the URLs in memory.
 
 +----------------------------------------------------------------------------------------------------+
 
@@ -113,7 +117,7 @@ formats.
 Feed Format Detection
 
 	The FeedFormatDetector utility class is used to detect the format of a feed. It inspects the root
-element of an xml file to determine the format of the file:
+element of a RSS feed to determine the format of the feed:
 
 +----------------------------------------------------------------------------------------------------+
 
@@ -143,13 +147,13 @@ element of an xml file to determine the format of the file:
     
 +----------------------------------------------------------------------------------------------------+
 
-	Officially, Yarfraw currently only supports RSS 2.0, RSS 1.0, and ATOM 1.0. But, the format detector
+	Officially, Yarfraw only supports RSS 2.0, RSS 1.0, and ATOM 1.0. But, the format detector
 will report RSS 0.9x formats as RSS 2.0 because the FeedReader is able to read them using the RSS 2.0 parser.
-If you want a stricter format detector, you can pass in a strict enforcement flag to tell the detector you 
-want strict format detection. whether to use 'strict' format detection. if set to true, the method will only report
-RSS 2.0 when the root element is 'rss' and it has a version 2.0 attribute: \<rss version="2.0" \>. 
+If you want a stricter format detector, you can pass in a strict enforcement flag to tell the detector that you 
+want strict format detection. if the flag is set to true, the method will only report
+RSS 2.0 when the root element is 'rss' and it has a version 2.0 attribute. For instance, \<rss version="2.0" \>. 
 	
-	For example, for the following 3 files, if strict detection is enabled, only File 2 will be detected
+	For the following 3 files, if strict detection is enabled, only File 2 will be detected
 as RSS 2.0 format, both File 1 and 3 will be reported as UNKNOWN format. If strict detection is disabled (default),
 then all three files will be identified as RSS20 format:
 
@@ -184,7 +188,7 @@ then all three files will be identified as RSS20 format:
 XML Utilities Methods Examples:
   
 	Parse an XML string. The core data model uses this method to allow users to add extensibility elements
-to a feed:
+to a feed. See {{{builder_adv.html}here}} for more details.
 	
 +----------------------------------------------------------------------------------------------------+
 

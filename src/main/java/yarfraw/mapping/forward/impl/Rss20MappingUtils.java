@@ -38,7 +38,7 @@ class Rss20MappingUtils {
   private static final ObjectFactory FACTORY = new ObjectFactory();
   private static final Log LOG = LogFactory.getLog(Rss20MappingUtils.class);
   private Rss20MappingUtils(){}
-  public static JAXBElement<TRssItem> ToRss20Item(ItemEntry item){
+  public static JAXBElement<TRssItem> toRss20Item(ItemEntry item){
     return FACTORY.createItem(toTItem(item));
   }
 
@@ -162,7 +162,7 @@ class Rss20MappingUtils {
   private static JAXBElement<TSource> toRss20Source(Source s){
     TSource ret = new TSource();
     if(s.getUrl() != null){
-      ret.setUrl(s.getUrl().toString());
+      ret.setUrl(s.getUrl());
     }
     ret.setValue(s.getSource());
     return FACTORY.createTRssItemSource(ret);
