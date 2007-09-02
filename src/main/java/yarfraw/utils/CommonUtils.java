@@ -66,20 +66,48 @@ public class CommonUtils{
   
   private static final SimpleDateFormat RFC822DATE_FORMAT = new SimpleDateFormat(RFC822DATE_PATTERN);
 
-  private static final SimpleDateFormat[] NON_ISO8601_FORMAT = new SimpleDateFormat[]{
-    RFC822DATE_FORMAT,
+  private static final SimpleDateFormat[] RFC_FORMAT = new SimpleDateFormat[]{
+    RFC822DATE_FORMAT, 
     new SimpleDateFormat(NON_STANDARD_PATTERN1),
     new SimpleDateFormat(NON_STANDARD_PATTERN2),
-    new SimpleDateFormat(NON_STANDARD_PATTERN3),
+    new SimpleDateFormat(NON_STANDARD_PATTERN3)
+  };
+  
+  private static final SimpleDateFormat[] NON_STANDARD_ISO_FORMAT = new SimpleDateFormat[]{
     new SimpleDateFormat(NON_STANDARD_PATTERN4),
     new SimpleDateFormat(NON_STANDARD_PATTERN5),
     new SimpleDateFormat(NON_STANDARD_PATTERN6),
     new SimpleDateFormat(NON_STANDARD_PATTERN7)
   };
-  
 
   private CommonUtils(){}
 
+  /**
+   * Determines whether the input <code>dateString</code> is valid based on the input <code>FeedFormat</code>.
+   * @param dateString
+   * @param format
+   * @return
+   */
+  public static synchronized boolean isDateFormatValid(String dateString, FeedFormat format){
+    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS10){
+      try {
+        
+        return tryParseISODate(dateString) != null ;
+      } catch (Exception e) {
+        //non strict ISO format
+        return tryParseNonStandardIsoDates(dateString) != null;
+      }
+    }else if(format == FeedFormat.RSS20){
+      try{
+        return tryParseRfcDates(dateString) != null;
+      } catch (Exception e) {
+        return false;
+      }
+    }else{
+      throw new IllegalArgumentException("Unsupported format: "+ format);
+    }
+  }
+  
   /**
    * Remove last occurrence of the character c in s
    */
@@ -105,13 +133,11 @@ public class CommonUtils{
       ret = tryParseISODate(dateString);
       return ret;
     } catch (Exception e) {
-      for(SimpleDateFormat format : NON_ISO8601_FORMAT){
-        try {
-          ret = format.parse(dateString);
-          return ret;
-        } catch (Exception ee) {
-          //keep trying
-        }
+      ret = tryParseNonStandardIsoDates(dateString);
+      if(ret != null){
+        return ret;
+      }else{
+        ret = tryParseRfcDates(dateString);
       }
     }
     if(ret == null){
@@ -121,11 +147,47 @@ public class CommonUtils{
   }
 
   /**
+   * Try to parse using rfc format
+   * @param dateString
+   * @return
+   */
+  private static Date tryParseRfcDates(String dateString){
+    Date ret = null;
+    for(SimpleDateFormat format : RFC_FORMAT){
+      try {
+        ret = format.parse(dateString);
+        return ret;
+      } catch (Exception ee) {
+        //keep trying
+      }
+    }
+    return ret;
+  }
+  
+  /**
+   * Try to parse using non standard ISO formats
+   * @param dateString
+   * @return
+   */
+  private static Date tryParseNonStandardIsoDates(String dateString){
+    Date ret = null;
+    for(SimpleDateFormat format : NON_STANDARD_ISO_FORMAT){
+      try {
+        ret = format.parse(dateString);
+        return ret;
+      } catch (Exception ee) {
+        //keep trying
+      }
+    }
+    return ret;
+  }
+  
+  /**
    * Format a {@link Date} object to string based on the input {@link FeedFormat}.
-   * For Atom 1.0, it will be formatted as ISO8601 Level 5 string. <br/>
+   * For Atom 1.0 and RSS 1.0 it will be formatted as ISO8601 Level 5 string. <br/>
    * http://www.w3.org/TR/NOTE-datetime
    * <br/>
-   * For both RSS 2.0 and RSS 1.0, it will be formatted as RFC 822 date string.
+   * For RSS 2.0, it will be formatted as RFC 822 date string.
    * <br/>
    * http://www.faqs.org/rfcs/rfc822.html
    * @param date any date 
@@ -136,9 +198,9 @@ public class CommonUtils{
     if(date == null || format == null){
       return null;
     }
-    if(format == FeedFormat.ATOM10){
+    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS20){
       return getDateAsISO8601String(date);
-    }else if(format == FeedFormat.RSS10 || format == FeedFormat.RSS20){
+    }else if(format == FeedFormat.RSS10 ){
       return RFC822DATE_FORMAT.format(date);
     }else{
       throw new IllegalArgumentException("Unsupported format: "+ format);

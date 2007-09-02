@@ -9,7 +9,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
+import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpURL;
@@ -127,16 +129,29 @@ public class FeedReader  extends AbstractBaseFeedParser{
     return readChannel(null);
   }
   
+  private static class WarningHandler implements ValidationEventHandler{
+
+    public boolean handleEvent(ValidationEvent event) {
+      DefaultValidationEventHandler d = new DefaultValidationEventHandler();
+      d.handleEvent(event);
+      return event.getSeverity()== ValidationEvent.FATAL_ERROR;
+    } 
+    
+  }
   
   private static synchronized Unmarshaller getUnMarshaller(FeedFormat format) throws JAXBException{
     if(format == FeedFormat.RSS20){
-      return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else if(format == FeedFormat.RSS10){
-    
-      return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-    
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else if(format == FeedFormat.ATOM10){
-      return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else{
       throw new UnsupportedOperationException("UnSupported Feed Format");
     }

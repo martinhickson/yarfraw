@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.ChannelFeed;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.TextInput;
@@ -27,6 +28,7 @@ import yarfraw.generated.rss10.elements.TRss10Channel;
 import yarfraw.generated.rss10.elements.TRss10Image;
 import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss10 Jaxb model
@@ -191,7 +193,16 @@ class Rss10MappingUtils {
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createDate(ch.getPubDate()));
+      String dateString = ch.getPubDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.RSS10)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.RSS10);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      elementList.add(factory.createDate(dateString));
     }
     
 //  not supported

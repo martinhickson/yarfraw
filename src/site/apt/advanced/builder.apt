@@ -5,7 +5,7 @@
                                     ------
                                      2007/08/28
 
-      Before reading page, you should have read {{{builder.html}Builder Quick Usage}}. If not, please
+      Before reading page, you should have read {{{basic/builder.html}Builder Quick Usage}}. If not, please
 read that first.
       
 Building items and channels with additional elements
@@ -18,7 +18,7 @@ You can add more elements to a channel or an item using the 'otherElements' and 
 
 +----------------------------------------------------------------------------------------------------+
    
-   new Channel().addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+   new ChannelFeed().addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
 
 +----------------------------------------------------------------------------------------------------+
    
@@ -34,6 +34,7 @@ You can add more elements to a channel or an item using the 'otherElements' and 
 	 
 +----------------------------------------------------------------------------------------------------+
    
+   ChannelFeed c = new ChannelFeed();
    c.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
    c.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
 
@@ -59,7 +60,7 @@ You can add more elements to a channel or an item using the 'otherElements' and 
    
    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
    Document doc = factory.newDocumentBuilder().newDocument();
-   new Channel().addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
+   new ChannelFeed().addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
    
 +----------------------------------------------------------------------------------------------------+
 
@@ -67,16 +68,12 @@ You can add more elements to a channel or an item using the 'otherElements' and 
 
 +----------------------------------------------------------------------------------------------------+
 
-	Item item = new Item().setTitle("title")
-                          .setDescription("desc")
-                          .setLink("http://my.company.com");
+    ItemEntry item = new ItemEntry().setTitle("title")
+                          .setDescriptionOrSummary("desc")
+                          .addLink("http://my.company.com");
     item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
     item.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
-    item.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");    
-    
-    item.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
-    
-    c.additem(item);
+    item.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
 
 +----------------------------------------------------------------------------------------------------+
     
@@ -94,7 +91,23 @@ You can add more elements to a channel or an item using the 'otherElements' and 
 	</item>
 		
 +----------------------------------------------------------------------------------------------------+ 
-      
+
+	the resulting item if writing Atom 1.0 format:
+
++----------------------------------------------------------------------------------------------------+
+    
+	<entry my:testAttribute="test">
+		<my:newElement>new element</my:newElement>
+		<my:otherNewElement>new element 2</my:otherNewElement>
+		<my:oneMoreElement />
+		<description>desc</description>
+		<link href="http://my.company.com" />
+		<title>title</title>
+	</entry>
+		
++----------------------------------------------------------------------------------------------------+ 
+
+	      
 Data object validation
       
 	Yarfraw offers some primitive validation for all its core data models. The validation logics will 
@@ -103,21 +116,55 @@ least one item element, required elements are not null, etc. If the validation f
 ValidationException:
 
 +----------------------------------------------------------------------------------------------------+
-	Channel c = buildChannel();
+
+	ChannelFeed c = buildChannel();
     c.validate(FeedFormat.RSS20);
     //validation for other formats might not work as well as RSS 2.0 validation
     c.validate(FeedFormat.RSS10);
     c.validate(FeedFormat.ATOM10);
+    
 +----------------------------------------------------------------------------------------------------+      
 
++----------------------------------------------------------------------------------------------------+
+	TODO: more details
++----------------------------------------------------------------------------------------------------+
+
+toString, equals, hashCode
+
+	All data model classes override toString, equals and hasCode methods. Please note that the equals method
+delegates to the Apache commons's reflectionEquals method, in which the comparison is done by doing deep 
+reflection inspection. If you have objects that seem to be having the same content but they are not
+equaled, it can be a number of things: maybe some field is null in one and is an empty collection in the
+other; maybe the same date is formatted differently so the date string is different; etc.
+
+	Also note that the toString dump the entire object to a string, which can be very noisy. You might
+want to consider implement a simplified toString() method that can output based on a specified format
+(i.e. skip the Atom 1.0 only fields when outputting a RSS 2.0 ChannelFeed). 
+
++----------------------------------------------------------------------------------------------------+
+  
+  @Override
+  public String toString(){
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  }
+  @Override
+  public boolean equals(Object other){
+    return EqualsBuilder.reflectionEquals(this, other);
+  }
+  @Override
+  public int hashCode(){
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
+  
++----------------------------------------------------------------------------------------------------+
+  
 Convenient methods
 
 	Many data model classes have convenient methods:
 
 +----------------------------------------------------------------------------------------------------+
-	// this creates locale is set to {@link Locale}.English
-    // and pubDate is set to <code>new Date(System.currentTimeMillis())
-    Channel c = Channel.create();
+
+    ChannelFeed c = buildChannel();
     
     //get an element such as this under the channel element  
     //<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
@@ -126,17 +173,23 @@ Convenient methods
     e = item.getElementByNS("http://my.company.com/", "newElement");
     
     //add 2 new categories using a string value
-    c.addCategory("category1", "category2");
+    c.addCategorySubject("category1", "category2");
     
     //add skip hours
     c.addSkipHour(1, 2, 3);
+    
+    //add a description using a string without creating a Text object
+    c.setDescriptionOrSubtitle("Meerkat: An Open Wire Service")
+    
 +----------------------------------------------------------------------------------------------------+      
 	
 	Other methods:
 	
 +----------------------------------------------------------------------------------------------------+
+
 	channel.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
 	item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+	
 +----------------------------------------------------------------------------------------------------+
   
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.

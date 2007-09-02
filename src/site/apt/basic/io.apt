@@ -21,7 +21,7 @@ xml file "rss20.xml" in RSS 2.0 format. Note that since every feed has only one 
   
 +----------------------------------------------------------------------------------------------------+      
 
-	Writhing other formats are similarly easy, just need to tell the writer what format you want to 
+	Writing other formats are similarly easy, just need to tell the writer what format you want to 
 write in. The following codes demostrate how to write in Atom 1.0 and RSS 1.0/RDF format.
 
 +----------------------------------------------------------------------------------------------------+

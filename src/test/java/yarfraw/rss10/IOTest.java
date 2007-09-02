@@ -13,6 +13,7 @@ import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
+import yarfraw.utils.CommonUtils;
 /**
  * Some unit tests for Reader/Writer/Appender
  * 
@@ -45,6 +46,16 @@ public class IOTest extends TestCase{
       i1.setOtherElements(null);
       i2.setUid((Id)null);
       i2.setOtherElements(null);
+      
+      assertEquals(CommonUtils.tryParseDate(i1.getPubDate()), CommonUtils.tryParseDate(i2.getPubDate()));
+      //different date format
+      i1.setPubDate(null);
+      i2.setPubDate(null);
+      
+      assertEquals(CommonUtils.tryParseDate(i1.getUpdatedDate()), CommonUtils.tryParseDate(i2.getUpdatedDate()));
+      //different date format
+      i1.setUpdatedDate(null);
+      i2.setUpdatedDate(null);
     }
     
     assertEquals(c.getOtherElements().size(), c2.getOtherElements().size());
@@ -56,6 +67,16 @@ public class IOTest extends TestCase{
     //not supported by rss 2.0
     c2.setAbout(null);
     c2.getImageOrIcon().setAbout(null);
+    
+    assertEquals(CommonUtils.tryParseDate(c.getPubDate()), CommonUtils.tryParseDate(c.getPubDate()));
+    //different date format
+    c.setPubDate(null);
+    c2.setPubDate(null);
+    
+    assertEquals(CommonUtils.tryParseDate(c.getLastBuildOrUpdatedDate()), CommonUtils.tryParseDate(c.getLastBuildOrUpdatedDate()));
+    //different date format
+    c.setLastBuildOrUpdatedDate(null);
+    c2.setLastBuildOrUpdatedDate(null);
     
     assertEquals(c, c2);
   }

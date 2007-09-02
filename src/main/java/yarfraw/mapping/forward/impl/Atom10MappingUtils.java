@@ -1,20 +1,14 @@
 package yarfraw.mapping.forward.impl;
 
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Content;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.ItemEntry;
@@ -33,6 +27,7 @@ import yarfraw.generated.atom10.elements.ObjectFactory;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
 import yarfraw.generated.atom10.elements.UriType;
+import yarfraw.utils.CommonUtils;
 /**
  * Util methods for mapping Yarfraw core model to Atom10 Jaxb model
  * @author jliang
@@ -144,7 +139,16 @@ public class Atom10MappingUtils{
     //partially supported
     if(item.getPubDate() != null){
       DateTimeType date = factory.createDateTimeType();
-      date.setValue(item.getPubDate());
+      String dateString = item.getPubDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.ATOM10)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.ATOM10);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to Atom 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      date.setValue(dateString);
       elementList.add(factory.createEntryTypePublished(date));
     }
     
@@ -173,7 +177,16 @@ public class Atom10MappingUtils{
     //partially supported
     if(item.getUpdatedDate() != null){
       DateTimeType date = factory.createDateTimeType();
-      date.setValue(item.getUpdatedDate());
+      String dateString = item.getUpdatedDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.ATOM10)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.ATOM10);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to Atom 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      date.setValue(dateString);
       elementList.add(factory.createEntryTypeUpdated(date));
     }
     
@@ -285,16 +298,4 @@ public class Atom10MappingUtils{
     return ret;
   }
   
-  public static XMLGregorianCalendar toGCal(Date date) throws YarfrawException{
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(date);    
-    try {
-      return DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(
-              cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH),
-              cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND)));
-    }
-    catch (DatatypeConfigurationException e) {
-      throw new YarfrawException("Unable to convert Date to XML Gregorian Calendar", e);
-    }
-  }
 }

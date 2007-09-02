@@ -32,10 +32,9 @@
       <item name="FAQ"    href="faq.html" />            
     </menu>    
 	<menu name="Quick Usage">
-      <item name="Builder API Usage"    href="builder.html" />
-      <item name="IO API Usage"    href="io.html" />
-      <item name="Feed Format"    href="format.html" />
-      <item name="Other Examples"    href="other.html" />
+      <item name="Builder API Usage"    href="basic/builder.html" />
+      <item name="IO API Usage"    href="basic/io.html" />
+      <item name="Utilities Examples"    href="basic/util.html" />
     </menu>
     <menu name="Advanced Usage">
       <item name="Builder Usage"    href="advanced/builder.html" />

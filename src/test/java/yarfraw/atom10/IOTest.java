@@ -34,7 +34,6 @@ public class IOTest extends TestCase{
     //but they are actually equal, it's just that one has a NS prefix, one doesnt 
     c.getItems().get(0).getContent().getOtherElements().set(0, null);
     c2.getItems().get(0).getContent().getOtherElements().set(0, null);
-    
     assertEquals(c, c2);
   }
   

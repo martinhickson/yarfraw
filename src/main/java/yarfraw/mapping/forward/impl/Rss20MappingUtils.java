@@ -5,9 +5,13 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.Cloud;
 import yarfraw.core.datamodel.Enclosure;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.ItemEntry;
@@ -23,6 +27,7 @@ import yarfraw.generated.rss20.elements.TImage;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
 import yarfraw.generated.rss20.elements.TTextInput;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss20 Jaxb model
@@ -31,6 +36,7 @@ import yarfraw.generated.rss20.elements.TTextInput;
  */
 class Rss20MappingUtils {
   private static final ObjectFactory FACTORY = new ObjectFactory();
+  private static final Log LOG = LogFactory.getLog(Rss20MappingUtils.class);
   private Rss20MappingUtils(){}
   public static JAXBElement<TRssItem> ToRss20Item(ItemEntry item){
     return FACTORY.createItem(toTItem(item));
@@ -126,7 +132,16 @@ class Rss20MappingUtils {
     }
     
     if(item.getPubDate() != null){
-      elementList.add(factory.createTRssItemPubDate(item.getPubDate()));
+      String dateString = item.getPubDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.RSS20)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.RSS20);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      elementList.add(factory.createTRssItemPubDate(dateString));
     }
     if(item.getSource() != null){
       elementList.add(toRss20Source(item.getSource()));
