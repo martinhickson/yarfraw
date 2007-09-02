@@ -45,9 +45,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</connection>
-    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</developerConnection>
-    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</url>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
+    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
+    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</url>
   </scm>
 
   <profiles>
