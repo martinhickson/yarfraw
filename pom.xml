@@ -258,22 +258,65 @@
   </dependencies>
   <reporting>
     <plugins>
+		<plugin>
+			<artifactId>maven-pmd-plugin</artifactId>
+			<configuration>
+				<linkXref>true</linkXref>
+				<sourceEncoding>utf-8</sourceEncoding>
+				<minimumTokens>80</minimumTokens>
+				<targetJdk>1.5</targetJdk>
+				<excludes>
+					<exclude>**/yarfraw/generated/*.java</exclude>
+				</excludes>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>jdepend-maven-plugin</artifactId>
+		</plugin>
+		  <plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>findbugs-maven-plugin</artifactId>
+		    <configuration>
+		      <threshold>Exp</threshold>
+		      <effort>Max</effort>
+		      <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+		      <includeFilterFile>findbugs-include.xml</includeFilterFile>
+		      <visitors>FindDeadLocalStores,UnreadFields</visitors>
+		      <omitVisitors>FindDeadLocalStores,UnreadFields</omitVisitors>
+		    </configuration>
+		  </plugin>				
+		<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+			</plugin>			 
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jdepend-maven-plugin</artifactId>
-      </plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>	 
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jxr-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-      </plugin>
-      <!-- 
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependencies</report>
+              <report>project-team</report>
+              <report>index</report>
+			  <report>maven-changes-plugin</report>              
+              <report>summary</report>
+              <report>license</report>            
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>	 
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
@@ -290,7 +333,10 @@
           <source>1.5</source>
         </configuration>
       </plugin>
-            --> 
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+      </plugin>    
     </plugins>
   </reporting>
   <distributionManagement>
