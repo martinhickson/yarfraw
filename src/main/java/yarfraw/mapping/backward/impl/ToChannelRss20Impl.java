@@ -11,6 +11,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
 import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
 import static yarfraw.io.parser.ElementQName.RSS20_TTL;
 import static yarfraw.io.parser.ElementQName.RSS20_WEBMASTER;
+import static yarfraw.utils.XMLUtils.same;
 
 import javax.xml.bind.JAXBElement;
 
@@ -36,7 +37,6 @@ import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.generated.rss20.elements.TTextInput;
 import yarfraw.mapping.backward.ToChannelRss20;
-import yarfraw.utils.CommonUtils;
 
 public class ToChannelRss20Impl implements ToChannelRss20{
   private static final Log LOG = LogFactory.getLog(ToChannelRss20Impl.class);
@@ -68,29 +68,29 @@ public class ToChannelRss20Impl implements ToChannelRss20{
       if (o instanceof JAXBElement) {
         JAXBElement jaxbElement = (JAXBElement) o;
         Object val = jaxbElement.getValue();
-        if(CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)){
+        if(same(jaxbElement.getName(), RSS20_TITLE)){
           c.setTitle((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {  
+        }else if (same(jaxbElement.getName(), RSS20_LINK)) {  
           c.addLink((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
+        }else if (same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
           c.setDescriptionOrSubtitle((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
+        }else if (same(jaxbElement.getName(), RSS20_COPYRIGHTS)) {
           c.setRights((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DOCS)) {
+        }else if (same(jaxbElement.getName(), RSS20_DOCS)) {
           c.setDocs((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_GENERATOR)) {
+        }else if (same(jaxbElement.getName(), RSS20_GENERATOR)) {
           c.setGenerator((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LANGUAGE)) {
+        }else if (same(jaxbElement.getName(), RSS20_LANGUAGE)) {
           c.setLang((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
+        }else if (same(jaxbElement.getName(), RSS20_LAST_BUILD_DATE)) {
           c.setLastBuildOrUpdatedDate((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
+        }else if (same(jaxbElement.getName(), RSS20_MANAGINGEDITOR)) {
           c.addManagingEditorOrAuthorOrPublisher((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
+        }else if (same(jaxbElement.getName(), RSS20_PUBDATE)) {
           c.setPubDate((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TTL)) {
+        }else if (same(jaxbElement.getName(), RSS20_TTL)) {
           c.setTtl(Integer.valueOf(jaxbElement.getValue().toString()));
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_WEBMASTER)) {
+        }else if (same(jaxbElement.getName(), RSS20_WEBMASTER)) {
           c.addWebMasterOrCreator((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;

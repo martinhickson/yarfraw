@@ -13,6 +13,7 @@ import yarfraw.core.datamodel.Id;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
+import yarfraw.utils.CommonUtils;
 /**
  * Some unit tests for Reader/Writer/Appender
  * 
@@ -27,7 +28,7 @@ public class IOTest extends TestCase{
     ChannelFeed c = r.readChannel();
     
     File f = File.createTempFile("rss10test", ".xml");
-    FeedWriter w = new FeedWriter(f);
+    FeedWriter w = new FeedWriter(f, FeedFormat.RSS10);
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
     
@@ -45,6 +46,16 @@ public class IOTest extends TestCase{
       i1.setOtherElements(null);
       i2.setUid((Id)null);
       i2.setOtherElements(null);
+      
+      assertEquals(CommonUtils.tryParseDate(i1.getPubDate()), CommonUtils.tryParseDate(i2.getPubDate()));
+      //different date format
+      i1.setPubDate(null);
+      i2.setPubDate(null);
+      
+      assertEquals(CommonUtils.tryParseDate(i1.getUpdatedDate()), CommonUtils.tryParseDate(i2.getUpdatedDate()));
+      //different date format
+      i1.setUpdatedDate(null);
+      i2.setUpdatedDate(null);
     }
     
     assertEquals(c.getOtherElements().size(), c2.getOtherElements().size());
@@ -57,10 +68,28 @@ public class IOTest extends TestCase{
     c2.setAbout(null);
     c2.getImageOrIcon().setAbout(null);
     
+    assertEquals(CommonUtils.tryParseDate(c.getPubDate()), CommonUtils.tryParseDate(c.getPubDate()));
+    //different date format
+    c.setPubDate(null);
+    c2.setPubDate(null);
+    
+    assertEquals(CommonUtils.tryParseDate(c.getLastBuildOrUpdatedDate()), CommonUtils.tryParseDate(c.getLastBuildOrUpdatedDate()));
+    //different date format
+    c.setLastBuildOrUpdatedDate(null);
+    c2.setLastBuildOrUpdatedDate(null);
+    
     assertEquals(c, c2);
   }
   
-  
+  @Test
+  public void testContent() throws Exception{
+    FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss10/content.xml").toURI(), FeedFormat.RSS10);
+    ChannelFeed c = r.readChannel();
+    ItemEntry i = c.getItems().get(0);
+    assertEquals("The Example Item", i.getTitleText());
+    assertNotNull(i.getElementByLocalName("encoded"));
+    assertNotNull(i.getElementByLocalName("encoded").getTextContent());
+  }
 }
 
 

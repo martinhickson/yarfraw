@@ -36,7 +36,7 @@ import yarfraw.generated.atom10.elements.LinkType;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
 import yarfraw.generated.atom10.elements.UriType;
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.XMLUtils;
 
 /**
  * TODO: document me
@@ -93,9 +93,9 @@ class Atom10MappingUtils{
       if (o instanceof JAXBElement<?>) {
         JAXBElement<?> jaxb = (JAXBElement<?>) o;
         Object val = jaxb.getValue();
-        if(CommonUtils.same(jaxb.getName(), ATOM10_EMAIL)){
+        if(XMLUtils.same(jaxb.getName(), ATOM10_EMAIL)){
           ret.setEmailOrText((String)val);
-        }else if(CommonUtils.same(jaxb.getName(), ATOM10_NAME)){
+        }else if(XMLUtils.same(jaxb.getName(), ATOM10_NAME)){
           ret.setName((String)val);
         }else if(val instanceof UriType){
           ret.setUri(((UriType)val).getValue());
@@ -181,35 +181,35 @@ class Atom10MappingUtils{
         JAXBElement<?> jaxb = (JAXBElement<?>) o;
         Object val = jaxb.getValue();
         
-        if (CommonUtils.same(jaxb.getName(), ATOM10_AUTHOR)) {
+        if (XMLUtils.same(jaxb.getName(), ATOM10_AUTHOR)) {
           ret.addAuthorOrCreator(toPersonType((PersonType)val));
         }else if(val instanceof CategoryType){
           ret.addCategorySubject(toCategorySubject((CategoryType)val));
         }else if(val instanceof ContentType){
           ret.setContent(toContent((ContentType)val));
-        }else if(CommonUtils.same(jaxb.getName(), ATOM10_CONTRIBUTOR)){
+        }else if(XMLUtils.same(jaxb.getName(), ATOM10_CONTRIBUTOR)){
           ret.addContributor(toPersonType((PersonType)val));
         }
         //contributor are ignored
         else if(val instanceof LinkType){ 
           ret.addLink(toAtomLink((LinkType)val));
-        }else if (CommonUtils.same(jaxb.getName(), ATOM10_PUBLISHED)) {
+        }else if (XMLUtils.same(jaxb.getName(), ATOM10_PUBLISHED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){
             ret.setPubDate(dt.getValue());
           }
-        }else if (CommonUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
+        }else if (XMLUtils.same(jaxb.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
           ret.setRights(toText(text));
         }//FIXME: source not supported
-        else if (CommonUtils.same(jaxb.getName(), ATOM10_SUMMARY)) {
+        else if (XMLUtils.same(jaxb.getName(), ATOM10_SUMMARY)) {
           TextType text = (TextType) val;
           ret.setDescriptionOrSummary(toText(text));
-        }else if (CommonUtils.same(jaxb.getName(), ATOM10_TITLE)) {
+        }else if (XMLUtils.same(jaxb.getName(), ATOM10_TITLE)) {
           TextType text = (TextType) val;
           ret.setTitle(toText(text));
-        }else if (CommonUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
+        }else if (XMLUtils.same(jaxb.getName(), ATOM10_UPDATED)) {
           //  partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){

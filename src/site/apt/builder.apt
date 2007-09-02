@@ -3,154 +3,345 @@
                                     ------
                                     Jay Liang
                                     ------
-                                     2007/08/14
+                                     2007/09/01
 
 Building Channels and Items
       
-      The core data model is based on a builder model (ie. setter methods return handle to the object). 
+      The core data model is based on the builder style (i.e. setter methods return handle to the object). 
 This makes building an object easier, for example, to build an item, you would write:
 
 +----------------------------------------------------------------------------------------------------+
 
-	new Item().setTitle("Item 1")
-   		.setLink("http://somelink.com/")
-   		.setDescription("desc")
-   		.setAuthor("oprah@oxygen.net")
-   		.addCategory("cat1", "cat2")
-   		.addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
-   		.setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
-   		.setGuid(new Guid("GUID")),
+	new ItemEntry()
+			 .setTitle("Star City")
+	         .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp")
+	         .setDescriptionOrSummary("How do Americans get ready to work with " +
+	         		"Russians aboard the International Space Station? They take a " +
+	         		"crash course in culture, language and protocol at Russia's " +
+	         		"&lt;a href=\"http://howe.iki.rssi.ru/GCTC/gctc_e.htm\"&gt;Star City&lt;/a&gt;.")
+	         .setPubDate("Tue, 03 Jun 2003 09:39:21 GMT")
 
 +----------------------------------------------------------------------------------------------------+      
 
-	To build a channel:
+	There are a lot more interesting things you can do with the builder API, take a look at {{{builder_adv.html}Advanced Example}}.
+	
+Building RSS 2.0 Channel
 
+	<<You are encourage to use RSS 2.0 format>>. 
+	To build the following channel:
+	
 +----------------------------------------------------------------------------------------------------+
-
-	Channel channel = new Channel().setTitle("Test Title")
-          .setLink("http://www.test.com")
-          .setDescription("Descritpion .........")
-          .setCopyright("Copyright 2002, Spartanburg Herald-Journal")
-          .setManagingEditor("geo@herald.com")
-          .setWebMaster("betty@herald.com (Betty Guernsey)")
-          .setPubDate(new Date(System.currentTimeMillis()))
-          .setLastBuildDate(new Date(System.currentTimeMillis()))
-          .addCategory("cat1")
-          .addCategory("cat2")
-          .setGenerator("MightyInHouse Content System v2.3")
-          .setDocs("http://blogs.law.harvard.edu/tech/rss")
-          .setCloud(new Cloud("rpc.sys.com", 80, "/RPC2", "pingMe","soap"))
-          .setTtl(60)
-          .setImage("http://my.image.com/image.jpg", "Test Image", "http://my.image.com/image.jpg")
-          .setTexInput(new TextInput("Title", "Descritpion", "name", "http://link.com/link"))
-          .addSkipDay(Day.Saturday, Day.Sunday)
-          .addSkipHour(12, 0, 1, 2, 3, 4, 5)
-    
-          .additem(new Item().setTitle("Item 1")
-                             .setLink("http://somelink.com/")
-                             .setDescription("desc")
-                             .setAuthor("oprah@oxygen.net")
-                             .addCategory("cat1", "cat2")
-                             .addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
-                             .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
-                             .setGuid(new Guid("GUID")),
-                   new Item().setTitle("Item2")
-                             .setLink("http://somelink.com/")
-                             .setDescription("desc")
-                             .setAuthor("oprah@oxygen.net")
-                             .addCategory("cat1", "cat2")
-                             .addCategory(new Category("cat3").setDomainOrScheme("http://somedomain"))
-                             .setComments("http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290")
-                             .setGuid(new Guid("GUID")));
+<?xml version="1.0"?>
+<rss version="2.0">
+   <channel>
+      <title>Liftoff News</title>
+      <link>http://liftoff.msfc.nasa.gov/</link>
+      <description>Liftoff to Space Exploration.</description>
+      <language>en-us</language>
+      <pubDate>Tue, 10 Jun 2003 04:00:00 GMT</pubDate>
+      <lastBuildDate>Tue, 10 Jun 2003 09:41:01 GMT</lastBuildDate>
+      <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+      <generator>Weblog Editor 2.0</generator>
+      <managingEditor>editor@example.com</managingEditor>
+      <webMaster>webmaster@example.com</webMaster>
+      <item>
+         <title>Star City</title>
+         <link>http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp</link>
+         <description>How do Americans get ready to work with Russians aboard the International 
+         Space Station? They take a crash course in culture, language and protocol at Russia's 
+         &lt;a href="http://howe.iki.rssi.ru/GCTC/gctc_e.htm"&gt;Star City&lt;/a&gt;.</description>
+         <pubDate>Tue, 03 Jun 2003 09:39:21 GMT</pubDate>
+         <guid>http://liftoff.msfc.nasa.gov/2003/06/03.html#item573</guid>
+      </item>
+      <item>
+         <description>Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a 
+         &lt;a href="http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm"&gt;partial eclipse 
+         of the Sun&lt;/a&gt; on Saturday, May 31st.</description>
+         <pubDate>Fri, 30 May 2003 11:06:42 GMT</pubDate>
+         <guid>http://liftoff.msfc.nasa.gov/2003/05/30.html#item572</guid>
+      </item>
+      <item>
+         <title>The Engine That Does More</title>
+         <link>http://liftoff.msfc.nasa.gov/news/2003/news-VASIMR.asp</link>
+         <description>Before man travels to Mars, NASA hopes to design new engines that will let us fly 
+         through the Solar System more quickly.  The proposed VASIMR engine would do that.</description>
+         <pubDate>Tue, 27 May 2003 08:37:32 GMT</pubDate>
+         <guid>http://liftoff.msfc.nasa.gov/2003/05/27.html#item571</guid>
+      </item>
+      <item>
+         <title>Astronauts' Dirty Laundry</title>
+         <link>http://liftoff.msfc.nasa.gov/news/2003/news-laundry.asp</link>
+         <description>Compared to earlier spacecraft, the International Space Station has many luxuries, 
+         but laundry facilities are not one of them.  Instead, astronauts have other options.</description>
+         <pubDate>Tue, 20 May 2003 08:56:02 GMT</pubDate>
+         <guid>http://liftoff.msfc.nasa.gov/2003/05/20.html#item570</guid>
+      </item>
+   </channel>
+</rss>
                              
 +----------------------------------------------------------------------------------------------------+
-
-Building items and channels with additional elements
 	
-	Sometimes you may want to add extensibility elements to your feed that are not in the RSS specs.
-For example, the RSS 2.0 feed from {{{digg.xml}digg.com}} has some additional elements under all the item elements.
-
-	The Channel and Item data models supports these additional elements, as well as any additional attributes.
-You can add more elements to a channel or an item using the 'otherElements' and 'otherAttributes' list:
-
+	You would write:
+	
 +----------------------------------------------------------------------------------------------------+
-   
-   new Channel().addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+	new ChannelFeed().setTitle("Liftoff News")
+	                 .addLink("http://liftoff.msfc.nasa.gov/")
+	                 .setDescriptionOrSubtitle("Liftoff to Space Exploration.")
+	                 .setLang("en-us")
+	                 .setPubDate("Tue, 10 Jun 2003 04:00:00 GMT")
+	                 .setLastBuildOrUpdatedDate("Tue, 10 Jun 2003 09:41:01 GMT")
+	                 .setDocs("http://blogs.law.harvard.edu/tech/rss")
+	                 .setGenerator("Weblog Editor 2.0")
+	                 .addManagingEditorOrAuthorOrPublisher("editor@example.com")
+	                 .addWebMasterOrCreator("webmaster@example.com")
+	 .addItem(new ItemEntry().setTitle("Star City")
+	                         .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp")
+	                         .setDescriptionOrSummary("How do Americans get ready to work with " +
+	                         		"Russians aboard the International Space Station? They take a " +
+	                         		"crash course in culture, language and protocol at Russia's " +
+	                         		"&lt;a href=\"http://howe.iki.rssi.ru/GCTC/gctc_e.htm\"&gt;Star City&lt;/a&gt;.")
+	                         .setPubDate("Tue, 03 Jun 2003 09:39:21 GMT")
+	                         .setUid("http://liftoff.msfc.nasa.gov/2003/06/03.html#item573"))
+	 .addItem(new ItemEntry().setDescriptionOrSummary("Sky watchers in Europe, Asia, and parts of " +
+	 		                      "Alaska and Canada will experience a " +
+	 		                      "&lt;a href=\"http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm\"&gt;" +
+	 		                      "partial eclipse of the Sun&lt;/a&gt; on Saturday, May 31st.")
+	                         .setPubDate("Fri, 30 May 2003 11:06:42 GMT")
+	                         .setUid("http://liftoff.msfc.nasa.gov/2003/05/30.html#item572"))
+	 .addItem(new ItemEntry().setTitle("The Engine That Does More")
+	                         .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-VASIMR.asp")
+	                         .setDescriptionOrSummary("Before man travels to Mars, NASA hopes to design new " +
+	                         		"engines that will let us fly through the Solar System more quickly.  " +
+	                         		"The proposed VASIMR engine would do that.")
+	                         .setPubDate("Tue, 27 May 2003 08:37:32 GMT")
+	                         .setUid("http://liftoff.msfc.nasa.gov/2003/05/27.html#item571"))
+	 .addItem(new ItemEntry().setTitle("Astronauts' Dirty Laundry")
+	                         .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-laundry.asp</")
+	                         .setDescriptionOrSummary("Compared to earlier spacecraft, the International Space" +
+	                         		" Station has many luxuries, but laundry facilities are not one of them.  " +
+	                         		"Instead, astronauts have other options.")
+	                         .setPubDate("Tue, 20 May 2003 08:56:02 GMT")
+	                         .setUid("http://liftoff.msfc.nasa.gov/2003/05/20.html#item570"));  
++----------------------------------------------------------------------------------------------------+
+	
+Building Atom 1.0 Channel
 
+	To build the following channel:
+	
 +----------------------------------------------------------------------------------------------------+
-   
-  That will add the following attribute to the channel element
-  
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">dive into mark</title>
+  <subtitle type="html">
+    A &lt;em&gt;lot&lt;/em&gt; of effort
+    went into making this effortless
+  </subtitle>
+  <updated>2005-07-10T12:29:29Z</updated>
+  <id>tag:example.org,2003:3</id>
+  <link rel="alternate" type="text/html" 
+   hreflang="en" href="http://example.org/"/>
+  <link rel="self" type="application/atom+xml" 
+   href="http://example.org/feed.atom"/>
+  <rights>Copyright (c) 2003, Mark Pilgrim</rights>
+  <generator uri="http://www.example.com/" version="1.0">
+    Example Toolkit
+  </generator>
+  <entry>
+    <title>Atom draft-07 snapshot</title>
+    <link rel="alternate" type="text/html" 
+     href="http://example.org/2005/04/02/atom"/>
+    <link rel="enclosure" type="audio/mpeg" length="1337"
+     href="http://example.org/audio/ph34r_my_podcast.mp3"/>
+    <id>tag:example.org,2003:3.2397</id>
+    <updated>2005-07-10T12:29:29Z</updated>
+    <published>2003-12-13T08:29:29-04:00</published>
+    <author>
+      <name>Mark Pilgrim</name>
+      <uri>http://example.org/</uri>
+      <email>f8dy@example.com</email>
+    </author>
+    <contributor>
+      <name>Sam Ruby</name>
+    </contributor>
+    <contributor>
+      <name>Joe Gregorio</name>
+    </contributor>
+    <content type="xhtml" xml:lang="en" 
+     xml:base="http://diveintomark.org/">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p><i>[Update: The Atom draft is finished.]</i></p>
+      </div>
+    </content>
+  </entry>
+</feed>
 +----------------------------------------------------------------------------------------------------+
-        
-   <channel xmlns:my="http://my.company.com/" my:testAttribute="test">
-   
+	
+	You would write:
+	
++----------------------------------------------------------------------------------------------------+
+	new ChannelFeed()
+	    .setTitle("dive into mark")
+	    .setDescriptionOrSubtitle("A <em>lot</em> of effort went into making this effortless")
+	    .setPubDate("2005-07-10T12:29:29Z")
+	    .setUid("tag:example.org,2003:3")
+	    .addLink(new Link("http://example.org/")
+	                      .setHreflang(Locale.ENGLISH)
+	                      .setRel("alternate")
+	                      .setType("text/html"))
+	    .addLink(new Link("http://example.org/feed.atom")
+	                      .setRel("self")
+	                      .setType("application/atom+xml"))
+	    .setRights("Copyright (c) 2003, Mark Pilgrim")
+	    .setGenerator(new Generator("Example Toolkit")
+	                              .setVersion("1.0")
+	                              .setUri("http://www.example.com/"))
+	    
+	    .addItem(new ItemEntry()
+	          .setTitle("Atom draft-07 snapshot")
+	          .addLink(new Link("http://example.org/2005/04/02/atom")
+	                      .setRel("alternate")
+	                      .setType("text/html"))
+	          .addLink(new Link("http://example.org/audio/ph34r_my_podcast.mp3")
+	                          .setRel("enclosure")
+	                          .setType("audio/mpeg")
+	                          .setLength(1337))                      
+	          
+	          .setUid("tag:example.org,2003:3.2397")
+	          .setUpdatedDate("2003-12-13T08:29:29-04:00")
+	          .setPubDate("2003-12-13T08:29:29-04:00")
+	          .addAuthorOrCreator(new Person("f8dy@example.com")
+	                                  .setName("Mark Pilgrim")
+	                                  .setUri("http://example.org/"))
+	          .addContributor(new Person().setName("Sam Ruby"))
+	          .addContributor(new Person().setName("Joe Gregorio"))
+	          .setContent(new Content().setType("xhtml")
+	                                   .setBase("http://diveintomark.org/")
+	                                   .setLang(Locale.US)
+	                                   .addOtherElement("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+	                                           "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+	                                         "</div>")));   
 +----------------------------------------------------------------------------------------------------+
 
-	Adding elements:
-	 
-+----------------------------------------------------------------------------------------------------+
-   
-   c.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
-   c.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
+Building RSS 1.0 Channel
 
+	<<You are NOT encourage to use RSS 1.0 format>>. To build the following channel:
+	
 +----------------------------------------------------------------------------------------------------+
-    
-   That will add the following two elements to the channel element
+<?xml version="1.0" encoding="utf-8"?> 
 
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:co="http://purl.org/rss/1.0/modules/company/"
+  xmlns:ti="http://purl.org/rss/1.0/modules/textinput/"
+  xmlns="http://purl.org/rss/1.0/"
+> 
+
+  <channel rdf:about="http://meerkat.oreillynet.com/?_fl=rss1.0">
+    <title>Meerkat</title>
+    <link>http://meerkat.oreillynet.com</link>
+    <description>Meerkat: An Open Wire Service</description>
+    <dc:publisher>The O'Reilly Network</dc:publisher>
+    <dc:creator>Rael Dornfest (mailto:rael@oreilly.com)</dc:creator>
+    <dc:rights>Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.</dc:rights>
+    <dc:date>2000-01-01T12:00+00:00</dc:date>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>2</sy:updateFrequency>
+    <sy:updateBase>2000-01-01T12:00+00:00</sy:updateBase>
+
+    <image rdf:resource="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg" />
+
+    <items>
+      <rdf:Seq>
+        <rdf:li resource="http://c.moreover.com/click/here.pl?r123" />
+      </rdf:Seq>
+    </items>
+
+    <textinput rdf:resource="http://meerkat.oreillynet.com" />
+
+  </channel>
+
+  <image rdf:about="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg">
+    <title>Meerkat Powered!</title>
+    <url>http://meerkat.oreillynet.com/icons/meerkat-powered.jpg</url>
+    <link>http://meerkat.oreillynet.com</link>
+  </image>
+
+  <item rdf:about="http://c.moreover.com/click/here.pl?r123">
+    <title>XML: A Disruptive Technology</title> 
+    <link>http://c.moreover.com/click/here.pl?r123</link>
+    <dc:description>
+      XML is placing increasingly heavy loads on the existing technical
+      infrastructure of the Internet.
+    </dc:description>
+    <dc:publisher>The O'Reilly Network</dc:publisher>
+    <dc:creator>Simon St.Laurent (mailto:simonstl@simonstl.com)</dc:creator>
+    <dc:rights>Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.</dc:rights>
+    <dc:subject>XML</dc:subject>
+    <co:name>XML.com</co:name>
+    <co:market>NASDAQ</co:market>
+    <co:symbol>XML</co:symbol>
+  </item> 
+
+  <textinput rdf:about="http://meerkat.oreillynet.com">
+    <title>Search Meerkat</title>
+    <description>Search Meerkat's RSS Database...</description>
+    <name>s</name>
+    <link>http://meerkat.oreillynet.com/</link>
+    <ti:function>search</ti:function>
+    <ti:inputType>regex</ti:inputType>
+  </textinput>
+
+</rdf:RDF>
 +----------------------------------------------------------------------------------------------------+
-        
-   <channel>
-   		<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
-		<my:otherNewElement xmlns:my="http://my.company.com/">new element 2</my:otherNewElement>
-   </channel>
-   
+	
+	You would write:
+	
++----------------------------------------------------------------------------------------------------+
+ new ChannelFeed()
+  .setAbout("http://meerkat.oreillynet.com/?_fl=rss1.0")
+  .setTitle("Meerkat")
+  .addLink("http://meerkat.oreillynet.com<")
+  .setDescriptionOrSubtitle("Meerkat: An Open Wire Service")
+  .addManagingEditorOrAuthorOrPublisher("The O'Reilly Network")
+  .addWebMasterOrCreator("Rael Dornfest (mailto:rael@oreilly.com)")
+  .setRights("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.")
+  .setPubDate("2000-01-01T12:00+00:00")
+  //30 min ttl will be converted to {udpatePeriod:hourly, updateFrequency:2}
+  //updateBase is not supported directly, use addOtherElement to add it manually
+  //if you really want to add it
+  .setTtl(30)
+  //the resource attribute is automatically set to be the same as the 'about' attribute
+  .setImageOrIcon(new Image().setAbout("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg")
+                       .setTitle("Meerkat Powered!")
+                       .setLink("http://meerkat.oreillynet.com")
+                       .setUrl("http://meerkat.oreillynet.com/icons/meerkat-powered.jpg"))
+  .setTexInput(new TextInput().setAbout("http://meerkat.oreillynet.com")
+                              .setTitle("Search Meerkat")
+                              .setDescription("Search Meerkat's RSS Database...")
+                              .setName("s")
+                              .setLink("http://meerkat.oreillynet.com/")
+                              //<ti:function> and <ti:inputType> are not supported directly
+                              //no problems, just add them manually
+                              .addOtherElement("<ti:function xmlns:ti=\"http://purl.org/rss/1.0/modules/textinput/\">search</ti:function>")
+                              .addOtherElement("<ti:inputType xmlns:ti=\"http://purl.org/rss/1.0/modules/textinput/\">regex</ti:inputType>")
+                              )
+  .addItem(new ItemEntry().setTitle("XML: A Disruptive Technology")
+                     .addLink("http://c.moreover.com/click/here.pl?r123")
+                     .setDescriptionOrSummary("XML is placing increasingly heavy loads on the existing technical infrastructure of the Internet.")
+                     .addAuthorOrCreator("Simon St.Laurent (mailto:simonstl@simonstl.com)")
+                     //Doh! publisher not supported, add it manually again
+                     .addOtherElement("<dc:publisher xmlns:dc=\"http://purl.org/dc/elements/1.1/\">The O'Reilly Network</dc:publisher>")
+                     .setRights("Copyright &#169; 2000 O'Reilly &amp; Associates, Inc.</dc:")
+                     .addCategorySubject("XML")
+                     //no supports for <co:*> elements
+                     .addOtherElement("<co:name xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML.com</co:name>")
+                     .addOtherElement("<co:market xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">NASDAQ</co:market>")
+                     .addOtherElement("<co:symbol xmlns:co=\"http://purl.org/rss/1.0/modules/company/\">XML</co:symbol>")
+                     );
 +----------------------------------------------------------------------------------------------------+
 
-	Of course, you can also add an element object:
-
-+----------------------------------------------------------------------------------------------------+
-   
-   new Channel().addOtherElement(new Element(){...});
-  	
-   
-   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-   Document doc = factory.newDocumentBuilder().newDocument();
-   new Channel().addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
-   
-+----------------------------------------------------------------------------------------------------+
-
-	Item works the same way:
-
-+----------------------------------------------------------------------------------------------------+
-
-	Item item = new Item().setTitle("title")
-                          .setDescription("desc")
-                          .setLink("http://my.company.com");
-    item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
-    item.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
-    item.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");    
-    
-    item.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
-    
-    c.additem(item);
-
-+----------------------------------------------------------------------------------------------------+
-    
-    resulting item:
-
-+----------------------------------------------------------------------------------------------------+
-    
-	<item my:testAttribute="test">
-		<my:newElement>new element</my:newElement>
-		<my:otherNewElement>new element 2</my:otherNewElement>
-		<my:oneMoreElement />
-		<description>desc</description>
-		<link>http://my.company.com</link>
-		<title>title</title>
-	</item>
-		
-+----------------------------------------------------------------------------------------------------+ 
  
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
   Also check out the {{{faq.html}FAQ}} section for more insights about this API. 

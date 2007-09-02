@@ -3,30 +3,34 @@
                                     ------
                                     Jay Liang
                                     ------
-                                    2007/08/14
+                                    2007/09/01
                                     
 About YARFRAW
 
-	<<Y>>et <<A>>nother <<R>>ss <<F>>eed <<R>>eader <<A>>nd <<W>>riter is an open source API library 
-for working with RSS feed. It offers a set of data model in builder style to help developer build RSS 2.0 feed.
-(Supports for  RSS 0.9x, RSS 1.0 / RDF, Atom 0.3 and Atom 1.0 will come in later releases).
+	<<Y>>et <<A>>nother <<R>>ss <<F>>eed <<R>>eader <<A>>ppender <<W>>riter is an open source API library 
+for working with RSS feed. It offers an unified data model in builder style to help developers to build and to read 
+RSS feeds. 
 
 Why Another Java RSS API?
 
 	Sure there are many of such libraries, but in software (and anything eles) there are always room for 
-	improvement. Someone else already did it is not a good reason for stopping new developments. The goal of this
-	project is to provide an intuitive, high quality alternative to all these other similar libraries. 
+improvement. Someone else already did it is not a good reason for stopping new developments. The goal of this
+project is to provide an intuitive, high quality alternative to all these other similar libraries. 
 	
-	Another reason is that I think this push down publishing is just a wonderful idea. I wish every every website
-would offer a rss feed (now most the popular ones already do). It allows users to process much more information than they
-normally would (by visiting the website). Ever since I started using Google's Rss Reader, I can browse through the same
-amount of information that would normally take me twice as much time to do. If you are thinking about adding a Rss feed
-to your website, you really should.
+	I am a big fan of RSS feeds myself. I think it's just a wonderful idea. I wish that every website
+would offer a RSS feed (now most the popular ones already did). Ever since I started using Google's 
+RSS Reader, I can browse through the same amount of information that would normally take me twice 
+as much time to do. If you are thinking about adding a RSS feed to your website, you really should. Yarfraw
+can help you do that. 
 
 Project Status
 
-	The API is now at a stable stage and fully supports RSS 2.0 feeds, you can use it in your projects. I am 
-currently lookup for developers/volunteers to share some of the workload of this project. If you are interested
+	The API now fully supports RSS 2.0, Rss/RDF 1.0, and Atom 1.0 feeds. There is no directly builder support for RSS 0.9x, 
+but the API is able to read RSS 0.9x formated feeds with no problems because RSS 2.0 should be backward compatible 
+with its previous revisions. 
+There's no scheduled plan to add supports for Atom 0.3 format (since it's being replaced by its successor Atom 1.0), 
+if you would like to help out in adding that, let me know. 
+
+	I am currently lookup for developers/volunteers to share some of the workload of this project. If you are interested
 in helping out, send me a message at 'zl25-drexel AT gmail DOT com'. (You need to be reasonably proficient with
 Java, XML, Maven2, SVN and open source development in general). 
-		

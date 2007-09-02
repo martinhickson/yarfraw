@@ -1,0 +1,45 @@
+                                    ------
+                                    Utilities Methods Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/09/02
+
+DOMSerializer Utilities Methods Examples:
+  	
+  	In {{{advanced/io.html}Advanced IO Examples}}, you saw a glimpse of the DOMSerializer method. This class
+can serialize any DOM object to a writer or an outputStream. This class is not used at all in Yarfraw's main
+code base, I downloaded it from the Internet to use for unit tests. You may find it useful when you need
+to display the elements that are mapped to the 'otherElements' list.   
+
++----------------------------------------------------------------------------------------------------+
+
+	DOMSerializer s = new DOMSerializer();
+	Document doc = XMLUtils.parseXml("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+	    "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+	    "</div>", false, true);
+	StringWriter w = new StringWriter();
+	s.serialize(doc, w);
+	Document doc2 = XMLUtils.parseXml(w.toString(), false, true);
+
++----------------------------------------------------------------------------------------------------+
+
+	You can just as easily write your own serialization code using an XML transformer if you want more 
+controls:
+	
++----------------------------------------------------------------------------------------------------+
+    
+    TransformerFactory factory = TransformerFactory.newInstance();
+    Transformer trans =  factory.newTransformer();
+    Source source = new StreamSource(new StringReader("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+        "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+        "</div>"));
+    StringWriter writer = new StringWriter();
+    Result result = new StreamResult(writer);
+    trans.transform(source, result);	
+    
++----------------------------------------------------------------------------------------------------+
+
+	  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

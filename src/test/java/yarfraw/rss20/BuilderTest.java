@@ -41,20 +41,30 @@ public class BuilderTest{
                                              .addWebMasterOrCreator("webmaster@example.com")
                              .addItem(new ItemEntry().setTitle("Star City")
                                                      .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp")
-                                                     .setDescriptionOrSummary("How do Americans get ready to work with Russians aboard the International Space Station? They take a crash course in culture, language and protocol at Russia's &lt;a href=\"http://howe.iki.rssi.ru/GCTC/gctc_e.htm\"&gt;Star City&lt;/a&gt;.")
+                                                     .setDescriptionOrSummary("How do Americans get ready to work with " +
+                                                     		"Russians aboard the International Space Station? They take a " +
+                                                     		"crash course in culture, language and protocol at Russia's " +
+                                                     		"&lt;a href=\"http://howe.iki.rssi.ru/GCTC/gctc_e.htm\"&gt;Star City&lt;/a&gt;.")
                                                      .setPubDate("Tue, 03 Jun 2003 09:39:21 GMT")
                                                      .setUid("http://liftoff.msfc.nasa.gov/2003/06/03.html#item573"))
-                             .addItem(new ItemEntry().setDescriptionOrSummary("Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a &lt;a href=\"http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm\"&gt;partial eclipse of the Sun&lt;/a&gt; on Saturday, May 31st.")
+                             .addItem(new ItemEntry().setDescriptionOrSummary("Sky watchers in Europe, Asia, and parts of " +
+                             		                      "Alaska and Canada will experience a " +
+                             		                      "&lt;a href=\"http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm\"&gt;" +
+                             		                      "partial eclipse of the Sun&lt;/a&gt; on Saturday, May 31st.")
                                                      .setPubDate("Fri, 30 May 2003 11:06:42 GMT")
                                                      .setUid("http://liftoff.msfc.nasa.gov/2003/05/30.html#item572"))
                              .addItem(new ItemEntry().setTitle("The Engine That Does More")
                                                      .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-VASIMR.asp")
-                                                     .setDescriptionOrSummary("Before man travels to Mars, NASA hopes to design new engines that will let us fly through the Solar System more quickly.  The proposed VASIMR engine would do that.")
+                                                     .setDescriptionOrSummary("Before man travels to Mars, NASA hopes to design new " +
+                                                     		"engines that will let us fly through the Solar System more quickly.  " +
+                                                     		"The proposed VASIMR engine would do that.")
                                                      .setPubDate("Tue, 27 May 2003 08:37:32 GMT")
                                                      .setUid("http://liftoff.msfc.nasa.gov/2003/05/27.html#item571"))
                              .addItem(new ItemEntry().setTitle("Astronauts' Dirty Laundry")
                                                      .addLink("http://liftoff.msfc.nasa.gov/news/2003/news-laundry.asp</")
-                                                     .setDescriptionOrSummary("Compared to earlier spacecraft, the International Space Station has many luxuries, but laundry facilities are not one of them.  Instead, astronauts have other options.")
+                                                     .setDescriptionOrSummary("Compared to earlier spacecraft, the International Space" +
+                                                     		" Station has many luxuries, but laundry facilities are not one of them.  " +
+                                                     		"Instead, astronauts have other options.")
                                                      .setPubDate("Tue, 20 May 2003 08:56:02 GMT")
                                                      .setUid("http://liftoff.msfc.nasa.gov/2003/05/20.html#item570"));                                                     
                                                      

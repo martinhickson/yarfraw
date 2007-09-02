@@ -33,7 +33,15 @@ public class FeedReaderUtils{
   }
   
   /**
-   * Read all Rss feed using an {@link ExecutorService} and return them in a list that is in the same order.
+   *  Static method for reading feed(s) remotely. This method will submit a Callable object to the input
+   *  ExecutorService for every input url and will only return when it finishes reading all requested feeds.
+   *  The ChannelFeeds in the returned list will in the exact same order as the input url. 
+   *  If for whatever reasons the method fails to read a feed, the corresponding ChannelFeed in the list will be null. 
+   *  <br/>
+   *  This method will detect the formats automatically, but since it does not remember any states, 
+   *  it has to performance format detection every time it is called.
+   *  It is recommended that you keep an instance of the reader in memory so the reader can re-use the detected
+   *  formats.
    * @param files - {@link File}s pointing to Rss feed files. 
    * @param executorService - @see {@link ExecutorService}
    * @param urls - @see {@link HttpURL}

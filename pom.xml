@@ -3,8 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>yarfraw</groupId>
   <artifactId>yarfraw</artifactId>
-  <name>YARFRAW - Yet Another RSS Feed Reader And Writer API</name>
-  <version>0.7-RC1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>YARFRAW - Yet Another RSS Feed Reader Appender Writer API</name>
+  <version>0.7</version>
   <description>Title says all, this is just another rss feed reader and writer API library.</description>
   <url>http://yarfraw.sourceforge.net/</url>
   <issueManagement>
@@ -44,10 +45,35 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</connection>
-    <developerConnection>scm:svn:https://zl25-drexel@yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</developerConnection>
-    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/</url>
+    <connection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</connection>
+    <developerConnection>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</developerConnection>
+    <url>scm:svn:https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags/yarfraw-0.7</url>
   </scm>
+
+  <profiles>
+  	<profile>
+  	  <id>dev</id>
+  	  <build>
+  	  	<plugins>
+		  	  <plugin>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <configuration>
+		          <forkMode>always</forkMode>
+		          <includes>
+		            <list>**/*Test.java</list>
+		          </includes>
+        		</configuration>
+      		</plugin>
+    	</plugins>
+  	</build>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>dev</value>
+        </property>
+      </activation>
+  	</profile>
+  </profiles>
   <build>
     <extensions>
       <extension>
@@ -61,7 +87,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <tagBase>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/tags</tagBase>
+          <tagBase>https://yarfraw.svn.sourceforge.net/svnroot/yarfraw/yarfraw/tags</tagBase>
         </configuration>
       </plugin>
       <plugin>
@@ -162,6 +188,7 @@
           <forkMode>always</forkMode>
           <includes>
             <list>**/*Test.java</list>
+            <list>**/*TestSlow.java</list>
           </includes>
         </configuration>
       </plugin>
@@ -195,7 +222,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.3</version>
+      <version>4.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -231,21 +258,85 @@
   </dependencies>
   <reporting>
     <plugins>
+		<plugin>
+			<artifactId>maven-pmd-plugin</artifactId>
+			<configuration>
+				<linkXref>true</linkXref>
+				<sourceEncoding>utf-8</sourceEncoding>
+				<minimumTokens>80</minimumTokens>
+				<targetJdk>1.5</targetJdk>
+				<excludes>
+					<exclude>**/yarfraw/generated/**/*.java</exclude>
+				</excludes>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>jdepend-maven-plugin</artifactId>
+		</plugin>
+		  <plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>findbugs-maven-plugin</artifactId>
+		    <configuration>
+		      <threshold>Exp</threshold>
+		      <effort>Max</effort>
+		      <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+		      <includeFilterFile>findbugs-include.xml</includeFilterFile>
+		      <visitors>FindDeadLocalStores,UnreadFields</visitors>
+		      <omitVisitors>FindDeadLocalStores,UnreadFields</omitVisitors>
+		    </configuration>
+		  </plugin>				
+		<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+			</plugin>			 
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jdepend-maven-plugin</artifactId>
-      </plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>	 
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jxr-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependencies</report>
+              <report>project-team</report>
+              <report>index</report>
+			  <report>maven-changes-plugin</report>              
+              <report>summary</report>
+              <report>license</report>            
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>	 
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <minmemory>128m</minmemory>
+          <maxmemory>512</maxmemory>
+          <links>
+            <list>
+              http://java.sun.com/j2se/1.5.0/docs/api
+            </list>
+            <list>
+              http://java.sun.com/javaee/5/docs/api/
+            </list>
+          </links>
+          <source>1.5</source>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
-      </plugin>
+      </plugin>    
     </plugins>
   </reporting>
   <distributionManagement>

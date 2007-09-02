@@ -5,9 +5,13 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.Day;
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.rss20.elements.ObjectFactory;
@@ -16,6 +20,7 @@ import yarfraw.generated.rss20.elements.TSkipDay;
 import yarfraw.generated.rss20.elements.TSkipDaysList;
 import yarfraw.generated.rss20.elements.TSkipHoursList;
 import yarfraw.mapping.forward.ToRss20Channel;
+import yarfraw.utils.CommonUtils;
 
 /**
  * Util methods for mapping Yarfraw core model to Rss20 Jaxb model
@@ -23,7 +28,7 @@ import yarfraw.mapping.forward.ToRss20Channel;
  *
  */
 public class ToRss20ChannelImpl implements ToRss20Channel{
-
+  private static final Log LOG = LogFactory.getLog(ToRss20ChannelImpl.class);
    private static ToRss20Channel _instance = new ToRss20ChannelImpl();
    
    public static ToRss20Channel getInstance(){
@@ -66,7 +71,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     }
 
     if(ch.getDocs() != null){
-      elementList.add(factory.createTRssChannelDocs(ch.getDocs().toString()));
+      elementList.add(factory.createTRssChannelDocs(ch.getDocs()));
     }
     
     if(ch.getGenerator() != null){
@@ -81,7 +86,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     if(ch.getItems() != null){
       for(ItemEntry t : ch.getItems()){
         if(t != null){
-          ret.getItem().add(Rss20MappingUtils.ToRss20Item(t).getValue());
+          ret.getItem().add(Rss20MappingUtils.toRss20Item(t).getValue());
         }
       }
     }
@@ -95,7 +100,16 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     }
     
     if(ch.getLastBuildOrUpdatedDate() != null){
-      elementList.add(factory.createTRssChannelLastBuildDate(ch.getLastBuildOrUpdatedDate()));
+      String dateString = ch.getLastBuildOrUpdatedDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.RSS20)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.RSS20);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      elementList.add(factory.createTRssChannelLastBuildDate(dateString));
     }
     
     String editor = Utils.getEmailOrText(ch.getManagingEditorOrAuthorOrPublisher());
@@ -104,7 +118,16 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
     }
     
     if(ch.getPubDate() != null){
-      elementList.add(factory.createTRssChannelPubDate(ch.getPubDate()));
+      String dateString = ch.getPubDate();
+      if(!CommonUtils.isDateFormatValid(dateString, FeedFormat.RSS20)){
+        String newDateString = CommonUtils.formatDate(CommonUtils.tryParseDate(dateString), FeedFormat.RSS20);
+        if(newDateString != null){
+          dateString = newDateString;
+        }else{
+          LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
+        }
+      }
+      elementList.add(factory.createTRssChannelPubDate(dateString));
     }
 
     if(ch.getSkipDays() != null){

@@ -1,0 +1,195 @@
+                                    ------
+                                    Builder Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/08/28
+
+Building items and channels with additional elements
+	
+	Sometimes you may want to add extensibility elements to your feed that are not in the RSS specs.
+For example, the RSS 2.0 feed from {{{digg.xml}digg.com}} has some additional elements under all the item elements.
+
+	The Channel and Item data models supports these additional elements, as well as any additional attributes.
+You can add more elements to a channel or an item using the 'otherElements' and 'otherAttributes' list:
+
++----------------------------------------------------------------------------------------------------+
+   
+   new ChannelFeed().addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+
++----------------------------------------------------------------------------------------------------+
+   
+  That will add the following attribute to the channel element
+  
++----------------------------------------------------------------------------------------------------+
+        
+   <channel xmlns:my="http://my.company.com/" my:testAttribute="test">
+   
++----------------------------------------------------------------------------------------------------+
+
+	Adding elements:
+	 
++----------------------------------------------------------------------------------------------------+
+   
+   ChannelFeed c = new ChannelFeed();
+   c.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
+   c.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
+
++----------------------------------------------------------------------------------------------------+
+    
+   That will add the following two elements to the channel element
+
++----------------------------------------------------------------------------------------------------+
+        
+   <channel>
+   		<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
+		<my:otherNewElement xmlns:my="http://my.company.com/">new element 2</my:otherNewElement>
+   </channel>
+   
++----------------------------------------------------------------------------------------------------+
+
+	Of course, you can also add an element object:
+
++----------------------------------------------------------------------------------------------------+
+   
+   new Channel().addOtherElement(new Element(){...});
+  	
+   
+   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+   Document doc = factory.newDocumentBuilder().newDocument();
+   new ChannelFeed().addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
+   
++----------------------------------------------------------------------------------------------------+
+
+	Item works the same way:
+
++----------------------------------------------------------------------------------------------------+
+
+    ItemEntry item = new ItemEntry().setTitle("title")
+                          .setDescriptionOrSummary("desc")
+                          .addLink("http://my.company.com");
+    item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+    item.addOtherElement("<my:newElement xmlns:my=\"http://my.company.com/\">new element</my:newElement>");
+    item.addOtherElement("<my:otherNewElement xmlns:my=\"http://my.company.com/\">new element 2</my:otherNewElement>");
+
++----------------------------------------------------------------------------------------------------+
+    
+    resulting item:
+
++----------------------------------------------------------------------------------------------------+
+    
+	<item my:testAttribute="test">
+		<my:newElement>new element</my:newElement>
+		<my:otherNewElement>new element 2</my:otherNewElement>
+		<my:oneMoreElement />
+		<description>desc</description>
+		<link>http://my.company.com</link>
+		<title>title</title>
+	</item>
+		
++----------------------------------------------------------------------------------------------------+ 
+
+	the resulting item if writing in Atom 1.0 format:
+
++----------------------------------------------------------------------------------------------------+
+    
+	<entry my:testAttribute="test">
+		<my:newElement>new element</my:newElement>
+		<my:otherNewElement>new element 2</my:otherNewElement>
+		<my:oneMoreElement />
+		<description>desc</description>
+		<link href="http://my.company.com" />
+		<title>title</title>
+	</entry>
+		
++----------------------------------------------------------------------------------------------------+ 
+
+	      
+Data object validation
+      
+	Yarfraw offers some primitive validation for all its core data models. The validation logics will 
+check to make sure the object you build conforms to the RSS specs by checking things such as there is at 
+least one item element, required elements are not null, etc. If the validation failed, it will raise a
+ValidationException:
+
++----------------------------------------------------------------------------------------------------+
+
+	ChannelFeed c = buildChannel();
+    c.validate(FeedFormat.RSS20);
+    //validation for other formats might not work as well as RSS 2.0 validation
+    c.validate(FeedFormat.RSS10);
+    c.validate(FeedFormat.ATOM10);
+    
++----------------------------------------------------------------------------------------------------+      
+
++----------------------------------------------------------------------------------------------------+
+	TODO: more details
++----------------------------------------------------------------------------------------------------+
+
+toString, equals, hashCode
+
+	All data model classes override toString, equals and hasCode methods. Please note that the equals method
+delegates to Apache commons's reflectionEquals method, in which the comparison is done by doing deep 
+reflection inspection. If you have objects that seem to be having the same content but they are not
+equaled, it can be a number of things: maybe some field is null in one and is an empty collection in the
+other; maybe the same date is formatted differently so the date string is different; etc.
+
+	Also note that the toString method dump the entire object to a string in multiple lines, 
+which can be very noisy. You might
+want to consider implementing a simplified toString() method that is format aware. 
+(i.e. skip the Atom 1.0 only fields when outputting a RSS 2.0 ChannelFeed). 
+
++----------------------------------------------------------------------------------------------------+
+  
+  @Override
+  public String toString(){
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  }
+  @Override
+  public boolean equals(Object other){
+    return EqualsBuilder.reflectionEquals(this, other);
+  }
+  @Override
+  public int hashCode(){
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
+  
++----------------------------------------------------------------------------------------------------+
+  
+Convenient methods
+
+	Many data model classes have convenient methods:
+
++----------------------------------------------------------------------------------------------------+
+
+    ChannelFeed c = buildChannel();
+    
+    //get an element such as this under the channel element  
+    //<my:newElement xmlns:my="http://my.company.com/">new element</my:newElement>
+    Element e = c.getElementByNS("http://my.company.com/", "newElement");
+    //from the item element
+    e = item.getElementByNS("http://my.company.com/", "newElement");
+    
+    //add 2 new categories using a string value
+    c.addCategorySubject("category1", "category2");
+    
+    //add skip hours
+    c.addSkipHour(1, 2, 3);
+    
+    //add a description using a string without creating a Text object
+    c.setDescriptionOrSubtitle("Meerkat: An Open Wire Service")
+    
++----------------------------------------------------------------------------------------------------+      
+	
+	Other methods:
+	
++----------------------------------------------------------------------------------------------------+
+
+	channel.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+	item.addOtherAttributes(new QName("http://my.company.com/", "testAttribute", "my"), "test");
+	
++----------------------------------------------------------------------------------------------------+
+  
+  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

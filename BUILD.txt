@@ -1,0 +1,13 @@
+1. download and install maven 2 
+2. change directory to /yarfraw and type 'mvn'
+3. the jar file can be found under /yarfraw/target/
+
+Notes:
+- The normal build can take up to a couple of minutes because of many
+unit tests attempt to read rss feeds from remote locations. If you 
+don't want to run these remote read tests but at the same time do not
+want to skip all tests entirely, add '-Denv=dev' to the end of the mvn
+command, this will trigger a profile call 'dev' that will exclude 
+these remote read tests.
+
+for example: 'mvn clean install -Denv=dev'

@@ -37,7 +37,9 @@ import yarfraw.utils.XMLUtils;
  * </li>
  * <li>Rss 2.0 - &lt;channel>
  * </li>
- * <li>Atom 1.0 - &lt;feed>
+ * <li>Atom 1.0 - &lt;feed> The "atom:feed" element is the document (i.e., top-level) element of an Atom Feed Document, 
+ * acting as a container for metadata and data associated with the feed. Its element children consist of metadata 
+ * elements followed by zero or more atom:entry child elements.
  * </li>
  * @author jliang
  *

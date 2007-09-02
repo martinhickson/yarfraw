@@ -17,9 +17,9 @@ import yarfraw.utils.ValidationUtils;
 import yarfraw.utils.XMLUtils;
 
 /**
- * <li>Rss 2.0 - the &ltcategory> element</li>
- * <li>Rss 1.0 - the &ltdc:subject> element</li>
- * <li>Atom 1.0 - the &ltcategory> element</li>
+ * <li>Rss 2.0 - the &lt;category> element</li>
+ * <li>Rss 1.0 - the &lt;dc:subject> element</li>
+ * <li>Atom 1.0 - the &lt;category> element</li>
  * 
  * <p>
  * Rss 2.0:  http://cyber.law.harvard.edu/rss/rss.html#syndic8 <br/>

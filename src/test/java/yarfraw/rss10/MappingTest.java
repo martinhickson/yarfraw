@@ -27,7 +27,6 @@ public class MappingTest extends TestCase{
     ChannelFeed c2 =  ToChannelRss10Impl.getInstance().execute(rdf);
     c.getTexInput().setResource(c.getTexInput().getAbout());
     c.getImageOrIcon().setResource(c.getImageOrIcon().getAbout());
-    
     assertEquals(c, c2);
     
   }

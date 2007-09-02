@@ -2,14 +2,17 @@ package yarfraw.coverage;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import yarfraw.atom10.BuilderTest;
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.io.FeedAppender;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
@@ -54,4 +57,45 @@ public class IOTest extends TestCase{
             new FileOutputStream(f));
     
   }
+  
+  @Test
+  public void testAppend() throws Exception{
+    File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss2sample.xml").toURI());
+    File copy = File.createTempFile("copy", ".xml");
+    FileUtils.copyFile(f, copy);
+    
+    FeedAppender a = new FeedAppender(copy);
+    a.setNumItemToKeep(3);
+    
+    List<ItemEntry> items = yarfraw.rss20.BuilderTest.buildChannel().getItems();
+    
+    a.appendAllItemsToBeginning(items.get(0));
+    
+    FeedReader r = new FeedReader(copy);
+    assertEquals(3, r.readChannel().getItems().size());
+    
+    a.appendAllItemsToBeginning(items);
+    
+    assertEquals(3, r.readChannel().getItems().size());
+    
+    a.setItem(2, items.get(0));
+    
+    assertEquals("item not set correctly", r.readChannel().getItems().get(2), items.get(0));
+    
+    a.appendAllItemsToEnd(items);
+    
+    ChannelFeed c = r.readChannel();
+    assertEquals("item not added correctly", c.getItems().get(2), items.get(0));
+  }
+  
+  @Test
+  public void testEncoding() throws Exception{
+    ChannelFeed c = new ChannelFeed()
+                  .setDescriptionOrSubtitle("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+        "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+      "</div>");
+    FeedWriter w = new FeedWriter(File.createTempFile("test",".xml"));
+    w.writeChannel(c);
+  }
+  
 }

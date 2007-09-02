@@ -1,0 +1,221 @@
+                                    ------
+                                    IO Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/09/02
+
+XSD Schemas and JAXB
+	
+	Currently, Yarfraw's writer and reader implementation uses {{{https://jaxb.dev.java.net/}JAXB}} to read from and
+write to xml files. Most of these JAXB codes are generated automatically from a few xsd schemas. 
+It's a good idea to take a look at these schema files, you will find a lot of insights on how
+things work internally in Yarfraw.
+
+	*	RSS 2.0 
+		
+		* {{xsd/rss20.xsd}}
+
+	*	Atom 1.0 
+		
+		* {{xsd/atom10.xsd}}	
+
+	*	RSS 1.0 
+		
+		* {{xsd/rss10.xsd}}
+		
+		* {{xsd/rss10dc.xsd}}
+		
+		* {{xsd/rss10rdf.xsd}}
+		
+		* {{xsd/rss10sy.xsd}}	
+
+
+JAXB ValidationEventHandler
+
+	The default implementation of ValidationEventHandler in JAXB will fail as soon as the first error or fatal error is encountered.
+The FeedReader class overrides this default implementation to make the validation only fail when a 'fatal error' is encountered.
+This lets FeedReader to be able to read as many different feeds as possible. The DefaultValidationEventHandler
+will output some error messages when it encounters an event, so this handler in Yarfraw will also output these
+messages.    
+
++----------------------------------------------------------------------------------------------------+
+
+	//ONLY FeedReader uses this handler, writer uses Default handler
+  private static class WarningHandler implements ValidationEventHandler{
+    public boolean handleEvent(ValidationEvent event) {
+      DefaultValidationEventHandler d = new DefaultValidationEventHandler();
+      d.handleEvent(event);
+      return event.getSeverity()== ValidationEvent.FATAL_ERROR;
+    }   
+  }
+  
++----------------------------------------------------------------------------------------------------+
+
+	You can pass in your own implementation of ValidationEventHandler to the IO classes in case you need
+to handler these validations events differently. 
+	 
++----------------------------------------------------------------------------------------------------+
+
+  FeedReader  r = new FeedReader("rss20.xml");
+   //Note: null handler will be promptly ignored
+  r.readChannel(new ValidationEventHandler(){
+      public boolean handleEvent(ValidationEvent event) {
+      	//Process the event
+        return false;
+      }
+  });
+
++----------------------------------------------------------------------------------------------------+
+
+
+	Similarly, you can add your own event handler to FeedWriter:
+	
++----------------------------------------------------------------------------------------------------+
+    
+    ChannelFeed c = new ChannelFeed();
+    FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
+    w.writeChannel(c);
+    w.writeChannel(c, new ValidationEventHandler(){
+      public boolean handleEvent(ValidationEvent event) {
+        System.out.println(event);
+        return false;
+      }
+    });
+   
++----------------------------------------------------------------------------------------------------+
+
+Content Element
+
+	In Atom 1.0, there is a \<content\> element under \<entry\> where you can put any text and xhtml
+as the content of the entry. This element is mapped to the Content class in Yarfraw. 
+There is no support for such element in RSS 2.0, you are supposed to simply
+use the \<description\> element for any text (html or non-html). In RSS 1.0, there is a 'content' extension
+module you can use to add encoded content to your feed. see {{{http://web.resource.org/rss/1.0/modules/content/}\<content:encoded\>}}.
+Yarfraw does not support this \<encoded\> element directly, but I have seen a few places where this element \<encoded\>
+element is being used. If a RSS 1.0 or RSS 2.0 feed has this \<encoded\> element, the FeedReader will add this element as 
+an 'otherElements' under the ItemEntry. Although this element is not in the RSS 2.0 specs, you might want to look for it 
+explicitly because I have seen some RSS 2.0 feeds use this element. 
+ 	
+ 	The following snippet shows you how to get the text content of this element.
+ 	
++----------------------------------------------------------------------------------------------------+
+
+    FeedReader r = new FeedReader("content.xml", FeedFormat.RSS10);
+    ChannelFeed c = r.readChannel();
+    ItemEntry i = c.getItems().get(0);
+    System.out.println(i.getElementByLocalName("encoded").getTextContent());
+	
++----------------------------------------------------------------------------------------------------+
+
+ 	content.xml
+ 	
++----------------------------------------------------------------------------------------------------+
+<?xml version="1.0" encoding="utf-8"?> 
+
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns="http://purl.org/rss/1.0/"
+> 
+
+  <channel rdf:about="http://example.org/rss.rdf">
+    <title>Example Feed</title>
+    <link>http://www.example.org</link>
+    <description>Simply for the purpose of demonstration.</description>
+
+    <items>
+      <rdf:Seq>
+        <rdf:li resource="http://example.org/item/" />
+      </rdf:Seq>
+    </items>
+    
+  </channel>
+
+  <item rdf:about="http://example.org/item/">
+    <title>The Example Item</title> 
+    <link>http://example.org/item/</link>
+    <content:encoded><![CDATA[<p>What a <em>beautiful</em> day!</p>]]></content:encoded>
+  </item> 
+</rdf:RDF>
++----------------------------------------------------------------------------------------------------+
+
+XHTML Elements
+
+	According to the Atom 1.0 {{{http://atompub.org/2005/07/11/draft-ietf-atompub-format-10.html#atomContent}specs}},
+The \<content\> element can have a single xhtmlDiv element. When FeedReader reads such an element, it will automatically
+parse it into an DOM element object. For example, for the following feed:
+ 
++----------------------------------------------------------------------------------------------------+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">dive into mark</title>
+  <link rel="alternate" type="text/html" 
+   hreflang="en" href="http://example.org/"/>
+  <entry>
+    <title>Atom draft-07 snapshot</title>
+    <content type="xhtml" xml:lang="en" 
+     xml:base="http://diveintomark.org/">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p><i>[Update: The Atom draft is finished.]</i></p>
+      </div>
+    </content>
+  </entry>
+</feed>
++----------------------------------------------------------------------------------------------------+
+
+	You can use the following code to get the div element.
+	
++----------------------------------------------------------------------------------------------------+
+
+	FeedReader r = new FeedReader("atomXhtml.xml", FeedFormat.ATOM10);
+    ChannelFeed c = r.readChannel();
+    ItemEntry i1 = c.getItems().get(0);
+    if(i1.getContent().getType().equals("xhtml")){//only content that is of type 'xhtml' will has div element
+      DOMSerializer serializer = new DOMSerializer();
+      Element div = i1.getContent().getElementByNS("http://www.w3.org/1999/xhtml", "div");
+      StringWriter writer = new StringWriter(); 
+      serializer.serializeNode((Node)div, writer, "");
+      System.out.println(writer.toString());
+    }else{//the rest will be interpreted as simple text content
+      System.out.println(i1.getContent().getContentText());
+    }
+    
++----------------------------------------------------------------------------------------------------+
+
+Encoded Content
+
+	Content will be automatically encoded, so you can put any strings you want in the \<description\> element and
+the \<content\> element (and all other text elements). For example: 
+
++----------------------------------------------------------------------------------------------------+
+    ChannelFeed c = new ChannelFeed()
+                  .setDescriptionOrSubtitle("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+        			"<p><i>[Update: The Atom draft is finished.]</i></p>"+
+      				"</div>");
+    FeedWriter w = new FeedWriter("test.xml");
+    w.writeChannel(c);
++----------------------------------------------------------------------------------------------------+
+	
+	resulting feed:
+	
++----------------------------------------------------------------------------------------------------+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss version="2.0">
+<channel>
+	<description>&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;&lt;i&gt;
+	[Update: The Atom draft is finished.]&lt;/i&gt;&lt;/p&gt;&lt;/div&gt;</description>
+	</channel>
+</rss>
++----------------------------------------------------------------------------------------------------+
+
+	use org.apache.common.lang.StringEscapeUtils if you want decode it:
+	
++----------------------------------------------------------------------------------------------------+	
+	System.out.println(StringEscapeUtils.unescapeXml(
+	"&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p&gt;&lt;i&gt;"+
+    "[Update: The Atom draft is finished.]&lt;/i&gt;&lt;/p&gt;&lt;/div&gt;"));
++----------------------------------------------------------------------------------------------------+
+  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

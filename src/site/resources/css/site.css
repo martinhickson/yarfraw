@@ -86,9 +86,9 @@ p {
   line-height: 1.3em;
   font-size: 12px;
   color: #000;
-  background-image: url("../images/hbg.gif");
+  background-image: url("../images/hbg.gif") ;
   background-repeat: repeat-x;
-  padding: 1em;
+  padding: 0.6em;
 }
 #breadcrumbs {
   height: 13px;
@@ -184,7 +184,7 @@ table {
   color: #003300;
 }
 #banner {
-  color: #efefef;
+  color: #fff;
   font-weight: bold;
   height: 70px;
   background: url(../images/bgheader.gif);

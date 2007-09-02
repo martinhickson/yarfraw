@@ -1,0 +1,24 @@
+                                    ------
+                                    Performance
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/09/01
+                                     
+Performance Consideration
+
+	Admittedly, Yarfraw is not the fastest RSS feed parser ever written. To read a feed into the core model,
+the FeedReader asks JAXB to first parse the input xml file (probably using a DOM parser), then JAXB mapps the parsed object
+into a bunch of JAXB binding objects, then Yarfraw inspects these JAXB binding objects and maps them over to 
+the core model objects.
+	
+	If you want a fast parser, you should simply parse the xml into a DOM, and then parse
+the DOM object directly yourself (or write a SAX parser if you want to make it even faster). 
+
+	However, if you are reading feeds from remote servers over the Internet, you will be spending most of the time
+waiting for the network round trip. This round trip time is much longer comparing to the parsing time, so the parsing
+speed is rarely the bottleneck. 
+
+	If you are reading multiple feeds remotely, you should consider spawning a thread for each FeedReader 
+(or use a thread pool) to have the readers run in parallel.    
+                                     

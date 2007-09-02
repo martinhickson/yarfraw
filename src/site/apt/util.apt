@@ -1,0 +1,205 @@
+                                    ------
+                                    Utilities Methods Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/08/14
+
+Date Parsing/Formatting Utilities Methods Examples:
+  
+	The FeedReader class does not attempt to parse the dates when it reads in feeds, this is by design
+because I don't want the reader to fail or throw an exception when it fails to parse a date. There are, however,
+a utility method you can use to parse date string you receive from a feed, it should be able to parse 
+most of the date formats: 
+	
++----------------------------------------------------------------------------------------------------+
+
+	//RFC format, use by RSS 2.0 ONLY
+	Date date = CommonUtils.tryParseDate("Tue, 27 May 2003 08:37:32 GMT");
+	//ISO format, use by both Atom 1.0 and RSS 1.0
+	Date date = CommonUtils.tryParseDate("2003-12-13T08:29:29-04:00");
+	Date date = CommonUtils.tryParseDate("2003-12-13T08:29:29");
+	Date date = CommonUtils.tryParseDate("2003-12-13");
+	
++----------------------------------------------------------------------------------------------------+
+	
+	If you are building a feed, you should use the following utility method to format a date into a string
+that can be recognize by Yarfraw. When Yarfraw writes a feed to a file, it will first check the
+date strings to determine whether it is in a valid format according to the format that it is currently writing in. 
+If the string is not valid, it will try to convert it to a standardize format 
+to ensure the resulting feed is readable by as many feed reader as possible. 
+It does that by first parsing the input date string and convert it to a string based on its feed format. For example,
+if the FeedWriter is writing in Atom 1.0 format and the input date string is "Tue, 27 May 2003 08:37:32 GMT", the writer will use
+the method above to parse the string into a date and then format it to a ISO date string "2003-05-27T08:37:32".
+
+	If the date string is already in the expected format (Atom 1.0 and RSS 1.0 should use ISO format, RSS 2.0 should use
+RFC format), or it's not in the expected format but the writer is not able to parse the date string, the writer will
+leave the date string as is and write it to the feed xml file without any modifications.
+
+	Use the following method to parse your date before using it as a date string in your feed:
+
++----------------------------------------------------------------------------------------------------+
+
+    String isoDateString = CommonUtils.formatDate(new Date(), FeedFormat.ATOM10);
+    String isoDateString2 = CommonUtils.formatDate(new Date(), FeedFormat.RSS10);
+    String rfcDateString = CommonUtils.formatDate(new Date(), FeedFormat.RSS20);
+   
++----------------------------------------------------------------------------------------------------+
+	Specs for RFC date format can be found here: {{{http://www.faqs.org/rfcs/rfc822.html}RFC 822}}.
+	Specs for ISO date format can be found here: {{{http://www.w3.org/TR/NOTE-datetime}ISO 8601}}.
+
+
+FeedReader Utilities Methods Examples:                                     
+	
+	Static method for reading feed(s):
+
++----------------------------------------------------------------------------------------------------+
+
+    File f1 = new File("digg.xml");
+    File f2 = new File("reddit.xml");
+    File f3 = new File("theserverside-rss2.xml");
+    //all input files need to be in the same format
+    List<ChannelFeed> channels = FeedReaderUtils.readAll(FeedFormat.RSS20, f1, f2, f3);
+    
++----------------------------------------------------------------------------------------------------+
+	
+	Static method for reading feed(s) remotely. 
+	
+	This method will submit a Callable function to the input
+ExecutorService for every input url and will only return when it finishes reading all requested feeds.
+The ChannelFeed objects in the returned list will in the exact same order as they were in the input url. For the example
+below, the first ChannelFeed in the returned list will be from 
+"http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml",
+the second ChannelFeed will be from "http://bensbargains.net/rss.xml/0" and so on. 
+If for whatever reasons the method fails
+to read a feed, the corresponding ChannelFeed in the list will be null. For example, if it fails to read from
+"http://rss.cnn.com/rss/money_topstories.rss", then the object at index 2 in the returned list will be null.
+	
+	This method will detect the formats automatically, but since it does not remember any states, 
+it has to perform format detection every time it is called.
+If performance is an issue, it is recommended that 
+you keep an instance of the reader in memory so the reader can re-use the detected formats as opposed to only 
+holding the URLs in memory.
+
++----------------------------------------------------------------------------------------------------+
+
+  HttpURL[] urls = new HttpURL[]{
+            new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"),
+            new HttpURL("http://bensbargains.net/rss.xml/0"),
+            new HttpURL("http://rss.cnn.com/rss/money_topstories.rss"),
+            new HttpURL("http://www.perezhilton.com/index.xml"),
+            new HttpURL("http://www.csmonitor.com/rss/top.rss"),
+            new HttpURL("http://www.comedycentral.com/rss/colbertvideos.jhtml"),
+            new HttpURL("http://feeds.feedburner.com/CoolTools"),
+            new HttpURL("http://couponbar.coupons.com/rss.asp"),
+            new HttpURL("http://www.gotapex.com/deals/daily/RSS2/"),
+            new HttpURL("http://www.comedycentral.com/rss/tdsvideos.jhtml"),
+            new HttpURL("http://rss.dealcatcher.com/rss.xml"),
+            new HttpURL("http://content.dealnews.com/dealnews/rss/todays-edition.xml"), //Rss 0.9x, Yarfraw can read it just fine
+            new HttpURL("http://www.defamer.com/index.xml"))
+    };
+    //you can pass in any ExecutorService you want
+    List<ChannelFeed> channels = FeedReaderUtils.readAll(Executors.newFixedThreadPool(10), urls );
+    
+    int i =0;
+    for(HttpURL url : urls){
+      ChannelFeed c = channels.get(i);
+      if(c != null){
+        System.out.println(c.getTitle());
+      }else{
+        System.out.println("Yarfraw failed to parse one of the channels: "+url);
+      }
+      i++;
+    }
+    
++----------------------------------------------------------------------------------------------------+
+
+Feed Format Detection
+
+	The FeedFormatDetector utility class is used to detect the format of a feed. It inspects the root
+element of a RSS feed to determine the format of the feed:
+
++----------------------------------------------------------------------------------------------------+
+
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("rss20.xml");
+      assert(FeedFormat.RSS20 == FeedFormatDetector.getFormat(s));
+    }finally{
+      IOUtils.closeQuietly(s); //dont forget to close you io streams!!
+    }
+
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("rss10.xml");
+      assert(FeedFormat.RSS10 == FeedFormatDetector.getFormat(s));
+    }finally{
+      IOUtils.closeQuietly(s); //dont forget to close you io streams!!
+    }    
+    
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("unsupportedFormat.xml");
+      assert(FeedFormat.UNKNOWN == FeedFormatDetector.getFormat(s));
+    }finally{
+      IOUtils.closeQuietly(s); //dont forget to close you io streams!!
+    }    
+    
++----------------------------------------------------------------------------------------------------+
+
+	Officially, Yarfraw only supports RSS 2.0, RSS 1.0, and ATOM 1.0. But, the format detector
+will report RSS 0.9x formats as RSS 2.0 because the FeedReader is able to read them using the RSS 2.0 parser.
+If you want a stricter format detector, you can pass in a strict enforcement flag to tell the detector that you 
+want strict format detection. if the flag is set to true, the method will only report
+RSS 2.0 when the root element is 'rss' and it has a version 2.0 attribute. For instance, \<rss version="2.0" \>. 
+	
+	For the following 3 files, if strict detection is enabled, only File 2 will be detected
+as RSS 2.0 format, both File 1 and 3 will be reported as UNKNOWN format. If strict detection is disabled (default),
+then all three files will be identified as RSS20 format:
+
++----------------------------------------------------------------------------------------------------+
+
+    File 1: { <rss version="0.92"><channel></channel> </rss> }
+				
+    File 2: { <rss version="2.0"><channel></channel></rss> }		
+
+    File 3: { <rss version="2.0.1"><channel /></rss> }
+								
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("file1.xml");
+      assert(FeedFormat.RSS20 == FeedFormatDetector.getFormat(s));
+    }finally{
+      IOUtils.closeQuietly(s); //dont forget to close you io streams!!
+    }
+    
+    InputStream s = null;
+    try {
+      s = Thread.currentThread().getContextClassLoader().getResourceAsStream("file1.xml");
+      assert(FeedFormat.UNKNOWN == FeedFormatDetector.getFormat(s, true));
+    }finally{
+      IOUtils.closeQuietly(s); //dont forget to close you io streams!!
+    } 
+    
+    ... as so on, you get the idea
+         
++----------------------------------------------------------------------------------------------------+
+
+XML Utilities Methods Examples:
+  
+	Parse an XML string. The core data model uses this method to allow users to add extensibility elements
+to a feed. See {{{builder_adv.html}here}} for more details.
+	
++----------------------------------------------------------------------------------------------------+
+
+    //signature: Document parseXml(String xml, boolean validating, boolean ignoringComments)
+	 
+  Document doc = XMLUtils.parseXml("<tag></tag>", false, false);
+  Element element = XMLUtils.parseXml("<tag></tag>", false, false).getDocumentElement();
+  
++----------------------------------------------------------------------------------------------------+
+
+	
+	  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

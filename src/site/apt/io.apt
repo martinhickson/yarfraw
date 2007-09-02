@@ -5,78 +5,126 @@
                                     ------
                                      2007/08/14
 
-Writing a RSS 2.0 feed
+Writing a feed
       
-      Writing a feed is easy after the Channel object is built. This builds a RSS 2.0 feed xml file.
-Note that since every feed has only one channel, the top level 'rss' element is automatically generated
-for you, all you need to do is to pass in the channel object:
+      Writing a feed is easy after the Channel object is built. Since RSS 2.0 is the most popular 
+format, the IO classes in Yarfraw are all default to RSS 2.0. The following codes writes a channel to an 
+xml file "rss20.xml" in RSS 2.0 format. Note that since every feed has only one channel, the top level 
+'rss' element is automatically generated for you, all you need to do is to pass in the channel object:
 
 +----------------------------------------------------------------------------------------------------+
-	
+
   Channel c = new Channel()
 				...
-				
-  FeedWriter w = new FeedWriter("yarfraw.xml"));
+  FeedWriter w = new FeedWriter("rss20.xml"));
   w.writeChannel(c);
-
+  
 +----------------------------------------------------------------------------------------------------+      
 
-	Currently the writer uses JAXB to write the xml file. You can inject your own error event handler
-to the writer is case you need to handle the event differently:
-
-+----------------------------------------------------------------------------------------------------+
-	
-  w.writeChannel(c, new ValidationEventHandler(){
-	public boolean handleEvent(ValidationEvent event) {
-	//Process the event
-		return false;
-	}  
-  });
+	Writing other formats are similarly easy, just need to tell the writer what format you want to 
+write in. The following codes demostrate how to write in Atom 1.0 and RSS 1.0/RDF format.
 
 +----------------------------------------------------------------------------------------------------+
 
-Add/Remove items 
-	
-	Sometimes you may want simply add a couple of items to an existing feed with out modifying the 
-top level channel. You can use the 'Appender' to do that. Internally, the appender reads in the feed, 
-modifies it, and then write it back to the file:
-
-+----------------------------------------------------------------------------------------------------+
-   
-    File f = new File("yarfraw.xml");
-    FeedAppender a = new FeedAppender(f);
-    a.addItem(item);
-    a.removeItem(2);
-
-+----------------------------------------------------------------------------------------------------+
-
-Reading a RSS 2.0 feed
-
-	You can use the reader class to read any RSS 2.0 feed.
-	
-+----------------------------------------------------------------------------------------------------+
-   
-    FeedReader r = new FeedReader( "yarfraw.xml");
-    Channel c = r.readChannel();
-   
-+----------------------------------------------------------------------------------------------------+
-	
-	The reader is capable of reading a feed from a remote http url:
-	
-+----------------------------------------------------------------------------------------------------+
-   
-    FeedReader reader = new FeedReader(new HttpURL("http://somewhere.com/rssfeed.xml"));
-    Channel c = r.readChannel();
+    FeedWriter writer = new FeedWriter("atom10.xml"));
+    writer.setFormat(FeedFormat.ATOM10);
+    writer.writeChannel(c);
     
-    //check whether a reader is reading from a remote server
-    reader.isRemoteRead();
-   
+    File f = new File("rss10.xml");
+    FeedWriter writer2 = new FeedWriter(f, FeedFormat.RSS10);
+    writer2.writeChannel(c);
+    
++----------------------------------------------------------------------------------------------------+
+
+Append, Set and Remove items 
+	
+	Sometimes you may want to simply add a couple of items to an existing feed without modifying the 
+top level channel. You can use the FeedAppender class to do that. The appender methods work very much like
+the insert methods in java.util.List. You can either specify a specific location to append new items
+to, or you can simply append to the beginning or to the end.   
+
+	Internally, the appender reads in the feed, modifies it, and then writes it back to the file. So if 
+performance is a concern, instead of doing a read/write operation for every modification, 
+you might want to write your own appender that only writes the channel to file when it needs to.  
+
++----------------------------------------------------------------------------------------------------+
+
+    FeedAppender a = new FeedAppender(new File("rss20.xml"));
+    a.appendAllItemsToBeginning(item);
+    a.removeItem(2);
+    a.appendAllItemsAt(2, item);
+    a.appendAllItemsToEnd(item);
+    
+    FeedAppender a = new FeedAppender(new File("atom10.xml"));
+    writer.setFormat(FeedFormat.ATOM10); //need to set the format explicitly because RSS 2.0 is the default
+    
++----------------------------------------------------------------------------------------------------+
+
+	If you simply want to keep adding new items to your feed while at the same time keeping the 
+number of items in the feed at a certain number (according to the specs, you are recommended to have
+only 15 items in a feed). You can tell the appender how many items you would like to keep in your
+feed. If the actual number of items (after appends) in the feed 
+is greater than the number you specified, the appender will remove items from the END
+of the feed to ensure there is at most numItemToKeep items in the feed.   
+ 
+	<<Note>>: the items in the input channel are assumed to be in descending order from new to old 
+(i.e. the newest item is at index 0 of the item list). So when the appender need to trim the feed,
+it always remove items from the end of the items list (the items that are at the bottom of the feed).
+
++----------------------------------------------------------------------------------------------------+
+
+	FeedAppender a = new FeedAppender(new File("yarfraw.xml"));
+	a.setNumItemToKeep(15); //this operation does NOT trim the list, trimming only occurs after append
+	a.appendAllItemsAt(0, bigItemList);
+	...
+	a.appendAllItemsAt(0, moreItems);
+	a.appendAllItemsToBeginning(item1, item2, item3);
+	//"yarfraw.xml" have at most 15 items no matter how many items were appended using the appender
+	
++----------------------------------------------------------------------------------------------------+
+
+Reading a feed
+
+	You can use the reader class to read any supported feed formats. Similar to other IO classes, the
+reader class uses RSS 2.0 format by default (except when it's reading remotely, see examples below), 
+so you need to set the appropriate format if the input is not in RSS 2.0 format.
+
++----------------------------------------------------------------------------------------------------+
+
+    FeedReader r = new FeedReader( "rss20.xml");
+    Channel c = r.readChannel();
+   	FeedReader r2 = new FeedReader( "atom10.xml", FeedFormat.ATOM10);
+    Channel c2 = r2.readChannel();
+    
++----------------------------------------------------------------------------------------------------+
+
+	The reader is capable of reading a feed from a remote http url. In this case, the format of the 
+remote feed is automatically detected. Format detection will be executed only once at object construction time.
+	
++----------------------------------------------------------------------------------------------------+
+    
+    FeedReader reader = new FeedReader(file); //it's default to Rss 2.0
+    reader.setFormat(FeedFormat.RSS10); //change it to other format
+    reader.setFormat(FeedFormat.ATOM10); //change it to other format
+	FeedReader reader2 = new FeedReader(new HttpURL("http://somewhere.com/rssfeed.xml"));
+	Channel c = reader2.readChannel();
+	
+	//check whether a reader is reading from a remote server
+	reader2.isRemoteRead();
+	
+	//This is a remote feed
+	reader2 = new FeedReader(new HttpURL("http://somewhere.com/atom10feed.xml"));
+	//so the format is automatically detected
+	assert(reader2.getFormat() == FeedFormat.ATOM10);
+    
+    //you can still change the format of the reader, but it's not recommended.
+    
 +----------------------------------------------------------------------------------------------------+
 
 	If the feed contains extensibility elements that are not in the official specs, those elements will be read
 into the Channel(or Item)'s otherElements list. You can get all these elements by calling Channel.getElements
 or there is a convenient method you can use to quickly get an specific element from the list. For example, the feed
-from {{digg.com}} has an element call \<digg:diggCount\>, you can get this element by using the following code:
+from digg.com has an element call \<digg:diggCount\>, you can get this element by using the following code:
 
 +----------------------------------------------------------------------------------------------------+
 
@@ -84,23 +132,11 @@ from {{digg.com}} has an element call \<digg:diggCount\>, you can get this eleme
     Channel c = r.readChannel();   
     Element e = c.getItems().get(0).getElementByNS("http://digg.com/docs/diggrss/", "diggCount");
     System.out.println(e.getTextContent());
-   
-+----------------------------------------------------------------------------------------------------+
-		
-		
-	Similar to FeedWriter, you can add your own event handler:
-	
-+----------------------------------------------------------------------------------------------------+
-   
-  r.readChannel(new ValidationEventHandler(){
-      public boolean handleEvent(ValidationEvent event) {
-      	//Process the event
-        return false;
-      }
-  });
-   
+    
 +----------------------------------------------------------------------------------------------------+
 
+  There are a lot more interesting things you can do with the IO API, take a look {{{io_adv.html}Advanced Examples}}.
+	
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
   Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
   

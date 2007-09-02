@@ -3,9 +3,12 @@
     <title>Release Notes</title>
   </properties>
   <body>
-  	<release version="0.8" date="TBD">
+    <release version="0.8" date="TBD">
+      <action dev="" type="TODO">
+        Add support for Atom 0.3, maybe..
+      </action>
   	</release>
-    <release version="0.7-RC" date="TBD" description="Release candidate of first major mile stone">
+    <release version="0.7" date="09/02/2007" description="Release candidate of first major mile stone">
       <action dev="jliang" type="add">
         Added remote rss feed reader.
       </action>
@@ -21,7 +24,7 @@
       <action dev="jliang" type="add">
         Added a lot more unit tests.
       </action>
-	  <action dev="jliang" type="TODO">
+	  <action dev="jliang" type="add">
         Added missing Javadoc. 
       </action>
 
@@ -33,13 +36,7 @@
       </action>              
 	  <action dev="jliang" type="add">
         Added support for Atom 1.0 
-      </action>
-	  <action dev="jliang" type="add">
-        Added support for Custom parsing 
-      </action>
-	  <action dev="jliang" type="add">
-        Added support for quick parsing 
-      </action>                                                                       
+      </action>                                                  
     </release>
   </body>
 </document>

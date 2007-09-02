@@ -84,13 +84,9 @@ public class Cloud extends AbstractBaseObject{
       throw new ValidationException("Cloud: Protocol should be one of the following: xml-rpc, soap, http-post");
     }
     
-    try {
-      if(_port != null && (Integer.parseInt(_port) < 0 || Integer.parseInt(_port) > 65535)){
-        throw new ValidationException("Cloud: Invalid port number");
-      }
+    if(_port != null && (Integer.parseInt(_port) < 0 || Integer.parseInt(_port) > 65535)){
+      throw new ValidationException("Cloud: Invalid port number");
     }
-    catch (Exception e) {
-      throw new ValidationException(e.getMessage());
-    }
+    
   }
 }

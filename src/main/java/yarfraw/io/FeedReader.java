@@ -9,7 +9,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
+import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpURL;
@@ -64,9 +66,13 @@ public class FeedReader  extends AbstractBaseFeedParser{
   public FeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
   }
-    /**
-   * Reads a channel from the feed file with a custom {@link ValidationEventHandler}
-   * 
+
+  /**
+   * Reads a channel from a local or remote feed with a custom {@link ValidationEventHandler}
+   *
+   * @param format any supported {@link yarfraw.core.datamodel.FeedFormat}
+   * @param inputStream any {@link java.io.InputStream}
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public static ChannelFeed readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
@@ -78,10 +84,11 @@ public class FeedReader  extends AbstractBaseFeedParser{
       throw new YarfrawException("Unable to unmarshal file", e);
     }
   }
-  
   /**
-   * Reads a channel from the feed file with a custom {@link ValidationEventHandler}
-   * 
+   * Reads a channel from a local or remote feed with a custom {@link ValidationEventHandler}
+   *
+   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public ChannelFeed readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
@@ -89,8 +96,10 @@ public class FeedReader  extends AbstractBaseFeedParser{
     InputStream input = null;
     try {
       input = getStream();
-      u = getUnMarshaller(_format); //if handler is not null, then we need a new instance
-      u.setEventHandler(validationEventHandler);
+      u = getUnMarshaller(_format); 
+      if(validationEventHandler != null){
+        u.setEventHandler(validationEventHandler);
+      }
       return toChannel(_format, u.unmarshal(input));
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);
@@ -117,26 +126,40 @@ public class FeedReader  extends AbstractBaseFeedParser{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }
   }
-  
+
   /**
-   * Reads a channel from the feed file.
-   * 
+   * Reads a channel from a local or remote feed.
+   *
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public ChannelFeed readChannel() throws YarfrawException{
     return readChannel(null);
   }
   
+  private static class WarningHandler implements ValidationEventHandler{
+
+    public boolean handleEvent(ValidationEvent event) {
+      DefaultValidationEventHandler d = new DefaultValidationEventHandler();
+      d.handleEvent(event);
+      return event.getSeverity()== ValidationEvent.FATAL_ERROR;
+    } 
+    
+  }
   
   private static synchronized Unmarshaller getUnMarshaller(FeedFormat format) throws JAXBException{
     if(format == FeedFormat.RSS20){
-      return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else if(format == FeedFormat.RSS10){
-    
-      return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-    
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else if(format == FeedFormat.ATOM10){
-      return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      Unmarshaller u = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
+      u.setEventHandler(new WarningHandler());
+      return u;
     }else{
       throw new UnsupportedOperationException("UnSupported Feed Format");
     }
