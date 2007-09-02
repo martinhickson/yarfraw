@@ -5,6 +5,7 @@ import static yarfraw.io.parser.ElementQName.RSS20_DESCRIPTION;
 import static yarfraw.io.parser.ElementQName.RSS20_LINK;
 import static yarfraw.io.parser.ElementQName.RSS20_PUBDATE;
 import static yarfraw.io.parser.ElementQName.RSS20_TITLE;
+import static yarfraw.utils.XMLUtils.same;
 
 import java.util.Map;
 
@@ -27,12 +28,10 @@ import yarfraw.generated.rss20.elements.TEnclosure;
 import yarfraw.generated.rss20.elements.TGuid;
 import yarfraw.generated.rss20.elements.TRssItem;
 import yarfraw.generated.rss20.elements.TSource;
-import yarfraw.utils.CommonUtils;
-
 class Rss20MappingUtils{
 
   private static final Log LOG = LogFactory.getLog(Rss20MappingUtils.class);
-  private static final String ENCODED = "encoded";
+ 
 
   private Rss20MappingUtils(){}
   
@@ -54,17 +53,17 @@ class Rss20MappingUtils{
       if (o instanceof JAXBElement) {
         JAXBElement jaxbElement = (JAXBElement) o;
         Object val = jaxbElement.getValue();
-        if(CommonUtils.same(jaxbElement.getName(), RSS20_AUTHOR)){
+        if(same(jaxbElement.getName(), RSS20_AUTHOR)){
           item.addAuthorOrCreator((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_COMMENTS)) {
+        }else if (same(jaxbElement.getName(), RSS20_COMMENTS)) {
           item.setComments((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
+        }else if (same(jaxbElement.getName(), RSS20_DESCRIPTION)) {
           item.setDescriptionOrSummary((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_LINK)) {
+        }else if (same(jaxbElement.getName(), RSS20_LINK)) {
           item.addLink((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_PUBDATE)) {
+        }else if (same(jaxbElement.getName(), RSS20_PUBDATE)) {
           item.setPubDate((String)jaxbElement.getValue());
-        }else if (CommonUtils.same(jaxbElement.getName(), RSS20_TITLE)) {
+        }else if (same(jaxbElement.getName(), RSS20_TITLE)) {
           item.setTitle((String)jaxbElement.getValue());
         }else if (val instanceof TCategory) {
           TCategory cat = (TCategory) val;
@@ -86,9 +85,6 @@ class Rss20MappingUtils{
         }
       }else if (o instanceof Element) {
         Element e = (Element) o;
-        if(ENCODED.equals(e.getLocalName())){
-          item.setContent(e.getTextContent());
-        }
         item.getOtherElements().add(e);
       }else{
         LOG.warn("Unexpected object: "+ToStringBuilder.reflectionToString(o)+" this should not happen!");

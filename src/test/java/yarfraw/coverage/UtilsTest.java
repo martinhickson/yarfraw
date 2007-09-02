@@ -1,6 +1,7 @@
 package yarfraw.coverage;
 
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -8,6 +9,12 @@ import java.util.Date;
 
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import junit.framework.TestCase;
 
@@ -36,6 +43,16 @@ public class UtilsTest extends TestCase{
     s.serialize(doc, w);
     Document doc2 = XMLUtils.parseXml(w.toString(), false, true);
     assertNotNull(doc2);
+    
+    TransformerFactory factory = TransformerFactory.newInstance();
+    Transformer trans =  factory.newTransformer();
+    Source source = new StreamSource(new StringReader("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+        "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+        "</div>"));
+    StringWriter writer = new StringWriter();
+    Result result = new StreamResult(writer);
+    trans.transform(source, result);
+    
   }
   
   @Test

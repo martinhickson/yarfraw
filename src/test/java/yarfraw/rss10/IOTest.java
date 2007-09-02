@@ -81,7 +81,15 @@ public class IOTest extends TestCase{
     assertEquals(c, c2);
   }
   
-  
+  @Test
+  public void testContent() throws Exception{
+    FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss10/content.xml").toURI(), FeedFormat.RSS10);
+    ChannelFeed c = r.readChannel();
+    ItemEntry i = c.getItems().get(0);
+    assertEquals("The Example Item", i.getTitleText());
+    assertNotNull(i.getElementByLocalName("encoded"));
+    assertNotNull(i.getElementByLocalName("encoded").getTextContent());
+  }
 }
 
 

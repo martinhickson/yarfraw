@@ -5,9 +5,6 @@
                                     ------
                                      2007/08/28
 
-      Before reading page, you should have read {{{basic/builder.html}Builder Quick Usage}}. If not, please
-read that first.
-      
 Building items and channels with additional elements
 	
 	Sometimes you may want to add extensibility elements to your feed that are not in the RSS specs.

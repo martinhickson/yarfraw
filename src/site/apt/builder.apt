@@ -23,7 +23,7 @@ This makes building an object easier, for example, to build an item, you would w
 
 +----------------------------------------------------------------------------------------------------+      
 
-	There are a lot more interesting things you can do with the builder API, take a look {{{advanced/builder.html}Advanced Example}}.
+	There are a lot more interesting things you can do with the builder API, take a look {{{builder_adv.html}Advanced Example}}.
 	
 Building RSS 2.0 Channel
 

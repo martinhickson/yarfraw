@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.w3c.dom.Element;
 
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.XMLUtils;
 /**
  * An abstract base object for the core data model
  */
@@ -99,7 +99,19 @@ abstract class AbstractBaseObject{
    * the matching element otherwise.
    */
   public Element getElementByNS(String namespaceURI, String localName){
-    return CommonUtils.getElementByNS(_otherElements, namespaceURI, localName);
+    return XMLUtils.getElementByNS(_otherElements, namespaceURI, localName);
+  }
+
+  /**
+   * Search through the other element list and return the FIRST element that matches
+   * the input localName.
+   * 
+   * @param localName - localName of the element
+   * @return - null if no matching element is found,
+   * the matching element otherwise.
+   */
+  public Element getElementByLocalName(String localName){
+    return XMLUtils.getElementByLocalName(_otherElements, localName);
   }
   
   /**

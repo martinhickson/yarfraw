@@ -91,8 +91,10 @@ public class FeedReader  extends AbstractBaseFeedParser{
     InputStream input = null;
     try {
       input = getStream();
-      u = getUnMarshaller(_format); //if handler is not null, then we need a new instance
-      u.setEventHandler(validationEventHandler);
+      u = getUnMarshaller(_format); 
+      if(validationEventHandler != null){
+        u.setEventHandler(validationEventHandler);
+      }
       return toChannel(_format, u.unmarshal(input));
     } catch (JAXBException e) {
       throw new YarfrawException("Unable to unmarshal file", e);

@@ -88,4 +88,14 @@ public class IOTest extends TestCase{
     assertEquals("item not added correctly", c.getItems().get(2), items.get(0));
   }
   
+  @Test
+  public void testEncoding() throws Exception{
+    ChannelFeed c = new ChannelFeed()
+                  .setDescriptionOrSubtitle("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
+        "<p><i>[Update: The Atom draft is finished.]</i></p>"+
+      "</div>");
+    FeedWriter w = new FeedWriter(File.createTempFile("test",".xml"));
+    w.writeChannel(c);
+  }
+  
 }

@@ -1,17 +1,18 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.io.parser.ElementQName.*;
+import static yarfraw.io.parser.ElementQName.RSS10_CONTRIBUTOR;
 import static yarfraw.io.parser.ElementQName.RSS10_CREATOR;
 import static yarfraw.io.parser.ElementQName.RSS10_DATE;
 import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
 import static yarfraw.io.parser.ElementQName.RSS10_LANGUAGE;
 import static yarfraw.io.parser.ElementQName.RSS10_LINK;
+import static yarfraw.io.parser.ElementQName.RSS10_NAME;
 import static yarfraw.io.parser.ElementQName.RSS10_PUBLISHER;
 import static yarfraw.io.parser.ElementQName.RSS10_RIGHTS;
 import static yarfraw.io.parser.ElementQName.RSS10_SUBJECT;
 import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
 import static yarfraw.io.parser.ElementQName.RSS10_UPDATEBASE;
 import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
-import static yarfraw.utils.CommonUtils.same;
+import static yarfraw.utils.XMLUtils.same;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ import yarfraw.generated.rss10.elements.TRss10TextInput;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.utils.CommonUtils;
 class Rss10MappingUtils{
-  private static final String ENCODED = "encoded";
 
   private static final Log LOG = LogFactory.getLog(Rss10MappingUtils.class);
   
@@ -179,9 +179,6 @@ class Rss10MappingUtils{
               }
             }else if (io instanceof Element) {
               Element e = (Element) io;
-              if(ENCODED.equals(e.getLocalName())){
-                item.setContent(e.getTextContent());
-              }
               item.getOtherElements().add(e);
             }else{
               LOG.warn("Unexpected object under <item>: "+ToStringBuilder.reflectionToString(io));

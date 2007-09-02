@@ -132,7 +132,7 @@ from {{digg.com}} has an element call \<digg:diggCount\>, you can get this eleme
     
 +----------------------------------------------------------------------------------------------------+
 
-  There are a lot more interesting things you can do with the IO API, take a look {{{advanced/io.html}Advanced Examples}}.
+  There are a lot more interesting things you can do with the IO API, take a look {{{io_adv.html}Advanced Examples}}.
 	
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
   Also check out the {{{faq.html}FAQ}} section for more insights about this API. 

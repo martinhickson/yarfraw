@@ -92,7 +92,9 @@ public class FeedWriter extends AbstractBaseIO{
     FileOutputStream out = null;
     try {
       Marshaller m = getMarshaller(_format);
-      m.setEventHandler(validationEventHandler);
+      if(validationEventHandler != null){
+        m.setEventHandler(validationEventHandler);
+      }
       out = new FileOutputStream(_file);
       m.marshal(getJaxbElementFromFormat(_format, channel), out);
     } catch (JAXBException e) {

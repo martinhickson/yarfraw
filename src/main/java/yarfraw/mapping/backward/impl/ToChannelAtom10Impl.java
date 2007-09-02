@@ -12,6 +12,7 @@ import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toImage;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toItem;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toPersonType;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toText;
+import static yarfraw.utils.XMLUtils.same;
 
 import javax.xml.bind.JAXBElement;
 
@@ -35,8 +36,6 @@ import yarfraw.generated.atom10.elements.LogoType;
 import yarfraw.generated.atom10.elements.PersonType;
 import yarfraw.generated.atom10.elements.TextType;
 import yarfraw.mapping.backward.ToChannelAtom10;
-import yarfraw.utils.CommonUtils;
-
 /**
  * TODO: document me
  * @author jliang
@@ -87,15 +86,15 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
       if (o instanceof JAXBElement<?>) {
         JAXBElement<?> jaxbElement = (JAXBElement<?>) o;
         Object val = jaxbElement.getValue();
-        if (CommonUtils.same(jaxbElement.getName(), ATOM10_TITLE)) {
+        if (same(jaxbElement.getName(), ATOM10_TITLE)) {
           TextType text = (TextType) val;
           c.setTitle(toText(text));
-        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
+        }else if (same(jaxbElement.getName(), ATOM10_SUBTITLE)) {
           TextType text = (TextType) val;
           c.setDescriptionOrSubtitle(toText(text));
-        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_AUTHOR)) {
+        }else if (same(jaxbElement.getName(), ATOM10_AUTHOR)) {
           c.addManagingEditorOrAuthorOrPublisher(toPersonType((PersonType)val));
-        }else if(CommonUtils.same(jaxbElement.getName(), ATOM10_CONTRIBUTOR)){
+        }else if(same(jaxbElement.getName(), ATOM10_CONTRIBUTOR)){
           c.addContributor(toPersonType((PersonType)val));
         }else if(val instanceof CategoryType){
           c.addCategorySubject(toCategorySubject((CategoryType)val));
@@ -112,10 +111,10 @@ public class ToChannelAtom10Impl implements ToChannelAtom10{
           LogoType logo = (LogoType)val;
           c.setLogo(toLogo(logo));
         }
-        else if (CommonUtils.same(jaxbElement.getName(), ATOM10_RIGHTS)) {
+        else if (same(jaxbElement.getName(), ATOM10_RIGHTS)) {
           TextType text = (TextType) val;
           c.setRights(toText(text));
-        }else if (CommonUtils.same(jaxbElement.getName(), ATOM10_UPDATED)) {
+        }else if (same(jaxbElement.getName(), ATOM10_UPDATED)) {
           //partially supported
           DateTimeType dt = (DateTimeType) val;
           if(dt.getValue() != null){

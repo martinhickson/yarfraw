@@ -9,16 +9,10 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import javax.xml.namespace.QName;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
@@ -255,44 +249,6 @@ public class CommonUtils{
   
 /////////////////////DATE PARSING///////////////////////////////////
   
-
-  /**
-   * Search through the input element list and return the first element that matches
-   * both input the namespaceURI and the localName.
-   * 
-   * @param namespaceURI - namespaceURI of the element to be search for
-   * @param localName - localName of the element
-   * @return - null if no matching element is found,
-   * the matching element otherwise.
-   */
-  public static Element getElementByNS(List<Element> elements, String namespaceURI, String localName){
-    if(CollectionUtils.isEmpty(elements)){
-      return null;
-    }
-    for(Element e : elements){
-      if(ObjectUtils.equals(localName, e.getLocalName()) && 
-              ObjectUtils.equals(namespaceURI, CommonUtils.emptyIfNull(e.getNamespaceURI()))){
-        return e;
-      }
-    }    
-    return null;
-  }
-
-
-  
-  public static boolean same(QName qn1, QName qn2){
-    return ObjectUtils.equals(qn1, qn2);
-  }
-
-  
-  /**
-   * Return empty string if input is null.
-   * @param str
-   * @return
-   */
-  public static String emptyIfNull(String str){
-    return str == null?StringUtils.EMPTY:str;
-  }
   
   /**
    * calculate the ttl value from updatePeriod and updateFrequency
