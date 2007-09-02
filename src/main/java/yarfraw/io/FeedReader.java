@@ -66,9 +66,13 @@ public class FeedReader  extends AbstractBaseFeedParser{
   public FeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
   }
-    /**
-   * Reads a channel from the feed file with a custom {@link ValidationEventHandler}
-   * 
+
+  /**
+   * Reads a channel from a local or remote feed with a custom {@link ValidationEventHandler}
+   *
+   * @param format any supported {@link yarfraw.core.datamodel.FeedFormat}
+   * @param inputStream any {@link java.io.InputStream}
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public static ChannelFeed readChannel(FeedFormat format, InputStream inputStream) throws YarfrawException{
@@ -80,10 +84,11 @@ public class FeedReader  extends AbstractBaseFeedParser{
       throw new YarfrawException("Unable to unmarshal file", e);
     }
   }
-  
   /**
-   * Reads a channel from the feed file with a custom {@link ValidationEventHandler}
-   * 
+   * Reads a channel from a local or remote feed with a custom {@link ValidationEventHandler}
+   *
+   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public ChannelFeed readChannel(ValidationEventHandler validationEventHandler) throws YarfrawException{
@@ -121,10 +126,11 @@ public class FeedReader  extends AbstractBaseFeedParser{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }
   }
-  
+
   /**
-   * Reads a channel from the feed file.
-   * 
+   * Reads a channel from a local or remote feed.
+   *
+   * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */
   public ChannelFeed readChannel() throws YarfrawException{

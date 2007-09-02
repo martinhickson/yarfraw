@@ -48,21 +48,20 @@ public class FeedAppender{
     this(new File(uri), FeedFormat.RSS20);
   } 
   
+
   /**
    * The {@link FeedFormat} this writer should be using.<br/>
    * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored  
-   * <p/>
-   * rss 2.0 is recommended, use other format if you really need to
+   * @return a {@link FeedFormat} enum
    */
   public FeedFormat getFormat() {
     return _reader.getFormat();
   }
+
   /**
    * The {@link FeedFormat} this writer should be using.<br/>
-   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored
-   * <p/>
-   * rss 2.0 is recommended, use other format if you really need to
-   *  
+   * if this is not set, the default is RSS 2.0 format. <code>null</code> format is ignored  
+   * @param format a {@link FeedFormat} enum
    */
   public void setFormat(FeedFormat format) {
     if(format != null){
@@ -70,22 +69,25 @@ public class FeedAppender{
       _writer.setFormat(format);
     } 
   }
+
   /**
    * Maximum number of items to keep in a feed. If the number of actual items
    * If <code>numItemToKeep</code> is non-negative and the actual number of {@link ItemEntry} (after appends)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   *
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
+   * @return the current <code>numberItemToKepp</code>, -1 if the value has not yet been set or there's no limit.
    */
   public int getNumItemToKeep() {
     return _numItemToKeep;
   }
+
   /**
    * Maximum number of items to keep in a feed. If the number of actual items
    * If <code>numItemToKeep</code> is non-negative and the actual number of {@link ItemEntry} (after appends)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
    * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   * 
+   * @param numItemToKeep number of items to keep in the current feed. no limit if it's negative.
+   * @return this
    */
   public FeedAppender setNumItemToKeep(int numItemToKeep) {
     _numItemToKeep = numItemToKeep < 0 ? -1 : numItemToKeep;
@@ -99,7 +101,7 @@ public class FeedAppender{
     }
     return items;
   }
-  
+
   /**
    * Appends all of the {@link ItemEntry} in the specified collection into the current feed
    * at the specified position (optional operation).  Shifts the
@@ -110,9 +112,12 @@ public class FeedAppender{
    * <br/>
    * If <code>numItemToKeep</code> is set and the resulting number of {@link ItemEntry} (after the append)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
    * 
-   * @throws YarfrawException if the appender failed to read or write the feed file.
+   * @param index index to append to
+   * @param items any number of {@link yarfraw.core.datamodel.ItemEntry}
+   * @return this
+   * @throws YarfrawException if operation failed.
    */
   public FeedAppender appendAllItemsAt(int index, List<ItemEntry> items) throws YarfrawException{
     ChannelFeed ch = readChannel();
@@ -129,7 +134,7 @@ public class FeedAppender{
   }
   
   /**
-   * Appends all of the {@link ItemEntry} to the <b>beginning</b> of the item list in  the current feed.  
+   * Appends all of the {@link ItemEntry} to the <b>beginning</b> of the item list in  the current feed.
    * Shifts the {@link ItemEntry} currently at that position (if any) and any subsequent
    * {@link ItemEntry} to the right (increases their indices).
    * <br/>
@@ -137,8 +142,10 @@ public class FeedAppender{
    * <br/>
    * If <code>numItemToKeep</code> is set and the resulting number of {@link ItemEntry} (after the append)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   * 
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
+   *
+   * @param items
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender appendAllItemsToBeginning(List<ItemEntry> items) throws YarfrawException{
@@ -146,7 +153,7 @@ public class FeedAppender{
   }
   
   /**
-   * Appends all of the {@link ItemEntry} to the <b>beginning</b> of the item list in the current feed.  
+   * Appends all of the {@link ItemEntry} to the <b>beginning</b> of the item list in the current feed.
    * Shifts the {@link ItemEntry} currently at that position (if any) and any subsequent
    * {@link ItemEntry} to the right (increases their indices).
    * <br/>
@@ -154,24 +161,28 @@ public class FeedAppender{
    * <br/>
    * If <code>numItemToKeep</code> is set and the resulting number of {@link ItemEntry} (after the append)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   * 
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
+   *
+   * @param items
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender appendAllItemsToBeginning(ItemEntry...items) throws YarfrawException{
     return appendAllItemsToBeginning(Arrays.asList(items));
   }
   
-  
+
   /**
-   * Appends all of the {@link ItemEntry} to the <b>end</b> of the item list in current feed.  
+   * Appends all of the {@link ItemEntry} to the <b>end</b> of the item list in current feed.
    * Shifts the {@link ItemEntry} currently at that position (if any) and any subsequent
    * {@link ItemEntry} to the right (increases their indices).
    * <br/>
    * If <code>numItemToKeep</code> is set and the resulting number of {@link ItemEntry} (after the append)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   * 
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
+   *
+   * @param items
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender appendAllItemsToEnd(List<ItemEntry> items) throws YarfrawException{
@@ -187,24 +198,28 @@ public class FeedAppender{
     _writer.writeChannel(ch);
     return this;
   }
-  
+
   /**
-   * Appends all of the {@link ItemEntry} to the <b>end</b> of the item list in the current feed.  
+   * Appends all of the {@link ItemEntry} to the <b>end</b> of the item list in the current feed.
    * Shifts the {@link ItemEntry} currently at that position (if any) and any subsequent
    * {@link ItemEntry} to the right (increases their indices).
    * <br/>
    * If <code>numItemToKeep</code> is set and the resulting number of {@link ItemEntry} (after the append)
    * in the feed greater than <code>numItemToKeep</code>, the appender will remove items from the END
-   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.   
-   * 
+   * of the feed to ensure there is at most <code>numItemToKeep</code> items in the feed.
+   *
+   * @param items
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender appendAllItemsToEnd(ItemEntry...items) throws YarfrawException{
     return appendAllItemsToEnd(Arrays.asList(items));
   }
+
   /**
-   * Remove the item at index <code>index</code> from the feed.
-   * 
+   * * Remove the item at index <code>index</code> from the feed.
+   * @param index
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender removeItem(int index) throws YarfrawException{
@@ -217,7 +232,9 @@ public class FeedAppender{
 
   /**
    * Set the item at index <code>index</code> to be the input <code>item</code>
-   * 
+   * @param index
+   * @param item
+   * @return
    * @throws YarfrawException if the appender failed to read or write the feed file.
    */
   public FeedAppender setItem(int index, ItemEntry item) throws YarfrawException{

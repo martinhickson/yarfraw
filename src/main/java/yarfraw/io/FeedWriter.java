@@ -56,19 +56,21 @@ public class FeedWriter extends AbstractBaseIO{
     this(new File(uri));
   }
 
-
   /**
    * Writes a channel to the feed file with a custom {@link ValidationEventHandler}
-   * 
+   * @param channel  a valid {@link yarfraw.core.datamodel.ChannelFeed}
    * @throws YarfrawException if write operation failed.
    */
   public void writeChannel(ChannelFeed channel) throws YarfrawException{
     writeChannel(channel, null);
   }
-  
+
   /**
-   * Writes a channel to a output stream.
-   * 
+   * Writes a channel to the feed file with a custom {@link ValidationEventHandler}.
+   *
+   * @param format any valid {@link yarfraw.core.datamodel.FeedFormat}
+   * @param channel  a valid {@link yarfraw.core.datamodel.ChannelFeed}
+   * @param outputStream an {@link java.io.OutputStream}
    * @throws YarfrawException if write operation failed.
    */
   public static void writeChannel(FeedFormat format, ChannelFeed channel, OutputStream outputStream) throws YarfrawException{
@@ -83,9 +85,11 @@ public class FeedWriter extends AbstractBaseIO{
     }
   }
   
-  /**
-   * Writes a channel to the feed file.
-   * 
+   /**
+   * Writes a channel to the feed file with a custom {@link ValidationEventHandler}.
+   *
+   * @param channel  a valid {@link yarfraw.core.datamodel.ChannelFeed}
+   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
    * @throws YarfrawException if write operation failed.
    */
   public void writeChannel(ChannelFeed channel, ValidationEventHandler validationEventHandler) throws YarfrawException{
