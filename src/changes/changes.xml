@@ -4,6 +4,9 @@
   </properties>
   <body>
     <release version="0.8" date="TBD">
+      <action dev="jliang" type="update">
+      	Removed e.printStatckTrace() from FeedReaderUtils
+      </action>
       <action dev="" type="TODO">
         Add support for Atom 0.3, maybe..
       </action>
