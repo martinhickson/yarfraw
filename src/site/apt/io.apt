@@ -135,6 +135,44 @@ from digg.com has an element call \<digg:diggCount\>, you can get this element b
     
 +----------------------------------------------------------------------------------------------------+
 
+	Another example of feeds that use extensibility elements, they are very common for popular sites.
+Youtube's feed has 'media' elements in their feed that look like:
+
++----------------------------------------------------------------------------------------------------+
+<channel>
+   ...
+  <item>
+    ...
+	<media:player url="http://youtube.com/?v=BIraBleRLck" />
+	<media:thumbnail url="http://img.youtube.com/vi/BIraBleRLck/default.jpg" width="120" height="90" />
+	<media:title>Salto nel melgot</media:title>
+	<media:category label="Tags">crazy mad follia covo bergamo arma pol andrev video divertenti 
+	funny videos porn sex lesbians hot sexy nude girls</media:category>
+	<media:credit>c45e6</media:credit>
+      ...
+  </item>
+   ...
+</channel> 
++----------------------------------------------------------------------------------------------------+
+
+	To get information about those elements, you would write:
+	
++----------------------------------------------------------------------------------------------------+
+	
+	FeedReader r = new FeedReader(new HttpURL("http://youtube.com/rss/global/recently_added.rss"));
+    ChannelFeed c =  r.readChannel();
+
+	System.out.println(c.getItems().get(0).getElementByLocalName("player"));
+	System.out.println(c.getItems().get(0).getElementByNS("http://search.yahoo.com/mrss/", "title"));
+    Element thumnail = c.getItems().get(0).getElementByNS("http://search.yahoo.com/mrss/", "thumbnail");
+	
+	System.out.println(thumnail.getAttribute("url"));
+	System.out.println(thumnail.getAttribute("width"));
+	System.out.println(thumnail.getAttribute("height")); 
+    
++----------------------------------------------------------------------------------------------------+
+
+
   There are a lot more interesting things you can do with the IO API, take a look {{{io_adv.html}Advanced Examples}}.
 	
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
