@@ -10,7 +10,7 @@ import yarfraw.io.FeedReader;
 public class Test{
 
   public static void main(String[] args) throws Exception {
-    FeedReader r = new FeedReader(new HttpURL("http://news.google.com/?output=atom"));
+    FeedReader r = new FeedReader(new HttpURL("http://www.defamer.com/index.xml"));
     ChannelFeed c =  r.readChannel();
     System.out.println(c);
     System.out.println(System.getProperty("java.io.tmpdir"));

@@ -5,19 +5,26 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.ValidationException;
+import yarfraw.generated.itunes.elements.ItunesCategoryType;
+import yarfraw.generated.itunes.elements.ItunesExtension;
+import yarfraw.generated.itunes.elements.ItunesImageType;
+import yarfraw.generated.itunes.elements.ItunesOwnerType;
 import yarfraw.io.FeedReader;
 import yarfraw.io.FeedWriter;
+import yarfraw.utils.extension.ExtensionUtils;
 /**
  * Some unit tests.
  * 
@@ -95,7 +102,38 @@ public class BuilderTest{
       //success
     }
   }
- 
+  
+  @Test
+  public void testItunesExtension() throws Exception {
+    ChannelFeed c = buildChannel();
+    ItunesExtension test = new ItunesExtension();
+    test.setAuthor("itune author");
+    test.setBlock("itunes block");
+    test.setDuration("itune duration");
+    ItunesCategoryType cat = new ItunesCategoryType();
+    cat.setText("cat");
+    test.getCategory().add(cat);
+    //<duration> is not allowed under channel, read the specs
+    //http://www.apple.com/itunes/store/podcaststechspecs.html
+//    test.setDuration("10:10:20");
+    test.setExplicit("yes");
+    test.setKeywords("some,key, words");
+    ItunesImageType image = new ItunesImageType();
+    image.setHref("http://someurl");
+    image.setRel("ref");
+    test.setImage(image);
+    ItunesOwnerType owner = new ItunesOwnerType();
+    owner.setEmail("owner@email.com");
+    owner.setName("pwner");
+    test.setOwner(owner);
+    test.setSubtitle("subtitle");
+    test.setSummary("summary");
+    List<Element> list = ExtensionUtils.toItunesElements(test);
+    c.getOtherElements().addAll(list);
+    FeedWriter w = new FeedWriter(File.createTempFile("itunes",".xml"));
+    w.writeChannel(c);
+  }
+  
   @Test
   public void testOtherElements() throws Exception {
     ChannelFeed c = buildChannel();

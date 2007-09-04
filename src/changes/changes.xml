@@ -4,9 +4,15 @@
   </properties>
   <body>
     <release version="0.8" date="TBD">
+      <action dev="jliang" type="add">
+      	Added support for itunes elements.
+      </action>    
       <action dev="jliang" type="update">
       	Removed e.printStatckTrace() from FeedReaderUtils
-      </action>
+      </action>      
+      <action dev="jliang" type="fix">
+      	Fixed a couple of typos in the log messages.
+      </action>          
       <action dev="" type="TODO">
         Add support for Atom 0.3, maybe..
       </action>

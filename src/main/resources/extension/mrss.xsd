@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified"
+        targetNamespace="http://tools.search.yahoo.com/mrss/"
+        xmlns:media="http://tools.search.yahoo.com/mrss/"
+        xmlns:dcterms="http://purl.org/dc/terms/">
+	<!-- Import the Qualified Dublin Core module namespace schema for dcterms:valid -->
+	<xs:import namespace="http://purl.org/dc/terms/"
+		schemaLocation="dc.xsd" />
+	<xs:element name="mrssExtension">
+		<xs:annotation>
+			<xs:documentation>This is a wrapper for Yahoo! mrss extension elements for RSS 2.0.
+			If you need to use this, you should read the specs at
+			http://search.yahoo.com/mrss</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="media:group" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:content" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:rating" minOccurs="0" />
+				<xs:element ref="media:title" minOccurs="0" />
+				<xs:element ref="media:description" minOccurs="0" />
+				<xs:element ref="media:keywords" minOccurs="0" />
+				<xs:element ref="media:thumbnail" minOccurs="0" />
+				<xs:element ref="media:category" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:hash" minOccurs="0" />
+				<xs:element ref="media:player" minOccurs="0" />
+				<xs:element ref="media:credit" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:restriction" minOccurs="0" />
+				<xs:element ref="media:copyright" minOccurs="0" />
+				<xs:element ref="media:text" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+    <xs:element name="group" type="media:mrssGroupType" />
+    <xs:element name="content" type="media:mrssContentType" />
+    <xs:element name="rating" type="media:mrssRatingType" />
+    <xs:element name="title" type="media:mrssTitleType" />
+    <xs:element name="description" type="media:mrssDescriptionType" />
+    <xs:element name="keywords" type="xs:string" />
+    <xs:element name="thumbnail" type="media:mrssThumbnailType" />
+    <xs:element name="category" type="media:mrssCategoryType" />
+	<xs:element name="hash" type="media:mrssHashType" />
+	<xs:element name="player" type="media:mrssPlayerType" />
+    <xs:element name="credit" type="media:mrssCreditType" />
+	<xs:element name="restriction" type="media:mrssRestrictionType" />    
+    <xs:element name="copyright" type="media:mrssCopyrightType" />
+    <xs:element name="text" type="media:mrssTextType" />
+    	        
+	<xs:complexType name="mrssGroupType">
+	     <xs:choice>
+	        <xs:element ref="media:content" minOccurs="1" maxOccurs="unbounded" />
+	 		<xs:element ref="media:rating" minOccurs="0" />
+			<xs:element ref="media:title" minOccurs="0" />
+			<xs:element ref="media:description" minOccurs="0" />
+			<xs:element ref="media:keywords" minOccurs="0" />
+			<xs:element ref="media:thumbnail" minOccurs="0" />
+			<xs:element ref="media:category" minOccurs="0" />
+			<xs:element ref="media:hash" minOccurs="0" />
+		    <xs:element ref="media:player" minOccurs="0" />			
+			<xs:element ref="media:credit" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element ref="media:restriction" minOccurs="0" />
+			<xs:element ref="media:copyright" minOccurs="0" />
+			<xs:element ref="media:text" minOccurs="0" />
+			<xs:element ref="dcterms:valid" minOccurs="0" />     	         
+	     </xs:choice>
+	</xs:complexType>
+
+   <xs:complexType name="mrssContentType">
+	  	<xs:all>
+	 		<xs:element ref="media:rating" minOccurs="0" />
+			<xs:element ref="media:title" minOccurs="0" />
+			<xs:element ref="media:description" minOccurs="0" />
+			<xs:element ref="media:keywords" minOccurs="0" />
+			<xs:element ref="media:thumbnail" minOccurs="0" />
+			<xs:element ref="media:category" minOccurs="0" />
+			<xs:element ref="media:hash" minOccurs="0" />
+			<xs:element ref="media:credit" minOccurs="0" />
+			<xs:element ref="media:restriction" minOccurs="0" />
+			<xs:element ref="media:copyright" minOccurs="0" />
+			<xs:element ref="media:text" minOccurs="0" />
+			<xs:element ref="dcterms:valid" minOccurs="0" />
+		</xs:all>
+       <xs:attribute name="url" use="required" type="xs:anyURI"/>
+       <xs:attribute name="fileSize" use="optional" type="xs:integer"/>
+       <xs:attribute name="type" type="xs:string" use="optional"/>
+       <xs:attribute name="medium" use="optional">
+       	<xs:simpleType>
+       		<xs:restriction base="xs:string">
+       			<xs:enumeration value="image" />
+       			<xs:enumeration value="audio" />
+       			<xs:enumeration value="video" />
+       			<xs:enumeration value="document" />
+       			<xs:enumeration value="executable" />
+       		</xs:restriction>
+       	</xs:simpleType>
+       </xs:attribute>
+       <xs:attribute name="isDefault" use="optional" type="xs:boolean"/>
+       <xs:attribute name="expression" use="optional" default="full">
+       	<xs:simpleType>
+       		<xs:restriction  base="xs:string">
+       			<xs:enumeration value="sample" />
+       			<xs:enumeration value="full" />
+       			<xs:enumeration value="nonstop" />
+       		</xs:restriction>       		
+       	</xs:simpleType>
+       </xs:attribute>
+       <xs:attribute name="bitrate" use="optional" type="xs:integer"/>
+       <xs:attribute name="framerate" use="optional" type="xs:integer"/>
+       <xs:attribute name="samplingrate" use="optional" type="xs:decimal"/>
+       <xs:attribute name="channels" use="optional" type="xs:integer"/>
+       <xs:attribute name="duration" use="optional" type="xs:integer"/>
+       <xs:attribute name="height" use="optional" type="xs:integer"/>
+       <xs:attribute name="width" use="optional" type="xs:integer"/>
+       <xs:attribute name="lang" use="optional" type="xs:string"/>
+
+   </xs:complexType>
+  
+    <xs:complexType name="mrssRatingType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="scheme" type="xs:string" default="urn:simple"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+   <xs:complexType name="mrssTitleType">
+      <xs:simpleContent>
+          <xs:extension base="xs:string">
+              <xs:attribute name="type">
+                  <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                          <xs:enumeration value="plain"/>
+                          <xs:enumeration value="html"/>
+                      </xs:restriction>
+                  </xs:simpleType>
+              </xs:attribute>
+          </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+
+   <xs:complexType name="mrssDescriptionType">
+      <xs:simpleContent>
+          <xs:extension base="xs:string">
+              <xs:attribute name="type">
+                  <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                          <xs:enumeration value="plain"/>
+                          <xs:enumeration value="html"/>
+                      </xs:restriction>
+                  </xs:simpleType>
+              </xs:attribute>
+          </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   
+  <xs:complexType name="mrssThumbnailType">
+      <xs:attribute name="url" use="required" type="xs:anyURI"/>
+      <xs:attribute name="height" use="optional" type="xs:integer"/>
+      <xs:attribute name="width" use="optional" type="xs:integer"/>
+      <xs:attribute name="time" use="optional" type="xs:string" />
+  </xs:complexType>
+  
+  
+  <xs:complexType name="mrssCategoryType">
+      <xs:simpleContent>
+          <xs:extension base="xs:string">
+              <xs:attribute name="scheme" type="xs:string" default="http://search.yahoo.com/mrss/category_schema" />
+              <xs:attribute name="label" use="optional" type="xs:string"/>
+          </xs:extension>
+      </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="mrssHashType">
+     <xs:simpleContent>
+         <xs:extension base="xs:string">
+             <xs:attribute name="algo" default="md5">
+                 <xs:simpleType>
+                     <xs:restriction base="xs:string">
+                         <xs:enumeration value="md5"/>
+                         <xs:enumeration value="sha-1"/>
+                     </xs:restriction>
+                 </xs:simpleType>
+             </xs:attribute>
+         </xs:extension>
+     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="mrssPlayerType">
+     <xs:simpleContent>
+         <xs:extension base="xs:string">
+             <xs:attribute name="url" use="required" type="xs:anyURI"/>
+	         <xs:attribute name="height" use="optional" type="xs:integer"/>
+	         <xs:attribute name="width" use="optional" type="xs:integer"/>
+         </xs:extension>
+     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="mrssCreditType">
+      <xs:simpleContent>
+          <xs:extension base="xs:string">
+              <xs:attribute name="role" use="optional" type="xs:string" />
+              <xs:attribute name="scheme" use="optional" type="xs:string" default="urn:ebu"/>
+          </xs:extension>
+      </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="mrssCopyrightType">
+      <xs:simpleContent>
+          <xs:extension base="xs:string">
+              <xs:attribute name="url" type="xs:anyURI"/>
+          </xs:extension>
+      </xs:simpleContent>
+  </xs:complexType>
+  
+
+  <xs:complexType name="mrssTextType">
+     <xs:simpleContent>
+         <xs:extension base="xs:string">
+             <xs:attribute use="optional" name="type">
+                 <xs:simpleType>
+                     <xs:restriction base="xs:string">
+                         <xs:enumeration value="plain"/>
+                         <xs:enumeration value="html"/>
+                     </xs:restriction>
+                 </xs:simpleType>
+             </xs:attribute>
+             <xs:attribute use="optional" name="lang" type="xs:string" />
+             <xs:attribute use="optional" name="start" type="xs:string" />
+             <xs:attribute use="optional" name="end" type="xs:string" />
+         </xs:extension>
+     </xs:simpleContent>
+  </xs:complexType>
+  
+  
+
+  <xs:complexType name="mrssRestrictionType">
+     <xs:simpleContent>
+         <xs:extension base="xs:string">
+             <xs:attribute use="required" name="relationship">
+                 <xs:simpleType>
+                     <xs:restriction base="xs:string">
+                         <xs:enumeration value="allow"/>
+                         <xs:enumeration value="deny"/>
+                     </xs:restriction>
+                 </xs:simpleType>
+             </xs:attribute>
+             <xs:attribute use="optional" name="type">
+                 <xs:simpleType>
+                     <xs:restriction base="xs:string">
+                         <xs:enumeration value="country"/>
+                         <xs:enumeration value="uri"/>
+                     </xs:restriction>
+                 </xs:simpleType>
+             </xs:attribute>
+         </xs:extension>
+     </xs:simpleContent>
+  </xs:complexType>
+
+</xs:schema>

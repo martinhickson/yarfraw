@@ -6,6 +6,5 @@ in no particular order:
 - maven rss feed auto generate plugin
 - aggregator with cover flow like gui
 
-- util for itunes support
 - util for http://search.yahoo.com/mrss/ support
-- util for other popular special element support
+- util for other popular special element support http://feedparser.org/docs/namespace-handling.html

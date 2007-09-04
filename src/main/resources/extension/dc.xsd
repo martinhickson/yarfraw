@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://purl.org/dc/terms/"
+	elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation>
+			Qualified Dublin Core module
+		</xs:documentation>
+	</xs:annotation>
+ 	<xs:element name="valid" type="xs:string" />
+</xs:schema>

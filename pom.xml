@@ -170,6 +170,38 @@
               <strict>false</strict>
             </configuration>
           </execution>
+          <execution>
+            <id>itunes</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.itunes.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/itunes.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/itunes</generateDirectory>
+            </configuration>
+          </execution>          
+          <execution>
+            <id>mrss</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.mrss.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/mrss.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/mrss</generateDirectory>
+            </configuration>
+          </execution>          
         </executions>
       </plugin>
       <plugin>

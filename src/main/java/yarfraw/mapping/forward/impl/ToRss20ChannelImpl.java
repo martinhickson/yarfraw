@@ -106,7 +106,7 @@ public class ToRss20ChannelImpl implements ToRss20Channel{
         if(newDateString != null){
           dateString = newDateString;
         }else{
-          LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
+          LOG.warn("The dateString "+dateString+" is in valid according to RSS 2.0 specs, unabel to convert it to a valid format, writing it as is");
         }
       }
       elementList.add(factory.createTRssChannelLastBuildDate(dateString));

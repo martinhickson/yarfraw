@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="itunesExtension">
+		<xs:annotation>
+			<xs:documentation>This is a wrapper for itunes extension elements for RSS 2.0.
+			If you need to use this, you should read the specs at
+			http://www.apple.com/itunes/store/podcaststechspecs.html</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="itunes:category" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="itunes:keywords" minOccurs="0" />
+				<xs:element ref="itunes:subtitle" minOccurs="0" />
+				<xs:element ref="itunes:duration" minOccurs="0" />
+				<xs:element ref="itunes:summary" minOccurs="0" />
+				<xs:element ref="itunes:image" minOccurs="0" />
+				<xs:element ref="itunes:explicit" minOccurs="0" />
+				<xs:element ref="itunes:owner" minOccurs="0" />
+				<xs:element ref="itunes:author" minOccurs="0" />
+				<xs:element ref="itunes:block" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="category" type="itunes:itunesCategoryType"/>
+	<xs:element name="keywords" type="xs:string"/>
+	<xs:element name="subtitle" type="xs:string"/>
+	<xs:element name="duration" type="xs:string" />
+	<xs:element name="summary" type="xs:string" />
+	<xs:element name="image" type="itunes:itunesImageType" />
+	<xs:element name="explicit" type="xs:string" />
+	<xs:element name="owner" type="itunes:itunesOwnerType" />
+	<xs:element name="author" type="xs:string" />
+	<xs:element name="block" type="xs:string" />
+	<xs:complexType name="itunesOwnerType">
+		<xs:all>
+			<xs:element type="xs:string" name="name" />
+			<xs:element type="xs:string" name="email" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="itunesCategoryType">
+		<xs:attribute type="xs:string" name="text" use="required" />
+	</xs:complexType>
+	<xs:complexType name="itunesImageType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="rel" />
+				<xs:attribute type="xs:string" name="type" />
+				<xs:attribute type="xs:anyURI" name="href" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
