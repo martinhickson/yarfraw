@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version ="2.0" xmlns:g="http://base.google.com/ns/1.0">
+
+<channel>
+	<title>The name of your bulk upload.</title>
+	<description>A description of your content.</description>
+	<link>http://www.example.com</link>
+  	
+<item>
+<title>John Doe</title>
+<g:age>18</g:age>
+<description>Laidback, honest, truthful, fun, loving, optimistic type of guy.</description>
+<g:education>PhD</g:education>
+<g:employer>Google Inc.</g:employer>
+<g:ethnicity>Latino</g:ethnicity>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<g:gender>male</g:gender>
+<guid>1</guid>
+<g:image_link>http://www.example.com/image1.jpg</g:image_link>
+<g:interested_in>Long walks on the beach</g:interested_in>
+<link>http://www.example.com/item1-info-page.html</link>
+<g:marital_status>single</g:marital_status>
+<g:occupation>Sales</g:occupation>
+<g:sexual_orientation>heterosexual</g:sexual_orientation>
+</item>
+ 
+<item> 
+<title>Single South Asian Male</title>
+<g:age>23</g:age>
+<description>23 year old dude looking for a girl.</description>
+<g:education>BS</g:education>
+<g:employer>Google, Inc.</g:employer>
+<g:ethnicity>South Asian</g:ethnicity>
+<g:expiration_date>2006-12-21</g:expiration_date>
+<g:gender>male</g:gender>
+<guid>2</guid>
+<g:image_link>http://www.example.com/image2.jpg</g:image_link>
+<g:interested_in>Single Women</g:interested_in>
+<link>http://www.example.com/item2-info-page.html</link>
+<g:marital_status>single</g:marital_status>
+<g:occupation>Sales</g:occupation>
+<g:sexual_orientation>heterosexual</g:sexual_orientation>
+</item>
+ 
+<item> 
+<title>Divorced female</title>
+<g:age>33</g:age>
+<description>Looking for a partner who likes cats.</description>
+<g:education>BA</g:education>
+<g:employer>Constrco, Inc.</g:employer>
+<g:ethnicity>Black</g:ethnicity>
+<g:expiration_date>2006-12-22</g:expiration_date>
+<g:gender>female</g:gender>
+<guid>3</guid>
+<g:image_link>http://www.example.com/image3.jpg</g:image_link>
+<g:interested_in>Movies and board games</g:interested_in>
+<link>http://www.example.com/item3-info-page.html</link>
+<g:marital_status>divorced</g:marital_status>
+<g:occupation>Construction</g:occupation>
+<g:sexual_orientation>heterosexual</g:sexual_orientation>
+</item>
+	
+</channel>
+</rss>

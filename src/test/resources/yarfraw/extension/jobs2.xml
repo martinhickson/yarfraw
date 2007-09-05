@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version ="2.0" xmlns:g="http://base.google.com/ns/1.0">
+
+<channel>
+	<title>The name of your bulk upload.</title>
+	<description>A description of your content.</description>
+	<link>http://www.example.com</link>
+  	
+<item>
+<title>Google Coordinator - Mountain View</title>
+<description>The successful candidate will be responsible for providing excellent service to our merchants, while simultaneously helping the product run smoothly behind the scenes. This person should be proactive, organized and, extremely detail-oriented.</description>
+<g:education>BS</g:education>
+<g:employer>Google, Inc</g:employer>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>1</guid>
+<g:image_link>http://www.example.com/image1.jpg</g:image_link>
+<g:immigration_status>permanent resident</g:immigration_status>
+<g:job_function>Coordinator</g:job_function>
+<g:job_industry>Internet</g:job_industry>
+<g:job_type>full-time</g:job_type>
+<link>http://www.example.com/item1-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043 USA</g:location>
+<g:publish_date>2005-12-20</g:publish_date>
+<g:salary>40000</g:salary>
+<g:salary_type>starting</g:salary_type>
+</item>
+ 
+<item> 
+<title>Google T-Shirt Distributor</title>
+<description>Love T-shirts? Just can't get enough? Why not consider a career as an official Google T-shirt Distributor. You will have first dibs on all new t-shirts.</description>
+<g:education>High School</g:education>
+<g:employer>Google, Inc</g:employer>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>2</guid>
+<g:image_link>http://www.example.com/image2.jpg</g:image_link>
+<g:immigration_status>permanent resident</g:immigration_status>
+<g:job_function>Distributor</g:job_function>
+<g:job_industry>Customer Service</g:job_industry>
+<g:job_type>part-time</g:job_type>
+<link>http://www.example.com/item2-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043 USA</g:location>
+<g:publish_date>2005-12-20</g:publish_date>
+<g:salary>25000</g:salary>
+<g:salary_type>starting</g:salary_type>
+</item>
+ 
+<item> 
+<title>Marketing Manager</title>
+<description>Responsibilities include working with the corporate marketing group, sales, and product support to drive projects such as: defining and implementing a customer communications strategy and determining ROI on advertising expenditures.</description>
+<g:education>PhD</g:education>
+<g:employer>Google Inc.</g:employer>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>3</guid>
+<g:image_link>http://www.example.com/image3.jpg</g:image_link>
+<g:immigration_status>permanent resident</g:immigration_status>
+<g:job_function>Product manager</g:job_function>
+<g:job_industry>Government</g:job_industry>
+<g:job_type>contractor</g:job_type>
+<link>http://www.example.com/item3-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043, USA</g:location>
+<g:publish_date>2005-12-20</g:publish_date>
+<g:salary>55000</g:salary>
+<g:salary_type>negotiable</g:salary_type>
+</item>
+	
+</channel>
+</rss>
