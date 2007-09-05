@@ -6,7 +6,16 @@
     <release version="0.8" date="TBD">
       <action dev="jliang" type="add">
       	Added support for itunes elements.
-      </action>    
+      </action>
+	  <action dev="jliang" type="add">
+      	Added support for Yahoo! mrss elements.
+      </action>                    
+	  <action dev="jliang" type="add">
+      	Added support for google base elements.
+      </action>              
+	  <action dev="jliang" type="add">
+      	Added support for GeoRss elements.
+      </action>                    
       <action dev="jliang" type="update">
       	Removed e.printStatckTrace() from FeedReaderUtils
       </action>      
