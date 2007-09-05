@@ -29,6 +29,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.dc.elements.DublinCoreExtension;
 import yarfraw.generated.googlebase.elements.CurrencyCodeEnumeration;
 import yarfraw.generated.googlebase.elements.DateTimeRangeType;
 import yarfraw.generated.googlebase.elements.GenderEnumeration;
@@ -61,11 +62,13 @@ public class ExtensionUtils{
   public static final String ITUNES_JAXB_CONTEXT = "yarfraw.generated.itunes.elements";
   public static final String MRSS_JAXB_CONTEXT = "yarfraw.generated.mrss.elements";
   public static final String GOOGLEBASE_JAXB_CONTEXT = "yarfraw.generated.googlebase.elements";
+  public static final String DUBLINCORE_JAXB_CONTEXT = "yarfraw.generated.dc.elements";
   public static final String GEORSS_JAXB_CONTEXT = "org.georss.georss._10";
   public static final String ITUNES_PREFIX = "itunes";
   public static final String MRSS_PREFIX = "media";
   public static final String GEORSS_PREFIX = "georss";
   public static final String GOOGLEBASE_PREFIX = "g";
+  public static final String DUBLINCORE_PREFIX = "dc";
 
   private static final ObjectFactory GOOGLEBASE_FACTORY = new ObjectFactory();
   
@@ -667,6 +670,22 @@ public class ExtensionUtils{
   public static List<Element> toMrssElements(MrssExtension extensionObject)
   throws YarfrawException{
     return toElements(extensionObject, MRSS_JAXB_CONTEXT, MRSS_PREFIX);
+  }
+
+  
+  /**
+   * Converts the input {@link DublinCoreExtension} object to an element list.
+   * <br/>
+   * see http://dublincore.org/documents/2002/07/31/dcmes-xml/ about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link DublinCoreExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toDublinCoreElements(MrssExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, DUBLINCORE_JAXB_CONTEXT, DUBLINCORE_PREFIX);
   }
   
   private static List<Element> toElements(Object extensionObject, String jaxbContext, String forcePrefix) throws YarfrawException {

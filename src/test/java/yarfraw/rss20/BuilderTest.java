@@ -182,8 +182,7 @@ public class BuilderTest{
     test.setWhere(where);
     List<Element> list = ExtensionUtils.toGeoRssElements(test);
     c.getOtherElements().addAll(list);
-//    FeedWriter w = new FeedWriter(File.createTempFile("georss",".xml"));
-    FeedWriter w = new FeedWriter("georss.xml");
+    FeedWriter w = new FeedWriter(File.createTempFile("georss",".xml"));
     w.writeChannel(c);
   }
   

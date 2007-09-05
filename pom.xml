@@ -217,7 +217,23 @@
               <forceRegenerate>true</forceRegenerate>
               <generateDirectory>${project.build.directory}/generated-sources/extension/mrss</generateDirectory>
             </configuration>
-          </execution>          
+          </execution>  
+		  <execution>
+            <id>dc</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.dc.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/rss10dc.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/dc</generateDirectory>
+            </configuration>
+          </execution>  
           <execution>
             <id>georss</id>
             <goals>
