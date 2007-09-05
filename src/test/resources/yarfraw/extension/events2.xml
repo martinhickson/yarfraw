@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version ="2.0" xmlns:g="http://base.google.com/ns/1.0">
+
+<channel>
+	<title>The name of your bulk upload.</title>
+	<description>A description of your content.</description>
+	<link>http://www.example.com</link>
+
+<item>
+<title>Google's 2005 Halloween Fright Fest</title>
+<description>Come face to face with your most horrific fears. This year's Halloween fest will be sure to scare your socks off, complete with a real haunted Googleplex.</description>
+<g:event_date_range>
+	<g:start>2006-10-31T18:00:00</g:start>
+	<g:end>2006-10-31T23:30:00</g:end>
+</g:event_date_range>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>1</guid>
+<g:image_link>http://www.example.com/image1.jpg</g:image_link>
+<link>http://www.example.com/item1-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043</g:location>
+<g:price>10</g:price>
+<g:price_type>starting</g:price_type>
+<g:quantity>100</g:quantity>
+</item>
+ 
+<item> 
+<title>Dave Matthews Band</title>
+<description>1 day of peace and music.</description>
+<g:event_date_range>
+	<g:start>2006-12-20</g:start>
+	<g:end>2006-12-20</g:end>
+</g:event_date_range>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>2</guid>
+<g:image_link>http://www.example.com/image2.jpg</g:image_link>
+<link>http://www.example.com/item2-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043</g:location>
+<g:price>25</g:price>
+<g:price_type>negotiable</g:price_type>
+<g:quantity>500</g:quantity>
+</item>
+ 
+<item> 
+<title>Chicago Bears Tickets</title>
+<description>1 ticket to see the monsters of the midway in action.</description>
+<g:event_date_range>
+	<g:start>2006-12-20T10:00:00-05:00</g:start>
+	<g:end>2006-12-20T13:30:00-05:00</g:end>
+</g:event_date_range>
+<g:expiration_date>2006-12-20</g:expiration_date>
+<guid>3</guid>
+<g:image_link>http://www.example.com/image3.jpg</g:image_link>
+<link>http://www.example.com/item3-info-page.html</link>
+<g:location>1600 Amphitheatre Parkway, Mountain View, CA, 94043</g:location>
+<g:price>50</g:price>
+<g:price_type>negotiable</g:price_type>
+<g:quantity>4</g:quantity>
+</item>
+
+</channel>
+</rss>

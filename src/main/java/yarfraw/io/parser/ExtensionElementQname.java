@@ -33,6 +33,12 @@ public class ExtensionElementQname {
 
   public final static QName MRSS_VALID_QNAME = new QName("http://purl.org/dc/terms/", "valid");
   
+  public final static QName GEORSS_WHERE_QNAME = new QName("http://www.georss.org/georss/10", "where");
+  public final static QName GEORSS_POLYGON_QNAME = new QName("http://www.georss.org/georss/10", "polygon");
+  public final static QName GEORSS_BOX_QNAME = new QName("http://www.georss.org/georss/10", "box");
+  public final static QName GEORSS_POINT_QNAME = new QName("http://www.georss.org/georss/10", "point");
+  public final static QName GEORSS_LINE_QNAME = new QName("http://www.georss.org/georss/10", "line");
+  
   private ExtensionElementQname(){}
   
 }

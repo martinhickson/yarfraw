@@ -185,7 +185,23 @@
               <forceRegenerate>true</forceRegenerate>
               <generateDirectory>${project.build.directory}/generated-sources/extension/itunes</generateDirectory>
             </configuration>
-          </execution>          
+          </execution> 
+          <execution>
+            <id>googleBase</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.googlebase.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/gbase.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/googlebase</generateDirectory>
+            </configuration>
+          </execution>                    
           <execution>
             <id>mrss</id>
             <goals>
@@ -200,6 +216,21 @@
               </schemaIncludes>
               <forceRegenerate>true</forceRegenerate>
               <generateDirectory>${project.build.directory}/generated-sources/extension/mrss</generateDirectory>
+            </configuration>
+          </execution>          
+          <execution>
+            <id>georss</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>false</strict>
+              <schemaIncludes>
+                <schemaInclude>extension/georss.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/georss</generateDirectory>
             </configuration>
           </execution>          
         </executions>

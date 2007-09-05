@@ -10,7 +10,7 @@ import yarfraw.io.FeedReader;
 public class Test{
 
   public static void main(String[] args) throws Exception {
-    FeedReader r = new FeedReader(new HttpURL("http://www.defamer.com/index.xml"));
+    FeedReader r = new FeedReader(new HttpURL("http://www.geonames.org/recent-changes.xml"));
     ChannelFeed c =  r.readChannel();
     System.out.println(c);
     System.out.println(System.getProperty("java.io.tmpdir"));

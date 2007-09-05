@@ -53,37 +53,38 @@
 	<xs:complexType name="mrssGroupType">
 	     <xs:choice>
 	        <xs:element ref="media:content" minOccurs="1" maxOccurs="unbounded" />
-	 		<xs:element ref="media:rating" minOccurs="0" />
-			<xs:element ref="media:title" minOccurs="0" />
-			<xs:element ref="media:description" minOccurs="0" />
-			<xs:element ref="media:keywords" minOccurs="0" />
-			<xs:element ref="media:thumbnail" minOccurs="0" />
-			<xs:element ref="media:category" minOccurs="0" />
-			<xs:element ref="media:hash" minOccurs="0" />
-		    <xs:element ref="media:player" minOccurs="0" />			
-			<xs:element ref="media:credit" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element ref="media:restriction" minOccurs="0" />
-			<xs:element ref="media:copyright" minOccurs="0" />
-			<xs:element ref="media:text" minOccurs="0" />
+				<xs:element ref="media:rating" minOccurs="0" />
+				<xs:element ref="media:title" minOccurs="0" />
+				<xs:element ref="media:description" minOccurs="0" />
+				<xs:element ref="media:keywords" minOccurs="0" />
+				<xs:element ref="media:thumbnail" minOccurs="0" />
+				<xs:element ref="media:category" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:hash" minOccurs="0" />
+				<xs:element ref="media:player" minOccurs="0" />
+				<xs:element ref="media:credit" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="media:restriction" minOccurs="0" />
+				<xs:element ref="media:copyright" minOccurs="0" />
+				<xs:element ref="media:text" minOccurs="0" />
 			<xs:element ref="dcterms:valid" minOccurs="0" />     	         
 	     </xs:choice>
 	</xs:complexType>
 
    <xs:complexType name="mrssContentType">
-	  	<xs:all>
-	 		<xs:element ref="media:rating" minOccurs="0" />
+	  	<xs:choice>
+			<xs:element ref="media:rating" minOccurs="0" />
 			<xs:element ref="media:title" minOccurs="0" />
 			<xs:element ref="media:description" minOccurs="0" />
 			<xs:element ref="media:keywords" minOccurs="0" />
 			<xs:element ref="media:thumbnail" minOccurs="0" />
-			<xs:element ref="media:category" minOccurs="0" />
+			<xs:element ref="media:category" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element ref="media:hash" minOccurs="0" />
-			<xs:element ref="media:credit" minOccurs="0" />
+			<xs:element ref="media:player" minOccurs="0" />
+			<xs:element ref="media:credit" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element ref="media:restriction" minOccurs="0" />
 			<xs:element ref="media:copyright" minOccurs="0" />
 			<xs:element ref="media:text" minOccurs="0" />
 			<xs:element ref="dcterms:valid" minOccurs="0" />
-		</xs:all>
+		</xs:choice>
        <xs:attribute name="url" use="required" type="xs:anyURI"/>
        <xs:attribute name="fileSize" use="optional" type="xs:integer"/>
        <xs:attribute name="type" type="xs:string" use="optional"/>
