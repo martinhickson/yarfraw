@@ -8,6 +8,7 @@ in no particular order:
 
 - util for http://search.yahoo.com/mrss/ support
 - util for other popular special element support 
+- extension addon framework
 - add prefix mapper
 - add xml transform builder that can converts any xml to a rss feed
 
