@@ -2,6 +2,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:dcterms="http://purl.org/dc/terms/"
 	targetNamespace="http://purl.org/dc/terms/"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:version="1.0"
 	elementFormDefault="qualified">
 
 	<xs:annotation>

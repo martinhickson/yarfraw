@@ -27,7 +27,7 @@ import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.backward.impl.ToChannelAtom10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss10Impl;
 import yarfraw.mapping.backward.impl.ToChannelRss20Impl;
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.JAXBUtils;
 /**
  * Provides a set of function to facilitate reading of a RSS feed.
  * 
@@ -146,22 +146,13 @@ public class FeedReader  extends AbstractBaseFeedParser{
     } 
     
   }
-  
-  private static synchronized Unmarshaller getUnMarshaller(FeedFormat format) throws JAXBException{
-    if(format == FeedFormat.RSS20){
-      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createUnmarshaller();
-      u.setEventHandler(new WarningHandler());
-      return u;
-    }else if(format == FeedFormat.RSS10){
-      Unmarshaller u = JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createUnmarshaller();
-      u.setEventHandler(new WarningHandler());
-      return u;
-    }else if(format == FeedFormat.ATOM10){
-      Unmarshaller u = JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createUnmarshaller();
-      u.setEventHandler(new WarningHandler());
-      return u;
-    }else{
-      throw new UnsupportedOperationException("UnSupported Feed Format");
-    }
+
+  private static Unmarshaller getUnMarshaller(FeedFormat format) throws JAXBException{
+    JAXBContext context = JAXBUtils.getContext(format);
+    Unmarshaller u = context.createUnmarshaller();
+    u.setEventHandler(new WarningHandler());
+    return u;
   }
+  
+  
 }

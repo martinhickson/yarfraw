@@ -8,7 +8,8 @@ in no particular order:
 
 - util for http://search.yahoo.com/mrss/ support
 - util for other popular special element support 
-
+- add prefix mapper
+http://java.sun.com/webservices/docs/2.0/tutorial/doc/JAXBUsing4.html
 http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html
 
 % of Feeds  	Namespace  	URI

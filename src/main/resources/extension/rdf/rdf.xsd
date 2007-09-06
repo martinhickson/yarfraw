@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="xlink.xsd" />
+	<xs:element name="RDF" abstract="false">
+		<xs:annotation>
+			<xs:documentation>
+				RDF Serialization by Poul Henrik Jorgensen, 2002-03-21.
+				Ref.: http://www.w3.org/TR/REC-rdf-syntax/
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Description" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Description" abstract="false">
+		<xs:complexType mixed="true">
+			<xs:choice>
+				<xs:element ref="propertyElt" minOccurs="0"
+					maxOccurs="unbounded" />
+				<xs:element ref="Description" minOccurs="0" />
+			</xs:choice>
+			<xs:attribute name="ID" type="xs:ID" use="optional" />
+			<xs:attribute name="about" type="xs:anyURI" use="optional" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="href">
+		<xs:complexType mixed="false">
+			<xs:attribute ref="xlink:type" />
+			<xs:attribute ref="xlink:role" />
+			<xs:attribute ref="xlink:title" />
+			<xs:attribute ref="xlink:href" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="propertyElt" type="property" abstract="true" />
+	<xs:complexType name="container" abstract="true" mixed="true">
+		<xs:sequence>
+			<xs:element name="li" maxOccurs="unbounded">
+				<xs:complexType mixed="true">
+					<xs:sequence>
+						<xs:element ref="propertyElt" minOccurs="0" />
+						<!--
+							<xs:element ref="cmcs:href" minOccurs="0"/>
+						-->
+						<xs:element ref="href" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:ID" />
+	</xs:complexType>
+	<xs:element name="Bag" abstract="false">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="container" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Alt" abstract="false">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="container" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Seq" abstract="false">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="container" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="property" abstract="true" mixed="true">
+		<xs:sequence>
+			<xs:element ref="Description" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="resource" type="xs:anyURI" />
+	</xs:complexType>
+	<xs:element name="DcCreator" abstract="false"
+		substitutionGroup="propertyElt">
+		<xs:complexType mixed="true">
+			<xs:complexContent mixed="true">
+				<xs:extension base="property" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DcTitle" abstract="false"
+		substitutionGroup="propertyElt">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="property" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DcSubject" abstract="false"
+		substitutionGroup="propertyElt">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="property" />
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

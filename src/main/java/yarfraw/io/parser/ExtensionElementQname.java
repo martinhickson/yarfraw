@@ -147,6 +147,27 @@ public class ExtensionElementQname {
   public final static QName GOOGLEBASE_SquareFootage_QNAME = new QName("http://base.google.com/ns/1.0", "square_footage");
   public final static QName GOOGLEBASE_ProgrammingLanguage_QNAME = new QName("http://base.google.com/ns/1.0", "programming_language");
 
+  public final static QName DC_Relation_QNAME = new QName("http://purl.org/dc/elements/1.1/", "relation");
+  public final static QName DC_Contributor_QNAME = new QName("http://purl.org/dc/elements/1.1/", "contributor");
+  public final static QName DC_Title_QNAME = new QName("http://purl.org/dc/elements/1.1/", "title");
+  public final static QName DC_Publisher_QNAME = new QName("http://purl.org/dc/elements/1.1/", "publisher");
+  public final static QName DC_Type_QNAME = new QName("http://purl.org/dc/elements/1.1/", "type");
+  public final static QName DC_Language_QNAME = new QName("http://purl.org/dc/elements/1.1/", "language");
+  public final static QName DC_Creator_QNAME = new QName("http://purl.org/dc/elements/1.1/", "creator");
+  public final static QName DC_Rights_QNAME = new QName("http://purl.org/dc/elements/1.1/", "rights");
+  public final static QName DC_Identifier_QNAME = new QName("http://purl.org/dc/elements/1.1/", "identifier");
+  public final static QName DC_Description_QNAME = new QName("http://purl.org/dc/elements/1.1/", "description");
+  public final static QName DC_Format_QNAME = new QName("http://purl.org/dc/elements/1.1/", "format");
+  public final static QName DC_Subject_QNAME = new QName("http://purl.org/dc/elements/1.1/", "subject");
+  public final static QName DC_Coverage_QNAME = new QName("http://purl.org/dc/elements/1.1/", "coverage");
+  public final static QName DC_Date_QNAME = new QName("http://purl.org/dc/elements/1.1/", "date");
+  public final static QName DC_Source_QNAME = new QName("http://purl.org/dc/elements/1.1/", "source");
+  
+  
+
+  public final static QName WFW_CommentRss_QNAME = new QName("http://wellformedweb.org/CommentAPI/", "commentRss");
+  public final static QName WFW_Comment_QNAME = new QName("http://wellformedweb.org/CommentAPI/", "comment");
+  
   private ExtensionElementQname(){}
   
 }

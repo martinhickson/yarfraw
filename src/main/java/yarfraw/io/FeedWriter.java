@@ -21,7 +21,7 @@ import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
-import yarfraw.utils.CommonUtils;
+import yarfraw.utils.JAXBUtils;
 /**
  * Provides a set of function to facilitate writing to a feed.
  * <br/>
@@ -127,15 +127,7 @@ public class FeedWriter extends AbstractBaseIO{
   }
   
   private static Marshaller getMarshaller(FeedFormat format) throws JAXBException{
-    if(format == FeedFormat.RSS20){
-      return JAXBContext.newInstance(CommonUtils.RSS20_JAXB_CONTEXT).createMarshaller();
-    }else if(format == FeedFormat.RSS10){
-      return JAXBContext.newInstance(CommonUtils.RSS10_JAXB_CONTEXT).createMarshaller();
-    }else if(format == FeedFormat.ATOM10){
-      return JAXBContext.newInstance(CommonUtils.ATOM10_JAXB_CONTEXT).createMarshaller();
-    }else{
-      throw new UnsupportedOperationException("UnSupported Feed Format");
-    }
-
+    JAXBContext context = JAXBUtils.getContext(format);
+    return context.createMarshaller();
   }
 }

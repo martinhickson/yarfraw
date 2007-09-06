@@ -248,7 +248,23 @@
               <forceRegenerate>true</forceRegenerate>
               <generateDirectory>${project.build.directory}/generated-sources/extension/georss</generateDirectory>
             </configuration>
-          </execution>          
+          </execution>  
+          <execution>
+            <id>wfw</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.wfw.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/wfw.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/wfw</generateDirectory>
+            </configuration>
+          </execution>           
         </executions>
       </plugin>
       <plugin>

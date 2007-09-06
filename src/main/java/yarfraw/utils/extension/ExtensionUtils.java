@@ -1,7 +1,8 @@
 package yarfraw.utils.extension;
 
-import static yarfraw.utils.XMLUtils.same;
 import static yarfraw.io.parser.ExtensionElementQname.*;
+import static yarfraw.utils.XMLUtils.same;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ import yarfraw.generated.mrss.elements.MrssRestrictionType;
 import yarfraw.generated.mrss.elements.MrssTextType;
 import yarfraw.generated.mrss.elements.MrssThumbnailType;
 import yarfraw.generated.mrss.elements.MrssTitleType;
+import yarfraw.generated.wfw.elements.WellFormedWebExtension;
 
 public class ExtensionUtils{
   private static final String HTTP_BASE_GOOGLE_COM_CNS_1_0 = "http://base.google.com/ns/1.0";
@@ -64,8 +66,10 @@ public class ExtensionUtils{
   public static final String GOOGLEBASE_JAXB_CONTEXT = "yarfraw.generated.googlebase.elements";
   public static final String DUBLINCORE_JAXB_CONTEXT = "yarfraw.generated.dc.elements";
   public static final String GEORSS_JAXB_CONTEXT = "org.georss.georss._10";
+  public static final String WFW_JAXB_CONTEXT = "yarfraw.generated.wfw.elements";
   public static final String ITUNES_PREFIX = "itunes";
   public static final String MRSS_PREFIX = "media";
+  public static final String WFW_PREFIX = "wfw";
   public static final String GEORSS_PREFIX = "georss";
   public static final String GOOGLEBASE_PREFIX = "g";
   public static final String DUBLINCORE_PREFIX = "dc";
@@ -140,7 +144,111 @@ public class ExtensionUtils{
     }
     return ret;
   }
+
+  /**
+   * Extracts the itunes extension elements from the input list into an {@link DublinCoreExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://dublincore.org/documents/2002/07/31/dcmes-xml/ about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link DublinCoreExtension} object
+   * @throws YarfrawException 
+   */
+  public static DublinCoreExtension extractDublinCoreExtension(List<Element> otherElements) throws YarfrawException {
+    DublinCoreExtension ret = new DublinCoreExtension();
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, DC_Contributor_QNAME)){
+            ret.getContributor().add(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Coverage_QNAME)){
+            ret.setCoverage(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Creator_QNAME)){
+            ret.setCreator(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Date_QNAME)){
+            ret.setDate(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Description_QNAME)){
+            ret.setDescription(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Format_QNAME)){
+            ret.setFormat(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Identifier_QNAME)){
+            ret.setIdentifier(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Language_QNAME)){
+            ret.setLanguage(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Publisher_QNAME)){
+            ret.setPublisher(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Relation_QNAME)){
+            ret.setRelation(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Rights_QNAME)){
+            ret.setRights(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Source_QNAME)){
+            ret.setSource(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Subject_QNAME)){
+            ret.getSubject().add(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Title_QNAME)){
+            ret.setTitle(e.getTextContent());
+            it.remove();
+          }else if(same(name, DC_Type_QNAME)){
+            ret.setType(e.getTextContent());
+            it.remove();
+          }
+        }
+      }
+    return ret;
+  }
   
+  /**
+   * Extracts the well-formed web extension elements from the input list into an {@link WellFormedWebExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://wellformedweb.org/news/wfw_namespace_elements about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link WellFormedWebExtension} object
+   * @throws YarfrawException 
+   */
+  public static WellFormedWebExtension extractWellFormedWebExtension(List<Element> otherElements) throws YarfrawException {
+    WellFormedWebExtension ret = new WellFormedWebExtension();
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, WFW_Comment_QNAME)){
+            ret.setComment(e.getTextContent());
+            it.remove();
+          }else if(same(name, WFW_CommentRss_QNAME)){
+            ret.setCommentRss(e.getTextContent());
+            it.remove();
+          }
+        }
+      }
+    return ret;
+  }
 
   /**
    * Extracts the googlebase extension elements from the input list into an {@link GoogleBaseExtension}
@@ -672,6 +780,20 @@ public class ExtensionUtils{
     return toElements(extensionObject, MRSS_JAXB_CONTEXT, MRSS_PREFIX);
   }
 
+  /**
+   * Converts the input {@link WellFormedWebExtension} object to an element list.
+   * <br/>
+   * see http://wellformedweb.org/news/wfw_namespace_elements about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link WellFormedWebExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toWellFormedWebElements(WellFormedWebExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, WFW_JAXB_CONTEXT, WFW_PREFIX);
+  }
   
   /**
    * Converts the input {@link DublinCoreExtension} object to an element list.
