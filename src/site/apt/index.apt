@@ -11,6 +11,8 @@ About YARFRAW
 for working with RSS feed. It offers an unified data model in builder style to help developers to build and to read 
 RSS feeds. 
 
+	keywords: Java RSS Feed Parser, RSS 0.9x, RSS 1.0, RSS 2.0 Atom 1.0
+	
 Why Another Java RSS API?
 
 	Sure there are many of such libraries, but in software (and anything eles) there are always room for 

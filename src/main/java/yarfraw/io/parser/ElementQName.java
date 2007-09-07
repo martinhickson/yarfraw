@@ -36,25 +36,26 @@ public class ElementQName{
   public final static QName RSS10_TEXTINPUT = new QName("http://purl.org/rss/1.0/", "textinput");
   public final static QName RSS10_RELATION = new QName("http://purl.org/dc/elements/1.1/", "relation");
   public final static QName RSS10_CHANNEL = new QName("http://purl.org/rss/1.0/", "channel");
-  public final static QName RSS10_CONTRIBUTOR = new QName("http://purl.org/dc/elements/1.1/", "contributor");
+  
   public final static QName RSS10_UPDATEFREQUENCY = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateFrequency");
   
+  public final static QName RSS10_DC_CONTRIBUTOR = new QName("http://purl.org/dc/elements/1.1/", "contributor");
   public final static QName RSS10_DC_ITEM_TITLE = new QName("http://purl.org/dc/elements/1.1/", "title");
-  public final static QName RSS10_PUBLISHER = new QName("http://purl.org/dc/elements/1.1/", "publisher");
-  public final static QName RSS10_TYPE = new QName("http://purl.org/dc/elements/1.1/", "type");
-  public final static QName RSS10_LANGUAGE = new QName("http://purl.org/dc/elements/1.1/", "language");
-  public final static QName RSS10_CREATOR = new QName("http://purl.org/dc/elements/1.1/", "creator");
-  public final static QName RSS10_RIGHTS = new QName("http://purl.org/dc/elements/1.1/", "rights");
-  public final static QName RSS10_IDENTIFIER = new QName("http://purl.org/dc/elements/1.1/", "identifier");
+  public final static QName RSS10_DC_PUBLISHER = new QName("http://purl.org/dc/elements/1.1/", "publisher");
+  public final static QName RSS10_DC_TYPE = new QName("http://purl.org/dc/elements/1.1/", "type");
+  public final static QName RSS10_DC_LANGUAGE = new QName("http://purl.org/dc/elements/1.1/", "language");
+  public final static QName RSS10_DC_CREATOR = new QName("http://purl.org/dc/elements/1.1/", "creator");
+  public final static QName RSS10_DC_RIGHTS = new QName("http://purl.org/dc/elements/1.1/", "rights");
+  public final static QName RSS10_DC_IDENTIFIER = new QName("http://purl.org/dc/elements/1.1/", "identifier");
   public final static QName RSS10_ITEM = new QName("http://purl.org/rss/1.0/", "item");
   public final static QName RSS10_ITEMS = new QName("http://purl.org/rss/1.0/", "items");
   //This is the dc description name, it's ignored
 //  public final static QName _Description_QNAME = new QName("http://purl.org/dc/elements/1.1/", "description");
-  public final static QName RSS10_FORMAT = new QName("http://purl.org/dc/elements/1.1/", "format");
-  public final static QName RSS10_SUBJECT = new QName("http://purl.org/dc/elements/1.1/", "subject");
-  public final static QName RSS10_SOURCE = new QName("http://purl.org/dc/elements/1.1/", "source");
-  public final static QName RSS10_COVERAGE = new QName("http://purl.org/dc/elements/1.1/", "coverage");
-  public final static QName RSS10_DATE = new QName("http://purl.org/dc/elements/1.1/", "date");
+  public final static QName RSS10_DC_FORMAT = new QName("http://purl.org/dc/elements/1.1/", "format");
+  public final static QName RSS10_DC_SUBJECT = new QName("http://purl.org/dc/elements/1.1/", "subject");
+  public final static QName RSS10_DC_SOURCE = new QName("http://purl.org/dc/elements/1.1/", "source");
+  public final static QName RSS10_DC_COVERAGE = new QName("http://purl.org/dc/elements/1.1/", "coverage");
+  public final static QName RSS10_DC_DATE = new QName("http://purl.org/dc/elements/1.1/", "date");
   public final static QName RSS10_UPDATEPERIOD = new QName("http://purl.org/rss/1.0/modules/syndication/", "updatePeriod");
 
   public final static QName RSS20_TITLE = new QName("", "title");

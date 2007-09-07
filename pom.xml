@@ -218,22 +218,6 @@
               <generateDirectory>${project.build.directory}/generated-sources/extension/mrss</generateDirectory>
             </configuration>
           </execution>  
-		  <execution>
-            <id>dc</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <verbose>true</verbose>
-              <strict>true</strict>
-              <generatePackage>yarfraw.generated.dc.elements</generatePackage>
-              <schemaIncludes>
-                <schemaInclude>extension/rss10dc.xsd</schemaInclude>
-              </schemaIncludes>
-              <forceRegenerate>true</forceRegenerate>
-              <generateDirectory>${project.build.directory}/generated-sources/extension/dc</generateDirectory>
-            </configuration>
-          </execution>  
           <execution>
             <id>georss</id>
             <goals>
@@ -264,7 +248,39 @@
               <forceRegenerate>true</forceRegenerate>
               <generateDirectory>${project.build.directory}/generated-sources/extension/wfw</generateDirectory>
             </configuration>
-          </execution>           
+          </execution>
+          <execution>
+            <id>blogger</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.blogger.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/bloggerAtom.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/blogger</generateDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>admin</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.admin.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/admin.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/admin</generateDirectory>
+            </configuration>
+          </execution>                                      
         </executions>
       </plugin>
       <plugin>
@@ -287,6 +303,29 @@
           </includes>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-site-map</id>
+            <phase>site</phase>
+            <configuration>
+              <tasks>
+                <echo>Creating sitemap.xml using the sitemap_gen tool from google. This requires python.</echo>
+                <exec executable="python" failonerror="true" failifexecutionfails="true">
+                  <arg value="bin/sitemap_gen/sitemap_gen.py" />
+                  <arg value="--config=config.xml" />
+                </exec>              
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>      
     </plugins>
   </build>
   <repositories>
@@ -448,6 +487,7 @@
       <id>website</id>
       <url>scp://zl25-drexel@shell.sf.net:/home/groups/y/ya/yarfraw/htdocs/</url>
     </site>
+    
   </distributionManagement>
 </project>
 

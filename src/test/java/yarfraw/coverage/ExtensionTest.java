@@ -268,4 +268,22 @@ public class ExtensionTest extends TestCase{
     FeedWriter w = new FeedWriter(File.createTempFile("gbase", ".xml"));
     w.writeChannel(c);
   }
+  
+  
+  @Test
+  public void testDc() throws Exception{
+//    DublinCoreExtension ext = new DublinCoreExtension();
+//    ext.setCoverage("coverage");
+//    ext.setCreator("creator");
+//    ext.setDate("2007-07-16");
+//    ext.setDescription("any description");
+//    ext.setFormat("text/html");
+//    ext.setIdentifier("id");
+//    ext.setLanguage("en");
+//    ext.setRelation("whatever");
+//    ext.setRights("copy right info");
+//    ext.setSource("the source");
+//    ext.setTitle("the title");
+    
+  }
 }

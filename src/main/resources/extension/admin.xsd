@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://webns.net/mvcb/"
+	xmlns:admin="http://webns.net/mvcb/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:version="1.0"
+	elementFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="rdf.xsd"/>
+	<xs:element name="adminExtension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="admin:generatorAgent" />
+				<xs:element ref="admin:errorReportsTo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>
+			Administrative extension http://web.resource.org/rss/1.0/modules/admin/
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="adminType">
+ 			<xs:attribute ref="rdf:resource" />
+ 		</xs:complexType>
+ 	<xs:element name="generatorAgent" type="admin:adminType" />
+ 		
+ 	<xs:element name="errorReportsTo" type="admin:adminType" />
+
+</xs:schema>

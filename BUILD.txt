@@ -11,3 +11,8 @@ command, this will trigger a profile call 'dev' that will exclude
 these remote read tests.
 
 for example: 'mvn clean install -Denv=dev'
+
+- You cannot use -X maven 2 option to build the project because
+jaxb generates some debug classes that will cause collisions if 
+this flag is set (because multiple schemas are merged to the same
+java package). If you know how to fix this, please let me know.

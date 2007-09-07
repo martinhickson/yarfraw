@@ -163,11 +163,20 @@ public class ExtensionElementQname {
   public final static QName DC_Date_QNAME = new QName("http://purl.org/dc/elements/1.1/", "date");
   public final static QName DC_Source_QNAME = new QName("http://purl.org/dc/elements/1.1/", "source");
   
-  
+  public final static QName SY_UpdateBase_QNAME = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateBase");
+  public final static QName SY_UpdateFrequency_QNAME = new QName("http://purl.org/rss/1.0/modules/syndication/", "updateFrequency");
+  public final static QName SY_UpdatePeriod_QNAME = new QName("http://purl.org/rss/1.0/modules/syndication/", "updatePeriod");
+
 
   public final static QName WFW_CommentRss_QNAME = new QName("http://wellformedweb.org/CommentAPI/", "commentRss");
   public final static QName WFW_Comment_QNAME = new QName("http://wellformedweb.org/CommentAPI/", "comment");
   
+  public final static QName BLOGGER_Draft_QNAME = new QName("http://purl.org/atom-blog/ns#", "draft");
+  public final static QName BLOGGER_ConvertLineBreaks_QNAME = new QName("http://www.blogger.com/atom/ns#", "convertLineBreaks");
+  
+  public final static QName ADMIN_ErrorReportsTo_QNAME = new QName("http://webns.net/mvcb/", "errorReportsTo");
+  public final static QName ADMIN_GeneratorAgent_QNAME = new QName("http://webns.net/mvcb/", "generatorAgent");
+
   private ExtensionElementQname(){}
   
 }

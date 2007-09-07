@@ -124,7 +124,6 @@
 				<xs:element ref="rss10:items" minOccurs="1" maxOccurs="1" />
 				<xs:element ref="sy:updatePeriod"  minOccurs="0" />
 				<xs:element ref="sy:updateFrequency" minOccurs="0" />
-				<xs:element ref="sy:updateBase" minOccurs="0" />
 				<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
 				<xs:element ref="dc:publisher" minOccurs="0" />
 				<xs:element ref="dc:creator" minOccurs="0" />

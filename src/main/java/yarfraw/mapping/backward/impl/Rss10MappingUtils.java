@@ -1,19 +1,18 @@
 package yarfraw.mapping.backward.impl;
-import static yarfraw.io.parser.ElementQName.RSS10_CONTRIBUTOR;
-import static yarfraw.io.parser.ElementQName.RSS10_CREATOR;
-import static yarfraw.io.parser.ElementQName.RSS10_DATE;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_CONTRIBUTOR;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_CREATOR;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_DATE;
 import static yarfraw.io.parser.ElementQName.RSS10_DESCRIPTION;
-import static yarfraw.io.parser.ElementQName.RSS10_LANGUAGE;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_LANGUAGE;
 import static yarfraw.io.parser.ElementQName.RSS10_LINK;
 import static yarfraw.io.parser.ElementQName.RSS10_NAME;
-import static yarfraw.io.parser.ElementQName.RSS10_PUBLISHER;
-import static yarfraw.io.parser.ElementQName.RSS10_RIGHTS;
-import static yarfraw.io.parser.ElementQName.RSS10_SUBJECT;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_PUBLISHER;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_RIGHTS;
+import static yarfraw.io.parser.ElementQName.RSS10_DC_SUBJECT;
 import static yarfraw.io.parser.ElementQName.RSS10_TITLE;
-import static yarfraw.io.parser.ElementQName.RSS10_UPDATEBASE;
 import static yarfraw.io.parser.ElementQName.RSS10_UPDATEFREQUENCY;
 import static yarfraw.utils.XMLUtils.same;
-
+import static yarfraw.mapping.backward.impl.Utils.getDcTypeText;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,20 +80,20 @@ class Rss10MappingUtils{
           ret.addLink((String)jaxb.getValue());
         }else if(same(jaxb.getName(), RSS10_UPDATEFREQUENCY)){
           updateFrequency = (BigInteger)jaxb.getValue();
-        }else if(same(jaxb.getName(), RSS10_SUBJECT)){
-          ret.addCategorySubject((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_PUBLISHER)){
-          ret.addManagingEditorOrAuthorOrPublisher((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_CREATOR)){
-          ret.addWebMasterOrCreator((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_RIGHTS)){
-          ret.setRights((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_DATE)){
-          ret.setPubDate((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_LANGUAGE)){
-          ret.setLang((String)jaxb.getValue());
-        }else if(same(jaxb.getName(), RSS10_CONTRIBUTOR)){
-          ret.addContributor((String)jaxb.getValue());
+        }else if(same(jaxb.getName(), RSS10_DC_SUBJECT)){
+          ret.addCategorySubject(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_PUBLISHER)){
+          ret.addManagingEditorOrAuthorOrPublisher(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_CREATOR)){
+          ret.addWebMasterOrCreator(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_RIGHTS)){
+          ret.setRights(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_DATE)){
+          ret.setPubDate(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_LANGUAGE)){
+          ret.setLang(getDcTypeText(jaxb));
+        }else if(same(jaxb.getName(), RSS10_DC_CONTRIBUTOR)){
+          ret.addContributor(getDcTypeText(jaxb));
         }else if(val instanceof UpdatePeriodEnum){
           updatePeriod = (UpdatePeriodEnum)val;
         }else if(val instanceof TRss10Image){
@@ -107,8 +106,6 @@ class Rss10MappingUtils{
           TextInput in = new TextInput();
           in.setResource(((TRss10TextInput)val).getResource());
           ret.setTexInput(in);
-        }else if(same(jaxb.getName(), RSS10_UPDATEBASE)){
-          LOG.info("<updateBase> element is ignored.");
         }else if(val instanceof Items){
           Seq seq = ((Items)val).getSeq();
           int i = 0;
@@ -164,16 +161,16 @@ class Rss10MappingUtils{
                 item.setDescriptionOrSummary((String)jaxb.getValue());
               }else if(same(jaxb.getName(), RSS10_LINK)){
                 item.addLink((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), RSS10_CONTRIBUTOR)){
-                item.addContributor((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), RSS10_CREATOR)){
-                item.addAuthorOrCreator((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), RSS10_RIGHTS)){
-                item.setRights((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), RSS10_DATE)){
-                item.setPubDate((String)jaxb.getValue());
-              }else if(same(jaxb.getName(), RSS10_SUBJECT)){
-                item.addCategorySubject((String)jaxb.getValue());
+              }else if(same(jaxb.getName(), RSS10_DC_CONTRIBUTOR)){
+                item.addContributor(getDcTypeText(jaxb));
+              }else if(same(jaxb.getName(), RSS10_DC_CREATOR)){
+                item.addAuthorOrCreator(getDcTypeText(jaxb));
+              }else if(same(jaxb.getName(), RSS10_DC_RIGHTS)){
+                item.setRights(getDcTypeText(jaxb));
+              }else if(same(jaxb.getName(), RSS10_DC_DATE)){
+                item.setPubDate(getDcTypeText(jaxb));
+              }else if(same(jaxb.getName(), RSS10_DC_SUBJECT)){
+                item.addCategorySubject(getDcTypeText(jaxb));
               }else{
                 LOG.warn("Unexpected jaxbElement under <item>: "+ ToStringBuilder.reflectionToString(jaxb));
               }

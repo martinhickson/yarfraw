@@ -30,7 +30,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.generated.dc.elements.DublinCoreExtension;
+import yarfraw.generated.admin.elements.AdminExtension;
+import yarfraw.generated.admin.elements.AdminType;
+import yarfraw.generated.blogger.elements.BloggerExtension;
 import yarfraw.generated.googlebase.elements.CurrencyCodeEnumeration;
 import yarfraw.generated.googlebase.elements.DateTimeRangeType;
 import yarfraw.generated.googlebase.elements.GenderEnumeration;
@@ -57,23 +59,37 @@ import yarfraw.generated.mrss.elements.MrssRestrictionType;
 import yarfraw.generated.mrss.elements.MrssTextType;
 import yarfraw.generated.mrss.elements.MrssThumbnailType;
 import yarfraw.generated.mrss.elements.MrssTitleType;
+import yarfraw.generated.rss10.elements.DcType;
+import yarfraw.generated.rss10.elements.DublinCoreExtension;
+import yarfraw.generated.rss10.elements.SyndicationExtension;
+import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.generated.wfw.elements.WellFormedWebExtension;
 
 public class ExtensionUtils{
   private static final String HTTP_BASE_GOOGLE_COM_CNS_1_0 = "http://base.google.com/ns/1.0";
-  public static final String ITUNES_JAXB_CONTEXT = "yarfraw.generated.itunes.elements";
-  public static final String MRSS_JAXB_CONTEXT = "yarfraw.generated.mrss.elements";
-  public static final String GOOGLEBASE_JAXB_CONTEXT = "yarfraw.generated.googlebase.elements";
-  public static final String DUBLINCORE_JAXB_CONTEXT = "yarfraw.generated.dc.elements";
-  public static final String GEORSS_JAXB_CONTEXT = "org.georss.georss._10";
-  public static final String WFW_JAXB_CONTEXT = "yarfraw.generated.wfw.elements";
-  public static final String ITUNES_PREFIX = "itunes";
-  public static final String MRSS_PREFIX = "media";
-  public static final String WFW_PREFIX = "wfw";
-  public static final String GEORSS_PREFIX = "georss";
-  public static final String GOOGLEBASE_PREFIX = "g";
-  public static final String DUBLINCORE_PREFIX = "dc";
-
+  private static final String ITUNES_JAXB_CONTEXT = "yarfraw.generated.itunes.elements";
+  private static final String MRSS_JAXB_CONTEXT = "yarfraw.generated.mrss.elements";
+  private static final String GOOGLEBASE_JAXB_CONTEXT = "yarfraw.generated.googlebase.elements";
+  private static final String DUBLINCORE_JAXB_CONTEXT = "yarfraw.generated.rss10.elements";
+  private static final String GEORSS_JAXB_CONTEXT = "org.georss.georss._10";
+  private static final String WFW_JAXB_CONTEXT = "yarfraw.generated.wfw.elements";
+  private static final String SY_JAXB_CONTEXT = "yarfraw.generated.rss10.elements";
+  private static final String BLOGGER_JAXB_CONTEXT = "yarfraw.generated.blogger.elements";
+  private static final String ADMIN_JAXB_CONTEXT = "yarfraw.generated.admin.elements";
+  
+  private static final String ITUNES_PREFIX = "itunes";
+  private static final String MRSS_PREFIX = "media";
+  private static final String WFW_PREFIX = "wfw";
+  private static final String GEORSS_PREFIX = "georss";
+  private static final String GOOGLEBASE_PREFIX = "g";
+  private static final String DUBLINCORE_PREFIX = "dc";
+  private static final String SYNDICATION_PREFIX = "sy";
+  private static final String ADMIN_PREFIX = "admin";
+  
+  private static enum ContextEnum{
+    DC, SY, ITUNES, GOOGLEBASE, WFW, MRSS, GEORSS, BLOGGER, ADMIN
+  }
+  
   private static final ObjectFactory GOOGLEBASE_FACTORY = new ObjectFactory();
   
   private static final Log LOG = LogFactory.getLog(ExtensionUtils.class);
@@ -156,10 +172,13 @@ public class ExtensionUtils{
    * @return an {@link DublinCoreExtension} object
    * @throws YarfrawException 
    */
+  @SuppressWarnings("unchecked")
   public static DublinCoreExtension extractDublinCoreExtension(List<Element> otherElements) throws YarfrawException {
     DublinCoreExtension ret = new DublinCoreExtension();
+    try {
       if(otherElements != null){
         Iterator<Element> it = otherElements.iterator();
+        Unmarshaller u = getContext(ContextEnum.SY).createUnmarshaller();
         while(it.hasNext()){
           Element e = it.next();
           if(e == null){
@@ -167,53 +186,56 @@ public class ExtensionUtils{
           }
           QName name = new QName(e.getNamespaceURI(), e.getLocalName());
           if(same(name, DC_Contributor_QNAME)){
-            ret.getContributor().add(e.getTextContent());
+            ret.getContributor().add(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Coverage_QNAME)){
-            ret.setCoverage(e.getTextContent());
+            ret.setCoverage(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Creator_QNAME)){
-            ret.setCreator(e.getTextContent());
+            ret.setCreator(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Date_QNAME)){
-            ret.setDate(e.getTextContent());
+            ret.setDate(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Description_QNAME)){
-            ret.setDescription(e.getTextContent());
+            ret.setDescription(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Format_QNAME)){
-            ret.setFormat(e.getTextContent());
+            ret.setFormat(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Identifier_QNAME)){
-            ret.setIdentifier(e.getTextContent());
+            ret.setIdentifier(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Language_QNAME)){
-            ret.setLanguage(e.getTextContent());
+            ret.setLanguage(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Publisher_QNAME)){
-            ret.setPublisher(e.getTextContent());
+            ret.setPublisher(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Relation_QNAME)){
-            ret.setRelation(e.getTextContent());
+            ret.setRelation(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Rights_QNAME)){
-            ret.setRights(e.getTextContent());
+            ret.setRights(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Source_QNAME)){
-            ret.setSource(e.getTextContent());
+            ret.setSource(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Subject_QNAME)){
-            ret.getSubject().add(e.getTextContent());
+            ret.getSubject().add(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Title_QNAME)){
-            ret.setTitle(e.getTextContent());
+            ret.setTitle(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }else if(same(name, DC_Type_QNAME)){
-            ret.setType(e.getTextContent());
+            ret.setType(((JAXBElement<DcType>)u.unmarshal(e)).getValue());
             it.remove();
           }
         }
       }
+    }catch (JAXBException e) {
+      throw new YarfrawException("unable to unmarshal element", e);
+    }
     return ret;
   }
   
@@ -250,6 +272,126 @@ public class ExtensionUtils{
     return ret;
   }
 
+  /**
+   * Extracts the well-formed web extension elements from the input list into an {@link AdminExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/admin/ about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link AdminExtension} object
+   * @throws YarfrawException 
+   */
+  @SuppressWarnings("unchecked")
+  public static AdminExtension extractAdminExtension(List<Element> otherElements) throws YarfrawException {
+    AdminExtension ret = new AdminExtension();
+    try {
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        Unmarshaller u = getContext(ContextEnum.ADMIN).createUnmarshaller();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, ADMIN_ErrorReportsTo_QNAME)){
+            if(e.getTextContent() != null){
+              ret.setErrorReportsTo(((JAXBElement<AdminType>)u.unmarshal(e)).getValue());
+            }
+          }else if(same(name, ADMIN_GeneratorAgent_QNAME)){
+            if(e.getTextContent() != null){
+              ret.setGeneratorAgent(((JAXBElement<AdminType>)u.unmarshal(e)).getValue());
+            }
+          }
+        }
+      }
+    }
+    catch (JAXBException e) {
+      throw new YarfrawException("unable to unmarshal element", e);
+    }
+
+    return ret;
+  }
+  
+  /**
+   * Extracts the well-formed web extension elements from the input list into an {@link BloggerExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://code.blogger.com/archives/atom-docs.html#extensions about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link BloggerExtension} object
+   * @throws YarfrawException 
+   */
+  public static BloggerExtension extractBloggerExtension(List<Element> otherElements) throws YarfrawException {
+    BloggerExtension ret = new BloggerExtension();
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, BLOGGER_ConvertLineBreaks_QNAME)){
+            if(e.getTextContent() != null){
+              ret.setConvertLineBreaks(Boolean.valueOf(e.getTextContent()));
+            }
+          }else if(same(name, BLOGGER_Draft_QNAME)){
+            if(e.getTextContent() != null){
+              ret.setDraft(Boolean.valueOf(e.getTextContent()));
+            }
+          }
+        }
+      }
+    return ret;
+  }
+  
+  /**
+   * Extracts the well-formed web extension elements from the input list into an {@link SyndicationExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/syndication/ about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link SyndicationExtension} object
+   * @throws YarfrawException 
+   */
+  @SuppressWarnings("unchecked")
+  public static SyndicationExtension extractSyndicationExtension(List<Element> otherElements) throws YarfrawException {
+    SyndicationExtension ret = new SyndicationExtension();
+    try {
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        Unmarshaller u = getContext(ContextEnum.SY).createUnmarshaller();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, SY_UpdateBase_QNAME)){
+            ret.setUpdateBase(e.getTextContent());
+            it.remove();
+          }else if(same(name, SY_UpdateFrequency_QNAME)){
+            ret.setUpdateFrequency(((JAXBElement<BigInteger>)u.unmarshal(e)).getValue());
+            it.remove();
+          }else if(same(name, SY_UpdatePeriod_QNAME)){
+            ret.setUpdatePeriod(((JAXBElement<UpdatePeriodEnum>)u.unmarshal(e)).getValue());
+            it.remove();
+          }
+        }
+      }
+    }catch (Exception e) {
+      throw new YarfrawException("unable to unmarshal element", e);
+    }
+    return ret;
+  }
+  
   /**
    * Extracts the googlebase extension elements from the input list into an {@link GoogleBaseExtension}
    * object.
@@ -729,7 +871,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toItunesElements(ItunesExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ITUNES_JAXB_CONTEXT, ITUNES_PREFIX);
+    return toElements(extensionObject, ContextEnum.ITUNES, ITUNES_PREFIX);
   }
 
   /**
@@ -744,7 +886,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toGeoRssElements(GeoRssExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, GEORSS_JAXB_CONTEXT, GEORSS_PREFIX);
+    return toElements(extensionObject, ContextEnum.GEORSS, GEORSS_PREFIX);
   }
   
 
@@ -762,7 +904,7 @@ public class ExtensionUtils{
   throws YarfrawException{
     //XXX: not sure why i have to do this to make it marshall
     JAXBElement<GoogleBaseExtension> jaxb = GOOGLEBASE_FACTORY.createGoogleBaseExtension(extensionObject);
-    return toElements(jaxb, GOOGLEBASE_JAXB_CONTEXT, GOOGLEBASE_PREFIX);
+    return toElements(jaxb, ContextEnum.GOOGLEBASE, GOOGLEBASE_PREFIX);
   }
   
   /**
@@ -777,7 +919,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toMrssElements(MrssExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, MRSS_JAXB_CONTEXT, MRSS_PREFIX);
+    return toElements(extensionObject, ContextEnum.MRSS, MRSS_PREFIX);
   }
 
   /**
@@ -792,7 +934,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toWellFormedWebElements(WellFormedWebExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, WFW_JAXB_CONTEXT, WFW_PREFIX);
+    return toElements(extensionObject, ContextEnum.WFW, WFW_PREFIX);
   }
   
   /**
@@ -807,16 +949,122 @@ public class ExtensionUtils{
    */
   public static List<Element> toDublinCoreElements(MrssExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, DUBLINCORE_JAXB_CONTEXT, DUBLINCORE_PREFIX);
+    return toElements(extensionObject, ContextEnum.DC, DUBLINCORE_PREFIX);
   }
   
-  private static List<Element> toElements(Object extensionObject, String jaxbContext, String forcePrefix) throws YarfrawException {
+  /**
+   * Converts the input {@link SyndicationExtension} object to an element list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/syndication/ about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link SyndicationExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toSyndicationElements(MrssExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, ContextEnum.SY, SYNDICATION_PREFIX);
+  }
+  
+  /**
+   * Converts the input {@link BloggerExtension} object to an element list.
+   * <br/>
+   * see http://code.blogger.com/archives/atom-docs.html#extensions about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link BloggerExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toBloggerAtomElements(BloggerExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, ContextEnum.BLOGGER, null);
+  }
+
+  /**
+   * Converts the input {@link AdminExtension} object to an element list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/admin/ about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link AdminExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toAdminAtomElements(AdminExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, ContextEnum.ADMIN, ADMIN_PREFIX);
+  }
+  
+  private static JAXBContext DC_CTX = null;
+  private static JAXBContext GEORSS_CTX = null;
+  private static JAXBContext GOOGLEBASE_CTX = null;
+  private static JAXBContext ITUNES_CTX = null;
+  private static JAXBContext MRSS_CTX = null;
+  private static JAXBContext SY_CTX = null;
+  private static JAXBContext WFW_CTX = null;
+  private static JAXBContext BLOGGER_CTX = null;
+  private static JAXBContext ADMIN_CTX = null;
+  
+  private static synchronized JAXBContext getContext(ContextEnum ctxEnum) throws JAXBException{
+    if(ctxEnum == ContextEnum.DC){
+      if(DC_CTX == null){
+        DC_CTX = JAXBContext.newInstance(DUBLINCORE_JAXB_CONTEXT); 
+      }
+      return DC_CTX;
+    }else if(ctxEnum == ContextEnum.ADMIN){
+      if(ADMIN_CTX == null){
+        ADMIN_CTX = JAXBContext.newInstance(ADMIN_JAXB_CONTEXT); 
+      }
+      return ADMIN_CTX;
+    }else if(ctxEnum == ContextEnum.BLOGGER){
+      if(BLOGGER_CTX == null){
+        BLOGGER_CTX = JAXBContext.newInstance(BLOGGER_JAXB_CONTEXT); 
+      }
+      return BLOGGER_CTX;
+    }else if(ctxEnum == ContextEnum.GEORSS){
+      if(GEORSS_CTX == null){
+        GEORSS_CTX = JAXBContext.newInstance(GEORSS_JAXB_CONTEXT); 
+      }
+      return GEORSS_CTX;
+    }else if(ctxEnum == ContextEnum.GOOGLEBASE){
+      if(GOOGLEBASE_CTX == null){
+        GOOGLEBASE_CTX = JAXBContext.newInstance(GOOGLEBASE_JAXB_CONTEXT);
+      }
+      return GOOGLEBASE_CTX;
+    }else if(ctxEnum == ContextEnum.ITUNES){
+      if(ITUNES_CTX == null){
+        ITUNES_CTX = JAXBContext.newInstance(ITUNES_JAXB_CONTEXT);
+      }
+      return ITUNES_CTX;
+    }else if(ctxEnum == ContextEnum.MRSS){
+      if(MRSS_CTX == null){
+        MRSS_CTX = JAXBContext.newInstance(MRSS_JAXB_CONTEXT);
+      }
+      return MRSS_CTX;
+    }else if(ctxEnum == ContextEnum.SY){
+      if(SY_CTX == null){
+        SY_CTX = JAXBContext.newInstance(SY_JAXB_CONTEXT);
+      }
+      return SY_CTX;
+    }else if(ctxEnum == ContextEnum.WFW){
+      if(WFW_CTX == null){
+        WFW_CTX = JAXBContext.newInstance(WFW_JAXB_CONTEXT);
+      }
+      return WFW_CTX;
+    }
+    
+    throw new UnsupportedOperationException("Unknown JAXB context: "+ctxEnum);
+  }
+  
+  private static List<Element> toElements(Object extensionObject, ContextEnum ctxEnum, String forcePrefix) throws YarfrawException {
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     dbf.setNamespaceAware(true);
     List<Element> ret = new ArrayList<Element>();
     try {
       Document doc = dbf.newDocumentBuilder().newDocument();
-      Marshaller m = JAXBContext.newInstance(jaxbContext).createMarshaller();
+      Marshaller m = getContext(ctxEnum).createMarshaller();
       m.marshal(extensionObject, doc);
       Element e = doc.getDocumentElement();
       NodeList list =  e.getChildNodes();

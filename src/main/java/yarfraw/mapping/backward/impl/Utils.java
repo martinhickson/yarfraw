@@ -2,13 +2,21 @@ package yarfraw.mapping.backward.impl;
 
 import java.util.List;
 
+import javax.xml.bind.JAXBElement;
+
 import org.apache.commons.collections.CollectionUtils;
 
 import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.Person;
+import yarfraw.generated.rss10.elements.DcType;
 
 class Utils{
   private Utils(){}
+  
+  @SuppressWarnings("unchecked")
+  public static String getDcTypeText(JAXBElement<?> dcType) {
+    return dcType == null ? null : ((JAXBElement<DcType>)dcType).getValue().getValue();
+  }
   
   /**
    * Gets the <code>emailOrText</code> field of the first person in the input list.

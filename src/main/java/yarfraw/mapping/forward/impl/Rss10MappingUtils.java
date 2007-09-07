@@ -20,6 +20,7 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.Image;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.TextInput;
+import yarfraw.generated.rss10.elements.DcType;
 import yarfraw.generated.rss10.elements.Items;
 import yarfraw.generated.rss10.elements.Li;
 import yarfraw.generated.rss10.elements.ObjectFactory;
@@ -133,7 +134,9 @@ class Rss10MappingUtils {
     if(ch.getCategorySubjects() != null){
       for(CategorySubject c : ch.getCategorySubjects()){
         if(c != null){
-          elementList.add(factory.createSubject(c.getCategoryOrSubjectOrTerm()));
+          DcType dc = new DcType();
+          dc.setValue(c.getCategoryOrSubjectOrTerm());
+          elementList.add(factory.createSubject(dc));
         }
       }
     }
@@ -144,7 +147,9 @@ class Rss10MappingUtils {
     }
     
     if(ch.getRightsText() != null){
-      elementList.add(factory.createRights(ch.getRightsText()));
+      DcType dc = new DcType();
+      dc.setValue(ch.getRightsText());
+      elementList.add(factory.createRights(dc));
     }
     
   //NOT SUPPORTED
@@ -179,7 +184,9 @@ class Rss10MappingUtils {
     elementList.add(factory.createItems(items));
     
     if(ch.getLang() != null){
-      elementList.add(factory.createLanguage(ch.getLang()));
+      DcType dc = new DcType();
+      dc.setValue(ch.getLang());
+      elementList.add(factory.createLanguage(dc));
     }
 
     //not supported
@@ -189,7 +196,9 @@ class Rss10MappingUtils {
     
     String creator = Utils.getEmailOrText(ch.getWebMasterOrCreator());
     if(creator != null){
-      elementList.add(factory.createCreator(creator));
+      DcType dc = new DcType();
+      dc.setValue(creator);
+      elementList.add(factory.createCreator(dc));
     }
     
     if(ch.getPubDate() != null){
@@ -202,7 +211,9 @@ class Rss10MappingUtils {
           LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
         }
       }
-      elementList.add(factory.createDate(dateString));
+      DcType dc = new DcType();
+      dc.setValue(dateString);
+      elementList.add(factory.createDate(dc));
     }
     
 //  not supported
@@ -241,12 +252,16 @@ class Rss10MappingUtils {
 
     String publisher = Utils.getEmailOrText(ch.getManagingEditorOrAuthorOrPublisher());
     if(publisher != null){
-      elementList.add(factory.createPublisher(publisher));
+      DcType dc = new DcType();
+      dc.setValue(publisher);
+      elementList.add(factory.createPublisher(dc));
     } 
     
     String contributor = Utils.getEmailOrText(ch.getContributors());
     if(contributor != null){
-      elementList.add(factory.createContributor(contributor));
+      DcType dc = new DcType();
+      dc.setValue(contributor);
+      elementList.add(factory.createContributor(dc));
     }
     
     ret.setAbout(ch.getAbout());

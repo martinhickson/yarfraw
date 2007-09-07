@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://purl.org/atom-blog/ns#"
+	xmlns:blogger="http://purl.org/atom-blog/ns#"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:version="1.0"
+	elementFormDefault="unqualified">
+
+	<xs:annotation>
+		<xs:documentation>
+			Blogger Draft extension http://purl.org/atom-blog/ns#
+		</xs:documentation>
+	</xs:annotation>
+ 	<xs:element name="draft" type="xs:boolean" />
+</xs:schema>

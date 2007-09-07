@@ -11,6 +11,7 @@ import yarfraw.core.datamodel.CategorySubject;
 import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.generated.rss10.elements.DcType;
 import yarfraw.generated.rss10.elements.ObjectFactory;
 import yarfraw.generated.rss10.elements.TRss10Item;
 import yarfraw.mapping.forward.ToRss10ChannelItem;
@@ -44,24 +45,32 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
     
     String author = Utils.getEmailOrText(item.getAuthorOrCreator());
     if(author != null){
-      elementList.add(FACTORY.createCreator(author));
+      DcType dc = new DcType();
+      dc.setValue(author);
+      elementList.add(FACTORY.createCreator(dc));
     }
     
     if(item.getRightsText() != null){
-      elementList.add(FACTORY.createRights(item.getRightsText()));
+      DcType dc = new DcType();
+      dc.setValue(item.getRightsText());
+      elementList.add(FACTORY.createRights(dc));
     }
     
     if(item.getCategorySubjects() != null){
       for(CategorySubject c : item.getCategorySubjects()){
         if(c != null){
-          elementList.add(FACTORY.createSubject(c.getCategoryOrSubjectOrTerm()));
+          DcType dc = new DcType();
+          dc.setValue(c.getCategoryOrSubjectOrTerm());
+          elementList.add(FACTORY.createSubject(dc));
         }
       }
     }
     
     String contributor = Utils.getEmailOrText(item.getContributors());
     if(contributor != null){
-      elementList.add(FACTORY.createContributor(contributor));
+      DcType dc = new DcType();
+      dc.setValue(contributor);
+      elementList.add(FACTORY.createContributor(dc));
     }
     
     //not supported
@@ -96,7 +105,9 @@ public class ToRss10ChannelItemImpl  implements ToRss10ChannelItem{
           LOG.warn("The dateString "+dateString+" is in valid according to RSS 1.0 specs, unabel to convert it to a valid format, writing it as is");
         }
       }
-      elementList.add(FACTORY.createDate(dateString));
+      DcType dc = new DcType();
+      dc.setValue(dateString);
+      elementList.add(FACTORY.createDate(dc));
     }
     
     //not supported

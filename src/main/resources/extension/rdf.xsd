@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation>
+			strip down version of rdf
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:attribute name="about" type="xs:anyURI" />
+	<xs:attribute name="resource" type="xs:anyURI" />
+
+</xs:schema>
