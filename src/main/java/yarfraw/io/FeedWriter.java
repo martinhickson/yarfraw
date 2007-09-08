@@ -21,7 +21,6 @@ import yarfraw.generated.rss20.elements.TRss;
 import yarfraw.mapping.forward.impl.ToAtom10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss10ChannelImpl;
 import yarfraw.mapping.forward.impl.ToRss20ChannelImpl;
-import yarfraw.utils.CommonConstants;
 import yarfraw.utils.JAXBUtils;
 /**
  * Provides a set of function to facilitate writing to a feed.
@@ -131,7 +130,7 @@ public class FeedWriter extends AbstractBaseIO{
   private static Marshaller getMarshaller(FeedFormat format) throws JAXBException{
     JAXBContext context = JAXBUtils.getContext(format);
     Marshaller m = context.createMarshaller();
-    m.setProperty(CommonConstants.PREFIX_MAPPER_PROPERTY_NAME, CommonConstants.getNamespacePrefixMapper(format));
+    m.setProperty(JAXBUtils.PREFIX_MAPPER_PROPERTY_NAME, JAXBUtils.getNamespacePrefixMapper(format));
     return m;
   }
 }

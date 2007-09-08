@@ -67,7 +67,7 @@ import yarfraw.generated.rss10.elements.SyndicationExtension;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
 import yarfraw.generated.slash.elements.SlashExtension;
 import yarfraw.generated.wfw.elements.WellFormedWebExtension;
-import yarfraw.utils.CommonConstants;
+import yarfraw.utils.JAXBUtils;
 
 public class ExtensionUtils{
   private static final String HTTP_BASE_GOOGLE_COM_CNS_1_0 = "http://base.google.com/ns/1.0";
@@ -1194,7 +1194,7 @@ public class ExtensionUtils{
     try {
       Document doc = dbf.newDocumentBuilder().newDocument();
       Marshaller m = getContext(ctxEnum).createMarshaller();
-      m.setProperty(CommonConstants.PREFIX_MAPPER_PROPERTY_NAME, CommonConstants.getNamespacePrefixMapper(FeedFormat.RSS20));
+      m.setProperty(JAXBUtils.PREFIX_MAPPER_PROPERTY_NAME, JAXBUtils.getNamespacePrefixMapper(FeedFormat.RSS20));
       m.marshal(extensionObject, doc);
       Element e = doc.getDocumentElement();
       NodeList list =  e.getChildNodes();
