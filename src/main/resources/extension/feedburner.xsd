@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://rssnamespace.org/feedburner/ext/1.0"
+	xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:version="1.0"
+	elementFormDefault="unqualified">
+	<xs:element name="feedburnerExtension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="feedburner:browserFriendly">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+Feedburner RSS extension elements. <br/> Contain a 'browser friendly' description
+about the parent element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
+				<xs:element ref="feedburner:origLink" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+Feedburner RSS extension elements. <br/> The original link 
+of the channel.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="browserFriendly"  type="xs:string"/>
+	<xs:element name="origLink" type="xs:string" />
+</xs:schema>
