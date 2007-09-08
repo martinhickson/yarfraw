@@ -1,6 +1,5 @@
 package yarfraw.atom10;
 
-import java.io.File;
 import java.util.Locale;
 
 import javax.xml.namespace.QName;
@@ -71,7 +70,7 @@ public class BuilderTest extends TestCase{
   public void testBuild() throws Exception{
 
     ChannelFeed ch = buildChannel();
-    FeedWriter writer = new FeedWriter(File.createTempFile("atom10",".xml"));
+    FeedWriter writer = new FeedWriter("testTmpOutput/atom10/builder.xml");
     writer.setFormat(FeedFormat.ATOM10);
     writer.writeChannel(ch);
     

@@ -27,7 +27,7 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/atom10b.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
     ChannelFeed c = r.readChannel();
-    File f = File.createTempFile("atom10", ".xml");
+    File f = new File("testTmpOutput/atom10/testRead.xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
     w.writeChannel(c);
@@ -47,7 +47,7 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/xmlDotComAtom10.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
     ChannelFeed c = r.readChannel();
-    File f = File.createTempFile("atom10", ".xml");
+    File f = new File("testTmpOutput/atom10/testRead2.xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
     w.writeChannel(c);
@@ -71,7 +71,7 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/atom10.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
     ChannelFeed c = r.readChannel();
-    File f = File.createTempFile("atom10", ".xml");
+    File f = new File("testTmpOutput/atom10/testRead3.xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
     w.writeChannel(c);
@@ -87,7 +87,7 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/atom10/atom10c.xml").toURI());
     r.setFormat(FeedFormat.ATOM10);
     ChannelFeed c = r.readChannel();
-    File f = File.createTempFile("atom10", ".xml");
+    File f = new File("testTmpOutput/atom10/testRead4.xml");
     FeedWriter w = new FeedWriter(f);
     w.setFormat(FeedFormat.ATOM10);
     w.writeChannel(c);

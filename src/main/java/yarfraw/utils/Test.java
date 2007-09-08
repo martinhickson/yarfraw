@@ -11,12 +11,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.httpclient.HttpURL;
-import org.apache.commons.lang.StringEscapeUtils;
-
-import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.YarfrawException;
-import yarfraw.io.FeedReader;
 
 
 public class Test{

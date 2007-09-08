@@ -99,6 +99,11 @@
               <includes>
                 <include>cobertura.ser</include>
                 <include>velocity.log</include>
+                <include>testTmpOutput/*.xml</include>
+                <include>testTmpOutput/atom10/*.xml</include>
+                <include>testTmpOutput/rss10/*.xml</include>
+                <include>testTmpOutput/rss20/*.xml</include>
+                <include>testTmpOutput/coverage/*.xml</include>
               </includes>
             </fileset>
           </filesets>

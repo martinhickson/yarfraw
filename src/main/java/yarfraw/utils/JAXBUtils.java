@@ -115,8 +115,9 @@ public class JAXBUtils {
       _extensionPrefixMap.put("http://webns.net/mvcb/", "admin");
       _extensionPrefixMap.put("http://rssnamespace.org/feedburner/ext/1.0", "feedburner");
       _extensionPrefixMap.put("http://purl.org/rss/1.0/modules/slash/", "slash");
-      _extensionPrefixMap.put("http://www.blogger.com/atom/ns#", null);
+      _extensionPrefixMap.put("http://www.blogger.com/atom/ns#", "blogger");
       _extensionPrefixMap.put("http://purl.org/atom-blog/ns#", "draft");
+      _extensionPrefixMap.put("http://www.w3.org/1999/xhtml", "xhtml");
       _extensionPrefixMap = Collections.unmodifiableMap(_extensionPrefixMap);
     }
     return _extensionPrefixMap;

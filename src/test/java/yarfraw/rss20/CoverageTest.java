@@ -1,6 +1,5 @@
 package yarfraw.rss20;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +69,7 @@ public class CoverageTest extends TestCase{
     ChannelFeed ch = r.readChannel();
     setupChannel(ch);
     ch.validate(FeedFormat.RSS20);
-    FeedWriter w = new FeedWriter(File.createTempFile("rss20", ".xml"));
+    FeedWriter w = new FeedWriter("testTmpOutput/rss20/testRss20.xml");
     w.writeChannel(ch);
   }
   

@@ -92,7 +92,7 @@ public class BuilderTest{
     item.addOtherElement(doc.createElementNS("http://my.company.com/", "oneMoreElement"));
     
     c.addItem(item);
-    File file = File.createTempFile("YarfrawTestOtherElements",".xml");
+    File file = new File("testTmpOutput/rss10/testOtherElements.xml");;
     FeedWriter w = new FeedWriter(file);
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
@@ -110,7 +110,7 @@ public class BuilderTest{
   @Test
   public void testBuild2() throws Exception{
     ChannelFeed c = buildChannel();
-    FeedWriter w = new FeedWriter(File.createTempFile("rss10",".xml"));
+    FeedWriter w = new FeedWriter("testTmpOutput/rss10/testBuild.xml");
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
   }

@@ -52,7 +52,7 @@ public class IOTest extends TestCase{
   
   @Test
   public void testOutputStream() throws Exception{
-    File f = File.createTempFile("atom10", ".xml");
+    File f = new File("testTmpOutput/coverage/testOutputStream.xml");
     FeedWriter.writeChannel(FeedFormat.ATOM10, BuilderTest.buildChannel(), 
             new FileOutputStream(f));
     
@@ -61,7 +61,7 @@ public class IOTest extends TestCase{
   @Test
   public void testAppend() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/rss2sample.xml").toURI());
-    File copy = File.createTempFile("copy", ".xml");
+    File copy = new File("testTmpOutput/coverage/testAppend.xml");
     FileUtils.copyFile(f, copy);
     
     FeedAppender a = new FeedAppender(copy);
@@ -94,7 +94,7 @@ public class IOTest extends TestCase{
                   .setDescriptionOrSubtitle("<div xmlns=\"http://www.w3.org/1999/xhtml\">"+
         "<p><i>[Update: The Atom draft is finished.]</i></p>"+
       "</div>");
-    FeedWriter w = new FeedWriter(File.createTempFile("test",".xml"));
+    FeedWriter w = new FeedWriter("testTmpOutput/atom10/testEncoding.xml");
     w.writeChannel(c);
   }
   

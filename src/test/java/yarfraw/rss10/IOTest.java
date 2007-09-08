@@ -27,7 +27,7 @@ public class IOTest extends TestCase{
     FeedReader r = new FeedReader( Thread.currentThread().getContextClassLoader().getResource("yarfraw/theserverside-rss2.xml").toURI());
     ChannelFeed c = r.readChannel();
     
-    File f = File.createTempFile("rss10test", ".xml");
+    File f = new File("testTmpOutput/rss10/testRead.xml");
     FeedWriter w = new FeedWriter(f, FeedFormat.RSS10);
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);

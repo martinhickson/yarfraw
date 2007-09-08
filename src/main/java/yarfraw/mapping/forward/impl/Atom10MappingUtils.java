@@ -56,8 +56,13 @@ public class Atom10MappingUtils{
   
   public static PersonType toPersonType(Person p){
     PersonType ret = new PersonType();
-    ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeEmail(p.getEmailOrText()));
-    ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeName(p.getName()));
+
+    if(p.getName()!= null){
+      ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeName(p.getName()));
+    }
+    if(p.getEmailOrText()!= null){
+      ret.getNameOrUriOrEmail().add(FACTORY.createPersonTypeEmail(p.getEmailOrText()));
+    }    
     if(p.getUri() != null){
       UriType uri = FACTORY.createUriType();
       uri.setValue(p.getUri());
