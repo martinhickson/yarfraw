@@ -10,8 +10,30 @@
 	<xs:element name="bloggerExtension">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="blogger:convertLineBreaks" />
-				<xs:element ref="draft:draft" />
+				<xs:element ref="blogger:convertLineBreaks" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+This flag, when set to true, means that a blog's posts will have their newlines automatically converted to
+ <br />. If set to false, newlines will not be transformed. 
+ This flag is read-only and can only be changed through the Blogger web interface for now. 
+ You can see a blog's Line Break status by sending a GET to it's service.feed URI and looking 
+ for it as a child of the &lt;feed> element:
+<br/>
+    &lt;convertLineBreaks xmlns="http://www.blogger.com/atom/ns#">true&lt;/convertLineBreaks>
+
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
+				<xs:element ref="draft:draft" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+Blogger Draft extension. <br/> http://purl.org/atom-blog/ns#
+<br/> Set to true to indicate a draft, false otherwise.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

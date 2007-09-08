@@ -15,6 +15,7 @@ public class ExtensionElementQname {
   public final static QName ITUNES_OWNER_NAME_QNAME = new QName("http://www.itunes.com/dtds/podcast-1.0.dtd", "name");
   public final static QName ITUNES_AUTHOR_QNAME = new QName("http://www.itunes.com/dtds/podcast-1.0.dtd", "author");
   public final static QName ITUNES_BLOCK_QNAME = new QName("http://www.itunes.com/dtds/podcast-1.0.dtd", "block");
+  public final static QName ITUNES_NewFeedUrl_QNAME = new QName("http://www.itunes.com/dtds/podcast-1.0.dtd", "new-feed-url");
 
   public final static QName MRSS_PLAYER_QNAME = new QName("http://tools.search.yahoo.com/mrss/", "player");
   public final static QName MRSS_CATEGORY_QNAME = new QName("http://tools.search.yahoo.com/mrss/", "category");
@@ -176,6 +177,14 @@ public class ExtensionElementQname {
   
   public final static QName ADMIN_ErrorReportsTo_QNAME = new QName("http://webns.net/mvcb/", "errorReportsTo");
   public final static QName ADMIN_GeneratorAgent_QNAME = new QName("http://webns.net/mvcb/", "generatorAgent");
+
+  public final static QName FEEDBURNER_OrigLink_QNAME = new QName("http://rssnamespace.org/feedburner/ext/1.0", "origLink");
+  public final static QName FEEDBURNER_BrowserFriendly_QNAME = new QName("http://rssnamespace.org/feedburner/ext/1.0", "browserFriendly");
+
+  public final static QName SLASH_HitParade_QNAME = new QName("http://purl.org/rss/1.0/modules/slash/", "hit_parade");
+  public final static QName SLASH_Department_QNAME = new QName("http://purl.org/rss/1.0/modules/slash/", "department");
+  public final static QName SLASH_Section_QNAME = new QName("http://purl.org/rss/1.0/modules/slash/", "section");
+  public final static QName SLASH_Comments_QNAME = new QName("http://purl.org/rss/1.0/modules/slash/", "comments");
 
   private ExtensionElementQname(){}
   

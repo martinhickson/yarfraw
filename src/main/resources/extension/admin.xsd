@@ -10,8 +10,27 @@
 	<xs:element name="adminExtension">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="admin:generatorAgent" />
-				<xs:element ref="admin:errorReportsTo" />
+				<xs:element ref="admin:generatorAgent" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+&lt;admin:errorReportsTo> is a URI (typically a 'mailto:' URL) for contacting the person or source of the 
+particular instance of RSS/RDF information. This would generally be used to report technical errors in the use of 
+RSS, RDF, or XML.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="admin:errorReportsTo" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+&lt;admin:generatorAgent> is a URI of the software that was used to generate the RSS/RDF. 
+This is similar to the User-Agent field in HTTP or the X-Mailer field in email. It can be 
+used to spot and report errors in the generating software and for statistical information. 
+The URI should include version information, and if it is a resolvable URL should return a user-readable HTML page.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

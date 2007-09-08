@@ -281,6 +281,38 @@
               <generateDirectory>${project.build.directory}/generated-sources/extension/admin</generateDirectory>
             </configuration>
           </execution>                                      
+          <execution>
+            <id>feedburner</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.feedburner.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/feedburner.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/feedburner</generateDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>slash</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.slash.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/slash.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/slash</generateDirectory>
+            </configuration>
+          </execution>                              
         </executions>
       </plugin>
       <plugin>
