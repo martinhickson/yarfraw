@@ -27,7 +27,8 @@ can help you do that.
 
 Project Status
 
-	The API now fully supports RSS 2.0, Rss/RDF 1.0, and Atom 1.0 feeds. There is no directly builder support for RSS 0.9x, 
+	The API now fully supports RSS 2.0, Rss/RDF 1.0, and Atom 1.0 feeds and a lot of {{{extension.html}extensions}}. 
+There is no directly builder support for RSS 0.9x, 
 but the API is able to read RSS 0.9x formated feeds with no problems because RSS 2.0 should be backward compatible 
 with its previous revisions. 
 There's no scheduled plan to add supports for Atom 0.3 format (since it's being replaced by its successor Atom 1.0), 
