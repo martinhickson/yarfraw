@@ -67,46 +67,6 @@ take a look at the {{{extension.html}extension}} page for more information about
    
 +----------------------------------------------------------------------------------------------------+
 
-	If you are using the ExtensionUtil to create these extension elements, the methods will automatically 
-add a predefined prefix to these extension elements to make the resulting xml document easier to read. The following
-table lists all the namespace prefixes: 
-
-*----------+--------------+----------------+----------------+----------------+
-|| <<Namespace Uri>> || <<Prefix>>    || <<comments>> ||       
-*----------+--------------+----------------+----------------+----------------+
-| http://www.w3.org/1999/02/22-rdf-syntax-ns# |  rdf | |
-*----------+--------------+----------------+----------------+----------------+
-|http://www.w3.org/XML/1998/namespace| xml | |
-*----------+--------------+----------------+----------------+----------------+
-|http://base.google.com/ns/1.0|g| |
-*----------+--------------+----------------+----------------+----------------+
-|http://www.itunes.com/dtds/podcast-1.0.dtd|itunes| |
-*----------+--------------+----------------+----------------+----------------+
-|http://tools.search.yahoo.com/mrss/|mrss| |
-*----------+--------------+----------------+----------------+----------------+
-|http://wellformedweb.org/CommentAPI/|wfw| |
-*----------+--------------+----------------+----------------+----------------+
-|http://www.georss.org/georss/10|georss| |
-*----------+--------------+----------------+----------------+----------------+
-|http://purl.org/dc/elements/1.1/|dc| |
-*----------+--------------+----------------+----------------+----------------+
-|http://purl.org/rss/1.0/modules/syndication/|sy| |
-*----------+--------------+----------------+----------------+----------------+
-|http://webns.net/mvcb/|admin| |
-*----------+--------------+----------------+----------------+----------------+
-|http://rssnamespace.org/feedburner/ext/1.0|feedburner| |
-*----------+--------------+----------------+----------------+----------------+
-|http://purl.org/rss/1.0/modules/slash/|slash| |
-*----------+--------------+----------------+----------------+----------------+
-|http://www.blogger.com/atom/ns#|blogger| |
-*----------+--------------+----------------+----------------+----------------+
-|http://purl.org/atom-blog/ns#|draft| |
-*----------+--------------+----------------+----------------+----------------+
-|http://www.w3.org/2005/Atom| "" | This the Atom 1.0 namespace, elements will use the default namespace |
-*----------+--------------+----------------+----------------+----------------+
-|http://purl.org/rss/1.0/| "" | This the RSS 1.0 namespace, elements will use the default namespace |
-*----------+--------------+----------------+----------------+----------------+
-
 Reading Extension Elements 
 	
 	Most of these extension elements are not in the RSS specs. Therefore, they are not mapped to the core data
