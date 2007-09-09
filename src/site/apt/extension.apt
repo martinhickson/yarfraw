@@ -13,9 +13,10 @@ as format that Google Base uses and Microsoft's simple sharing format, that are 
 adds new functionalities by adding extension elements. If you need to parse a RSS feed, you should definitely consider
 adding support for some of these extension elements. 
 
-	 An engineer from Google wrote an MapReduce program to go through all the feeds that Google Reader keeps track of
-and got the top 50 extension namespaces that are being used (see more at {{http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html}}).
-Currently Yarfraw supports quite a few of them. I am also using this list to prioritize extension support to be added in the
+	 The following table shows the most popular extension elements that are currently being used. 
+The data comes from a blog entry from the {{{http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html}Google Reader blog}}. 
+An engineer from Google wrote an MapReduce program to go through all the feeds that Google Reader keeps track of
+and listed the top 50 extension namespaces. Currently Yarfraw supports quite a few of them. I am also using this list to prioritize extension support to be added in the
 future.
 
 *----------+--------------+----------------+----------------+----------------+
