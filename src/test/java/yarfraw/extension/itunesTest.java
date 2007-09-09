@@ -21,6 +21,7 @@ import yarfraw.utils.extension.ExtensionUtils;
 public class itunesTest extends TestCase{
   @Test
   public void testBuild() throws Exception{
+    
     ItunesExtension ext = new ItunesExtension();
     ext.setAuthor("itune author");
     ext.setBlock("itunes block");

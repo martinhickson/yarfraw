@@ -27,7 +27,8 @@
       
     <menu name="Yarfraw">
 	  <item name="About"    href="index.html" />
-	  <item name="Introduction"    href="intro.html" />    
+	  <item name="Introduction"    href="intro.html" />
+	  <item name="Extension Support (New!)"    href="extension.html" />  	      
       <item name="Installation"    href="installation.html" />
       <item name="FAQ"    href="faq.html" />            
     </menu>    
@@ -35,11 +36,13 @@
       <item name="Builder API Examples"    href="builder.html" />
       <item name="IO API Examples"    href="io.html" />
       <item name="Utilities Examples"    href="util.html" />
+      <item name="Extension Examples (New!)"    href="ext.html" />
     </menu>
     <menu name="Advanced Usage">
       <item name="Builder API Examples"    href="builder_adv.html" />
       <item name="IO API Examples"    href="io_adv.html" />
       <item name="Utilities Examples"    href="util_adv.html" />
+      <item name="Extension Examples (New!)"    href="ext_adv.html" />
       <item name="Other Examples"    href="other_adv.html" />
       <item name="Performance Consideration"    href="performance.html" />
     </menu>
