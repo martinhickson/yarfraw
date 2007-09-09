@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rss10="http://purl.org/rss/1.0/" 
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	targetNamespace="http://purl.org/rss/1.0/"
+	elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation xml:lang="en" >
+		XML Schema for RSS v1.0 feed files.
+		</xs:documentation>
+	</xs:annotation>
+
+	<!-- note this reference to the RDF schema: it's a backward reference, so I would regard it
+		as kosher. -->
+
+	<!-- Import the RDF namespace schema for rdf:resource -->
+	<xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		schemaLocation="rss10rdf.xsd" />
+
+	<!-- Syndication module -->
+	<xs:import namespace="http://purl.org/rss/1.0/modules/syndication/"
+		schemaLocation="rss10sy.xsd" />
+	
+	<!-- Dublin Core module -->
+	<xs:import namespace="http://purl.org/dc/elements/1.1/"
+		schemaLocation="rss10dc.xsd" />
+			
+	<xs:element name="item" type="rss10:tRss10Item" />
+	<xs:element name="channel" type="rss10:tRss10Channel" />
+	<xs:element name="image" type="rss10:tRss10Image" />
+	<xs:element name="textinput" type="rss10:tRss10TextInput" />
+	<xs:element name="items" type="rss10:items"/>
+	
+	<xs:complexType name="items" >
+		<xs:sequence>
+			<xs:element ref="rdf:Seq" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="tRss10Item" >
+		<xs:annotation>
+			<xs:documentation> While commonly a news headline, with RSS 1.0's modular extensibility, 
+			this can be just about anything: discussion posting, job listing, software patch -- 
+			any object with a URI. There may be a minimum of one item per RSS document. 
+			While RSS 1.0 does not enforce an upper limit, for backward compatibility with 
+			RSS 0.9 and 0.91, a maximum of fifteen items is recommended.
+			{item_uri} must be unique with respect to any other rdf:about 
+			attributes in the RSS document and is a URI which identifies the item. 
+			{item_uri} should be identical to the value of the 'link' sub-element of 
+			the 'item' element, if possible. </xs:documentation>
+		</xs:annotation>
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>The title of the item.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The item synopsis.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="link" type="xs:anyURI" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>The URL of the item.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="dc:creator" minOccurs="0" />
+						<xs:element ref="dc:rights" minOccurs="0" />
+						<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="dc:date" minOccurs="0" />
+						<xs:element ref="dc:contributor" minOccurs="0" />
+						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Extensibility element.</xs:documentation>
+							</xs:annotation>
+						</xs:any>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute ref="rdf:about" use="required" />
+				<xs:attribute ref="rdf:resource" use="optional" />
+				<xs:anyAttribute namespace="##any"  />
+	</xs:complexType>
+
+	<xs:complexType name="tRss10Channel">
+		<xs:annotation>
+		<xs:documentation>The channel element contains metadata describing the channel itself, 
+		including a title, brief description, and URL link to the described resource 
+		(the channel provider's home page, for instance). The {resource} URL of the channel 
+		element's rdf:about attribute must be unique with respect to any other rdf:about 
+		attributes in the RSS document and is a URI which identifies the channel. Most commonly, 
+		this is either the URL of the homepage being described or a URL where the RSS file can be found.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>A descriptive title for the channel.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="link" type="xs:anyURI"  minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation> The URL to which an HTML rendering of the channel title will link, commonly the parent site's home or news page.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>A brief description of the channel's content, function, source, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+				<xs:element name="image" type="rss10:tRss10Image" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Specifies a GIF, JPEG or PNG image that can be displayed with the channel.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="rss10:textinput" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="rss10:image"  minOccurs="0" maxOccurs="1" />
+				<xs:element ref="rss10:items" minOccurs="1" maxOccurs="1" />
+				<xs:element ref="sy:updatePeriod"  minOccurs="0" />
+				<xs:element ref="sy:updateFrequency" minOccurs="0" />
+				<xs:element ref="dc:subject" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="dc:publisher" minOccurs="0" />
+				<xs:element ref="dc:creator" minOccurs="0" />
+				<xs:element ref="dc:rights" minOccurs="0" />
+				<xs:element ref="dc:date" minOccurs="0"  />
+				<xs:element ref="dc:language" minOccurs="0" />
+				<xs:element ref="dc:contributor" minOccurs="0" />
+				<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Extensibility element.</xs:documentation>
+					</xs:annotation>
+				</xs:any>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute ref="rdf:resource" use="optional" />
+		<xs:attribute ref="rdf:about" use="required" />
+		<xs:anyAttribute namespace="##any"  />
+	</xs:complexType>
+	<xs:complexType name="tRss10Image">
+		<xs:annotation>
+			<xs:documentation>An image to be associated with an HTML rendering of the channel. 
+			This image should be of a format supported by the majority of Web browsers. 
+			While the later 0.91 specification allowed for a width of 1-144 and height of 1-400, 
+			convention (and the 0.9 specification) dictate 88x31.</xs:documentation>
+		</xs:annotation>
+			<xs:all>
+				<xs:element name="url" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+						<xs:documentation>The URL of the image to used in the "src" attribute of the channel's image tag when rendered as HTML.</xs:documentation>
+					</xs:annotation>			
+				</xs:element>
+				<xs:element name="title" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The alternative text ("alt" attribute) associated with the channel's image tag when rendered as HTML.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="link" type="xs:anyURI" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image &lt;title&gt; and &lt;link&gt; should have the same value as the channel's &lt;title&gt; and &lt;link&gt;. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+			<xs:attribute ref="rdf:about" use="required" />
+			<xs:attribute ref="rdf:resource" use="optional" />
+			<xs:anyAttribute namespace="##any"  />
+	</xs:complexType>
+	
+	<xs:complexType name="tRss10TextInput">
+		<xs:annotation>
+			<xs:documentation>The purpose of this element is something of a mystery! You can use it to specify a search engine box. Or to allow a reader to provide feedback. Most aggregators ignore it.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>The label of the Submit button in the text input area.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Explains the text input area.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>The name of the text object in the text input area.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="link" type="xs:anyURI" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>The URL of the CGI script that processes text input requests.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:any namespace="##any" processContents="skip" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Extensibility element.</xs:documentation>
+					</xs:annotation>
+				</xs:any>	
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute ref="rdf:resource" use="optional" />
+		<xs:attribute ref="rdf:about" use="required" />
+	</xs:complexType>
+
+</xs:schema>
