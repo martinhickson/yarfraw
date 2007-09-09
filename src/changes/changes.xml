@@ -8,7 +8,7 @@
         Add support for Atom 0.3
       </action>
   	</release>
-    <release version="0.8" date="TBD">
+    <release version="0.8" date="09/08/2006">
       <action dev="jliang" type="add">
       	Added support for itunes extension elements.
       </action>
