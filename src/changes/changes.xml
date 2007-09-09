@@ -22,11 +22,29 @@
       	Added support for GeoRss extension elements.
       </action>
 	  <action dev="jliang" type="add">
-      	Added support for DublinCore extension web elements.
+      	Added support for DublinCore extension elements.
       </action>        
 	  <action dev="jliang" type="add">
-      	Added support for well-formed extension web elements.
-      </action>                                              
+      	Added support for well-formed extension elements.
+      </action>                          
+	  <action dev="jliang" type="add">
+      	Added support for admin extension elements.
+      </action>
+	  <action dev="jliang" type="add">
+      	Added support for syndication extension elements.
+      </action>                
+	  <action dev="jliang" type="add">
+      	Added support for feedburner extension elements.
+      </action>
+	  <action dev="jliang" type="add">
+      	Added support for blogger extension elements.
+      </action>
+	  <action dev="jliang" type="add">
+      	Added support for slash extension elements.
+      </action>
+	  <action dev="jliang" type="add">
+      	Added support for preferred prefix mapping for all formats and all supported extension.
+      </action>                                                                                                                                 
       <action dev="jliang" type="update">
       	Removed e.printStatckTrace() from FeedReaderUtils
       </action>      

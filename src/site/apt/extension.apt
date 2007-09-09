@@ -1,0 +1,110 @@
+                                    ------
+                                    Extension Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/09/08
+
+RSS Extension Elements 
+	
+	If you need to write programs to read or write RSS feeds, you will know that the RSS formats are very
+extensible. You can pretty much add any additional elements to a feed. There are also many other XML formats, such
+as format that Google Base uses and Microsoft's simple sharing format, that are based on the RSS format and
+adds new functionalities by adding extension elements. If you need to parse a RSS feed, you should definitely consider
+adding support for some of these extension elements. 
+
+	 An engineer from Google wrote an MapReduce program to go through all the feeds that Google Reader keeps track of
+and got the top 50 extension namespaces that are being used (see more at {{http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html}}).
+Currently Yarfraw supports quite a few of them. I am also using this list to prioritize extension support to be added in the
+future.
+
+*----------+--------------+----------------+----------------+----------------+
+|| <<% of Feeds>> || <<Namespace>>    || <<URI>> || Supported by Yarfraw ||       
+*----------+--------------+----------------+----------------+----------------+
+|29.36%  	|{{{http://dublincore.org/documents/dces/}Dublin Core}}  	|http://purl.org/dc/elements/1.1/| Yes|
+*----------+--------------+----------------+----------------+----------------+
+|15.71%  	|{{{http://www.w3.org/1999/xhtml}XHTML}}  	|http://www.w3.org/1999/xhtml | Partial, there are some util methods for working with xhtml elements |
+*----------+--------------+----------------+----------------+----------------+
+|11.92%  	|{{{http://code.blogger.com/archives/atom-docs.html#extensions}Blogger Atom API Extensions}}  	|http://www.blogger.com/atom/ns# | Yes|
+*----------+--------------+----------------+----------------+----------------+
+|11.88%  	|{{{http://code.blogger.com/archives/atom-docs.html#draft}Blogger Draft Extension}}  	|http://purl.org/atom-blog/ns# | Yes|
+*----------+--------------+----------------+----------------+----------------+
+|11.16%  	|{{{http://web.resource.org/rss/1.0/modules/content/}RSS 1.0 Content Module}}  	|http://purl.org/rss/1.0/modules/content/| Partial, the most popular element \<encoded\> is supported by the core model directly|
+*----------+--------------+----------------+----------------+----------------+
+| 8.39%  	|{{{http://wellformedweb.org/news/wfw_namespace_elements/}Well-Formed Web Comment API}}  	|http://wellformedweb.org/CommentAPI/ | Yes|
+*----------+--------------+----------------+----------------+----------------+
+|5.35%  	|{{{http://web.resource.org/rss/1.0/modules/admin/}RSS 1.0 Administrative Module}}  	|http://webns.net/mvcb/| Yes|
+*----------+--------------+----------------+----------------+----------------+
+|3.85%  	|{{{http://www.burningdoor.com/eric/archives/001209.html}FeedBurner Extensions}}  	|http://rssnamespace.org/feedburner/ext/1.0 | Yes|
+*----------+--------------+----------------+----------------+----------------+
+| 3.74%  	| MSN Spaces  	| http://schemas.microsoft.com/msn/spaces/2005/rss|No, I couldn't find the specs |
+*----------+--------------+----------------+----------------+----------------+
+| 3.66%  	|{{{http://web.resource.org/rss/1.0/modules/slash/}Slash}}  	|http://purl.org/rss/1.0/modules/slash/ | Yes |
+*----------+--------------+----------------+----------------+----------------+
+| 3.59%  	|{{{http://purl.org/rss/1.0/modules/syndication/}RSS 1.0 Syndication Module}}  	| http://purl.org/rss/1.0/modules/syndication/ | Yes|
+*----------+--------------+----------------+----------------+----------------+
+| 2.50%  	|{{{http://www.apple.com/itunes/podcasts/techspecs.html}iTunes}}  	|http://www.itunes.com/dtds/podcast-1.0.dtd | Yes|
+*----------+--------------+----------------+----------------+----------------+
+| 2.49%  	| {{{http://livejournal.org/rss/lj/1.0/}LiveJournal RSS Module 1.0}}  	|http://www.livejournal.org/rss/lj/1.0/ | No, next release perhaps?|
+*----------+--------------+----------------+----------------+----------------+
+| 2.33%  	| {{{http://dublincore.org/documents/dcmi-terms/}Dublin Core Terms}}  	| http://purl.org/dc/terms/ | Partial |
+*----------+--------------+----------------+----------------+----------------+
+|2.27%  	|{{{http://msdn.microsoft.com/xml/rss/sle/}Microsoft Simple List Extensions}}  |	http://www.microsoft.com/schemas/rss/core/2005|  No, no Microsoft :-) |
+*----------+--------------+----------------+----------------+----------------+
+|2.00%  	|{{{http://search.yahoo.com/mrss}Yahoo Media RSS}}  	|http://search.yahoo.com/mrss/ | Yes |
+*----------+--------------+----------------+----------------+----------------+
+| 1.24%  	| {{{http://web.resource.org/rss/1.0/modules/taxonomy/}RSS 1.0 Taxonomy Module}}  |	http://purl.org/rss/1.0/modules/taxonomy/ | No, perhaps in the next release? |
+*----------+--------------+----------------+----------------+----------------+
+| ...  	| Skipping   |	see {{http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html}} for the complete list |  |
+*----------+--------------+----------------+----------------+----------------+
+| 0.06%  	| {{{http://www.google.com/base/help/rss_specs.html}Google Base}} |  	http://base.google.com/cns/1.0 | Yes|
+*----------+--------------+----------------+----------------+----------------+
+| No Data  	| {{{http://georss.org/}Georss Extension}}  |	http://www.georss.org/georss/10 | Yes |
+*----------+--------------+----------------+----------------+----------------+
+
+Preferred Namespace Prefixes
+
+	When Yarfraw marshall these extension elements, it will automatically 
+add a predefined prefix to them to make the resulting xml document easier to read. The following
+table lists all the namespace prefixes: 
+
+*----------+--------------+----------------+----------------+----------------+
+|| <<Namespace Uri>> || <<Prefix>>    || <<comments>> ||       
+*----------+--------------+----------------+----------------+----------------+
+| http://www.w3.org/1999/02/22-rdf-syntax-ns# |  rdf | |
+*----------+--------------+----------------+----------------+----------------+
+|http://www.w3.org/XML/1998/namespace| xml | |
+*----------+--------------+----------------+----------------+----------------+
+|http://base.google.com/ns/1.0|g| |
+*----------+--------------+----------------+----------------+----------------+
+|http://www.itunes.com/dtds/podcast-1.0.dtd|itunes| |
+*----------+--------------+----------------+----------------+----------------+
+|http://tools.search.yahoo.com/mrss/|mrss| |
+*----------+--------------+----------------+----------------+----------------+
+|http://wellformedweb.org/CommentAPI/|wfw| |
+*----------+--------------+----------------+----------------+----------------+
+|http://www.georss.org/georss/10|georss| |
+*----------+--------------+----------------+----------------+----------------+
+|http://purl.org/dc/elements/1.1/|dc| |
+*----------+--------------+----------------+----------------+----------------+
+|http://purl.org/rss/1.0/modules/syndication/|sy| |
+*----------+--------------+----------------+----------------+----------------+
+|http://webns.net/mvcb/|admin| |
+*----------+--------------+----------------+----------------+----------------+
+|http://rssnamespace.org/feedburner/ext/1.0|feedburner| |
+*----------+--------------+----------------+----------------+----------------+
+|http://purl.org/rss/1.0/modules/slash/|slash| |
+*----------+--------------+----------------+----------------+----------------+
+|http://www.blogger.com/atom/ns#|blogger| |
+*----------+--------------+----------------+----------------+----------------+
+|http://purl.org/atom-blog/ns#|draft| |
+*----------+--------------+----------------+----------------+----------------+
+|http://www.w3.org/2005/Atom| "" | This the Atom 1.0 namespace, elements will use the default namespace |
+*----------+--------------+----------------+----------------+----------------+
+|http://purl.org/rss/1.0/| "" | This the RSS 1.0 namespace, elements will use the default namespace |
+*----------+--------------+----------------+----------------+----------------+
+
+
+  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

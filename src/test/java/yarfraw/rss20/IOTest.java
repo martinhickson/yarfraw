@@ -39,7 +39,7 @@ public class IOTest extends TestCase{
   @Test
   public void testBuilder() throws Exception{
     ChannelFeed c = BuilderTest.buildChannel();
-    FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
+    FeedWriter w = new FeedWriter("testTmpOutput/rss20/testBuilder.xml");
     c.setTitle("<test>test</test>");
     w.writeChannel(c);
     w.writeChannel(c, new ValidationEventHandler(){
@@ -54,7 +54,7 @@ public class IOTest extends TestCase{
   @Test
   public void testBuilder2() throws Exception{
     ChannelFeed c = BuilderTest.buildChannel();
-    FeedWriter w = new FeedWriter(File.createTempFile("yarfraw", ".xml"));
+    FeedWriter w = new FeedWriter("testTmpOutput/rss20/testBuilder2.xml");
     w.setFormat(FeedFormat.RSS10);
     w.writeChannel(c);
   }
@@ -149,7 +149,7 @@ public class IOTest extends TestCase{
   @Test
   public void testAppend2() throws Exception{
     File f = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());
-    File copy = File.createTempFile("YarfrawDiggCopy", ".xml");
+    File copy = new File("testTmpOutput/rss20/testAppend.xml");
     List<ItemEntry> items = BuilderTest.buildChannel().getItems();
     FeedWriter w = new FeedWriter(copy);
     w.writeChannel(new FeedReader(f).readChannel());

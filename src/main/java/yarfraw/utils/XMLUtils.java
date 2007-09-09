@@ -1,5 +1,6 @@
 package yarfraw.utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -9,6 +10,14 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ObjectUtils;
@@ -20,6 +29,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import yarfraw.core.datamodel.YarfrawException;
 
 public class XMLUtils{
   private XMLUtils(){}
@@ -202,6 +213,26 @@ public class XMLUtils{
   public static Node getChildrenNodeByName(Node parent, String localName){
     List<Node> result = getChildrenByName(parent, localName, true);
     return result.size() > 0? result.get(0) : null;
+  }
+  
+
+  public static String transformWithXsl(String xslt, String xml) throws YarfrawException{
+    Source source = new StreamSource(xml);
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    Result res = new StreamResult(out);  
+    TransformerFactory transFact = TransformerFactory.newInstance();
+    Transformer trans;
+    
+    try {
+      trans = transFact.newTransformer(new StreamSource(xslt));
+      trans.transform(source, res);
+    } catch (TransformerConfigurationException e) {
+      throw new YarfrawException("Transformer config exception", e);
+    } catch (TransformerException e) {
+      throw new YarfrawException("Transform exception", e);
+    }
+    
+    return out.toString();
   }
   
   private static List<Node> getChildrenByName(Node parent, String localName, boolean single){

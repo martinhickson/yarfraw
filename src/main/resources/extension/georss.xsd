@@ -14,11 +14,47 @@ elementFormDefault="qualified" version="1.0">
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="georss:where" minOccurs="0" />
-				<xs:element ref="georss:point" minOccurs="0" />
-				<xs:element ref="georss:line" minOccurs="0" />
-				<xs:element ref="georss:polygon" minOccurs="0" />
-				<xs:element ref="georss:box" minOccurs="0" />
+				<xs:element ref="georss:where" minOccurs="0" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+See http://georss.org/ about this element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element> 
+				<xs:element ref="georss:point" minOccurs="0" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+See http://georss.org/ about this element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>
+				<xs:element ref="georss:line" minOccurs="0" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+See http://georss.org/ about this element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>
+				
+				<xs:element ref="georss:polygon" minOccurs="0" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+See http://georss.org/ about this element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>
+				<xs:element ref="georss:box" minOccurs="0" >
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+See http://georss.org/ about this element.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

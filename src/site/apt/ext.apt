@@ -1,0 +1,125 @@
+                                    ------
+                                    Extension Usage
+                                    ------
+                                    Jay Liang
+                                    ------
+                                     2007/09/08
+
+Adding Extension Elements 
+	
+	With the extension utilities, you can easily add some of the popular RSS extension elements to your 
+feed. For example, to add the itunes elements:
+
++----------------------------------------------------------------------------------------------------+
+   
+    ItunesExtension ext = new ItunesExtension();
+    ext.setAuthor("itune author");
+    ext.setBlock("itunes block");
+    ext.setDuration("itune duration");
+    ItunesCategoryType cat = new ItunesCategoryType();
+    cat.setText("cat");
+    ext.getCategory().add(cat);
+    ext.getCategory().add(cat);
+    //<duration> is not allowed under channel, read the specs
+    //http://www.apple.com/itunes/store/podcaststechspecs.html
+    ext.setDuration("10:10:20");
+    ext.setExplicit("yes");
+    ext.setKeywords("some,key, words");
+    ItunesImageType image = new ItunesImageType();
+    image.setHref("http://someurl");
+    image.setRel("ref");
+    ext.setImage(image);
+    ItunesOwnerType owner = new ItunesOwnerType();
+    owner.setEmail("owner@email.com");
+    owner.setName("pwner");
+    ext.setOwner(owner);
+    ext.setSubtitle("subtitle");
+    ext.setSummary("summary");
+    
+
+    FeedWriter w = new FeedWriter("itunes.xml");
+    ChannelFeed c = new ChannelFeed();
+    c.setTitle("a title");
+    c.getOtherElements().addAll(ExtensionUtils.toItunesElements(ext));
+    ItemEntry i = new ItemEntry();
+    i.getOtherElements().addAll(ExtensionUtils.toItunesElements(ext));
+    c.addItem(i.setTitle("item title"));
+    w.writeChannel(c);
+
++----------------------------------------------------------------------------------------------------+
+   
+  The ExtensionUtils class currently support the following extensions. If you don't know what they are,
+take a look at the {{{extension.html}extension}} page for more information about them.
+  
++----------------------------------------------------------------------------------------------------+
+        
+    ExtensionUtils.toAdminAtomElements(extensionObject);
+    ExtensionUtils.toBloggerAtomElements(extensionObject);
+    ExtensionUtils.toDublinCoreElements(extensionObject);
+    ExtensionUtils.toFeedburnerElements(extensionObject);
+    ExtensionUtils.toGeoRssElements(extensionObject);
+    ExtensionUtils.toGoogleBaseElements(extensionObject);
+    ExtensionUtils.toItunesElements(extensionObject);
+    ExtensionUtils.toMrssElements(extensionObject);
+    ExtensionUtils.toSlahsElements(extensionObject);
+    ExtensionUtils.toSyndicationElements(extensionObject);
+    ExtensionUtils.toWellFormedWebElements(extensionObject);
+   
++----------------------------------------------------------------------------------------------------+
+
+Reading Extension Elements 
+	
+	Most of these extension elements are not in the RSS specs. Therefore, they are not mapped to the core data
+model of Yarfraw. However, in the real world, you will find these extension elements quite often in many feeds.
+If you are using Yarfraw to write a feed viewer, you should also take these extension elements into consideration.
+For example, many RSS 2.0 feed does not have a \<pubDate\> element, instead, they use the \<dc:date\> element
+to indicates the date of publishing.  
+
+	All elements that are not mapped to the core model will be added to the 'otherElements' list of its corresponding
+parent. The extension utilities package has some methods that you can use to extract these common extension elements
+to an object for further processing.
+
+	To extract the itunes extension elements from an item, you write:
+	
++----------------------------------------------------------------------------------------------------+
+
+    ChannelFeed c = new FeedReader("itunes.xml").readChannel();
+    ItunesExtension ext = ExtensionUtils.extractItunesExtension(c.getOtherElements());
+    
++----------------------------------------------------------------------------------------------------+
+
+	One thing you should note is that when an element is 'extracted', the element is removed from the
+otherElement list. For example, if the otherElement list contains only itunes elements, then the size
+of the otherElement list will be 0 after the extraction:
+
++----------------------------------------------------------------------------------------------------+
+
+    ChannelFeed c = new FeedReader("itunes.xml").readChannel();
+    ItunesExtension ext = ExtensionUtils.extractItunesExtension(c.getOtherElements());
+    assert(c.getOtherElements().size() == 0);
+    
++----------------------------------------------------------------------------------------------------+
+
+
+	The ExtensionUtils class currently support the following extensions. If you don't know what they are,
+take a look at the {{{extension.html}extension}} page for more information about them.
+
++----------------------------------------------------------------------------------------------------+
+  
+    ExtensionUtils.extractAdminExtension(otherElements);
+    ExtensionUtils.extractBloggerExtension(otherElements);
+    ExtensionUtils.extractDublinCoreExtension(otherElements);
+    ExtensionUtils.extractFeedburnerExtension(otherElements);
+    ExtensionUtils.extractGeoRssExtension(otherElements);
+    ExtensionUtils.extractGoogleBaseExtension(otherElements);
+    ExtensionUtils.extractItunesExtension(otherElements);
+    ExtensionUtils.extractMrssExtension(otherElements);
+    ExtensionUtils.extractSlashExtension(otherElements);
+    ExtensionUtils.extractSyndicationExtension(otherElements);
+    ExtensionUtils.extractWellFormedWebExtension(otherElements);
+    
++----------------------------------------------------------------------------------------------------+
+    
+  For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
+  Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
+  

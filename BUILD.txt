@@ -16,3 +16,7 @@ for example: 'mvn clean install -Denv=dev'
 jaxb generates some debug classes that will cause collisions if 
 this flag is set (because multiple schemas are merged to the same
 java package). If you know how to fix this, please let me know.
+
+- if you are building the site, the findbugs report will run the build process out of memory.
+use 'export MAVEN_OPTS=-Xmx512M' to first increase the max heap size before running it.
+on Windows, you need ot go to ControPanel->System and add the MAVEN_OPTS env variable. 

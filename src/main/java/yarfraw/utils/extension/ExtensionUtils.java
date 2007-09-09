@@ -29,10 +29,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.admin.elements.AdminExtension;
 import yarfraw.generated.admin.elements.AdminType;
 import yarfraw.generated.blogger.elements.BloggerExtension;
+import yarfraw.generated.feedburner.elements.FeedburnerExtension;
 import yarfraw.generated.googlebase.elements.CurrencyCodeEnumeration;
 import yarfraw.generated.googlebase.elements.DateTimeRangeType;
 import yarfraw.generated.googlebase.elements.GenderEnumeration;
@@ -63,7 +65,9 @@ import yarfraw.generated.rss10.elements.DcType;
 import yarfraw.generated.rss10.elements.DublinCoreExtension;
 import yarfraw.generated.rss10.elements.SyndicationExtension;
 import yarfraw.generated.rss10.elements.UpdatePeriodEnum;
+import yarfraw.generated.slash.elements.SlashExtension;
 import yarfraw.generated.wfw.elements.WellFormedWebExtension;
+import yarfraw.utils.JAXBUtils;
 
 public class ExtensionUtils{
   private static final String HTTP_BASE_GOOGLE_COM_CNS_1_0 = "http://base.google.com/ns/1.0";
@@ -76,18 +80,13 @@ public class ExtensionUtils{
   private static final String SY_JAXB_CONTEXT = "yarfraw.generated.rss10.elements";
   private static final String BLOGGER_JAXB_CONTEXT = "yarfraw.generated.blogger.elements";
   private static final String ADMIN_JAXB_CONTEXT = "yarfraw.generated.admin.elements";
+  private static final String FEEDBURNER_JAXB_CONTEXT = "yarfraw.generated.feedburner.elements";
+  private static final String SLASH_JAXB_CONTEXT = "yarfraw.generated.slash.elements";
+
   
-  private static final String ITUNES_PREFIX = "itunes";
-  private static final String MRSS_PREFIX = "media";
-  private static final String WFW_PREFIX = "wfw";
-  private static final String GEORSS_PREFIX = "georss";
-  private static final String GOOGLEBASE_PREFIX = "g";
-  private static final String DUBLINCORE_PREFIX = "dc";
-  private static final String SYNDICATION_PREFIX = "sy";
-  private static final String ADMIN_PREFIX = "admin";
-  
+  //FIXME: should merge the constants into the enum
   private static enum ContextEnum{
-    DC, SY, ITUNES, GOOGLEBASE, WFW, MRSS, GEORSS, BLOGGER, ADMIN
+    DC, SY, ITUNES, GOOGLEBASE, WFW, MRSS, GEORSS, BLOGGER, ADMIN, FEEDBURNER, SLASH
   }
   
   private static final ObjectFactory GOOGLEBASE_FACTORY = new ObjectFactory();
@@ -151,6 +150,9 @@ public class ExtensionUtils{
             it.remove();
           }else if(same(name, ITUNES_SUMMARY_QNAME)){
             ret.setSummary(e.getTextContent());
+            it.remove();
+          }else if(same(name, ITUNES_NewFeedUrl_QNAME)){
+            ret.setNewFeedUrl(e.getTextContent());
             it.remove();
           }
         }
@@ -304,6 +306,81 @@ public class ExtensionUtils{
             if(e.getTextContent() != null){
               ret.setGeneratorAgent(((JAXBElement<AdminType>)u.unmarshal(e)).getValue());
             }
+          }
+        }
+      }
+    }
+    catch (JAXBException e) {
+      throw new YarfrawException("unable to unmarshal element", e);
+    }
+
+    return ret;
+  }
+  
+  /**
+   * Extracts the feedburner extension elements from the input list into an {@link FeedburnerExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see www.feedburner.com about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link FeedburnerExtension} object
+   * @throws YarfrawException 
+   */
+  @SuppressWarnings("unchecked")
+  public static FeedburnerExtension extractFeedburnerExtension(List<Element> otherElements) throws YarfrawException {
+    FeedburnerExtension ret = new FeedburnerExtension();
+    if(otherElements != null){
+      Iterator<Element> it = otherElements.iterator();
+      while(it.hasNext()){
+        Element e = it.next();
+        if(e == null){
+          continue;
+        }
+        QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+        if(same(name, FEEDBURNER_BrowserFriendly_QNAME)){
+          ret.setBrowserFriendly(e.getTextContent());
+        }else if(same(name, FEEDBURNER_OrigLink_QNAME)){
+          ret.setOrigLink(e.getTextContent());
+        }
+      }
+    }
+    return ret;
+  }
+
+  /**
+   * Extracts the slash extension elements from the input list into an {@link SlashExtension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/slash/ these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link SlashExtension} object
+   * @throws YarfrawException 
+   */
+  @SuppressWarnings("unchecked")
+  public static SlashExtension extractSlashExtension(List<Element> otherElements) throws YarfrawException {
+    SlashExtension ret = new SlashExtension();
+    try {
+      if(otherElements != null){
+        Iterator<Element> it = otherElements.iterator();
+        Unmarshaller u = getContext(ContextEnum.SLASH).createUnmarshaller();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, SLASH_Comments_QNAME)){
+            ret.setComments(((JAXBElement<BigInteger>)u.unmarshal(e)).getValue());
+          }else if(same(name, SLASH_Department_QNAME)){
+            ret.setDepartment(e.getTextContent());
+          }else if(same(name, SLASH_HitParade_QNAME)){
+            ret.setHitParade(e.getTextContent());
+          }else if(same(name, SLASH_Section_QNAME)){
+            ret.setSection(e.getTextContent());
           }
         }
       }
@@ -871,7 +948,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toItunesElements(ItunesExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.ITUNES, ITUNES_PREFIX);
+    return toElements(extensionObject, ContextEnum.ITUNES);
   }
 
   /**
@@ -886,7 +963,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toGeoRssElements(GeoRssExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.GEORSS, GEORSS_PREFIX);
+    return toElements(extensionObject, ContextEnum.GEORSS);
   }
   
 
@@ -904,7 +981,7 @@ public class ExtensionUtils{
   throws YarfrawException{
     //XXX: not sure why i have to do this to make it marshall
     JAXBElement<GoogleBaseExtension> jaxb = GOOGLEBASE_FACTORY.createGoogleBaseExtension(extensionObject);
-    return toElements(jaxb, ContextEnum.GOOGLEBASE, GOOGLEBASE_PREFIX);
+    return toElements(jaxb, ContextEnum.GOOGLEBASE);
   }
   
   /**
@@ -919,7 +996,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toMrssElements(MrssExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.MRSS, MRSS_PREFIX);
+    return toElements(extensionObject, ContextEnum.MRSS);
   }
 
   /**
@@ -934,7 +1011,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toWellFormedWebElements(WellFormedWebExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.WFW, WFW_PREFIX);
+    return toElements(extensionObject, ContextEnum.WFW);
   }
   
   /**
@@ -947,9 +1024,9 @@ public class ExtensionUtils{
    * @return a list of elements representing all the elements in the input extension object
    * @throws YarfrawException if conversion failed
    */
-  public static List<Element> toDublinCoreElements(MrssExtension extensionObject)
+  public static List<Element> toDublinCoreElements(DublinCoreExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.DC, DUBLINCORE_PREFIX);
+    return toElements(extensionObject, ContextEnum.DC);
   }
   
   /**
@@ -962,9 +1039,9 @@ public class ExtensionUtils{
    * @return a list of elements representing all the elements in the input extension object
    * @throws YarfrawException if conversion failed
    */
-  public static List<Element> toSyndicationElements(MrssExtension extensionObject)
+  public static List<Element> toSyndicationElements(SyndicationExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.SY, SYNDICATION_PREFIX);
+    return toElements(extensionObject, ContextEnum.SY);
   }
   
   /**
@@ -979,7 +1056,7 @@ public class ExtensionUtils{
    */
   public static List<Element> toBloggerAtomElements(BloggerExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.BLOGGER, null);
+    return toElements(extensionObject, ContextEnum.BLOGGER);
   }
 
   /**
@@ -994,7 +1071,37 @@ public class ExtensionUtils{
    */
   public static List<Element> toAdminAtomElements(AdminExtension extensionObject)
   throws YarfrawException{
-    return toElements(extensionObject, ContextEnum.ADMIN, ADMIN_PREFIX);
+    return toElements(extensionObject, ContextEnum.ADMIN);
+  }
+
+  /**
+   * Converts the input {@link FeedburnerExtension} object to an element list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/admin/ about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link FeedburnerExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toFeedburnerElements(FeedburnerExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, ContextEnum.FEEDBURNER);
+  }
+
+  /**
+   * Converts the input {@link FeedburnerExtension} object to an element list.
+   * <br/>
+   * see http://web.resource.org/rss/1.0/modules/admin/ about these
+   * extension elements
+   * 
+   * @param extensionObject an valid {@link FeedburnerExtension} object
+   * @return a list of elements representing all the elements in the input extension object
+   * @throws YarfrawException if conversion failed
+   */
+  public static List<Element> toSlahsElements(SlashExtension extensionObject)
+  throws YarfrawException{
+    return toElements(extensionObject, ContextEnum.SLASH);
   }
   
   private static JAXBContext DC_CTX = null;
@@ -1006,6 +1113,8 @@ public class ExtensionUtils{
   private static JAXBContext WFW_CTX = null;
   private static JAXBContext BLOGGER_CTX = null;
   private static JAXBContext ADMIN_CTX = null;
+  private static JAXBContext FEEDBURNER_CTX = null;
+  private static JAXBContext SLASH_CTX = null;
   
   private static synchronized JAXBContext getContext(ContextEnum ctxEnum) throws JAXBException{
     if(ctxEnum == ContextEnum.DC){
@@ -1023,6 +1132,16 @@ public class ExtensionUtils{
         BLOGGER_CTX = JAXBContext.newInstance(BLOGGER_JAXB_CONTEXT); 
       }
       return BLOGGER_CTX;
+    }else if(ctxEnum == ContextEnum.FEEDBURNER){
+      if(FEEDBURNER_CTX == null){
+        FEEDBURNER_CTX = JAXBContext.newInstance(FEEDBURNER_JAXB_CONTEXT); 
+      }
+      return FEEDBURNER_CTX;
+    }else if(ctxEnum == ContextEnum.SLASH){
+      if(SLASH_CTX == null){
+        SLASH_CTX = JAXBContext.newInstance(SLASH_JAXB_CONTEXT); 
+      }
+      return SLASH_CTX;
     }else if(ctxEnum == ContextEnum.GEORSS){
       if(GEORSS_CTX == null){
         GEORSS_CTX = JAXBContext.newInstance(GEORSS_JAXB_CONTEXT); 
@@ -1058,13 +1177,14 @@ public class ExtensionUtils{
     throw new UnsupportedOperationException("Unknown JAXB context: "+ctxEnum);
   }
   
-  private static List<Element> toElements(Object extensionObject, ContextEnum ctxEnum, String forcePrefix) throws YarfrawException {
+  private static List<Element> toElements(Object extensionObject, ContextEnum ctxEnum) throws YarfrawException {
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     dbf.setNamespaceAware(true);
     List<Element> ret = new ArrayList<Element>();
     try {
       Document doc = dbf.newDocumentBuilder().newDocument();
       Marshaller m = getContext(ctxEnum).createMarshaller();
+      m.setProperty(JAXBUtils.PREFIX_MAPPER_PROPERTY_NAME, JAXBUtils.getNamespacePrefixMapper(FeedFormat.RSS20));
       m.marshal(extensionObject, doc);
       Element e = doc.getDocumentElement();
       NodeList list =  e.getChildNodes();
@@ -1072,7 +1192,6 @@ public class ExtensionUtils{
         Node n = list.item(i);
         if (n instanceof Element) {
           Element element = (Element) n;
-          element.setPrefix(forcePrefix);
           ret.add(element);
         }else {
           LOG.error("Ignore unexpected node "+n.getNodeName()+", this should not happen");

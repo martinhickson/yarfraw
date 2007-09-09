@@ -9,6 +9,17 @@
 			RDF Syndication module
 		</xs:documentation>
 	</xs:annotation>
+	
+	<xs:element name="syndicationExtension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sy:updateBase" />
+				<xs:element ref="sy:updateFrequency" />
+				<xs:element ref="sy:updatePeriod" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 <!--
 Description
 

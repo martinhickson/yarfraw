@@ -30,6 +30,7 @@ import yarfraw.utils.JAXBUtils;
  *
  */
 public class FeedWriter extends AbstractBaseIO{
+  
   private static final ObjectFactory RSS20_FACTORY = new ObjectFactory();
   
   public FeedWriter(File file, FeedFormat format){
@@ -128,6 +129,8 @@ public class FeedWriter extends AbstractBaseIO{
   
   private static Marshaller getMarshaller(FeedFormat format) throws JAXBException{
     JAXBContext context = JAXBUtils.getContext(format);
-    return context.createMarshaller();
+    Marshaller m = context.createMarshaller();
+    m.setProperty(JAXBUtils.PREFIX_MAPPER_PROPERTY_NAME, JAXBUtils.getNamespacePrefixMapper(format));
+    return m;
   }
 }
