@@ -5,65 +5,11 @@ in no particular order:
 - web/swing feed aggregator front end
 - maven rss feed auto generate plugin
 - aggregator with cover flow like gui
-
-- util for http://search.yahoo.com/mrss/ support
-- util for other popular special element support 
-- extension addon framework
-- add prefix mapper
+- add shell script to find out some interesting statistics about the code base
+	- ration of generated code vs real codes
+	- total line of codes
+	- total lines of test codes
+	- etc
+	
 - add xml transform builder that can converts any xml to a rss feed
 
-http://java.sun.com/webservices/docs/2.0/tutorial/doc/JAXBUsing4.html
-http://googlereader.blogspot.com/2006/08/namespaced-extensions-in-feeds.html
-
-% of Feeds  	Namespace  	URI
-29.36% 	Dublin Core 	http://purl.org/dc/elements/1.1/
-15.71% 	XHTML 	http://www.w3.org/1999/xhtml
-11.92% 	Blogger Atom API Extensions 	http://www.blogger.com/atom/ns#
-11.88% 	Blogger Draft Extension 	http://purl.org/atom-blog/ns#
-11.16% 	RSS 1.0 Content Module 	http://purl.org/rss/1.0/modules/content/
-8.39% 	Well-Formed Web Comment API 	http://wellformedweb.org/CommentAPI/
-5.35% 	RSS 1.0 Administrative Module 	http://webns.net/mvcb/
-3.85% 	FeedBurner Extensions 	http://rssnamespace.org/feedburner/ext/1.0
-3.74% 	MSN Spaces 	http://schemas.microsoft.com/msn/spaces/2005/rss
-3.66% 	Slash 	http://purl.org/rss/1.0/modules/slash/
-3.59% 	RSS 1.0 Syndication Module 	http://purl.org/rss/1.0/modules/syndication/
-2.50% 	iTunes 	http://www.itunes.com/dtds/podcast-1.0.dtd
-2.49% 	LiveJournal RSS Module 1.0 	http://www.livejournal.org/rss/lj/1.0/
-2.33% 	Dublin Core Terms 	http://purl.org/dc/terms/
-2.27% 	Microsoft Simple List Extensions 	http://www.microsoft.com/schemas/rss/core/2005
-2.00% 	Yahoo Media RSS 	http://search.yahoo.com/mrss/
-1.24% 	RSS 1.0 Taxonomy Module 	http://purl.org/rss/1.0/modules/taxonomy/
-1.06% 	TrackBack Module for RSS 1.0/2.0 	http://madskills.com/public/xml/rss/module/trackback/
-1.04% 	creativeCommons RSS Module 	http://backend.userland.com/creativeCommonsRssModule
-0.92% 	OpenSearch 	http://a9.com/-/spec/opensearchrss/1.1/
-0.68% 	Basic Geo (WGS84 lat/long) Vocabulary 	http://www.w3.org/2003/01/geo/wgs84_pos#
-0.54% 	Atom Threading 	http://purl.org/syndication/thread/1.0
-0.42% 	Creative Commons (RDF) 	http://web.resource.org/cc/
-0.39% 	Technorati API 	http://api.technorati.com/dtd/tapi-002.xml
-0.36% 	Google Calendar 	http://schemas.google.com/gCal/2005
-0.31% 	Google GData 	http://schemas.google.com/g/2005
-0.28% 	Feed History 	http://purl.org/syndication/history/1.0
-0.28% 	eBay 	urn:ebay:apis:eBLBaseComponents
-0.27% 	Pheed 	http://www.pheed.com/pheed/
-0.23% 	RSS 1.0 Annotation Module 	http://purl.org/rss/1.0/modules/annotation/
-0.21% 	PRISM 	http://prismstandard.org/namespaces/1.2/basic/
-0.18% 	Bulkfeeds 	http://bulkfeeds.net/xmlns#
-0.16% 	Atom Indexing 	urn:atom-extension:indexing
-0.15% 	AOL Journals 	http://journals.aol.com/_atom/aj#
-0.14% 	Jive Forums 	http://www.jivesoftware.com/xmlns/jiveforums/rss
-0.13% 	Yahoo! Weather 	http://xml.weather.yahoo.com/ns/rss/1.0
-0.11% 	RSSWriter Manifest 	http://usefulinc.com/rss/manifest/
-0.11% 	FOAF Vocabulary 	http://xmlns.com/foaf/0.1/
-0.10% 	Feedster 	http://feedster.com/feedstersearch/ext/1.0
-0.10% 	Google Picasa Web 	http://picasaweb.google.com/lh/picasaweb/
-0.09% 	RSS 1.0 Link Module 	http://purl.org/rss/1.0/modules/link/
-0.09% 	Buzznet 	http://www.buzznet.com/1.0/
-0.09% 	Digg 	http://digg.com/docs/diggrss/
-0.09% 	PubSub 	http://pubsub.com/xmlns
-0.09% 	Snaplog PhotoBlog RSS extension 	http://snaplog.com/backend/PhotoBlog.html
-0.08% 	XSL 	http://www.w3.org/1999/XSL/Transform
-0.07% 	Hatena XML Namespace 	http://www.hatena.ne.jp/info/xmlns#
-0.07% 	iTunes Music Store 	http://phobos.apple.com/rss/1.0/modules/itms/
-0.07% 	Furl 	http://www.furl.net/resources/furlRSS.jsp#
-0.06% 	Google Base 	http://base.google.com/cns/1.0
-0.06% 	Web Wiz Forums 	http://syndication.webwizguide.info/rss_namespace/
