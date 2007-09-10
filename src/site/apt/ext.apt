@@ -52,19 +52,51 @@ feed. For example, to add the itunes elements:
 take a look at the {{{extension.html}extension}} page for more information about them.
   
 +----------------------------------------------------------------------------------------------------+
-        
+
+    AdminExtension extensionObject = new AdminExtension();
+    ...
     ExtensionUtils.toAdminAtomElements(extensionObject);
+    
+    BloggerExtension extensionObject = new BloggerExtension();
+    ...
     ExtensionUtils.toBloggerAtomElements(extensionObject);
+    
+    DublinCoreExtension extensionObject = new DublinCoreExtension();
+    ...
     ExtensionUtils.toDublinCoreElements(extensionObject);
+    
+    FeedburnerExtension extensionObject = new FeedburnerExtension();
+    ...
     ExtensionUtils.toFeedburnerElements(extensionObject);
+    
+    GeoRssExtension extensionObject = new GeoRssExtension();
+    ...
     ExtensionUtils.toGeoRssElements(extensionObject);
+    
+    GoogleBaseExtension extensionObject = new GoogleBaseExtension();
+    ...
     ExtensionUtils.toGoogleBaseElements(extensionObject);
+    
+    ItunesExtension extensionObject = new ItunesExtension();
+    ...
     ExtensionUtils.toItunesElements(extensionObject);
+    
+    MrssExtension extensionObject = new MrssExtension();
+    ...
     ExtensionUtils.toMrssElements(extensionObject);
+    
+    SlashExtension extensionObject = new SlashExtension();
+    ...
     ExtensionUtils.toSlahsElements(extensionObject);
+    
+    SyndicationExtension extensionObject = new SyndicationExtension();
+    ...
     ExtensionUtils.toSyndicationElements(extensionObject);
-    ExtensionUtils.toWellFormedWebElements(extensionObject);
-   
+    
+    WellFormedWebExtension extensionObject = new WellFormedWebExtension();
+    ...
+    ExtensionUtils.toWellFormedWebElements(extensionObject);    
+    
 +----------------------------------------------------------------------------------------------------+
 
 Reading Extension Elements 
@@ -119,6 +151,7 @@ take a look at the {{{extension.html}extension}} page for more information about
     ExtensionUtils.extractWellFormedWebExtension(otherElements);
     
 +----------------------------------------------------------------------------------------------------+
+
     
   For more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
   Also check out the {{{faq.html}FAQ}} section for more insights about this API. 
