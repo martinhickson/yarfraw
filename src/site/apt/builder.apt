@@ -224,7 +224,7 @@ Building Atom 1.0 Channel
 
 Building RSS 1.0 Channel
 
-	<<You are NOT encourage to use RSS 1.0 format>>. To build the following channel:
+	<<Avoid using RSS 1.0 format if possible>>. To build the following channel:
 	
 +----------------------------------------------------------------------------------------------------+
 <?xml version="1.0" encoding="utf-8"?> 
