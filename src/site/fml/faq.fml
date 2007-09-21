@@ -27,4 +27,29 @@
     </faq>
 
   </part>
+  <part id="FeedReader">
+    <title>FeedReader</title>
+   
+    <faq id="conditionalGet">
+      <question>
+       The FeedReader does not support Http request header, how do I do conditional get?
+      </question>
+      <answer>
+       The current implementation of FeedReader does not add any additional request header
+       when it issues a read request. If you need to perform conditional get (see
+       <a href="http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers">here</a>
+       for details), you can:
+       <br/>
+		1. you can use the static read channel method 
+		2. you can extend the FeedReader class and override the method:  
+		protected InputStream getStream() throws IOException{}  
+		<br/>
+		perhaps throw a special runtime exception when you decide not to read the stream.  
+		 <br/>
+		3. you can write a wrapper class to wrap the FeedReader class and manage the http stream in that class and pass it to FeedReader. 
+		<br/>
+		(also see <a href="http://sourceforge.net/forum/forum.php?thread_id=1823062&forum_id=725344">this discussion thread</a>).
+      </answer>
+    </faq>
+  </part>  
 </faqs>
