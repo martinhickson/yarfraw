@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import junit.framework.TestCase;
 
 import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
@@ -20,6 +21,13 @@ import yarfraw.utils.reader.FeedReaderUtils;
 
 public class RemoteTestSlow extends TestCase{
   private static final Log LOG = LogFactory.getLog(RemoteTestSlow.class);
+  
+  @Test
+  public void testHttpRequestHeaderSupport() throws Exception{
+    GetMethod get = new GetMethod("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml");
+    FeedReader r = new FeedReader(get);
+    r.readChannel();
+  }
   
 
   @Test

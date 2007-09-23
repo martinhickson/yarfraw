@@ -15,8 +15,11 @@ import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
@@ -35,36 +38,100 @@ import yarfraw.utils.JAXBUtils;
  *
  */
 public class FeedReader  extends AbstractBaseFeedParser{
-  
+  private static final Log LOG = LogFactory.getLog(FeedReader.class);
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * @param file - the local file to be read from 
+   * @param format - the {@link FeedFormat} of the feed.
+   */
   public FeedReader(File file, FeedFormat format){
     super(file, format);
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * @param pathName - full path of the file
+   * @param format - the {@link FeedFormat} of the feed.
+   */
   public FeedReader(String pathName, FeedFormat format){
     super(new File(pathName), format);
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * @param uri - the {@link URI} that points to the file
+   * @param format - the {@link FeedFormat} of the feed.
+   */
   public FeedReader(URI uri, FeedFormat format){
     super(new File(uri), format);
-  }  
+  }
+  
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * <br/>
+   * Note the {@link FeedFormat} will be set to default which is RSS 2.0
+   * @param file - a local file
+   */
   public FeedReader(File file){
     super(file);
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * <br/>
+   * Note the {@link FeedFormat} will be set to default which is RSS 2.0
+   * @param pathName - full path of the file
+   */
   public FeedReader(String pathName){
     super(new File(pathName));
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a local file.
+   * <br/>
+   * Note the {@link FeedFormat} will be set to default which is RSS 2.0
+   * @param uri - the uril that points to the file
+   */
   public FeedReader(URI uri){
     super(new File(uri));
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a remote source using Http.
+   * <br/>
+   * Format detection will be automatically performed. 
+   * @param httpUrl - the {@link HttpURL} of the remote source
+   * @param params - any {@link HttpClientParams}
+   * @throws YarfrawException - if parse failed
+   * @throws IOException - if format detection failed
+   */
   public FeedReader(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
     super(httpUrl, params);
   }
   
+  /**
+   * Constructs a {@link FeedReader} to read from a remote source using Http.
+   * <br/>
+   * Format detection will be automatically performed.
+   * @param httpUrl - the {@link HttpURL} of the remote source
+   * @throws YarfrawException - if parse failed
+   * @throws IOException - if format detection failed
+   */
   public FeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
+  }
+  
+  /**
+   * Constructs a {@link FeedReader} to read from a remote source using Http.
+   * <br/>
+   * Format detection will be automatically performed.
+   * @param getMethod
+   * @throws YarfrawException - if parse failed
+   * @throws IOException - if format detection failed
+   * 
+   */
+  public FeedReader(GetMethod getMethod) throws YarfrawException, IOException{
+    super(getMethod);
   }
 
   /**
@@ -96,6 +163,10 @@ public class FeedReader  extends AbstractBaseFeedParser{
     InputStream input = null;
     try {
       input = getStream();
+      if(input == null){
+        LOG.warn("Unable to read from null stream, returning null");
+        return null;
+      }
       u = getUnMarshaller(_format); 
       if(validationEventHandler != null){
         u.setEventHandler(validationEventHandler);

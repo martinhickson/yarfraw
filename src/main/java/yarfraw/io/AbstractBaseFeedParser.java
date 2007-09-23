@@ -23,6 +23,8 @@ abstract class AbstractBaseFeedParser extends AbstractBaseIO{
   
   protected HttpURL _httpUrl = null;
   protected HttpClientParams _httpClientParams = null;
+  protected GetMethod _getMethod = null;
+  
   public AbstractBaseFeedParser(File file, FeedFormat format){
     super(file, format);
   }
@@ -57,6 +59,11 @@ abstract class AbstractBaseFeedParser extends AbstractBaseIO{
     _format = FeedFormatDetector.getFormat(getStream());
   }
   
+  public AbstractBaseFeedParser(GetMethod getMethod) throws YarfrawException, IOException{
+    _getMethod = getMethod;
+    _format = FeedFormatDetector.getFormat(getStream());
+  }
+  
   public HttpClientParams getHttpClientParams() {
     return _httpClientParams;
   }
@@ -66,20 +73,31 @@ abstract class AbstractBaseFeedParser extends AbstractBaseIO{
   }
 
   /**
+   * The {@link GetMethod} object to be used to remote from a remote source.
+   * @return
+   */
+  public GetMethod getGetMethod() {
+    return _getMethod;
+  }
+
+  /**
    * Is the reader reading the feed from a remote http link.
    * @return true if reading remotely<br/>
    * false if reading from local file
    */
   public boolean isRemoteRead(){
-    return _httpUrl != null;
+    return _httpUrl != null || _getMethod != null;
   }
     
   
   protected InputStream getStream() throws IOException{
     InputStream stream;
     if(isRemoteRead()){
-      GetMethod get = new GetMethod(_httpUrl.toString());
-      get.setFollowRedirects(true);
+      GetMethod get = getGetMethod();
+      if(get == null){
+        get = new GetMethod(_httpUrl.toString());
+        get.setFollowRedirects(true);
+      } 
       HttpClient client = new HttpClient();
       if(_httpClientParams != null){
         client.setParams(_httpClientParams);

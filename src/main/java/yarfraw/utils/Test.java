@@ -11,12 +11,30 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.httpclient.HttpURL;
+import org.apache.commons.httpclient.methods.GetMethod;
+
+import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.YarfrawException;
+import yarfraw.io.CachedFeedReader;
+import yarfraw.io.FeedReader;
 
 
 public class Test{
 
   public static void main(String[] args) throws Exception {
+    GetMethod get = new GetMethod("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml");
+    FeedReader r = new FeedReader(get);
+    ChannelFeed first = r.readChannel();
+    ChannelFeed second = r.readChannel();
+    System.out.println(first == second);
+    
+    FeedReader cacheFeedReader = new CachedFeedReader(
+        new HttpURL("http://fishbowl.pastiche.org/index.rdf"));
+    first = cacheFeedReader.readChannel();
+    second = cacheFeedReader.readChannel();
+    System.out.println(first == second);
+    
 //    FeedReader r = new FeedReader(new HttpURL("http://feeds.feedburner.com/javaposse"));
 //    ChannelFeed c =  r.readChannel();
 //    System.out.println(c.getItems().get(0));
