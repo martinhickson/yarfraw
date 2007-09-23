@@ -100,7 +100,7 @@ so you need to set the appropriate format if the input is not in RSS 2.0 format.
 
 	The reader is capable of reading a feed from a remote http url. In this case, the format of the 
 remote feed is automatically detected. Format detection will be executed only once at object construction time.
-	
+
 +----------------------------------------------------------------------------------------------------+
     
     FeedReader reader = new FeedReader(file); //it's default to Rss 2.0
@@ -120,6 +120,73 @@ remote feed is automatically detected. Format detection will be executed only on
     //you can still change the format of the reader, but it's not recommended.
     
 +----------------------------------------------------------------------------------------------------+
+
+Reading feeds via {{{http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers}Http conditional Get}}
+
+	(<<this is a new feature since version 0.9>>).
+	
+	If you are using Yarfraw to build an aggregator, you should definitely consider supporting conditional get to 
+reduce network traffics. In Yarfraw, conditional get is supported by a special feed reader called CachedFeedReader,
+which extends the FeedReader class.
+As the name suggests, this class also supports basic caching of the previous parsed feed and therefore will only need
+to perform parsing when there are new changes to the feed that it's reading. 
+
++----------------------------------------------------------------------------------------------------+
+    FeedReader cr = new CachedFeedReader(new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"));
+    ChannelFeed first = cr.readChannel();
+    //issue another read immediately after, since nothing should have been changed since the last read
+    //the reader will return the cached ChannelFeed object from the previous read
+    ChannelFeed second = cr.readChannel();
+    assertTrue(first == second);
++----------------------------------------------------------------------------------------------------+    
+
+	The CachedFeedReader will keep a cached version of the previous read and parsed FeedChannel object, 
+and performs conditional get to the remote sever using the 2 http headers: Last-Modified and Etag. 
+If the server responses a 304 not modified status code, the reader will return the cached feed, 
+otherwise it reads and parse the response as normal. If the remote feed is not modified since the last
+read, there's no need to perform parsing, therefore, this class will perform much better than the normal
+FeedReader class. One thing you should note is that this reader caches the <<reference>> of the original
+FeedChannel and also returns it to the caller, so if the FeedChannel object is modified, the cached version
+is also modified.
+
++----------------------------------------------------------------------------------------------------+
+	CachedFeedReader cr = new CachedFeedReader(new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"));
+    ChannelFeed first = cr.readChannel();
+    
+    //if I modify the returned feed object
+    first.setTitle("blah");
+    //the cached feed object is also modified
+    assertEquals(first.getTitle(), cr.getCachedChannelFeed().getTitle());    
+    
++----------------------------------------------------------------------------------------------------+
+
+	When this cached behavior, an aggregator can skip any aggregation work if it finds the returned ChannelFeed object
+is the same as the previously cached object. For example:
+
++----------------------------------------------------------------------------------------------------+
+    CachedFeedReader cr = new CachedFeedReader(new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"));
+    ChannelFeed first = cr.readChannel();
+    
+    ...some times later, you issues a read again to check for new changes
+    
+    
+    //you first get a copy of the cached of the cached reference
+    ChannelFeed previous = cr.getCachedChannelFeed();
+    //issue a read
+    ChannelFeed current = cr.readChannel();
+    
+    if(current == previous){
+      //this means nothing has changed
+    }else{
+      //there are new changes, so need to perform aggregation
+    }
++----------------------------------------------------------------------------------------------------+
+
+   
+Reading extensibility elements	
+
+	<<If the extensibility elements are supported by one of the {{{ext.html}extension modules}}, you should consider
+using them instead of reading them as normal DOM elements>>.
 
 	If the feed contains extensibility elements that are not in the official specs, those elements will be read
 into the Channel(or Item)'s otherElements list. You can get all these elements by calling Channel.getElements

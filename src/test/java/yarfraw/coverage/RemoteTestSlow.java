@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
+import yarfraw.io.CachedFeedReader;
 import yarfraw.io.FeedReader;
 import yarfraw.utils.reader.FeedReaderUtils;
 
@@ -29,7 +30,28 @@ public class RemoteTestSlow extends TestCase{
     r.readChannel();
   }
   
+  @Test
+  public void testConditionalGet() throws Exception{
+    CachedFeedReader r = new CachedFeedReader(new HttpURL("http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml"));
+    ChannelFeed first = r.readChannel();
+    ChannelFeed second = r.readChannel();
 
+    first.setTitle("blah");
+    assertTrue(first == second);
+    assertEquals(first.getTitle(), r.getCachedChannelFeed().getTitle());
+
+    //you first get a copy of the cached of the cached reference
+    ChannelFeed previous = r.getCachedChannelFeed();
+    //issue a read
+    ChannelFeed current = r.readChannel();
+    
+    if(current == previous){
+      //this means nothing has changed
+    }else{
+      fail("there should be no changes");
+    }
+  }
+  
   @Test
   public void testRead3() throws Exception{  
     File f1 = new File(Thread.currentThread().getContextClassLoader().getResource("yarfraw/digg.xml").toURI());

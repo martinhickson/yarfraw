@@ -33,15 +33,22 @@
    
     <faq id="conditionalGet">
       <question>
-       The FeedReader does not support Http request header, how do I do conditional get?
+       Does the reader supports <a href="">Http conditional get</a>?
       </question>
       <answer>
-       The current implementation of FeedReader does not add any additional request header
-       when it issues a read request. If you need to perform conditional get (see
-       <a href="http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers">here</a>
-       for details), you can:
-       <br/>
-		1. use the static read channel method <br/>
+       Yes, it's supported by a special feed reader called CachedFeedReader, which extends FeedReader.
+       It supports conditional get and basic caching, see <a href="io.html">here</a> for more information.
+      </answer>
+    </faq>
+    
+    <faq>
+    	<question>
+    	I need to perform more sophisticated caching and http request handling than the CachedFeedReader, what should I do?
+    	</question>
+    	<answer>
+    	In that case, there are a few things you can do:
+    	<br/><br/>
+    	1. use the static read channel method in FeedReader.<br/> 
 		2. extend the FeedReader class and override the method: <br/>  
 		protected InputStream getStream() throws IOException{}  
 		<br/>
@@ -50,7 +57,13 @@
 		3. write a wrapper class to wrap the FeedReader class and manage the http stream in that class and pass it to FeedReader. 
 		<br/>
 		(also see <a href="http://sourceforge.net/forum/forum.php?thread_id=1823062&amp;forum_id=725344">this discussion thread</a>).
-      </answer>
+		<br/>
+		method 1 will be most flexible, but it does not perform format detection automatically, use FeedFormatDetector to 
+		detect the feed format.  
+		<br/>
+		For method 2 and 3, take a look at the source codes of 
+		<a href="http://yarfraw.svn.sourceforge.net/viewvc/yarfraw/yarfraw/yarfraw/src/main/java/yarfraw/io/CachedFeedReader.java?view=log">CachedFeedReader</a>
+    	</answer>		
     </faq>
   </part>  
 </faqs>
