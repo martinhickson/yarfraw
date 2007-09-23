@@ -1,9 +1,7 @@
 package yarfraw.io;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 
 import javax.xml.bind.ValidationEventHandler;
 
@@ -14,7 +12,6 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 
 import yarfraw.core.datamodel.ChannelFeed;
-import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 
 /**
@@ -126,26 +123,27 @@ public class CachedFeedReader extends FeedReader{
     stream = get.getResponseBodyAsStream();
     return stream; 
   }
-    
+
+  /**
+   * 
+   * @return - The value of the "Last-Modified" response header from the last read.
+   */
+  public String getLastModified() {
+    return _lastModified;
+  }
+
+  /**
+   * 
+   * @return The value of the "ETag" response header from the last read.
+   */
+  public String getETag() {
+    return _eTag;
+  }
+
   public ChannelFeed getCachedChannelFeed() {
     return _cachedChannelFeed;
   }
 
-  public void setCachedChannelFeed(ChannelFeed cachedChannelFeed) {
-    _cachedChannelFeed = cachedChannelFeed;
-  }
-
-  //constructors from super class, this class is only for remote reads  
-  /**
-   * Constructs a {@link CachedFeedReader} to read from a local file.
-   * <br/>
-   * Note the {@link FeedFormat} will be set to default which is RSS 2.0
-   * @param uri - the uril that points to the file
-   */
-  public CachedFeedReader(URI uri){
-    super(new File(uri));
-  }
-  
   /**
    * Constructs a {@link CachedFeedReader} to read from a remote source using Http.
    * <br/>
