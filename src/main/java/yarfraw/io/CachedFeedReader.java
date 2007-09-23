@@ -106,7 +106,7 @@ public class CachedFeedReader extends FeedReader{
     
     //there's a cached version of the feed, add the request
     //header to perform conditional get
-    if(_lastModified != null || _eTag != null){
+    if(_cachedChannelFeed != null){
       get.addRequestHeader(new Header(IF_MODIFIED_SINCE, _lastModified));
       get.addRequestHeader(new Header(IF_NONE_MATCH, _eTag));
     }
