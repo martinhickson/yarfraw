@@ -1,5 +1,5 @@
 in no particular order:
-
+- a web based feed builder app that can deploy with a simple servlet container like winston http://winstone.sourceforge.net/
 - swing feed builder appp w/ web start
 - feed aggregator module w/ default data store impl + customizable data persistence layer
 - web/swing feed aggregator front end
