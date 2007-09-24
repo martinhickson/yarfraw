@@ -30,6 +30,7 @@ public class CommonUtils{
   public static final String RSS20_JAXB_CONTEXT = "yarfraw.generated.rss20.elements";
   public static final String RSS10_JAXB_CONTEXT = "yarfraw.generated.rss10.elements";
   public static final String ATOM10_JAXB_CONTEXT = "yarfraw.generated.atom10.elements";
+  public static final String ATOM03_JAXB_CONTEXT = "yarfraw.generated.atom03.elements";
   
   /////////////////////DATE PARSING///////////////////////////////////
   public static final String RFC822DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
@@ -83,9 +84,8 @@ public class CommonUtils{
    * @return
    */
   public static synchronized boolean isDateFormatValid(String dateString, FeedFormat format){
-    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS10){
+    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS10 || format == FeedFormat.ATOM03){
       try {
-        
         return tryParseISODate(dateString) != null ;
       } catch (Exception e) {
         //non strict ISO format
@@ -192,7 +192,7 @@ public class CommonUtils{
     if(date == null || format == null){
       return null;
     }
-    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS20){
+    if(format == FeedFormat.ATOM10 || format == FeedFormat.RSS20 || format == FeedFormat.ATOM03){
       return getDateAsISO8601String(date);
     }else if(format == FeedFormat.RSS10 ){
       return RFC822DATE_FORMAT.format(date);

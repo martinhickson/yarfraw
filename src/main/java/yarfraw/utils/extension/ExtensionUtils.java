@@ -33,6 +33,8 @@ import yarfraw.core.datamodel.FeedFormat;
 import yarfraw.core.datamodel.YarfrawException;
 import yarfraw.generated.admin.elements.AdminExtension;
 import yarfraw.generated.admin.elements.AdminType;
+import yarfraw.generated.atom03.ext.elements.Atom03Extension;
+import yarfraw.generated.atom03.ext.elements.ContentType;
 import yarfraw.generated.blogger.elements.BloggerExtension;
 import yarfraw.generated.feedburner.elements.FeedburnerExtension;
 import yarfraw.generated.googlebase.elements.CurrencyCodeEnumeration;
@@ -82,17 +84,72 @@ public class ExtensionUtils{
   private static final String ADMIN_JAXB_CONTEXT = "yarfraw.generated.admin.elements";
   private static final String FEEDBURNER_JAXB_CONTEXT = "yarfraw.generated.feedburner.elements";
   private static final String SLASH_JAXB_CONTEXT = "yarfraw.generated.slash.elements";
+  private static final String ATOM03_JAXB_CONTEXT = "yarfraw.generated.atom03.ext.elements";
 
   
   //FIXME: should merge the constants into the enum
   private static enum ContextEnum{
-    DC, SY, ITUNES, GOOGLEBASE, WFW, MRSS, GEORSS, BLOGGER, ADMIN, FEEDBURNER, SLASH
+    DC, SY, ITUNES, GOOGLEBASE, WFW, MRSS, GEORSS, BLOGGER, ADMIN, FEEDBURNER, SLASH, ATOM03
   }
   
   private static final ObjectFactory GOOGLEBASE_FACTORY = new ObjectFactory();
   
   private static final Log LOG = LogFactory.getLog(ExtensionUtils.class);
   private ExtensionUtils(){}
+  
+  
+  /**
+   * Extracts the Atom 0.3 extension elements <b>that are not mapped to the core models</b>
+   * from the input list into an {@link Atom03Extension}
+   * object. <br/>
+   * The extracted elements will be removed from the original input list.
+   * <br/>
+   * see http://yarfraw.sourceforge.net about these
+   * extension elements
+   * @param otherElements - any elements
+   * @return an {@link Atom03Extension} object
+   * @throws YarfrawException 
+   */
+  @SuppressWarnings("unchecked")
+  public static Atom03Extension extractAtom03Extension(List<Element> otherElements) throws YarfrawException {
+    Atom03Extension ret = new Atom03Extension();
+    try{
+      if(otherElements != null){
+        Unmarshaller u = getContext(ContextEnum.ATOM03).createUnmarshaller();
+        Iterator<Element> it = otherElements.iterator();
+        while(it.hasNext()){
+          Element e = it.next();
+          if(e == null){
+            continue;
+          }
+          QName name = new QName(e.getNamespaceURI(), e.getLocalName());
+          if(same(name, ATOM03_CONTENT_QNAME)){
+            ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
+            ret.getContent().add(c);
+            it.remove();
+          }else if(same(name, ATOM03_INFO_QNAME)){
+            ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
+            ret.setInfo(c);
+            it.remove();
+          }else if(same(name, ATOM03_ISSUED_QNAME)){
+            ret.setIssued(e.getTextContent());
+            it.remove();
+          }else if(same(name, ATOM03_SUMMARY_QNAME)){
+            ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
+            ret.setSummary(c);
+            it.remove();
+          }else if(same(name, ATOM03_TAGLINE_QNAME)){
+            ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
+            ret.setTagline(c);
+            it.remove();
+          }
+        }
+      }
+    }catch (JAXBException e) {
+      throw new YarfrawException("unable to unmarshal element", e);
+    }
+    return ret;
+  }
   
   /**
    * Extracts the itunes extension elements from the input list into an {@link ItunesExtension}
@@ -110,7 +167,7 @@ public class ExtensionUtils{
     ItunesExtension ret = new ItunesExtension();
     try{
       if(otherElements != null){
-        Unmarshaller u = JAXBContext.newInstance(ITUNES_JAXB_CONTEXT).createUnmarshaller();
+        Unmarshaller u = getContext(ContextEnum.ITUNES).createUnmarshaller();
         Iterator<Element> it = otherElements.iterator();
         while(it.hasNext()){
           Element e = it.next();
@@ -1115,6 +1172,7 @@ public class ExtensionUtils{
   private static JAXBContext ADMIN_CTX = null;
   private static JAXBContext FEEDBURNER_CTX = null;
   private static JAXBContext SLASH_CTX = null;
+  private static JAXBContext ATOM03_CTX = null;
   
   private static synchronized JAXBContext getContext(ContextEnum ctxEnum) throws JAXBException{
     if(ctxEnum == ContextEnum.DC){
@@ -1122,6 +1180,11 @@ public class ExtensionUtils{
         DC_CTX = JAXBContext.newInstance(DUBLINCORE_JAXB_CONTEXT); 
       }
       return DC_CTX;
+    }else if(ctxEnum == ContextEnum.ATOM03){
+      if(ATOM03_CTX == null){
+        ATOM03_CTX = JAXBContext.newInstance(ATOM03_JAXB_CONTEXT); 
+      }
+      return ATOM03_CTX;
     }else if(ctxEnum == ContextEnum.ADMIN){
       if(ADMIN_CTX == null){
         ADMIN_CTX = JAXBContext.newInstance(ADMIN_JAXB_CONTEXT); 

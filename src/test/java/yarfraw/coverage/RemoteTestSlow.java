@@ -135,8 +135,8 @@ public class RemoteTestSlow extends TestCase{
     try {
       FeedReader reader = new FeedReader(new HttpURL("http://www.google.com/news?output%5Cx3datom=&output=atom"));
       assertTrue("isRemoteRead", reader.isRemoteRead());
-      if(reader.getFormat() != FeedFormat.UNKNOWN){
-        System.out.println("Google news' atom feed should be an unsupported atom 0.3 format");
+      if(reader.getFormat() != FeedFormat.ATOM03){
+        System.out.println("Google news' atom feed should be atom 0.3 format");
       }
     }
     catch (Exception e) {

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://purl.org/atom/ns#" 
+xmlns:atom="http://purl.org/atom/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" 
+	schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+	<xs:element name="tagline" type="atom:contentType"/>
+	<xs:element name="info" type="atom:contentType"/>
+	<xs:element name="issued" type="atom:iso8601dateTime"/>
+	<xs:element name="summary" type="atom:contentType"/>
+	<xs:element name="content" type="atom:contentType"/>	
+	<xs:element name="atom03Extension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element  ref="atom:tagline" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+The "atom:tagline" element is a Content construct that conveys a human-readable description or 
+tagline for the feed. atom:feed elements MAY contain an atom:tagline element, but MUST NOT contain more than one.
+						]]> 
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element  ref="atom:info" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+The "atom:info" element is a Content construct that conveys a human-readable explanation of the feed format itself. atom:feed elements MAY contain an atom:info element, but MUST NOT contain more than one.
+The atom:info element SHOULD NOT considered meaningful by processors; it is a convenience to publishers in certain situations. 
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
+				<xs:element ref="atom:issued">
+				<xs:annotation>
+				<xs:documentation><![CDATA[ 
+The "atom:issued" element is a Date construct that indicates the time that the entry was issued. atom:entry elements MUST contain an atom:issued element, but MUST NOT contain more than one.
+The content of an atom:issued element MAY omit a time zone.  
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>				
+				<xs:element  ref="atom:summary" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+The "atom:summary" element is a Content construct that conveys a short summary, 
+abstract or excerpt of the entry. atom:entry elements MAY contain an atom:created element, but MUST NOT contain more than one. 
+						]]> 
+						</xs:documentation>
+					</xs:annotation>				
+				</xs:element>
+				<xs:element ref="atom:content" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+The "atom:content" element is a Content construct that conveys the content of the entry. atom:entry elements MAY contain one or more atom:content elements.
+If @type="multipart/alternative", @mode MUST NOT be specified, and content element MUST contain 1 or more content elements. These content elements MUST NOT 
+specify @type="multipart/alternative" (i.e. only one level of nesting is allowed). Consumers SHOULD look at all alternative content elements and determine which one is most suitable, based on which @type and @mode the consumer supports, and preferences specified by the end user (if any). Consumers SHOULD NOT render more than one content alternative.  
+						]]> 
+						</xs:documentation>
+					</xs:annotation>						
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	
+	<xs:complexType name="contentType" mixed="true">
+		<xs:choice>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:attribute name="type" use="optional" default="text/plain"/>
+		<xs:attribute name="mode" use="optional" default="xml">
+
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="xml"/>
+					<xs:enumeration value="escaped"/>
+					<xs:enumeration value="base64"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute ref="xml:lang" use="optional"/>
+
+		<xs:anyAttribute/>
+	</xs:complexType>
+	<xs:simpleType name="iso8601dateTime">
+		<xs:union memberTypes="xs:dateTime xs:date"/>
+	</xs:simpleType>
+</xs:schema>

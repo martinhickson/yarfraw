@@ -122,6 +122,8 @@ public class FeedWriter extends AbstractBaseIO{
       return ToRss10ChannelImpl.getInstance().execute(channel);
     }else if(format == FeedFormat.ATOM10){
       return ToAtom10ChannelImpl.getInstance().execute(channel);
+    }else if(format == FeedFormat.ATOM03){
+      throw new UnsupportedOperationException("Yarfraw does not support writting to Atom 0.3 format, use Atom 1.0 instead.");
     }else{
       throw new UnsupportedOperationException("Unknown Feed Format");
     }

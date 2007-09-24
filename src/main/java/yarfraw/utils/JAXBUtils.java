@@ -17,12 +17,14 @@ public class JAXBUtils {
   private static JAXBContext RSS20_CONTEXT = null;
   private static JAXBContext RSS10_CONTEXT = null;
   private static JAXBContext ATOM10_CONTEXT = null;
+  private static JAXBContext ATOM03_CONTEXT = null;
   
   
   private static Map<String, String> _extensionPrefixMap = null;
   private static Map<String, String> _rss10PrefixMap = null;
   private static Map<String, String> _rss20PrefixMap = null;
   private static Map<String, String> _atom10PrefixMap = null;
+  private static Map<String, String> _atom03PrefixMap = null;
   
   /**
    * Gets the namespace prefix map for the marshaller.
@@ -36,10 +38,22 @@ public class JAXBUtils {
       return RSS10_PREFIX_MAPPER;
     }else if(format == FeedFormat.RSS20){
       return RSS20_PREFIX_MAPPER;
+    }else if(format == FeedFormat.ATOM03){
+      return ATOM03_PREFIX_MAPPER;
     }else{
       throw new UnsupportedOperationException("Unknown format: "+format);
     }
   }
+
+  private static NamespacePrefixMapper ATOM03_PREFIX_MAPPER = new NamespacePrefixMapper(){
+
+    @Override
+    public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
+      Map<String, String> prefixMap = getAtom03PrefixMap();
+      return prefixMap.get(namespaceUri);
+    }
+    
+  };
   
   private static NamespacePrefixMapper ATOM10_PREFIX_MAPPER = new NamespacePrefixMapper(){
 
@@ -91,9 +105,19 @@ public class JAXBUtils {
   }
 
   private synchronized static Map<String, String> getAtom10PrefixMap(){
+    if(_atom03PrefixMap == null){
+      _atom03PrefixMap = new HashMap<String, String>();
+      _atom03PrefixMap.put("http://www.w3.org/2005/Atom", ""); //atom 1.0 elements go to default
+      _atom03PrefixMap.putAll(getExtensionPrefixMap());
+      _atom03PrefixMap = Collections.unmodifiableMap(_atom03PrefixMap);
+    }
+    return _atom03PrefixMap;
+  }
+  
+  private synchronized static Map<String, String> getAtom03PrefixMap(){
     if(_atom10PrefixMap == null){
       _atom10PrefixMap = new HashMap<String, String>();
-      _atom10PrefixMap.put("http://www.w3.org/2005/Atom", ""); //atom 1.0 elements go to default
+      _atom10PrefixMap.put("http://purl.org/atom/ns#", ""); //atom 0.3 elements go to default
       _atom10PrefixMap.putAll(getExtensionPrefixMap());
       _atom10PrefixMap = Collections.unmodifiableMap(_atom10PrefixMap);
     }
@@ -151,6 +175,12 @@ public class JAXBUtils {
       return ATOM10_CONTEXT;
     }
     
+    if(format == FeedFormat.ATOM03){
+      if(ATOM03_CONTEXT == null){
+        ATOM03_CONTEXT = JAXBContext.newInstance(CommonUtils.ATOM03_JAXB_CONTEXT);
+      }
+      return ATOM03_CONTEXT;
+    }
     throw new UnsupportedOperationException("Unsupported format: "+ format);
     
   }

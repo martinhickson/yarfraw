@@ -68,8 +68,9 @@ public class Person extends AbstractBaseObject{
    * </li>
    * @param emailOrText
    */
-  public void setEmailOrText(String emailOrText) {
+  public Person setEmailOrText(String emailOrText) {
     _emailOrText = emailOrText;
+    return this;
   }
 
   /**

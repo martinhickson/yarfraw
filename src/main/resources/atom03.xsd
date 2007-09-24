@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://purl.org/atom/ns#" 
+xmlns:atom="http://purl.org/atom/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" 
+	schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+	<xs:element name="feed" type="atom:feedType"/>	
+	<xs:complexType name="feedType">
+		<xs:choice>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="modified" type="atom:iso8601dateTime" minOccurs="1"/>
+			<xs:element name="author" type="atom:personType" minOccurs="0"/>
+
+			<xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- support by extension 
+				<xs:element name="tagline" type="atom:contentType" minOccurs="0"/>  
+			-->
+			<xs:element name="id" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="generator" type="atom:generatorType" minOccurs="0"/>
+			<xs:element name="copyright" type="xs:string" minOccurs="0"/>
+			<!-- support by extension
+			<xs:element name="info" type="atom:contentType" minOccurs="0"/>
+			-->
+			<xs:element name="entry" type="atom:entryType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+
+		<xs:attribute name="version" type="atom:versionType" use="required"/>
+		<xs:attribute ref="xml:lang" use="optional"/>
+ 		<xs:anyAttribute/>
+	</xs:complexType>
+	<xs:complexType name="personType">
+		<xs:choice>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="email" type="atom:emailType" minOccurs="0"/>
+
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:anyAttribute/>
+	</xs:complexType>
+	<xs:complexType name="linkType">
+		<xs:attribute name="rel" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="alternate"/>
+
+					<xs:enumeration value="start"/>
+					<xs:enumeration value="next"/>
+					<xs:enumeration value="prev"/>
+					<xs:enumeration value="service.edit"/>
+					<xs:enumeration value="service.post"/>
+					<xs:enumeration value="service.feed"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+
+		<xs:attribute name="type" type="atom:mediaType" use="required"/>
+		<xs:attribute name="href" type="xs:anyURI" use="required"/>
+		<xs:attribute name="title" type="xs:string" use="optional"/>
+		<xs:anyAttribute/>
+		</xs:complexType>
+	<xs:complexType name="generatorType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="url" type="xs:anyURI" use="optional"/>
+
+				<xs:attribute name="version" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="entryType">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="link" type="atom:linkType"/>
+			<xs:element name="author" type="atom:personType" minOccurs="0"/>
+
+			<xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="id" type="xs:string"/>
+			<!-- support by extension
+			<xs:element name="issued" type="atom:iso8601dateTime"/>
+			-->
+			<xs:element name="modified" type="atom:iso8601dateTime"/>
+			<xs:element name="created" type="atom:iso8601dateTime" minOccurs="0"/>
+			<!-- support by extension
+			<xs:element name="summary" type="atom:contentType" minOccurs="0"/>
+			<xs:element name="content" type="atom:contentType" minOccurs="0" maxOccurs="unbounded"/>
+			-->
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+
+		<xs:attribute ref="xml:lang" use="optional"/>
+		<xs:anyAttribute/>
+	</xs:complexType>
+	<xs:simpleType name="iso8601dateTime">
+		<xs:union memberTypes="xs:dateTime xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="versionType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="\d+\.\d+"/>
+		</xs:restriction>
+
+	</xs:simpleType>
+	<xs:simpleType name="emailType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="\w+@(\w+\.)+\w+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="mediaType">
+		<xs:restriction base="xs:normalizedString">
+			<xs:pattern value="\w+/\w+"/>
+
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

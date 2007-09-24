@@ -144,6 +144,20 @@
             </configuration>
           </execution>
           <execution>
+            <id>atom03</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <generatePackage>yarfraw.generated.atom03.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>atom03.xsd</schemaInclude>
+              </schemaIncludes>
+              <generateDirectory>${project.build.directory}/generated-sources/atom03</generateDirectory>
+            </configuration>
+          </execution>          
+          <execution>
             <id>rss20</id>
             <goals>
               <goal>generate</goal>
@@ -174,6 +188,22 @@
               <strict>false</strict>
             </configuration>
           </execution>
+          <execution>
+            <id>atom03ext</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <strict>true</strict>
+              <generatePackage>yarfraw.generated.atom03.ext.elements</generatePackage>
+              <schemaIncludes>
+                <schemaInclude>extension/atom03.xsd</schemaInclude>
+              </schemaIncludes>
+              <forceRegenerate>true</forceRegenerate>
+              <generateDirectory>${project.build.directory}/generated-sources/extension/atom03ext</generateDirectory>
+            </configuration>
+          </execution>           
           <execution>
             <id>itunes</id>
             <goals>

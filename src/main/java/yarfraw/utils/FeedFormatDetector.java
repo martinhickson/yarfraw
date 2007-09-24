@@ -32,7 +32,8 @@ public class FeedFormatDetector{
   private static final String VERSION_20 = "2.0";
   private static final String RDF = "RDF";
   private static final String RDF_NS_URI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-  private static final String ATOM10_XMLNS = "http://www.w3.org/2005/Atom";  
+  private static final String ATOM10_XMLNS = "http://www.w3.org/2005/Atom";
+  private static final String ATOM03_XMLNS = "http://purl.org/atom/ns#";
   private static final String FEED = "feed";
   
   private static final FormatDetectionHandler FormatDetectionHandler_NON_STRICT = new FormatDetectionHandler(false);
@@ -122,8 +123,9 @@ public class FeedFormatDetector{
         throw new EarlyTerminationException(FeedFormat.RSS10);
       }else if (FEED.equals(localName)&& ATOM10_XMLNS.equals(uri)) {
         throw new EarlyTerminationException(FeedFormat.ATOM10);
-      }
-      else{
+      }else if(FEED.equals(localName) && ATOM03_XMLNS.equals(uri)){
+        throw new EarlyTerminationException(FeedFormat.ATOM03);
+      }else{
        //does not recognize the format from the root element, the format must be unknown
         throw new EarlyTerminationException(FeedFormat.UNKNOWN);
       }
