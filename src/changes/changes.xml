@@ -3,11 +3,6 @@
     <title>Release Notes</title>
   </properties>
   <body>
-  	<release version="TBD" date="TBD">
-  	  <action dev="" type="TODO">
-        Add support for Atom 0.3
-      </action>
-  	</release>
   	<release version="0.9" date="TBD">
   		<action dev="jliang" type="add">
   			Added CachedFeedReader that supports conditional get.
