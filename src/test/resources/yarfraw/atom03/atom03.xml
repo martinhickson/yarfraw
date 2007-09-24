@@ -1,0 +1,1454 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<feed version="0.3" xml:lang="en" xmlns="http://purl.org/atom/ns#">
+	<generator>NFE/1.0</generator>
+	<title>Google News</title>
+	<link rel="alternate" type="text/html"
+		href="http://news.google.com/" />
+	<tagline>Google News</tagline>
+	<author>
+		<name>Google Inc.</name>
+		<email>news-feedback@google.com</email>
+	</author>
+	<copyright>&amp;copy;2007 Google</copyright>
+	<modified>2007-09-24T20:16:17+00:00</modified>
+	<!-- A couple notes:
+		* add an "output=atom" param to get Atom
+		* section pages have a "topic=?" param;
+		use "topic=h" for a Top Stories section.
+	-->
+	<entry>
+		<title type="text/html" mode="escaped">&lt;b>Iranian president spars with academics in NY - Reuters Canada&lt;/b></title>
+		<link rel="alternate" type="text/html"
+			href="http://ca.today.reuters.com/news/NewsArticle.aspx?type=topNews&amp;storyID=2007-09-24T193744Z_01_N24309875_RTRIDST_0_NEWS-IRAN-AHMADINEJAD-COL.XML" />
+		<id>tag:news.google.com,2005:cluster=42cfbcd8</id>
+		<summary>Top Stories</summary>
+		<issued>2007-09-24T19:39:29+00:00</issued>
+		<modified>2007-09-24T19:39:29+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center
+			valign=top&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-0&amp;fd=A&amp;url=http://ca.today.reuters.com/news/NewsArticle.aspx%3Ftype%3DtopNews%26storyID%3D2007-09-24T193744Z_01_N24309875_RTRIDST_0_NEWS-IRAN-AHMADINEJAD-COL.XML&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Iranian
+			president spars with academics in
+			NY&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Reuters
+			Canada&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;36 minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Claudia Parsons NEW YORK (Reuters) - Iranian
+			President Mahmoud Ahmadinejad clashed with a US academic who
+			called him a &amp;quot;petty and cruel dictator&amp;quot; at
+			a forum in New York on Monday where Ahmadinejad said Iran
+			was a peaceful nation and a victim of
+			&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-1&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5gQbulMXqIwovDODr_KP_CRnw7a4A&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Talk
+			of war is &amp;#39;propaganda&amp;#39;: Iranian
+			leader&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/?ncl=1120910552&amp;hl=en&amp;btclp=1&amp;scoring=r&quot;&gt;&lt;img
+			src=&quot;/images/news_comment_bubble12.gif&quot;
+			alt=&quot;google news comment&quot;
+			class=&quot;comment-icon&quot;&gt;Comment by&amp;nbsp;David
+			M. Schizer&lt;/a&gt;&lt;font size=-1
+			color=#6f6f6f&gt;&amp;nbsp;Dean, Columbia Law
+			School&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font size=-1
+			class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-2&amp;fd=A&amp;url=http://www.cnn.com/2007/US/09/24/us.iran/&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;CNN&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-3&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601087%26sid%3DafuYjcyMELfQ%26refer%3Dhome&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-4&amp;fd=A&amp;url=http://www.nydailynews.com/news/2007/09/24/2007-09-24_irans_president_i_dont_deny_holocaust-3.html&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;New
+			York Daily News&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-0-5&amp;fd=A&amp;url=http://abcnews.go.com/US/wireStory%3Fid%3D3643605&amp;cid=1120910552&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;ABC
+			News&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120910552&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			2,696 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Putin boosts finance minister Kudrin in reshuffle -
+			Canada.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.canada.com/topics/news/world/story.html?id=8bb83f90-4fd5-4a23-b369-638a84d95da5&amp;k=96315" />
+		<id>tag:news.google.com,2005:cluster=42d4747d</id>
+		<summary>Top Stories</summary>
+		<issued>2007-09-24T19:22:03+00:00</issued>
+		<modified>2007-09-24T19:22:03+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1i-0&amp;fd=A&amp;url=http://www.javno.com/en/world/clanak.php%3Fid%3D78636&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=398BnvzTP2MJ&amp;imgurl=www.javno.com/slike/slike_3/r1/g2007/m07/x131145485895694529.jpg
+			width=57 height=80 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;Javno.hr&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-0&amp;fd=A&amp;url=http://www.canada.com/topics/news/world/story.html%3Fid%3D8bb83f90-4fd5-4a23-b369-638a84d95da5%26k%3D96315&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Putin
+			boosts finance minister Kudrin in
+			reshuffle&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Canada.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;54 minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;Russian Finance Minister Alexei Kudrin smiles
+			during a news conference in Moscow, February 9, 2006. Kudrin
+			was given the additional post of deputy prime minister by
+			President Vladimir Putin on
+			Monday.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-1&amp;fd=A&amp;url=http://today.reuters.com/investing/FinanceArticle.aspx%3Ftype%3DbondsNews%26storyID%3D2007-09-24T190724Z_01_L24115587_RTRIDST_0_RUSSIA-CABINET-KUDRIN-UPDATE-1.XML&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;UPDATE
+			1-Russia&amp;#39;s new govt to continue economic
+			policy-Kudrin&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Reuters&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-2&amp;fd=A&amp;url=http://news.xinhuanet.com/english/2007-09/25/content_6786634.htm&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Putin
+			rejects defense minister&amp;#39;s resignation&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Xinhua&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-3&amp;fd=A&amp;url=http://www.guardian.co.uk/worldlatest/story/0,,-6945200,00.html&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Guardian
+			Unlimited&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-4&amp;fd=A&amp;url=http://www.forbes.com/afxnewslimited/feeds/afx/2007/09/24/afx4149891.html&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Forbes&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-5&amp;fd=A&amp;url=http://online.wsj.com/article/SB119065684852837665.html%3Fmod%3Dgooglenews_wsj&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Wall
+			Street Journal&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/0-1-6&amp;fd=A&amp;url=http://www.earthtimes.org/articles/show/113158.html&amp;cid=1121219709&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Earthtimes.org&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121219709&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			131 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Burma protests: Q&amp;amp;A - Telegraph.co.uk
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.telegraph.co.uk/news/main.jhtml?xml=/news/2007/09/24/wburma224.xml" />
+		<id>tag:news.google.com,2005:cluster=42cf3d32</id>
+		<summary>World</summary>
+		<issued>2007-09-24T18:36:02+00:00</issued>
+		<modified>2007-09-24T18:36:02+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0i-0&amp;fd=A&amp;url=http://www.gulfnews.com/world/Myanmar/10155823.html&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=qEOaU7N0UgkJ&amp;imgurl=www.gulfnews.com/images/07/09/23/23_wd_myanmar_reuters_4.jpg
+			width=80 height=61 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Gulf
+			News&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-0&amp;fd=A&amp;url=http://www.telegraph.co.uk/news/main.jhtml%3Fxml%3D/news/2007/09/24/wburma224.xml&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Burma
+			protests: Q&amp;amp;A&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Telegraph.co.uk&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;1 hour
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Sebastien Berger The first demonstrations were
+			triggered by fuel price increases of as much as 500 per cent
+			announced by the Burma&amp;#39;s military rulers last
+			month.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-1&amp;fd=A&amp;url=http://www.guardian.co.uk/worldlatest/story/0,,-6944888,00.html&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Myanmar
+			Government Warns Monk Protesters&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Guardian
+			Unlimited&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-2&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5ivO0AtyBkmFxEVb3xG3xpzLlpGIQ&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Over
+			100000 flood Myanmar streets in largest protest in
+			decades&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-3&amp;fd=A&amp;url=http://www.agi.it/world/news/200709241040-cro-ren0013-art.html&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Agenzia
+			Giornalistica Italia&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-4&amp;fd=A&amp;url=http://uk.reuters.com/article/wtMostRead/idUKSP153502._CH_.242020070924&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters
+			UK&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-5&amp;fd=A&amp;url=http://www.thestandard.com.hk/news_detail.asp%3Fpp_cat%3D20%26art_id%3D54021%26sid%3D15521055%26con_type%3D1&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Standard&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-0-6&amp;fd=A&amp;url=http://www.digitaljournal.com/article/232315/ROUNDUP_Myanmar_s_monk_led_rebellion_gains_pace&amp;cid=1120877874&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;DigitalJournal.com&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120877874&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			2,081 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			CORRECTED - UN Climate change debate coins new jargon -
+			Reuters UK
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://uk.reuters.com/article/oilRpt/idUKN2425128320070924" />
+		<id>tag:news.google.com,2005:cluster=42d24aef</id>
+		<summary>World</summary>
+		<issued>2007-09-24T09:43:59+00:00</issued>
+		<modified>2007-09-24T09:43:59+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/24/AR2007092400128.html&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=e_910eYr17wJ&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/24/PH2007092400130.jpg
+			width=80 height=54 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-0&amp;fd=A&amp;url=http://uk.reuters.com/article/oilRpt/idUKN2425128320070924&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;CORRECTED
+			- UN Climate change debate coins new
+			jargon&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Reuters
+			UK&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;10 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Deborah Zabarenko, Environment Correspondent
+			UNITED NATIONS, Sept 24 (Reuters) - To understand the
+			climate change debate, it helps to understand the jargon, a
+			mixture of diplomatese, pundit-speak and
+			techno-talk.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-1&amp;fd=A&amp;url=http://www.abcnews.go.com/Politics/wireStory%3Fid%3D3643054&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Schwarzenegger
+			urges UN to move on climate change&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;ABC
+			News&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-2&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5hmEb_7UPNl8zmh_rSquPha8tbBVw&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Halve
+			global-warming pollution by 2050, Europe tells UN
+			summit&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-3&amp;fd=A&amp;url=http://www.nytimes.com/2007/09/24/world/24cnd-nations.html%3Fhp&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;New
+			York Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-4&amp;fd=A&amp;url=http://www.cbc.ca/world/story/2007/09/24/climate-talks.html&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;CBC.ca&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-1-5&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601086%26sid%3DaWsdIrnA0KOU%26refer%3Dlatin_america&amp;cid=1121077999&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121077999&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			880 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Pakistan Supreme Court Dismisses Two Challenges to Musharraf
+			- Voice of America
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.voanews.com/english/2007-09-24-voa23.cfm" />
+		<id>tag:news.google.com,2005:cluster=42ce1c28</id>
+		<summary>World</summary>
+		<issued>2007-09-24T16:10:45+00:00</issued>
+		<modified>2007-09-24T16:10:45+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2i-0&amp;fd=A&amp;url=http://www.msnbc.msn.com/id/20923837/&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=UVopZSN30LMJ&amp;imgurl=msnbcmedia2.msn.com/j/msnbc/Components/Photos/070922/070922_pakistan_hmed_2p.hmedium.jpg
+			width=80 height=53 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;MSNBC&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-0&amp;fd=A&amp;url=http://www.voanews.com/english/2007-09-24-voa23.cfm&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Pakistan
+			Supreme Court Dismisses Two Challenges to
+			Musharraf&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Voice of
+			America&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;4 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Daniel Schearf Pakistan&amp;#39;s Supreme
+			Court has dismissed two challenges to President Pervez
+			Musharraf&amp;#39;s bid for reelection, but the justices are
+			still considering several
+			others.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-1&amp;fd=A&amp;url=http://www.youtube.com/watch%3Fv%3D7lfcTFNTIPo&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Video:
+			Pakistan&amp;#39;s political crackdown intensifies&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AlJazeeraEnglish&lt;/nobr&gt;&lt;/font&gt;&lt;object
+			width=&quot;448&quot; height=&quot;356&quot;&gt;&lt;param
+			name=&quot;movie&quot;
+			value=&quot;http://www.youtube.com/v/7lfcTFNTIPo&quot;&gt;&lt;/param&gt;&lt;param
+			name=&quot;wmode&quot;
+			value=&quot;transparent&quot;&gt;&lt;/param&gt;&lt;embed
+			src=&quot;http://www.youtube.com/v/7lfcTFNTIPo&quot;type=&quot;application/x-shockwave-flash&quot;wmode=&quot;transparent&quot;width=&quot;448&quot;height=&quot;356&quot;&gt;&lt;/embed&gt;&lt;/object&gt;&lt;br&gt;&lt;/font&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-2&amp;fd=A&amp;url=http://www.zeenews.com/znnew/articles.asp%3Faid%3D397085%26sid%3DWOR%26sname%3D%26news%3DFormer%2520SC%2520judge%2520to%2520challenge%2520Mush,%2520Oppn%2520activists%2520arrested&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Former
+			SC judge to challenge Mush, Oppn activists
+			arrested&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Zee
+			News&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-3&amp;fd=A&amp;url=http://www.iht.com/articles/2007/09/24/asia/pakistan.php&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;International
+			Herald Tribune&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-4&amp;fd=A&amp;url=http://www.time.com/time/world/article/0,8599,1664712,00.html&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;TIME&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-5&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5hbQNJ8-Kn-tU4oYOuZMCPB6pGHgQ&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/1-2-6&amp;fd=A&amp;url=http://www.theglobeandmail.com/servlet/story/LAC.20070924.PAKISTAN24/TPStory/TPInternational/Asia/&amp;cid=1120803880&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Globe
+			and
+			Mail&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120803880&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			649 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Can Clinton Be Stopped? - Washington Post
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://blog.washingtonpost.com/the-trail/2007/09/24/the_hillary_blitz.html?hpid=topnews" />
+		<id>tag:news.google.com,2005:cluster=42d43c10</id>
+		<summary>U.S.</summary>
+		<issued>2007-09-24T17:56:01+00:00</issued>
+		<modified>2007-09-24T17:56:01+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/22/AR2007092200230.html&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=v3uMB5KjkV8J&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/22/PH2007092200231.jpg
+			width=61 height=80 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-0&amp;fd=A&amp;url=http://blog.washingtonpost.com/the-trail/2007/09/24/the_hillary_blitz.html%3Fhpid%3Dtopnews&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Can
+			Clinton Be Stopped?&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Washington
+			Post&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;2 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;The Hillary Clinton who appeared on five Sunday
+			morning shows was a formidable political candidate: poised,
+			polished, knowledgeable.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-1&amp;fd=A&amp;url=http://www.charlotte.com/local/story/290646.html&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Edwards,
+			Obama say no to lobbyists&amp;#39; money&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Charlotte
+			Observer&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-2&amp;fd=A&amp;url=http://firstread.msnbc.msn.com/archive/2007/09/24/376385.aspx&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Oh-eight
+			(D): The Hillary filibuster&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;MSNBC&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-3&amp;fd=A&amp;url=http://www.newsday.com/news/nationworld/ny-usclin245387843sep24,0,62201.story&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Newsday&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-4&amp;fd=A&amp;url=http://www.reuters.com/article/politicsNews/idUSN2425624820070924&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-5&amp;fd=A&amp;url=http://www.tnr.com/blog/show_comments.mhtml%3Fb%3Dthe_plank%26pid%3D145852&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Plank on TNR.com&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-0-6&amp;fd=A&amp;url=http://www.angus-reid.com/polls/view/28332/democrats_2008_hillary_47_obama_25&amp;cid=1121205264&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Angus
+			Reid Global
+			Monitor&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121205264&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			141 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Bush Criticizes Democrats on Spending - The Associated Press
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://ap.google.com/article/ALeqM5iuZ0n7iVCTnik8vRwCQLt-nUIqow" />
+		<id>tag:news.google.com,2005:cluster=42d4b5a2</id>
+		<summary>U.S.</summary>
+		<issued>2007-09-24T18:03:44+00:00</issued>
+		<modified>2007-09-24T18:03:44+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/24/AR2007092400108.html&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=GY9iY09vmzQJ&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/24/PH2007092400109.jpg
+			width=80 height=56 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-0&amp;fd=A&amp;url=http://ap.google.com/article/ALeqM5iuZ0n7iVCTnik8vRwCQLt-nUIqow&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Bush
+			Criticizes Democrats on
+			Spending&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;The Associated
+			Press&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;2 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;WASHINGTON (AP) - President Bush on Monday
+			criticized the Democratic-led Congress for failing to pass
+			spending bills on time, saying they might be trying to
+			&amp;quot;sneak in all kinds of special
+			projects.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-1&amp;fd=A&amp;url=http://today.reuters.com/investing/FinanceArticle.aspx%3Ftype%3DbondsNews%26storyID%3D2007-09-24T181924Z_01_N24297029_RTRIDST_0_BUSH-BUDGET-PICTURE.XML&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Bush
+			seeks bill to keep US government running&lt;/a&gt; &lt;font
+			size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Reuters&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-2&amp;fd=A&amp;url=http://public.cq.com/docs/cqm/cqmidday110-000002591518.html&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Bush
+			Warns Omnibus Spending Bills Won’t Avert Vetoes&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Congressional
+			Quarterly&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-3&amp;fd=A&amp;url=http://www.greenbaypressgazette.com/apps/pbcs.dll/article%3FAID%3D/20070924/GPG0101/70924088/1206/GPGnews&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Green
+			Bay Press Gazette&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-4&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601087%26sid%3DaOn9pxPISLPo%26refer%3Dhome&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-5&amp;fd=A&amp;url=http://www.upi.com/NewsTrack/Top_News/2007/09/24/bush_urges_us_congress_to_work_on_budget/4907/&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;United
+			Press International&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-1-6&amp;fd=A&amp;url=http://thinkprogress.org/2007/09/24/bush-priorities/&amp;cid=1121236386&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Think
+			Progress&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121236386&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			213 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			MoveOn.Org To Pay The New York Times The Difference -
+			mediabistro.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.mediabistro.com/fishbowlny/scandals/moveonorg_to_pay_the_new_york_times_the_difference_67645.asp" />
+		<id>tag:news.google.com,2005:cluster=42d409c5</id>
+		<summary>U.S.</summary>
+		<issued>2007-09-24T16:22:45+00:00</issued>
+		<modified>2007-09-24T16:22:45+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2i-0&amp;fd=A&amp;url=http://www.earthtimes.org/articles/show/112851.html&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=ZVz8322oN1kJ&amp;imgurl=www.earthtimes.org/newsimage/price_break_24097.jpg
+			width=80 height=54 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;Earthtimes.org&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-0&amp;fd=A&amp;url=http://www.mediabistro.com/fishbowlny/scandals/moveonorg_to_pay_the_new_york_times_the_difference_67645.asp&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;MoveOn.Org
+			To Pay The New York Times The
+			Difference&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;mediabistro.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;3 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;After almost two weeks, The New York Times has
+			been under attack by conservatives -- and some moderates --
+			in the press for the advocacy ad personally criticizing
+			General Petraeus.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-1&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601087%26sid%3Dawa2v3hs.xJE%26refer%3Dhome&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;MoveOn.org
+			Says It Will Pay Times More for Controversial Ad&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-2&amp;fd=A&amp;url=http://www.cnn.com/2007/US/09/23/nyt.moveon/%3Firef%3Dmpstoryview&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Group&amp;#39;s
+			ad attacked integrity of Gen. David Petraeus, the top
+			&lt;b&gt;...&lt;/b&gt;&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;CNN&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-3&amp;fd=A&amp;url=http://blogs.usatoday.com/onpolitics/2007/09/theres-no-movin.html&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;USA
+			Today&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-4&amp;fd=A&amp;url=http://thecaucus.blogs.nytimes.com/2007/09/23/moveon-to-pay-full-times-ad-rate/%3Fhp&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;New
+			York Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-5&amp;fd=A&amp;url=http://www.cnsnews.com/ViewPolitics.asp%3FPage%3D/Politics/archive/200709/POL20070924a.html&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;CNSNews.com&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/2-2-6&amp;fd=A&amp;url=http://themoderatevoice.com/politics/military/15260/ny-times-public-editor-hoyt-blasts-papers-moveon-petraeus-ad-as-betraying-interests/&amp;cid=1121192389&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Moderate
+			Voice&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121192389&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			261 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			UAW strike at GM plants may impact local operations -
+			Bizjournals.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.bizjournals.com/dayton/stories/2007/09/24/daily1.html" />
+		<id>tag:news.google.com,2005:cluster=42cd0187</id>
+		<summary>Business</summary>
+		<issued>2007-09-24T18:06:38+00:00</issued>
+		<modified>2007-09-24T18:06:38+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0i-0&amp;fd=A&amp;url=http://money.cnn.com/2007/09/24/news/companies/gm_uaw_strikedeadline/%3Fpostversion%3D2007092408&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=4xOmF7cL61gJ&amp;imgurl=i.l.cnn.net/money/2007/09/24/news/companies/gm_uaw_strikedeadline/gm_assembly_line.03.jpg
+			width=80 height=60 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;CNNMoney.com&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-0&amp;fd=A&amp;url=http://www.bizjournals.com/dayton/stories/2007/09/24/daily1.html&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;UAW
+			strike at GM plants may impact local
+			operations&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Bizjournals.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;2 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;The Dayton area could feel the impact of the
+			United Auto Workers&amp;#39; strike that started Monday at
+			General Motors Corp. plants nationwide, a local labor leader
+			said.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-1&amp;fd=A&amp;url=http://www.thestreet.com/s/strike-on-at-gm-plants/newsanalysis/businessinsurance/10380997.html%3Fpuc%3Dgooglefi&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Strike
+			On at GM Plants&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;TheStreet.com&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-2&amp;fd=A&amp;url=http://articles.moneycentral.msn.com/Investing/Dispatch/070924markets.aspx&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;UAW
+			strike deadline set&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;MSN
+			Money&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-3&amp;fd=A&amp;url=http://voanews.com/english/2007-09-24-voa44.cfm&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Voice
+			of America&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-4&amp;fd=A&amp;url=http://www.chron.com/disp/story.mpl/ap/tx/5160128.html&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Houston
+			Chronicle&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-5&amp;fd=A&amp;url=http://www.chicagotribune.com/business/chi-070925-gm-strike,0,5532605.story%3Fcoll%3Dchi-news-hed&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Chicago
+			Tribune&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-0-6&amp;fd=A&amp;url=http://www.forbes.com/business/2007/09/24/general-motors-update-markets-equity-cx_af_0924markets19.html&amp;cid=1120731527&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Forbes&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120731527&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			3,173 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Oil below $81 as Gulf production resumes - BusinessWeek
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.businessweek.com/ap/financialnews/D8RS0JR00.htm" />
+		<id>tag:news.google.com,2005:cluster=42d38555</id>
+		<summary>Business</summary>
+		<issued>2007-09-24T19:40:20+00:00</issued>
+		<modified>2007-09-24T19:40:20+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1i-0&amp;fd=A&amp;url=http://www.boston.com/business/articles/2007/09/21/oil_prices_slip&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=HIOk59sP3SgJ&amp;imgurl=cache.boston.com/resize/bonzai-fba/AP_Photo/2007/09/21/1190350065_0429/410w.jpg
+			width=80 height=52 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Boston
+			Globe&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-0&amp;fd=A&amp;url=http://www.businessweek.com/ap/financialnews/D8RS0JR00.htm&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Oil
+			below $81 as Gulf production
+			resumes&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;BusinessWeek&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;35 minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By JOHN WILEN Energy futures fell Monday after a
+			tropical depression that moved through the Gulf of Mexico
+			late last week turned out to be a
+			dud.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-1&amp;fd=A&amp;url=http://online.wsj.com/article/SB119064810868837465.html%3Fmod%3Dgooglenews_wsj&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Crude
+			Slips as Storm Threat Falls&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Wall Street
+			Journal&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-2&amp;fd=A&amp;url=http://www.cattlenetwork.com/content.asp%3Fcontentid%3D162535&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;OIL
+			FUTURES: Crude Dn; Short-term Hurricane Threat
+			Dissipates&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;CattleNetwork.com&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-3&amp;fd=A&amp;url=http://investing.reuters.co.uk/investing/financeArticle.aspx%3Ftype%3DhotStocksNewsUS%26storyID%3D2007-09-24T194005Z_01_SP57154_RTRUKOC_0_US-MARKETS-OIL.xml&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters.uk&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-4&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5jJDT3oAh5s0fgF3mjIPJ6snvYysg&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-5&amp;fd=A&amp;url=http://www.forbes.com/afxnewslimited/feeds/afx/2007/09/24/afx4147511.html&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Forbes&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-1-6&amp;fd=A&amp;url=http://uk.reuters.com/article/oilRpt/idUKN2448402220070924&amp;cid=1121158485&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters
+			UK&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121158485&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			460 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Report: Microsoft may take 5% stake in Facebook -
+			Bizjournals.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.bizjournals.com/sanjose/stories/2007/09/24/daily13.html" />
+		<id>tag:news.google.com,2005:cluster=42d4d408</id>
+		<summary>Business</summary>
+		<issued>2007-09-24T19:08:33+00:00</issued>
+		<modified>2007-09-24T19:08:33+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center
+			valign=top&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-2-0&amp;fd=A&amp;url=http://www.bizjournals.com/sanjose/stories/2007/09/24/daily13.html&amp;cid=1121244168&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Report:
+			Microsoft may take 5% stake in
+			Facebook&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Bizjournals.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;1 hour
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;Microsoft Corp. is reportedly in talks about
+			taking up to a 5 percent stake in Facebook Inc. that could
+			value the social networking startup at about $10
+			billion.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-2-1&amp;fd=A&amp;url=http://online.wsj.com/article/SB119065193646437586.html%3Fmod%3Dgooglenews_wsj&amp;cid=1121244168&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Microsoft
+			in Talks to Buy Facebook Stake&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Wall Street
+			Journal&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-2-2&amp;fd=A&amp;url=http://www.news.com/8301-13577_3-9783638-36.html%3Ftag%3Dnefd.blgs&amp;cid=1121244168&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Report:
+			Microsoft plans to invest in, not acquire Facebook&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;CNET
+			News.com&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-2-3&amp;fd=A&amp;url=http://www.allheadlinenews.com/articles/7008616852&amp;cid=1121244168&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;AHN&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/3-2-4&amp;fd=A&amp;url=http://www.bizjournals.com/sanjose/stories/2007/09/24/daily13.html%3Fjst%3Db_ln_hl&amp;cid=1121244168&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bizjournals.com&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121244168&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			14 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Gaming world braces for industry &amp;#39;killer&amp;#39;
+			Halo 3 - AFP
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://afp.google.com/article/ALeqM5iy-yMdKbeG0LsgOTBxGCZkcDeQTA" />
+		<id>tag:news.google.com,2005:cluster=42d24b6d</id>
+		<summary>Sci/Tech</summary>
+		<issued>2007-09-24T19:32:57+00:00</issued>
+		<modified>2007-09-24T19:32:57+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0i-0&amp;fd=A&amp;url=http://www.winknews.com/news/entertainment/9962011.html&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=hvUU87NtVsEJ&amp;imgurl=media.winknews.com/images/halo_3.jpg
+			width=80 height=60 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;Winknews.com&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-0&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5iy-yMdKbeG0LsgOTBxGCZkcDeQTA&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Gaming
+			world braces for industry &amp;#39;killer&amp;#39; Halo
+			3&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;AFP&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;43
+			minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;WASHINGTON (AFP) - The gaming world braced Monday
+			for the launch of &amp;quot;Halo 3,&amp;quot; expected to
+			help Microsoft and its XBox 360 console in its battle
+			against Nintendo&amp;#39;s Wii and Sony&amp;#39;s
+			Playstation 3. Microsoft was to release the game in the
+			United States at
+			&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-1&amp;fd=A&amp;url=http://www.informationweek.com/blog/main/archives/2007/09/halo_3_reviews.html&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Halo
+			3 Reviews Are In: Master Chief Rules!&lt;/a&gt; &lt;font
+			size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;InformationWeek&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-2&amp;fd=A&amp;url=http://www.marketwatch.com/news/story/microsoft-scores-critics-halo-3/story.aspx%3Fguid%3D%257BC91DCE17-F661-4FAA-BEBD-BCE1742621D1%257D&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Microsoft
+			gets boost from high &amp;#39;Halo 3&amp;#39;
+			scores&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;MarketWatch&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-3&amp;fd=A&amp;url=http://www.foxnews.com/wires/2007Sep24/0,4670,GamesHalo3Launch,00.html&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;FOX
+			News&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-4&amp;fd=A&amp;url=http://chicagotribune.com/entertainment/chi-mxa0924halo_archivesep24,1,1376581.story&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Chicago
+			Tribune&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-5&amp;fd=A&amp;url=http://www.usatoday.com/tech/columnist/marcsaltzman/2007-09-24-halo-3_N.htm&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;USA
+			Today&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-0-6&amp;fd=A&amp;url=http://blogs.mercurynews.com/aei/2007/09/review_halo_3_.html&amp;cid=1121078125&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;San
+			Jose Mercury
+			News&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121078125&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			368 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			One laptop per child project opens up on November 12 - TG
+			Daily
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.tgdaily.com/content/view/34012/135/" />
+		<id>tag:news.google.com,2005:cluster=42d42ae7</id>
+		<summary>Sci/Tech</summary>
+		<issued>2007-09-24T15:22:16+00:00</issued>
+		<modified>2007-09-24T15:22:16+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1i-0&amp;fd=A&amp;url=http://www.bjhcim.co.uk/news/2007/n709019.htm&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=HDo89_egnqEJ&amp;imgurl=www.bjhcim.co.uk/news/images/olpc9-c.jpg
+			width=80 height=53 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;bjhcim&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-0&amp;fd=A&amp;url=http://www.tgdaily.com/content/view/34012/135/&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;One
+			laptop per child project opens up on November
+			12&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;TG
+			Daily&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;4 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Mark Raby Cambridge (MA) - Starting November,
+			North American residents will be able to purchase an XO
+			laptop for $400, sending another machine to a child in an
+			impoverished country.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-1&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5jkmpFI_sRnl2ntWmktdHfOJJE15Q&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&amp;#39;100
+			dollar laptops&amp;#39; for poor students to go on
+			sale&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-2&amp;fd=A&amp;url=http://www.msnbc.msn.com/id/20941373/site/newsweek/&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Give
+			One, Get One&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Newsweek&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-3&amp;fd=A&amp;url=http://bits.blogs.nytimes.com/2007/09/24/the-larger-challenge-and-opportunity-for-one-laptop-per-child/&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;New
+			York Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-4&amp;fd=A&amp;url=http://www.businessweek.com/technology/content/sep2007/tc20070923_960941.htm%3Fchan%3Dtop%2Bnews_top%2Bnews%2Bindex_businessweek%2Bexclusives&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;BusinessWeek&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-5&amp;fd=A&amp;url=http://www.timesonline.co.uk/tol/news/tech_and_web/article2522677.ece&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Times
+			Online&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-1-6&amp;fd=A&amp;url=http://abcnews.go.com/GMA/TenWays/story%3Fid%3D3640025%26page%3D1&amp;cid=1121200871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;ABC
+			News&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121200871&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			230 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Starbucks&amp;#39; song giveaway to promote iTunes deal -
+			Seattle Times
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://seattletimes.nwsource.com/html/businesstechnology/2003898939_starbucks24.html" />
+		<id>tag:news.google.com,2005:cluster=42d45a20</id>
+		<summary>Sci/Tech</summary>
+		<issued>2007-09-24T07:23:36+00:00</issued>
+		<modified>2007-09-24T07:23:36+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2i-0&amp;fd=A&amp;url=http://www.komotv.com/news/9957346.html&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=o70-yBYPWVwJ&amp;imgurl=media.komotv.com/images/070924_iPhone.jpg
+			width=80 height=60 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;KOMO&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-0&amp;fd=A&amp;url=http://seattletimes.nwsource.com/html/businesstechnology/2003898939_starbucks24.html&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Starbucks&amp;#39;
+			song giveaway to promote iTunes
+			deal&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Seattle
+			Times&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;12 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Seattle Times staff To promote its new
+			in-store partnership with Apple Computer, Starbucks plans to
+			give away 1.5 million song downloads per day from Oct. 2 to
+			Nov. 7 in its US stores.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-1&amp;fd=A&amp;url=http://arstechnica.com/journals/apple.ars/2007/09/24/starbucks-to-spread-50-million-pieces-of-itunes-love&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Starbucks
+			to spread 50 million pieces of iTunes love&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Ars
+			Technica&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-2&amp;fd=A&amp;url=http://www.themoneytimes.com/articles/20070924/starbucks_plans_to_give_away_free_itunes_downloads-id-1010103.html&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Starbucks
+			plans to give away Free iTunes Downloads&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;The Money
+			Times&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-3&amp;fd=A&amp;url=http://newsticker.welt.de/index.php%3Fchannel%3Dfin%26module%3Dsmarthouse%26id%3D593644&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Die
+			Welt&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-4&amp;fd=A&amp;url=http://www.tgdaily.com/content/view/34005/113/&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;TG
+			Daily&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-5&amp;fd=A&amp;url=http://investing.reuters.co.uk/investing/financeArticle.aspx%3Ftype%3DtnBusinessNews%26storyID%3D2007-09-24T044959Z_01_N24362788_RTRIDST_0_BUSINESS-STARBUCKS-MUSIC-DC.XML&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters.uk&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/4-2-6&amp;fd=A&amp;url=http://www.bizjournals.com/portland/stories/2007/09/24/daily1.html&amp;cid=1121212960&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bizjournals.com&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121212960&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			279 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			City files suit against Sonics to enforce lease - Seattle
+			Post Intelligencer
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://seattlepi.nwsource.com/basketball/332923_arena25.html" />
+		<id>tag:news.google.com,2005:cluster=42d2eda0</id>
+		<summary>Sports</summary>
+		<issued>2007-09-24T19:45:48+00:00</issued>
+		<modified>2007-09-24T19:45:48+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0i-0&amp;fd=A&amp;url=http://www.philly.com/philly/wires/ap/sports/20070924_ap_seattlefilessuitagainstsupersonics.html&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=5GR2doFU58UJ&amp;imgurl=media.philly.com/images/300*200/c2f8d779-8e00-426e-9f72-870979bf6dc1.jpg
+			width=80 height=53 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Philadelphia
+			Inquirer&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-0&amp;fd=A&amp;url=http://seattlepi.nwsource.com/basketball/332923_arena25.html&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;City
+			files suit against Sonics to enforce
+			lease&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Seattle Post
+			Intelligencer&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;30 minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By GREG JOHNS The city of Seattle filed a lawsuit
+			against the Sonics and their ownership group in King County
+			Superior Court on Monday, attempting to block the
+			team&amp;#39;s attempt to get out of its KeyArena
+			lease.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-1&amp;fd=A&amp;url=http://seattletimes.nwsource.com/html/localnews/2003899697_websonics25m.html&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Seattle
+			sues to keep Sonics in lease&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Seattle
+			Times&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-2&amp;fd=A&amp;url=http://www.thenewstribune.com/news/updates/story/163448.html&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;City
+			of Seattle files lawsuit against Sonics&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;TheNewsTribune.com
+			(subscription)&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-3&amp;fd=A&amp;url=http://www.king5.com/topstories/stories/NW_092407SSB_seattle_lawsuit_keyarena_lease_JM.106dbace8.html&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;KING5.com
+			(subscription)&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-4&amp;fd=A&amp;url=http://www.sportingnews.com/yourturn/viewtopic.php%3Ft%3D275757&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;SportingNews.com&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-5&amp;fd=A&amp;url=http://sportsillustrated.cnn.com/2007/basketball/nba/09/21/sonics.arena.ap/&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;SI.com&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-0-6&amp;fd=A&amp;url=http://sports.espn.go.com/nba/news/story%3Fid%3D3030622&amp;cid=1121119648&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;ESPN&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121119648&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			135 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Over 120 arrests in investigation of underground steroid
+			trade - San Francisco Chronicle
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.sfgate.com/cgi-bin/article.cgi?f=/n/a/2007/09/24/sports/s082727D09.DTL" />
+		<id>tag:news.google.com,2005:cluster=42d48a32</id>
+		<summary>Sports</summary>
+		<issued>2007-09-24T15:52:02+00:00</issued>
+		<modified>2007-09-24T15:52:02+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1i-0&amp;fd=A&amp;url=http://www.efluxmedia.com/news_DEA_Makes_124_Arrests_in_Drug_Raids_08948.html&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=8zZ22KbhwEEJ&amp;imgurl=www.efluxmedia.com/content/news/news_8948.jpg
+			width=80 height=60 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;eFluxMedia (press
+			release)&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-0&amp;fd=A&amp;url=http://www.sfgate.com/cgi-bin/article.cgi%3Ff%3D/n/a/2007/09/24/sports/s082727D09.DTL&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Over
+			120 arrests in investigation of underground steroid
+			trade&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;San Francisco
+			Chronicle&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;4 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By PETE YOST, AP Writer Over 120 people were
+			arrested in an 18-month international investigation of
+			illicit steroid labs, the Drug Enforcement Administration
+			announced Monday.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-1&amp;fd=A&amp;url=http://www.nytimes.com/2007/09/24/sports/24cnd-steroid.html%3Fem%26ex%3D1190779200%26en%3D88692f01a7579e36%26ei%3D5087%250A&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;US
+			Arrests 124 in Raids on Global Steroid Ring&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;New York
+			Times&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-2&amp;fd=A&amp;url=http://blogs.usatoday.com/sportsscope/2007/09/awaiting-fallou.html&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Awaiting
+			fallout from massive global drug bust&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;USA
+			Today&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-3&amp;fd=A&amp;url=http://canadianpress.google.com/article/ALeqM5ikdOIrZelpA16Eu6L9-hQbi28eIQ&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Canadian Press&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-4&amp;fd=A&amp;url=http://msn.foxsports.com/olympics/story/7260490&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;FOXSports.com&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-1-5&amp;fd=A&amp;url=http://www.dea.gov/pubs/pressrel/pr092407.html&amp;cid=1121225266&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;DEA.gov&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121225266&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			404 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			US women boot England, reach World Cup semifinals - New York
+			Daily News
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.nydailynews.com/sports/more_sports/2007/09/23/2007-09-23_us_women_boot_england_reach_world_cup_se-2.html" />
+		<id>tag:news.google.com,2005:cluster=42d0e3c1</id>
+		<summary>Sports</summary>
+		<issued>2007-09-23T08:25:41+00:00</issued>
+		<modified>2007-09-23T08:25:41+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2i-0&amp;fd=A&amp;url=http://seattlepi.nwsource.com/othersports/2051AP_SOC_WWCup_US_England.html&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=5hHDzUN3V34J&amp;imgurl=seattlepi.nwsource.com/dayart/aponline/25421.26China-WWCUP-Soccer-USA-England.sff.jpg
+			width=80 height=54 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Seattle Post
+			Intelligencer&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-0&amp;fd=A&amp;url=http://www.nydailynews.com/sports/more_sports/2007/09/23/2007-09-23_us_women_boot_england_reach_world_cup_se-2.html&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;US
+			women boot England, reach World Cup
+			semifinals&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;New York Daily
+			News&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;Sep 23,
+			2007&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;BY MICHAEL LEWIS TIANJIN, China - In a city that
+			has more than its share of air-pollution problems, the US
+			Women&amp;#39;s national team decided to clear the air about
+			its disappointing performance before it took on England in
+			the Women&amp;#39;s World Cup
+			&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-1&amp;fd=A&amp;url=http://www.timesonline.co.uk/tol/sport/football/article2512345.ece&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;England’s
+			brave run ended&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Times
+			Online&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-2&amp;fd=A&amp;url=http://football.guardian.co.uk/News_Story/0,,2175092,00.html&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Women&amp;#39;s
+			World Cup, quarter-final: England 0-3 USA&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Guardian
+			Unlimited&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-3&amp;fd=A&amp;url=http://soccernet.espn.go.com/columns/story%3Fid%3D465591%26root%3Dwomensworldcup2007%26cc%3D5739&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;ESPN&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-4&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/22/AR2007092200513.html%3Fhpid%3Dmoreheadlines&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Washington
+			Post&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/5-2-5&amp;fd=A&amp;url=http://www.paddocktalk.com/news/html/modules.php%3Fop%3Dmodload%26name%3DNews%26file%3Darticle%26sid%3D67141&amp;cid=1120986049&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;PaddockTalk&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120986049&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			287 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Clooney in the Clear! - TMZ.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.tmz.com/2007/09/24/clooney-in-the-clear/" />
+		<id>tag:news.google.com,2005:cluster=42d31d5f</id>
+		<summary>Entertainment</summary>
+		<issued>2007-09-24T16:45:05+00:00</issued>
+		<modified>2007-09-24T16:45:05+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/22/AR2007092200462.html%3Fnav%3Drss_artsandliving/entertainmentnews&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=GGr4TnxoeFsJ&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/22/PH2007092200463.jpg
+			width=50 height=80 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-0&amp;fd=A&amp;url=http://www.tmz.com/2007/09/24/clooney-in-the-clear/&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Clooney
+			in the Clear!&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;TMZ.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;3 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&amp;quot;On Friday, Sept. 21,2007 at
+			approximately 3:30pm Weehawken police and the Weehawken
+			Volunteer First Aid Squad responded to a 911 call of a
+			motorcycle accident with possible injuries at the comer of
+			King Avenue and Boulevard
+			East.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-1&amp;fd=A&amp;url=http://news.bostonherald.com/track/celebrity/view.bg%3Farticleid%3D1033664&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Clooney
+			and girlfriend take a tumble in New Jersey&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Boston
+			Herald&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-2&amp;fd=A&amp;url=http://www.voanews.com/english/Entertainment/2007-09-24-voa41.cfm&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Actor
+			George Clooney Injured in Motorcycle Accident&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Voice of
+			America&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-3&amp;fd=A&amp;url=http://www.dailymail.co.uk/pages/live/articles/showbiz/showbiznews.html%3Fin_article_id%3D483670%26in_page_id%3D1773&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Daily
+			Mail&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-4&amp;fd=A&amp;url=http://www.suntimes.com/entertainment/zwecker/571299,CST-FTR-zp24.article&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Chicago
+			Sun-Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-5&amp;fd=A&amp;url=http://timesofindia.indiatimes.com/Entertainment/International_Buzz/Clooneys_gal_is_a_daredevil/articleshow/2397952.cms&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Times
+			of India&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-0-6&amp;fd=A&amp;url=http://www.hecklerspray.com/george-clooney-knackers-his-rib-falling-off-motorbike/200710161.php&amp;cid=1121131871&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;hecklerspray&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121131871&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			659 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Milla zaps zombies in familiar &amp;quot;Evil&amp;quot;
+			sequel - Reuters
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.reuters.com/article/filmNews/idUSN2344702520070924" />
+		<id>tag:news.google.com,2005:cluster=42d2494e</id>
+		<summary>Entertainment</summary>
+		<issued>2007-09-24T02:10:31+00:00</issued>
+		<modified>2007-09-24T02:10:31+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1i-0&amp;fd=A&amp;url=http://movies.nytimes.com/2007/09/24/movies/24evil.html&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=MQqrLie_vfcJ&amp;imgurl=graphics8.nytimes.com/images/2007/09/21/arts/22evil600.jpg
+			width=80 height=37 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;New York
+			Times&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-0&amp;fd=A&amp;url=http://www.reuters.com/article/filmNews/idUSN2344702520070924&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Milla
+			zaps zombies in familiar &amp;quot;Evil&amp;quot;
+			sequel&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Reuters&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;18 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Frank Scheck NEW YORK (Hollywood Reporter) -
+			All too eager to please their fanboy base, the makers of
+			&amp;quot;Resident Evil: Extinction&amp;quot; begin the
+			third installment of their successful sci-fi/horror
+			franchise with a naked shot of comely star Milla Jovovich
+			&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-1&amp;fd=A&amp;url=http://movies.nytimes.com/2007/09/24/movies/24evil.html&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Las
+			Vegas Under Siege by Zombies and a Mutant&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;New York
+			Times&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-2&amp;fd=A&amp;url=http://www.voanews.com/english/Entertainment/2007-09-24-voa37.cfm&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Milla
+			Jovovich&amp;#39;s New Movie Tops US Weekend Box Office
+			Sales&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Voice of
+			America&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-3&amp;fd=A&amp;url=http://www.latimes.com/entertainment/news/celebrity/la-et-milla24sep24,1,5741071.story%3Fcoll%3Dla-celebrity-news&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Los
+			Angeles Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-4&amp;fd=A&amp;url=http://blog.seattlepi.nwsource.com/popcornreview/archives/122369.asp%3Ffrom%3Dblog_last3&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Seattle
+			Post Intelligencer&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-5&amp;fd=A&amp;url=http://blogcritics.org/archives/2007/09/24/071701.php&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Blogcritics.org&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-1-6&amp;fd=A&amp;url=http://www.calendarlive.com/movies/reviews/cl-et-resident24sep24,0,1367251.story%3Fcoll%3Dcl-home-top-blurb-right&amp;cid=1121077582&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;calendarlive.com&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121077582&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			101 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			&amp;quot;The War&amp;quot; Re-Examines WWII - CBS News
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.cbsnews.com/stories/2007/09/24/earlyshow/leisure/celebspot/main3291300.shtml" />
+		<id>tag:news.google.com,2005:cluster=42d0f23c</id>
+		<summary>Entertainment</summary>
+		<issued>2007-09-24T16:24:55+00:00</issued>
+		<modified>2007-09-24T16:24:55+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2i-0&amp;fd=A&amp;url=http://www.canada.com/vancouversun/news/westcoastlife/story.html%3Fid%3D7314a634-6768-4152-a764-1b8d5b2ac207%26k%3D26728&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=bv4YlzOpo_QJ&amp;imgurl=a123.g.akamai.net/f/123/12465/1d/media.canada.com/reuters/olcaent_iptc/2007-09-21t222401z_01_nootr_rtridsp_2_entertainment-war-col.jpg%3Fsize%3Dl
+			width=80 height=80 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Vancouver
+			Sun&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-0&amp;fd=A&amp;url=http://www.cbsnews.com/stories/2007/09/24/earlyshow/leisure/celebspot/main3291300.shtml&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;&amp;quot;The
+			War&amp;quot; Re-Examines
+			WWII&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;CBS
+			News&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;3 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;Ken Burns&amp;#39; latest film, &amp;quot;The
+			War,&amp;quot; is not about what the generals experienced,
+			but how average Americans experienced World War
+			II.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-1&amp;fd=A&amp;url=http://www.ohio.com/lifestyle/premier/9943171.html&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Too
+			many details bog documentary down&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Akron Beacon
+			Journal&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-2&amp;fd=A&amp;url=http://www.abcnews.go.com/ThisWeek/Voices/story%3Fid%3D3639419&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Ken
+			Burns Tackles WWII In New Doc&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;ABC
+			News&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-3&amp;fd=A&amp;url=http://www.beyondchron.org/articles/Ken_Burns_The_War_Teaches_False_History_Lesson_4938.html&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Beyond
+			Chron&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-4&amp;fd=A&amp;url=http://www.movieweb.com/tv/news/38/22438.php&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;MovieWeb&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-5&amp;fd=A&amp;url=http://www.studlife.com/news/2007/09/24/Cadenza/Ken-Burns.the.War.Premieres-2987053.shtml&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Student
+			Life&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/6-2-6&amp;fd=A&amp;url=http://www.insidebayarea.com/business/ci_6977188&amp;cid=1120989756&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Inside
+			Bay
+			Area&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120989756&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			103 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			UK Defra says latest FMD cases linked to first outbreak;
+			control ... - Forbes
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.forbes.com/afxnewslimited/feeds/afx/2007/09/24/afx4149830.html" />
+		<id>tag:news.google.com,2005:cluster=42cc08fc</id>
+		<summary>Health</summary>
+		<issued>2007-09-24T18:56:58+00:00</issued>
+		<modified>2007-09-24T18:56:58+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0i-0&amp;fd=A&amp;url=http://tvnz.co.nz/view/page/536641/1375245&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=x759lwECFA8J&amp;imgurl=images.tvnz.co.nz/tvnz_images/news2007/united_kingdom/britain_footmouth_232.jpg
+			width=80 height=44 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;TVNZ&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-0&amp;fd=A&amp;url=http://www.forbes.com/afxnewslimited/feeds/afx/2007/09/24/afx4149830.html&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;UK
+			Defra says latest FMD cases linked to first outbreak;
+			control
+			&lt;b&gt;...&lt;/b&gt;&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Forbes&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;1 hour
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;LONDON (Thomson Financial) - The Department of
+			Environment, Food and Rural Affairs said the latest
+			Epidemiology report shows there is a link between the August
+			and September cases of Foot and Mouth Disease, probably
+			being infected by &amp;#39;mechanical
+			&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-1&amp;fd=A&amp;url=http://www.chron.com/disp/story.mpl/ap/fn/5160109.html&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;No
+			Foot-And-Mouth Outside Infected Zone&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Houston
+			Chronicle&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-2&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5i6_dRAZJ3KDODS1Azw9vpR7F26Zg&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;New
+			suspected foot and mouth case in Britain&lt;/a&gt; &lt;font
+			size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-3&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601102%26sid%3DaX17hSfsXdLE%26refer%3Duk&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-4&amp;fd=A&amp;url=http://www.timesonline.co.uk/tol/news/uk/article2525206.ece&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Sunday Times&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-5&amp;fd=A&amp;url=http://ukpress.google.com/article/ALeqM5h-qduXAkNdrlp3cybqsXkvalwb6g&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;The
+			Press Association&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-0-6&amp;fd=A&amp;url=http://www.news-medical.net/%3Fid%3D30240&amp;cid=1120667900&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;News-Medical.net&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1120667900&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			513 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			New test makes bird flu detection easier, cheaper - Reuters
+			UK
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://uk.reuters.com/article/healthNews/idUKHKG9283520070924" />
+		<id>tag:news.google.com,2005:cluster=42d3660e</id>
+		<summary>Health</summary>
+		<issued>2007-09-24T17:24:56+00:00</issued>
+		<modified>2007-09-24T17:24:56+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1i-0&amp;fd=A&amp;url=http://www.chinadaily.com.cn/world/2007-09/24/content_6129318.htm&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=KnEW7jlh0zgJ&amp;imgurl=www.chinadaily.com.cn/world/images/attachement/jpg/site1/20070924/0013729e4abe08616d9c10.jpg
+			width=80 height=53 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;China
+			Daily&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-0&amp;fd=A&amp;url=http://uk.reuters.com/article/healthNews/idUKHKG9283520070924&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;New
+			test makes bird flu detection easier,
+			cheaper&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Reuters
+			UK&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;2 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;By Anthony J. Brown, MD NEW YORK (Reuters Health)
+			- A multinational team of researchers has developed a system
+			that can detect the bird flu virus on a throat swab specimen
+			in less than 30 minutes.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-1&amp;fd=A&amp;url=http://www.medicalnewstoday.com/articles/83386.php&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;New
+			Quick And Cheap Bird Flu Test&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Medical News
+			Today&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-2&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5igoFAx8N3s4eiugZxLhoJPhnkOvA&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Miniature
+			lab can detect deadly bird flu virus in 30 minutes&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-3&amp;fd=A&amp;url=http://www.reuters.com/article/scienceNews/idUSHKG9283520070923&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Reuters&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-4&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601101%26sid%3Da3VNAm8XBop4%26refer%3Djapan&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-5&amp;fd=A&amp;url=http://www.bangkokpost.com/breaking_news/breakingnews.php%3Fid%3D121970&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Bangkok
+			Post&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-1-6&amp;fd=A&amp;url=http://www.efluxmedia.com/news_Detecting_H5N1_in_Less_Than_30_Minutes_08938.html&amp;cid=1121150478&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;eFluxMedia
+			(press
+			release)&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121150478&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			64 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Murdock gives Duke $35M for study at Kannapolis campus -
+			Bizjournals.com
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.bizjournals.com/triangle/stories/2007/09/24/daily6.html" />
+		<id>tag:news.google.com,2005:cluster=42d4c013</id>
+		<summary>Health</summary>
+		<issued>2007-09-24T18:58:34+00:00</issued>
+		<modified>2007-09-24T18:58:34+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-2i-0&amp;fd=A&amp;url=http://www.wral.com/business/story/1854471/&amp;cid=1121239059&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=VJ_7eUF606sJ&amp;imgurl=wwwcache.wral.com/asset/news/local/2007/08/03/1665679/1186154161_DukeUniversity-220x165.jpg
+			width=80 height=60 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font
+			size=-2&gt;WRAL.com&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-2-0&amp;fd=A&amp;url=http://www.bizjournals.com/triangle/stories/2007/09/24/daily6.html&amp;cid=1121239059&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Murdock
+			gives Duke $35M for study at Kannapolis
+			campus&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Bizjournals.com&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;1 hour
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;Billionaire food magnate David Murdock has given
+			$35 million to Duke University researchers to fund a
+			research study - one that will take place at the
+			Murdock-inspired North Carolina Research Campus in
+			Kannapolis.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-2-1&amp;fd=A&amp;url=http://www.charlotte.com/109/story/291122.html&amp;cid=1121239059&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Murdock
+			unveils massive Kannapolis study plans&lt;/a&gt; &lt;font
+			size=-1 color=#6f6f6f&gt;&lt;nobr&gt;Charlotte
+			Observer&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-2-2&amp;fd=A&amp;url=http://www.wral.com/business/story/1854471/&amp;cid=1121239059&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Duke
+			Gets $35 Million for Disease-Fighting Study&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;WRAL.com&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/7-2-3&amp;fd=A&amp;url=http://www.wsoctv.com/news/14192355/detail.html&amp;cid=1121239059&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;WSOCtv.com&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121239059&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			30 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Administration Urges Social Security Fix - Guardian
+			Unlimited
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://www.guardian.co.uk/worldlatest/story/0,,-6945249,00.html" />
+		<id>tag:news.google.com,2005:cluster=42d163dc</id>
+		<summary>More Top Stories</summary>
+		<issued>2007-09-24T19:51:48+00:00</issued>
+		<modified>2007-09-24T19:51:48+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0i-0&amp;fd=A&amp;url=http://ap.google.com/article/ALeqM5hxTCjTf4MLcD4tYVIWzVLvG-HkLA&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=cWwn_l0Kg54J&amp;imgurl=ap.google.com/media/ALeqM5hoAitrLJzVtGfG4if_ZPaouyvYvg
+			width=80 height=55 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;The Associated
+			Press&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0-0&amp;fd=A&amp;url=http://www.guardian.co.uk/worldlatest/story/0,,-6945249,00.html&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Administration
+			Urges Social Security
+			Fix&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;Guardian
+			Unlimited&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;24 minutes
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;From AP By MARTIN CRUTSINGER AP Economics Writer
+			WASHINGTON (AP) - The Bush administration said in a new
+			report Monday that Social Security is facing a $13.6
+			trillion shortfall and that delaying needed reforms is not
+			fair to younger workers.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0-1&amp;fd=A&amp;url=http://www.bloomberg.com/apps/news%3Fpid%3D20601087%26sid%3Daz6vEMM6jsKQ%26refer%3Dhome&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Paulson
+			Aims to Revive Bush&amp;#39;s Social Security Push
+			(Update1)&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Bloomberg&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0-2&amp;fd=A&amp;url=http://www.forbes.com/markets/feeds/afx/2007/09/24/afx4149549.html&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Treasury
+			wants early Social Security reform, but cannot say when
+			&lt;b&gt;...&lt;/b&gt;&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Forbes&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0-3&amp;fd=A&amp;url=http://www.localnewsleader.com/olberlin/stories1/index.php%3Faction%3Dfullnews%26id%3D63549&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Olberlin&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-0-4&amp;fd=A&amp;url=http://www.ajc.com/business/content/business/stories/2007/09/21/DebtLimit_0922.html&amp;cid=1121018844&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Atlanta
+			Journal
+			Constitution&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121018844&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			168 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Israel orders criminal probe into Olmert - Xinhua
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://news.xinhuanet.com/english/2007-09/24/content_6786568.htm" />
+		<id>tag:news.google.com,2005:cluster=42d489b5</id>
+		<summary>More Top Stories</summary>
+		<issued>2007-09-24T15:53:52+00:00</issued>
+		<modified>2007-09-24T15:53:52+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/24/AR2007092400475.html&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=55h-jFX8rwMJ&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/24/PH2007092400479.jpg
+			width=80 height=56 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-0&amp;fd=A&amp;url=http://news.xinhuanet.com/english/2007-09/24/content_6786568.htm&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Israel
+			orders criminal probe into
+			Olmert&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font
+			color=#6f6f6f&gt;Xinhua&amp;nbsp;-&lt;/font&gt;
+			&lt;nobr&gt;4 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;JERUSALEM, Sept. 24 (Xinhua) -- The Attorney
+			General&amp;#39;s office of Israel has ordered a criminal
+			investigation into Prime Minister Ehud Olmert, the justice
+			ministry said on Monday.&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-1&amp;fd=A&amp;url=http://www.guardian.co.uk/israel/Story/0,,2176210,00.html&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Israeli
+			PM faces police inquiry&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;Guardian
+			Unlimited&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-2&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5j60FU_oLSXGSsVeY32PW-S2ohtiQ&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Israel
+			orders Olmert corruption probe&lt;/a&gt; &lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-3&amp;fd=A&amp;url=http://www.theglobeandmail.com/servlet/story/RTGAM.20070924.wolmert0924/BNStory/International/%3Fpage%3Drss%26id%3DRTGAM.20070924.wolmert0924&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Globe
+			and Mail&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-4&amp;fd=A&amp;url=http://www.cnn.com/2007/WORLD/meast/09/24/olmert.investigation/&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;CNN&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-5&amp;fd=A&amp;url=http://www.ynetnews.com/articles/0,7340,L-3453070,00.html&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Ynetnews&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-1-6&amp;fd=A&amp;url=http://www.efluxmedia.com/news_Israeli_Premier_Ehud_Olmert_Faces_Corruption_Probe_08949.html&amp;cid=1121225141&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;eFluxMedia
+			(press
+			release)&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121225141&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			132 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+	<entry>
+		<title type="text/html" mode="escaped">
+			Two Italian soldiers freed after Afghan kidnapping - ABC
+			Online
+		</title>
+		<link rel="alternate" type="text/html"
+			href="http://abc.net.au/news/stories/2007/09/24/2042157.htm?section=world" />
+		<id>tag:news.google.com,2005:cluster=42d3f3b1</id>
+		<summary>More Top Stories</summary>
+		<issued>2007-09-24T12:39:32+00:00</issued>
+		<modified>2007-09-24T12:39:32+00:00</modified>
+		<content type="text/html" mode="escaped">
+			&lt;br&gt;&lt;div class=lh&gt;&lt;table border=0 align=right
+			cellpadding=5 cellspacing=0&gt;&lt;tr&gt;&lt;td width=80
+			align=center valign=top&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2i-0&amp;fd=A&amp;url=http://www.washingtonpost.com/wp-dyn/content/article/2007/09/24/AR2007092400206.html&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;img
+			src=http://news.google.com/news?imgefp=gVFf7XXhfpgJ&amp;imgurl=media3.washingtonpost.com/wp-dyn/content/photo/2007/09/24/PH2007092400208.jpg
+			width=80 height=51 alt=&quot;&quot;
+			border=1&gt;&lt;br&gt;&lt;font size=-2&gt;Washington
+			Post&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-0&amp;fd=A&amp;url=http://abc.net.au/news/stories/2007/09/24/2042157.htm%3Fsection%3Dworld&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;b&gt;Two
+			Italian soldiers freed after Afghan
+			kidnapping&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;b&gt;&lt;font color=#6f6f6f&gt;ABC
+			Online&amp;nbsp;-&lt;/font&gt; &lt;nobr&gt;7 hours
+			ago&lt;/nobr&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;NATO has freed two kidnapped Italian soldiers in
+			western Afghanistan in an operation which left both troops
+			wounded and up to nine of their captors dead, officials
+			said.&lt;/font&gt;&lt;br&gt;&lt;font size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-1&amp;fd=A&amp;url=http://afp.google.com/article/ALeqM5ielxl_4NKaSPDy5tC_TC7Zp8sanA&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Two
+			Italian soldiers freed after Afghan kidnapping&lt;/a&gt;
+			&lt;font size=-1
+			color=#6f6f6f&gt;&lt;nobr&gt;AFP&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-2&amp;fd=A&amp;url=http://www.foxnews.com/story/0,2933,297774,00.html&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;Kidnapped
+			Italian Soldiers Freed After Raid in Afghanistan&lt;/a&gt;
+			&lt;font size=-1 color=#6f6f6f&gt;&lt;nobr&gt;FOX
+			News&lt;/nobr&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font
+			size=-1 class=p&gt;&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-3&amp;fd=A&amp;url=http://english.people.com.cn/90001/90777/6270022.html&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;People&#39;s
+			Daily Online&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-4&amp;fd=A&amp;url=http://voanews.com/english/2007-09-24-voa8.cfm&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Voice
+			of America&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;- &lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-5&amp;fd=A&amp;url=http://www.kplctv.com/Global/story.asp%3FS%3D7117829%26nav%3D0nqx&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;KPLC-TV&lt;/nobr&gt;&lt;/a&gt;&amp;nbsp;-
+			&lt;a
+			href=&quot;http://news.google.com/news/url?sa=T&amp;ct=us/8-2-6&amp;fd=A&amp;url=http://www.forbes.com/afxnewslimited/feeds/afx/2007/09/24/afx4147275.html&amp;cid=1121186737&amp;ei=ERv4RveFIYSc0AG2z8GlDw&quot;&gt;&lt;nobr&gt;Forbes&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br/&gt;&lt;font
+			class=p size=-1&gt;&lt;a class=p
+			href=http://news.google.com/?ncl=1121186737&amp;hl=en&gt;&lt;nobr&gt;&lt;b&gt;all
+			884 news
+			articles&lt;/b&gt;&lt;/nobr&gt;&lt;/a&gt;&lt;/font&gt;&lt;br
+			clear=all&gt; &lt;/div&gt;
+		</content>
+	</entry>
+</feed>
