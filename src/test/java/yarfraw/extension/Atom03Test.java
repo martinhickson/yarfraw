@@ -18,10 +18,10 @@ public class Atom03Test extends TestCase{
     ChannelFeed c = r.readChannel();
     assertEquals(26, c.getItems().size());
     
-    assertEquals("<b>Iranian president spars with academics in NY - Reuters Canada</b>", c.getItems().get(0).getTitleText());
-    Atom03Extension ext = ExtensionUtils.extractAtom03Extension(c.getItems().get(0).getOtherElements());
-    assertEquals("2007-09-24T19:39:29+00:00", ext.getIssued());
     
+    Atom03Extension ext = ExtensionUtils.extractAtom03Extension(c.getItems().get(0).getOtherElements());
+    assertEquals("<b>Iranian president spars with academics in NY - Reuters Canada</b>", ext.getTitle().getContent().get(0));
+    assertEquals("2007-09-24T19:39:29+00:00", ext.getIssued());
     assertEquals("Top Stories", ext.getSummary().getContent().get(0));
     assertEquals("text/html", ext.getContent().get(0).getType());
     assertEquals("escaped", ext.getContent().get(0).getMode());

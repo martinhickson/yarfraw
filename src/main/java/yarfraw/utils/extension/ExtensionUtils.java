@@ -138,6 +138,10 @@ public class ExtensionUtils{
             ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
             ret.setSummary(c);
             it.remove();
+          }else if(same(name, ATOM03_TITLE_QNAME)){
+            ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
+            ret.setTitle(c);
+            it.remove();
           }else if(same(name, ATOM03_TAGLINE_QNAME)){
             ContentType c = ((JAXBElement<ContentType>)u.unmarshal(e)).getValue();
             ret.setTagline(c);

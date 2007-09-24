@@ -8,10 +8,20 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="info" type="atom:contentType"/>
 	<xs:element name="issued" type="atom:iso8601dateTime"/>
 	<xs:element name="summary" type="atom:contentType"/>
-	<xs:element name="content" type="atom:contentType"/>	
+	<xs:element name="content" type="atom:contentType"/>
+	<xs:element name="title" type="atom:contentType"/>		
 	<xs:element name="atom03Extension">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element  ref="atom:title" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation><![CDATA[ 
+The "atom:title" element is a Content construct that conveys a human-readable title for the feed. atom:feed elements MUST contain exactly one atom:title element. If the feed describes a Web resource, its content SHOULD be the same as that resource's title.
+4.4
+						]]> 
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>			
 				<xs:element  ref="atom:tagline" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation><![CDATA[ 

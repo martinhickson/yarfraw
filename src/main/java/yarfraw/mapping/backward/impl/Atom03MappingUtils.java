@@ -56,7 +56,7 @@ class Atom03MappingUtils{
     ret.setUpdatedDate(entry.getModified());
     
 //    ret.setDescriptionOrSummary(entry.getSummary());
-    ret.setTitle(entry.getTitle());
+//    ret.setTitle(entry.getTitle());
     if(entry.getOtherAttributes() != null){
       ret.getOtherAttributes().putAll(entry.getOtherAttributes());
     }

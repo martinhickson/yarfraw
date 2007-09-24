@@ -7,7 +7,6 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="feed" type="atom:feedType"/>	
 	<xs:complexType name="feedType">
 		<xs:choice>
-			<xs:element name="title" type="xs:string"/>
 			<xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="modified" type="atom:iso8601dateTime" minOccurs="1"/>
 			<xs:element name="author" type="atom:personType" minOccurs="0"/>
@@ -72,7 +71,6 @@ elementFormDefault="qualified" attributeFormDefault="unqualified">
 	</xs:complexType>
 	<xs:complexType name="entryType">
 		<xs:sequence>
-			<xs:element name="title" type="xs:string"/>
 			<xs:element name="link" type="atom:linkType"/>
 			<xs:element name="author" type="atom:personType" minOccurs="0"/>
 

@@ -64,7 +64,7 @@ public class ToChannelAtom03Impl implements ToChannelAtom03{
     }
     
     c.setLastBuildOrUpdatedDate(feed.getModified());
-    c.setTitle(feed.getTitle());
+//    c.setTitle(feed.getTitle());
     
     if(feed.getOtherAttributes() != null){
       c.getOtherAttributes().putAll(feed.getOtherAttributes());

@@ -190,6 +190,7 @@ public class ExtensionElementQname {
   public final static QName ATOM03_TAGLINE_QNAME = new QName("http://purl.org/atom/ns#", "tagline");
   public final static QName ATOM03_INFO_QNAME = new QName("http://purl.org/atom/ns#", "info");
   public final static QName ATOM03_SUMMARY_QNAME = new QName("http://purl.org/atom/ns#", "summary");
+  public final static QName ATOM03_TITLE_QNAME = new QName("http://purl.org/atom/ns#", "title");
   public final static QName ATOM03_CONTENT_QNAME = new QName("http://purl.org/atom/ns#", "content");
  
   private ExtensionElementQname(){}
