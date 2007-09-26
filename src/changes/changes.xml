@@ -12,7 +12,10 @@
   		</action>
 		<action dev="jliang" type="update">
   			Updated the setter for email in core Person class to be builder style. 
-  		</action>  		  		  		
+  		</action>
+		<action dev="jliang" type="update">
+  			Deprecated some constructors in FeedReader to suggest using CachedFeedReader. 
+  		</action>  		  	  		  		  		  		
   	</release>
     <release version="0.8" date="09/08/2006">
       <action dev="jliang" type="add">

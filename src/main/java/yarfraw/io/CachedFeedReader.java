@@ -153,6 +153,7 @@ public class CachedFeedReader extends FeedReader{
    * @throws YarfrawException - if parse failed
    * @throws IOException - if format detection failed
    */
+  @SuppressWarnings("deprecation")
   public CachedFeedReader(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
     super(httpUrl, params);
   }
@@ -165,6 +166,7 @@ public class CachedFeedReader extends FeedReader{
    * @throws YarfrawException - if parse failed
    * @throws IOException - if format detection failed
    */
+  @SuppressWarnings("deprecation")
   public CachedFeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
   }

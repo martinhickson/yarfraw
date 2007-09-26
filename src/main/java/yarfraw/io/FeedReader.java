@@ -105,6 +105,8 @@ public class FeedReader  extends AbstractBaseFeedParser{
    * @param params - any {@link HttpClientParams}
    * @throws YarfrawException - if parse failed
    * @throws IOException - if format detection failed
+   * @deprecated use {@link CachedFeedReader} for remote feed reading, it offers the same set of 
+   * features as this class as well as HTTP conditional get
    */
   public FeedReader(HttpURL httpUrl, HttpClientParams params) throws YarfrawException, IOException{
     super(httpUrl, params);
@@ -117,6 +119,8 @@ public class FeedReader  extends AbstractBaseFeedParser{
    * @param httpUrl - the {@link HttpURL} of the remote source
    * @throws YarfrawException - if parse failed
    * @throws IOException - if format detection failed
+   * @deprecated use {@link CachedFeedReader} for remote feed reading, it offers the same set of 
+   * features as this class as well as HTTP conditional get
    */
   public FeedReader(HttpURL httpUrl) throws YarfrawException, IOException{
     super(httpUrl, null);
