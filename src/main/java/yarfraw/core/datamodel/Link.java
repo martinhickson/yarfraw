@@ -20,6 +20,7 @@ import yarfraw.utils.ValidationUtils;
  *
  */
 public class Link extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private String _href;
   private String _rel;
   private String _type;

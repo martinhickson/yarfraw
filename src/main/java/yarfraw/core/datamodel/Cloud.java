@@ -20,6 +20,7 @@ import yarfraw.utils.ValidationUtils;
  *
  */
 public class Cloud extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private String _domain;
   private String _port;
   private String _path;

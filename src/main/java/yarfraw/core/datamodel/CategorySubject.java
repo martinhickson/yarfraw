@@ -30,6 +30,10 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class CategorySubject extends AbstractBaseObject{
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 20070927L;
   private String _categoryOrSubjectOrTerm;
   private String _domainOrScheme;
   private String _label;

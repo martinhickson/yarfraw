@@ -19,6 +19,7 @@ import yarfraw.utils.ValidationUtils;
  *
  */
 public class Enclosure extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private String _url;
   private String _length;
   private String _mimeType;

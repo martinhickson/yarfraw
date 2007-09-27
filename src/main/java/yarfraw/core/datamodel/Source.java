@@ -16,6 +16,7 @@ package yarfraw.core.datamodel;
  *
  */
 public class Source extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private String _url;
   private String _source;
   public Source(){}
