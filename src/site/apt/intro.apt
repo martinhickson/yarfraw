@@ -50,6 +50,8 @@ table lists all the special mapping among formats:
 
 	Note the following table is not necessary complete, for more details, I encourage to take a look at the {{{apidocs/index.html}Javadoc}}.
 The model also supports extensibility elements, see {{{builder.html}Builder Example}} and other documentations on the site.
+
+RSS 2.0, RSS 1.0, ATOM 1.0
 	
 *----------+--------------+----------------+----------------+----------------+
 || <<Yarfraw Data Model>> || <<RSS 2.0 >>    || <<RSS 1.0>> || <<Atom 1.0>> || <<Comments>> ||       
@@ -142,3 +144,12 @@ The model also supports extensibility elements, see {{{builder.html}Builder Exam
 *----------+--------------+----------------+----------------+----------------+
 | ItemEntry.content | \<encoded\> | \<encoded\> | \<content\> | {{{apidocs/index.html}Javadoc}} |
 *----------+--------------+----------------+----------------+----------------+
+
+Atom 0.3
+
+	Since release 0.9, Atom 0.3 are also supported. Most of the elements are mapped to the core model the same way as 
+Atom 1.0, with a couple of exceptions. Some elements in Atom 0.3 are 
+not mapped to the core models but will be available through an extension module call Atom03Extension 
+(see {{{ext.html}extension support}}).	
+
+	

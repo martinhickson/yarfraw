@@ -11,7 +11,7 @@ About YARFRAW
 for working with RSS feed. It offers an unified data model in builder style to help developers to build and to read 
 RSS feeds. 
 
-	keywords: Java RSS Feed Parser, RSS 0.9x, RSS 1.0, RSS 2.0 Atom 1.0
+	keywords: Java RSS Feed Parser, RSS 0.9x, RSS 1.0, RSS 2.0 Atom 1.0 and Atom 0.3
 	
 Why Another Java RSS API?
 
@@ -30,9 +30,7 @@ Project Status
 	The API now fully supports RSS 2.0, Rss/RDF 1.0, and Atom 1.0 feeds and a lot of {{{extension.html}extensions}}. 
 There is no directly builder support for RSS 0.9x, 
 but the API is able to read RSS 0.9x formated feeds with no problems because RSS 2.0 should be backward compatible 
-with its previous revisions. 
-There's no scheduled plan to add supports for Atom 0.3 format (since it's being replaced by its successor Atom 1.0), 
-if you would like to help out in adding that, let me know. 
+with its previous revisions. Since release 0.9, Atom 0.3 format is also supported.  
 
 	I am currently lookup for developers/volunteers to share some of the workload of this project. If you are interested
 in helping out, send me a message at 'zl25-drexel AT gmail DOT com'. (You need to be reasonably proficient with

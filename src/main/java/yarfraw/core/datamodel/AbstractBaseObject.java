@@ -1,5 +1,6 @@
 package yarfraw.core.datamodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import yarfraw.utils.XMLUtils;
 /**
  * An abstract base object for the core data model
  */
-abstract class AbstractBaseObject{
+abstract class AbstractBaseObject implements Serializable{
   protected String _base;
   protected String _lang;
   protected String _resource;

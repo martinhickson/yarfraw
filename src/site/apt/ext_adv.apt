@@ -12,6 +12,10 @@ the following schema. Some of them are official schema (which are usually higher
 specs, some of
 them I created myself (which are usually very simplistic).
 
+	*	ATOM 0.3 Extension -- http://www.w3.org/2001/XMLSchema
+		
+		* {{xsd/extension/atom03.xsd}}
+		
 	*	RSS 1.0 Administrative Module -- http://webns.net/mvcb/
 		
 		* {{xsd/extension/admin.xsd}}

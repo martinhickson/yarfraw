@@ -19,7 +19,7 @@ import yarfraw.utils.ValidationUtils;
  *
  */
 public class Generator extends AbstractBaseObject{
-
+  private static final long serialVersionUID = 20070927L;
   private String _value;
   private String _uri;
   private String _version;

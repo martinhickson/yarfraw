@@ -150,6 +150,52 @@ take a look at the {{{extension.html}extension}} page for more information about
     ExtensionUtils.extractSyndicationExtension(otherElements);
     ExtensionUtils.extractWellFormedWebExtension(otherElements);
     
+    //some elements in Atom 0.3 are supported through an extension module
+    Atom03Extension ext = ExtensionUtils.extractAtom03Extension(otherElements);
+    
++----------------------------------------------------------------------------------------------------+
+
+Atom 0.3 support
+
+	On version 0.9, I added support for Atom 0.3 just for completeness sake. At the time of writting 
+(9/26/07), the only site that I know is still actually using Atom 0.3 is Google news. Since the feed is
+from Google, I have to support it :-). 
+
+	Support for Atom 0.3 is achieved through some combination of core model mapping and extension mapping.
+The reason for this is because I do not want to modify the core model in order to add support for an 
+obsolete format. So elements that can mapped to the core model are mapped, the rest will be added to the
+otherElements list and can be mapped using an extension module. 
+	
+	All elements in Atom 0.3 that are of type 'content construct' will be sent to the otherElements list.
+They include:
+
++----------------------------------------------------------------------------------------------------+	
+	<xs:element name="tagline" type="atom:contentType"/>
+	<xs:element name="info" type="atom:contentType"/>
+	<xs:element name="summary" type="atom:contentType"/>
+	<xs:element name="content" type="atom:contentType"/>
+	<xs:element name="title" type="atom:contentType"/>	
++----------------------------------------------------------------------------------------------------+
+	
+	In addition, element \<issued\> will also be added as an extension element. 	
+
+	Here is a short example on how to use the core model and the extension module to access data in an
+Atom 0.3 feed:
+
++----------------------------------------------------------------------------------------------------+
+	
+    FeedReader r = new FeedReader("http://news.google.com/?output=atom");
+    r.setFormat(FeedFormat.ATOM03);
+    ChannelFeed c = r.readChannel();
+    assertEquals(26, c.getItems().size());
+    
+    Atom03Extension ext = ExtensionUtils.extractAtom03Extension(c.getItems().get(0).getOtherElements());
+    assertEquals("<b>Iranian president spars with academics in NY - Reuters Canada</b>", ext.getTitle().getContent().get(0));
+    assertEquals("2007-09-24T19:39:29+00:00", ext.getIssued());
+    assertEquals("Top Stories", ext.getSummary().getContent().get(0));
+    assertEquals("text/html", ext.getContent().get(0).getType());
+    assertEquals("escaped", ext.getContent().get(0).getMode());
+    	
 +----------------------------------------------------------------------------------------------------+
 
     

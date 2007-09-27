@@ -38,6 +38,7 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class ItemEntry extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private static final Log LOG = LogFactory.getLog(ItemEntry.class);
   private Text _title;
   private List<Link> _links;

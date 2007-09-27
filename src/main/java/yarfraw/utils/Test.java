@@ -1,26 +1,11 @@
 package yarfraw.utils;
 
-import java.io.File;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
 import org.apache.commons.httpclient.HttpURL;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
-import yarfraw.core.datamodel.YarfrawException;
-
 import yarfraw.generated.atom03.ext.elements.Atom03Extension;
-import yarfraw.io.CachedFeedReader;
 import yarfraw.io.FeedReader;
 import yarfraw.utils.extension.ExtensionUtils;
 

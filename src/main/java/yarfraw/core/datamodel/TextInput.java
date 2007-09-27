@@ -41,6 +41,7 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class TextInput extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   private String _title;
   private String _description;
   private String _name;

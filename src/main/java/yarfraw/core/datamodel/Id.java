@@ -40,7 +40,7 @@ import yarfraw.utils.ValidationUtils;
  *
  */
 public class Id extends AbstractBaseObject{
-  
+  private static final long serialVersionUID = 20070927L;
   private String _idValue;
   private Boolean _isPermaLink = true;
 

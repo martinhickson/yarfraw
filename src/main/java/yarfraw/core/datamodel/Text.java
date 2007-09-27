@@ -23,6 +23,7 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class Text extends AbstractBaseObject{
+  private static final long serialVersionUID = 20070927L;
   public enum TextType{
     text, html, xhtml
   }

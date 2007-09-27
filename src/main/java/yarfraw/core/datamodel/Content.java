@@ -33,7 +33,7 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class Content extends AbstractBaseObject{
-  
+  private static final long serialVersionUID = 20070927L;
   private List<String> _contentText;
   private String _type;
   private String _src;

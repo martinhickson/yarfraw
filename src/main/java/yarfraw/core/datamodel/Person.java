@@ -26,7 +26,7 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class Person extends AbstractBaseObject{
-
+  private static final long serialVersionUID = 20070927L;
   private String _emailOrText;
   private String _uri;
   private String _name;

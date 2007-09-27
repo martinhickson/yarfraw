@@ -45,6 +45,10 @@ import yarfraw.utils.XMLUtils;
  *
  */
 public class ChannelFeed extends AbstractBaseObject{
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 20070927L;
   private static final Log LOG = LogFactory.getLog(ChannelFeed.class);
   private List<ItemEntry> _items;
   private Text _title;
