@@ -121,9 +121,9 @@ remote feed is automatically detected. Format detection will be executed only on
     
 +----------------------------------------------------------------------------------------------------+
 
-Reading feeds via {{{http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers}Http conditional Get}}
+Reading feeds via Http conditional Get
 
-	(<<this is a new feature since version 0.9>>).
+	(<<this is a new feature since version 0.9>>, see more about HTTP conditional get {{{http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers}here}}).
 	
 	If you are using Yarfraw to build an aggregator, you should definitely consider supporting conditional get to 
 reduce network traffics. In Yarfraw, conditional get is supported by a special feed reader called CachedFeedReader,
