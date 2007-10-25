@@ -140,6 +140,30 @@ public class CachedFeedReader extends FeedReader{
     return _eTag;
   }
 
+  /**
+   * Setter for the "ETag" response header. 
+   * <br/>This method is used to let the caller set an initial value
+   * for this header. <br/> 
+   * This value will be automatically updated by this class for every
+   * {@link #readChannel()} method call.
+   * @param tag
+   */
+  public void setETag(String tag) {
+	_eTag = tag;
+  }
+  
+  /**
+   * Setter for the "Last-Modified" response header.
+   * <br/>This method is used to let the caller set an initial value
+   * for this header. <br/> 
+   * This value will be automatically updated by this class for every
+   * {@link #readChannel()} method call.
+   * @param tag
+   */
+  public void setLastModified(String lastModified) {
+	_lastModified = lastModified;
+  }
+  
   public ChannelFeed getCachedChannelFeed() {
     return _cachedChannelFeed;
   }
