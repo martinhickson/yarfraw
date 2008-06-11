@@ -3,6 +3,11 @@
     <title>Release Notes</title>
   </properties>
   <body>
+  	<release version="0.92" date="6/10/2008">
+  		<action dev="jliang" type="update">
+  		added fix for bug report 1963518
+  		</action>
+  	</release>
   	<release version="0.91" date="09/27/2007">
   		<action dev="jliang" type="update">
   			Made all core model objects serializable
