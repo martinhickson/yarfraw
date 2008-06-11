@@ -368,30 +368,7 @@
             <list>**/*TestSlow.java</list>
           </includes>
         </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-site-map</id>
-            <phase>site</phase>
-            <configuration>
-              <tasks>
-                <echo>Creating sitemap.xml using the sitemap_gen tool from google. This requires python. Swith the direction of the slash if you are on Windows</echo>
-                <exec executable="python" failonerror="true" failifexecutionfails="true">
-                  <arg value="bin/sitemap_gen/sitemap_gen.py" />
-                  <arg value="--config=config.xml" />
-                </exec>              
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>      
+      </plugin>    
     </plugins>
   </build>
   <repositories>
