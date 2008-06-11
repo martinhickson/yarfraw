@@ -3,7 +3,7 @@
 xmlns:atom="http://purl.org/atom/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"  
 elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" 
-	schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+	schemaLocation="xml.xsd"/>
 	<xs:element name="tagline" type="atom:contentType"/>
 	<xs:element name="info" type="atom:contentType"/>
 	<xs:element name="issued" type="atom:iso8601dateTime"/>
