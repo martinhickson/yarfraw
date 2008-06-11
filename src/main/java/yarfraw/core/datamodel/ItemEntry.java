@@ -657,7 +657,7 @@ public class ItemEntry extends AbstractBaseObject{
    * @return
    */
   public ItemEntry setUid(String uid){
-    if(_uid == null){
+    if(uid == null){
       _uid = null;
       return this;
     }
