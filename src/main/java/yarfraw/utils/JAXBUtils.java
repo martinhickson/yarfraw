@@ -25,8 +25,28 @@ public class JAXBUtils {
   private static Map<String, String> _rss20PrefixMap = null;
   private static Map<String, String> _atom10PrefixMap = null;
   private static Map<String, String> _atom03PrefixMap = null;
-  
-  /**
+    
+    public static void setExtensionPrefixMap(Map<String, String> prefixMap) {
+        _extensionPrefixMap = prefixMap;
+    }
+    
+    public static void setRss10PrefixMap(Map<String, String> prefixMap) {
+        _rss10PrefixMap = prefixMap;
+    }
+        
+    public static void setRss20PrefixMap(Map<String, String> prefixMap) {
+        _rss20PrefixMap = prefixMap;
+    }
+    
+    public static void setAtom10PrefixMap(Map<String, String> prefixMap) {
+        _atom10PrefixMap = prefixMap;
+    }
+    
+    public static void setAtom03PrefixMap(Map<String, String> prefixMap) {
+        _atom03PrefixMap = prefixMap;
+    }
+
+/**
    * Gets the namespace prefix map for the marshaller.
    * @param format a {@link FeedFormat}
    * @return a {@link NamespacePrefixMapper} object for the {@link Marshaller}
