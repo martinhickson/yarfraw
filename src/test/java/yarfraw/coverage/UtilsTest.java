@@ -7,8 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Date;
 
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.ValidationEvent;
+import jakarta.xml.bind.ValidationEventHandler;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;

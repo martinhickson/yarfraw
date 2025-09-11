@@ -3,7 +3,7 @@ package yarfraw.mapping.backward.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;

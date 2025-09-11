@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.bind.helpers.DefaultValidationEventHandler;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationEvent;
+import jakarta.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.helpers.DefaultValidationEventHandler;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpURL;
@@ -159,7 +159,7 @@ public class FeedReader  extends AbstractBaseFeedParser{
   /**
    * Reads a channel from a local or remote feed with a custom {@link ValidationEventHandler}
    *
-   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
+   * @param validationEventHandler a custom {@link jakarta.xml.bind.ValidationEventHandler}
    * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */

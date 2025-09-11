@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Test;
 
 import yarfraw.core.datamodel.ChannelFeed;

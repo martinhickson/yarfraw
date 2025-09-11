@@ -10,10 +10,10 @@ import static yarfraw.io.parser.ElementQName.ATOM10_SUMMARY;
 import static yarfraw.io.parser.ElementQName.ATOM10_TITLE;
 import static yarfraw.io.parser.ElementQName.ATOM10_UPDATED;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;

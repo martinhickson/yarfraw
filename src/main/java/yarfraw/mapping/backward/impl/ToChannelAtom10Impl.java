@@ -14,9 +14,9 @@ import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toPersonType;
 import static yarfraw.mapping.backward.impl.Atom10MappingUtils.toText;
 import static yarfraw.utils.XMLUtils.same;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;

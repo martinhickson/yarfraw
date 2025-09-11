@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import net.opengis.gml.CoordType;
 import net.opengis.gml.PointType;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.georss.georss._10.GeoRssExtension;
 import org.georss.georss._10.SimplePositionType;
 import org.georss.georss._10.Where;

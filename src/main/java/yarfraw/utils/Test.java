@@ -1,7 +1,7 @@
 package yarfraw.utils;
 
 import org.apache.commons.httpclient.HttpURL;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;

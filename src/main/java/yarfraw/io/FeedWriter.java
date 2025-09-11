@@ -6,10 +6,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.ValidationEventHandler;
 
 import org.apache.commons.io.IOUtils;
 
@@ -90,7 +90,7 @@ public class FeedWriter extends AbstractBaseIO{
    * Writes a channel to the feed file with a custom {@link ValidationEventHandler}.
    *
    * @param channel  a valid {@link yarfraw.core.datamodel.ChannelFeed}
-   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
+   * @param validationEventHandler a custom {@link jakarta.xml.bind.ValidationEventHandler}
    * @throws YarfrawException if write operation failed.
    */
   public void writeChannel(ChannelFeed channel, ValidationEventHandler validationEventHandler) throws YarfrawException{

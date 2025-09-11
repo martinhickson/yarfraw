@@ -4,16 +4,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 
 import yarfraw.core.datamodel.FeedFormat;
 
 public class JAXBUtils {
-  public static final String PREFIX_MAPPER_PROPERTY_NAME = "com.sun.xml.bind.namespacePrefixMapper";
+  public static final String PREFIX_MAPPER_PROPERTY_NAME = "org.glassfish.jaxb.namespacePrefixMapper";
   private static JAXBContext RSS20_CONTEXT = null;
   private static JAXBContext RSS10_CONTEXT = null;
   private static JAXBContext ATOM10_CONTEXT = null;

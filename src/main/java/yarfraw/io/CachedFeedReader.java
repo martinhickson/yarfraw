@@ -3,7 +3,7 @@ package yarfraw.io;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.ValidationEventHandler;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
@@ -76,7 +76,7 @@ public class CachedFeedReader extends FeedReader{
    * This method performs conditional get, if the remote is not modified
    * since last request, the cached feed will be returned.
    * 
-   * @param validationEventHandler a custom {@link javax.xml.bind.ValidationEventHandler}
+   * @param validationEventHandler a custom {@link jakarta.xml.bind.ValidationEventHandler}
    * @return a {@link ChannelFeed} object
    * @throws YarfrawException if read operation failed.
    */

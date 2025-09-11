@@ -1,6 +1,6 @@
 package yarfraw.mapping.forward;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import yarfraw.core.datamodel.ItemEntry;
 import yarfraw.core.datamodel.YarfrawException;

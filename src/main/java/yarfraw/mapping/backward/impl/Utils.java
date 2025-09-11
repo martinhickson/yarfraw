@@ -2,9 +2,9 @@ package yarfraw.mapping.backward.impl;
 
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import yarfraw.core.datamodel.Link;
 import yarfraw.core.datamodel.Person;

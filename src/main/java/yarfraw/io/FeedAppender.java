@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import yarfraw.core.datamodel.ChannelFeed;
 import yarfraw.core.datamodel.FeedFormat;
