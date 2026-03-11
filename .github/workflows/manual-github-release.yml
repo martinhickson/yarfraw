@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version (use auto, or provide 0.93 / 0.93.bravura-1)"
+        description: "Release version (e.g. 1.2.1.bravura-1 or 1.2.1)"
         required: false
-        default: "auto"
+        default: "1.2.1.bravura-1"
 
 permissions:
   contents: write
@@ -41,15 +41,9 @@ jobs:
           set -euo pipefail
 
           INPUT_VERSION="${{ inputs.version }}"
-          BASE_VERSION="$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)"
-          BASE_VERSION="${BASE_VERSION//$'\r'/}"
-          BASE_VERSION="${BASE_VERSION%-SNAPSHOT}"
-
           INPUT_VERSION="${INPUT_VERSION#v}"
 
-          if [[ -z "${INPUT_VERSION}" || "${INPUT_VERSION}" == "auto" ]]; then
-            RELEASE_VERSION="${BASE_VERSION}.bravura-1"
-          elif [[ "${INPUT_VERSION}" =~ \.bravura-[0-9]+$ ]]; then
+          if [[ "${INPUT_VERSION}" =~ \.bravura-[0-9]+$ ]]; then
             RELEASE_VERSION="${INPUT_VERSION}"
           else
             RELEASE_VERSION="${INPUT_VERSION}.bravura-1"
