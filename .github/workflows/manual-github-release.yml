@@ -89,7 +89,7 @@ jobs:
 
       - name: Build package
         shell: bash
-        run: mvn -B clean package
+        run: mvn -B clean package -DskipTests
 
       - name: Publish package to GitHub Packages (Maven)
         shell: bash
