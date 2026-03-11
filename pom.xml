@@ -4,7 +4,7 @@
   <artifactId>yarfraw</artifactId>
   <packaging>jar</packaging>
   <name>YARFRAW - Yet Another RSS Feed Reader Appender Writer API</name>
-  <version>0.92</version>
+  <version>1.2.1.bravura-1</version>
   <description>Title says all, this is just another rss feed reader and writer API library.</description>
   
   <properties>
